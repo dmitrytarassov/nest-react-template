@@ -1,0 +1,31 @@
+version: "3.0"
+
+services:
+  database:
+    image: mongo:latest
+    container_name: soltools-mongodb
+    hostname: soltools
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+      MONGO_INITDB_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_PASSWORD: ${MONGO_PASS}
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodbdata:/data/db
+
+  db-view:
+    image: mongo-express
+    container_name: soltools-mongodb-view
+    hostname: soltools-mongodb-view
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: soltools
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_USER}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_PASS}
+    depends_on:
+      - database
+
+volumes:
+  mongodbdata:

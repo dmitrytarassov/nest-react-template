@@ -21,8 +21,11 @@
     "resolveJsonModule": true,
     "paths": {
       "@backend/*": ["src/server/*"],
+      "@backend": ["src/server"],
       "@frontend/*": ["src/client/*"],
-      "@lib/*": ["src/lib/*"]
+      "@frontend": ["src/client"],
+      "@lib/*": ["src/lib/*"],
+      "@lib": ["src/lib"]
     }
   }
 }

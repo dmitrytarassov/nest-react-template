@@ -3,7 +3,11 @@ import { AppProps } from 'next/app';
 
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@frontend/utils/theme';
-import { Container } from '@frontend/layout/Container';
+
+import 'swiper/css';
+import './index.css';
+import { Router } from 'next/router';
+import ContainerWithMap from '@frontend/components/ContainerWithMap';
 
 export interface IMetaTags {
   title?: string;
@@ -21,15 +25,26 @@ interface IApp extends AppProps {
   pageProps: IHeadProps & {
     children?: React.ReactNode;
   };
+  router: Router;
 }
 
-function Client({ Component, pageProps }: IApp) {
+function Client(props: IApp) {
+  const { Component, pageProps } = props;
+
+  // @ts-ignore
   return (
     <ThemeProvider theme={theme}>
-      <Container>
-        {/* @ts-ignore */}
-        <Component {...pageProps} />
-      </Container>
+      {props.router.route === '/' ? (
+        <>
+          {/* @ts-ignore */}
+          <Component {...pageProps} />
+        </>
+      ) : (
+        <ContainerWithMap>
+          {/* @ts-ignore */}
+          <Component {...pageProps} />
+        </ContainerWithMap>
+      )}
     </ThemeProvider>
   );
 }

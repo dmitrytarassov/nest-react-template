@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.swiper {
+    overflow: visible!important;
+}
+
+.swiper-wrapper {
+    align-items: stretch!important;
+}
+
+.swiper-slide {
+    height: auto!important;
+}
+
+.leaflet-div-icon {
+    background: none!important;
+    border: none!important;
+}
+
+@font-face {
+    font-family: "Neue Machina";
+    src: url("/public/fonts/PPNeueMachina-Light.otf");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Neue Machina";
+    src: url("/public/fonts/PPNeueMachina-Regular.otf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Neue Machina";
+    src: url("/public/fonts/PPNeueMachina-Ultrabold.otf");
+    font-weight: 700;
+}
