@@ -114,7 +114,7 @@ const RentalCard = ({ rental, active }: RentalCardProps) => {
   }, [active]);
 
   return (
-    <Link href={`/rentals/${rental.id}`} passHref>
+    <Link href={`/rentals/${rental.url}`} passHref>
       <StyledRentalCard active={active} ref={ref}>
         <RentalCardImage src={rental.icon} />
         <RentalCardContent>

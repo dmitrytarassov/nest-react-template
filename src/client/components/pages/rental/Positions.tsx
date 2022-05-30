@@ -109,7 +109,6 @@ const Positions = ({
 
   useEffect(() => {
     if (init) {
-      console.log('asd');
       uniqueProductsResponse.mutate();
     }
   }, [city]);

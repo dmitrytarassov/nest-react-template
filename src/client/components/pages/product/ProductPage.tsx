@@ -37,8 +37,6 @@ const ProductPage = ({
   const { rentals } = useRentals();
   const router = useRouter();
 
-  console.log(currentImage);
-
   const breadcrumbs: IBreadCrumb[] = [
     {
       name: 'Главная',
@@ -57,8 +55,6 @@ const ProductPage = ({
       link: `/products/${rentalProduct.id}`,
     },
   ];
-
-  console.log(promotions);
 
   useEffect(() => {
     const _rentals = rentals.find(({ id }) => id === rental.id)

@@ -32,7 +32,10 @@ function Client(props: IApp) {
   const { Component, pageProps } = props;
 
   // @ts-ignore
-  return (
+  return props.router.route.startsWith('/admin') ? (
+    // @ts-ignore
+    <Component {...pageProps} />
+  ) : (
     <ThemeProvider theme={theme}>
       {props.router.route === '/' ? (
         <>

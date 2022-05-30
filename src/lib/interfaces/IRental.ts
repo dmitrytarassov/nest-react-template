@@ -10,15 +10,7 @@ export interface IRental {
     name: string;
     coordinates: [number, number];
   };
-  workingTime: [
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-  ];
+  workingTime: string;
   socials: {
     vk?: string;
     telegram?: string;

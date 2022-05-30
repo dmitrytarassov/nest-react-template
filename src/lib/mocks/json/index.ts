@@ -1,4 +1,4 @@
-import * as _rentals from './rentals.json';
+// import * as _rentals from './rentals.json';
 import * as _products from './products.json';
 import * as _rentalProducts from './rental_products.json';
 import * as _news from './news.json';
@@ -9,7 +9,7 @@ import { IRentalProduct } from '@lib/interfaces/IRentalProduct';
 import { IPromotion } from '@lib/interfaces/IPromotion';
 
 // @ts-ignore
-export const rentals: IRental[] = _rentals;
+// export const rentals: IRental[] = _rentals;
 // @ts-ignore
 export const products: IProduct[] = _products;
 // @ts-ignore

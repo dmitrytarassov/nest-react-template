@@ -1,9 +1,9 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { products } from '@lib/mocks/json';
 import { IProduct } from '@lib/interfaces/IProduct';
 
 @Injectable()
-export class ProductsService implements OnModuleInit {
+export class ProductsService {
   async getProducts(ids: string[]): Promise<IProduct[]> {
     return products.filter(({ id }) => ids.includes(id));
   }
@@ -17,9 +17,5 @@ export class ProductsService implements OnModuleInit {
       .filter(({ unique }) => unique)
       .map(({ id }) => id);
     return uniqueIds;
-  }
-
-  onModuleInit() {
-    console.log('onModuleInit');
   }
 }

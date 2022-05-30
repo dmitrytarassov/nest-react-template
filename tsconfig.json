@@ -25,7 +25,9 @@
       "@frontend/*": ["src/client/*"],
       "@frontend": ["src/client"],
       "@lib/*": ["src/lib/*"],
-      "@lib": ["src/lib"]
+      "@lib": ["src/lib"],
+      "@admin/*": ["src/client/admin/*"],
+      "@admin": ["src/client/admin"]
     }
   }
 }

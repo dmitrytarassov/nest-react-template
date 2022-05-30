@@ -11,7 +11,6 @@ export async function loadRentalProduct(
   const responsePromise: Promise<IControllerResponse<IRentalProduct>> =
     await get(`${process.env.API_URL}${getLoadRentalProductUrl(id)}`);
   const response = await responsePromise;
-  console.log(response);
   const data: IRentalProduct = response?.data;
 
   return data;

@@ -5,9 +5,7 @@ import { IProduct } from '@lib/interfaces/IProduct';
 
 @Controller('api/products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {
-    console.log(1);
-  }
+  constructor(private readonly productsService: ProductsService) {}
 
   @Get('')
   async getProducts(

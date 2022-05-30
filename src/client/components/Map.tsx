@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MapContainer } from 'react-leaflet';
 import { TileLayer } from 'react-leaflet';
-// import { useMap } from 'react-leaflet/hooks';
-import { Marker, Popup } from 'react-leaflet';
 import dynamic from 'next/dynamic';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import 'leaflet/dist/leaflet.css';
 import Markers from '@frontend/components/Markers';
 
@@ -29,7 +27,6 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Markers />
-        {/*<Marker position={[59.906701, 30.482708]} icon={icon} />*/}
       </MapContainer>
     </Container>
   );

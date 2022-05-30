@@ -22,36 +22,68 @@ import * as path from 'path';
 import { RentalProductsModule } from '@backend/rental-products/rental-products.module';
 import { RentalProductsController } from '@backend/rental-products/rental-products.controller';
 import { RentalProductsService } from '@backend/rental-products/rental-products.service';
+import { CrudRentalModule } from '@backend/crud_rental/crud_rental.module';
+import { CrudRentalController } from '@backend/crud_rental/crud_rental.controller';
+import { CrudRentalService } from '@backend/crud_rental/crud_rental.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CrudIconModule } from '@backend/crud_icon/crud_icon.module';
+import { CrudIconController } from '@backend/crud_icon/crud_icon.controller';
+import { CrudIconService } from '@backend/crud_icon/crud_icon.service';
+import { CrudProductService } from '@backend/crud_product/crud_product.service';
+import { CrudProductController } from '@backend/crud_product/crud_product.controller';
+import { CrudProductModule } from '@backend/crud_product/crud_product.module';
+import { CrudRentalProductModule } from '@backend/crud_rental_product/crud_rental_product.module';
+import { CrudRentalProcuctController } from '@backend/crud_rental_product/crud_rental_product.controller';
+import { CrudRentalProcuctService } from '@backend/crud_rental_product/crud_rental_product.service';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 @Module({
   imports: [
+    MongooseModule.forRoot(
+      `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
+    ),
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, '..', 'public'),
       // renderPath: 'uploads',
     }),
     ViewModule,
     ConsoleModule,
+    CrudRentalModule,
+    CrudProductModule,
+    CrudRentalProductModule,
     ProductsModule,
     RentalsModule,
     PromotionsModule,
     CityModule,
     RentalProductsModule,
+    CrudIconModule,
   ],
   controllers: [
     AppController,
+    CrudRentalController,
+    CrudProductController,
+    CrudRentalProcuctController,
     RentalsController,
     ProductsController,
     PromotionsController,
     CityController,
     RentalProductsController,
+    CrudIconController,
   ],
   providers: [
     AppService,
+    CrudRentalService,
+    CrudProductService,
+    CrudRentalProcuctService,
     RentalsService,
     ProductsService,
     PromotionsService,
     CityService,
     RentalProductsService,
+    CrudIconService,
   ],
+  exports: [MongooseModule],
 })
 export class AppModule {}
