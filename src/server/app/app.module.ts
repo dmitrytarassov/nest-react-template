@@ -39,6 +39,10 @@ import { CrudRentalProcuctService } from '@backend/crud_rental_product/crud_rent
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
+console.log(
+  `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
+);
+
 @Module({
   imports: [
     MongooseModule.forRoot(

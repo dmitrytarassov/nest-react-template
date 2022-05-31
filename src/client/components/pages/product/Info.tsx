@@ -51,9 +51,16 @@ const PropValue = styled.div`
   margin-left: 8px;
 `;
 
+const PropValueLine = styled.p`
+  margin: 0;
+  width: 100%;
+  text-align: right;
+`;
+
 const PropSeparator = styled.div`
   width: 100%;
   border-bottom: 1px dashed #d8dde2;
+  margin-top: 14px;
 `;
 
 const PropText = styled.div`
@@ -68,7 +75,7 @@ const PropText = styled.div`
 
 const Props = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   width: 100%;
 
   & + ${PropText} {
@@ -108,9 +115,19 @@ const Info = ({ product }: InfoProps) => {
           <Title>Характеристики устройства</Title>
           {product.properties.map(([name, value]) => (
             <Props>
-              <PropName>{name}</PropName>
-              <PropSeparator />
-              <PropValue>{value}</PropValue>
+              {name === '**' ? (
+                <PropValue>{value}</PropValue>
+              ) : (
+                <>
+                  <PropName>{name}</PropName>
+                  <PropSeparator />
+                  <PropValue>
+                    {value.split('==').map((e) => (
+                      <PropValueLine key={e}>{e}</PropValueLine>
+                    ))}
+                  </PropValue>
+                </>
+              )}
             </Props>
           ))}
           {product.propertiesText && (

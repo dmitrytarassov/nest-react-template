@@ -114,7 +114,7 @@ const OldPrice = styled.div`
   color: ${({ theme }: WithTheme) => theme.colors.text.secondary};
 `;
 
-interface ICardProps {
+export interface ICardProps {
   title: string;
   description?: string;
   image: string;

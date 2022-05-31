@@ -124,9 +124,10 @@ const MapModal = ({
   coordinates: _defaultCoordinates,
 }: MapModalProps) => {
   const center =
-    _defaultCoordinates.length && _defaultCoordinates[0] !== 0
+    _defaultCoordinates?.length && _defaultCoordinates[0] !== 0
       ? _defaultCoordinates
       : _coordinates[city] || _coordinates['spb'];
+
   const [coordinates, setCoordinates] = useState(center);
 
   return (

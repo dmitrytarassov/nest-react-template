@@ -1,30 +1,10 @@
 version: "3.0"
 
 services:
-  db:
-    platform: linux/x86_64
-    image: mysql:5.7
-#    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    expose:
-      - "3306"
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: kinoscope
-    command: ['mysqld', '--default-authentication-plugin=mysql_native_password', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8082:8080
-
   database:
     image: mongo:latest
-    container_name: soltools-mongodb
-    hostname: soltools
+    container_name: kinoscope-mongodb
+    hostname: kinoscope
     environment:
       MONGO_INITDB_DATABASE: ${MONGO_DB}
       MONGO_INITDB_USERNAME: ${MONGO_USER}
@@ -36,12 +16,12 @@ services:
 
   db-view:
     image: mongo-express
-    container_name: soltools-mongodb-view
-    hostname: soltools-mongodb-view
+    container_name: kinoscope-mongodb-view
+    hostname: kinoscope-mongodb-view
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_SERVER: soltools
+      ME_CONFIG_MONGODB_SERVER: kinoscope
       ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_USER}
       ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_PASS}
     depends_on:
