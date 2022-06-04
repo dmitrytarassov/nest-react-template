@@ -9,4 +9,9 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: process.env.NODE_ENV === 'production',
   },
+  ...(process.env.NODE_ENV === 'production'
+    ? {
+        distDir: '../../.next',
+      }
+    : {}),
 };

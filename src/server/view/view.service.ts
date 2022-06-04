@@ -11,7 +11,7 @@ export class ViewService implements OnModuleInit {
     try {
       this.server = createServer({
         dev: process.env.NODE_ENV !== 'production',
-        dir: 'src/client',
+        dir: process.env.NODE_ENV !== 'production' ? 'src/client' : '',
       });
       await this.server.prepare();
     } catch (error) {
