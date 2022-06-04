@@ -31,12 +31,15 @@ export class BaseCrudMongoModel<T> {
       }
     }
 
+    const skip = +query.limit * (+query.page - 1) || undefined;
+    const limit = +query.limit || undefined;
+
     const data = await this.model
       .find()
       // @ts-ignore
       .sort(order)
-      .skip(+query.limit * (+query.page - 1))
-      .limit(+query.limit)
+      .skip(skip)
+      .limit(limit)
       .exec();
 
     // @ts-ignore
