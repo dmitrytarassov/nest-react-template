@@ -1,7 +1,7 @@
 export interface IProduct {
   id: string;
   name: string;
-  properties?: [string, string][];
+  properties: string;
   propertiesText?: string;
   description: string;
   shortDescription?: string;

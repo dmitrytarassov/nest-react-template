@@ -26,6 +26,12 @@ export class RentalProcuct {
 
   @Prop()
   promotionDescription?: string;
+
+  @Prop()
+  promotionShortDescription?: string;
+
+  @Prop()
+  date: Date;
 }
 
 export type RentalProcuctDocument = RentalProcuct & Document;

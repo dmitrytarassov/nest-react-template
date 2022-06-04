@@ -45,6 +45,18 @@ export class Rental {
 
   @Prop()
   city: City;
+
+  @Prop()
+  delivery: string;
+
+  @Prop()
+  selfService: string;
+
+  @Prop()
+  repair: string;
+
+  @Prop()
+  insurance: string;
 }
 
 export type RentalDocument = Rental & Document;

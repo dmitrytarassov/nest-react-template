@@ -1,10 +1,6 @@
-import Card, { ICardProps } from '@frontend/components/Card';
 import React, { useEffect, useState } from 'react';
-import { theme } from '@frontend/utils/theme';
-import { ThemeProvider } from 'styled-components';
-import PreviewContainer, { PreviewPageContainer } from '../PreviewContainer';
-import Info from '@frontend/components/pages/product/Info';
 import { IProduct } from '@lib/interfaces/IProduct';
+import ProductPagePreview from '../previews/ProductPagePreview';
 
 export default function ProductPreviewPage() {
   const [record, setRecord] = useState<IProduct>({
@@ -12,7 +8,7 @@ export default function ProductPreviewPage() {
     name: '',
     photos: [],
     description: '',
-    properties: [],
+    properties: '',
     propertiesText: '',
     unique: false,
   });
@@ -24,14 +20,7 @@ export default function ProductPreviewPage() {
 
     const description = `${formData.get('shortDescription')}`;
     const propertiesText = `${formData.get('propertiesText')}`;
-    const properties = `${formData.get('properties')}`.split('\n').map((e) => {
-      if (e.startsWith('**')) {
-        return ['**', e.replace('**', '')];
-      } else {
-        const [param = '', value = ''] = e.split('===');
-        return [param, value];
-      }
-    });
+    const properties = `${formData.get('properties')}`;
 
     // @ts-ignore
     setRecord((record) => ({
@@ -53,13 +42,5 @@ export default function ProductPreviewPage() {
     };
   }, []);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <PreviewContainer>
-        <PreviewPageContainer>
-          <Info product={record} />
-        </PreviewPageContainer>
-      </PreviewContainer>
-    </ThemeProvider>
-  );
+  return <ProductPagePreview record={record} />;
 }

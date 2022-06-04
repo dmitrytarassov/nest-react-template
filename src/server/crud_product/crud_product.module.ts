@@ -3,12 +3,11 @@ import { CrudProductService } from './crud_product.service';
 import { CrudProductController } from './crud_product.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductSchema } from './crud_product.schema';
+import mongoConfig from '@backend/utils/mongoConfig';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
-    ),
+    MongooseModule.forRoot(mongoConfig),
     MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
   ],
   controllers: [CrudProductController],

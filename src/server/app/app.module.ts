@@ -35,6 +35,9 @@ import { CrudProductModule } from '@backend/crud_product/crud_product.module';
 import { CrudRentalProductModule } from '@backend/crud_rental_product/crud_rental_product.module';
 import { CrudRentalProcuctController } from '@backend/crud_rental_product/crud_rental_product.controller';
 import { CrudRentalProcuctService } from '@backend/crud_rental_product/crud_rental_product.service';
+import { CrudPromotionModule } from '@backend/crud_promotion/crud_product.module';
+import { CrudPromotionController } from '@backend/crud_promotion/crud_promotion.controller';
+import { CrudPromotionService } from '@backend/crud_promotion/crud_promotion.service';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -57,6 +60,7 @@ console.log(
     CrudRentalModule,
     CrudProductModule,
     CrudRentalProductModule,
+    CrudPromotionModule,
     ProductsModule,
     RentalsModule,
     PromotionsModule,
@@ -69,6 +73,7 @@ console.log(
     CrudRentalController,
     CrudProductController,
     CrudRentalProcuctController,
+    CrudPromotionController,
     RentalsController,
     ProductsController,
     PromotionsController,
@@ -81,6 +86,7 @@ console.log(
     CrudRentalService,
     CrudProductService,
     CrudRentalProcuctService,
+    CrudPromotionService,
     RentalsService,
     ProductsService,
     PromotionsService,

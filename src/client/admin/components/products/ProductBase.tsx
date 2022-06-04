@@ -8,7 +8,7 @@ import {
 } from 'react-admin';
 import { validateRequired } from '@admin/components/utils/validate';
 import Box from '@admin/components/Box';
-import { PreviewImage } from '../PreviewImage';
+import { PreviewImage } from '../previews/PreviewImage';
 import ProductPreviewCard from './ProductPreviewCard';
 import ProductPreviewPage from './ProductPreviewPage';
 

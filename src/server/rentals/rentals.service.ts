@@ -4,8 +4,6 @@ import { IRental } from '@lib/interfaces/IRental';
 import { IRentalProduct } from '@lib/interfaces/IRentalProduct';
 import { City } from '@lib/types/City';
 import { Rental } from '@backend/crud_rental/crud_rental.schema';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import { CrudRentalService } from '@backend/crud_rental/crud_rental.service';
 
 @Injectable()

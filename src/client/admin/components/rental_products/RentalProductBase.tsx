@@ -11,20 +11,25 @@ import {
 import { validateRequired } from '@admin/components/utils/validate';
 import Box from '@admin/components/Box';
 import { DependedTextField } from '../DependedTextField';
+import RentalProductPreviewCard from './RentalProductPreviewCard';
+import RentalProductPreviewPage from './RentalProductPreviewPage';
 
 const RentalProductBase = () => {
   const record = useRecordContext();
-  const [promotionType, setPromotionType] = useState(record.promotionType);
+  console.log(record);
+
+  const [promotionType, setPromotionType] = useState(record?.promotionType);
 
   useEffect(() => {
     if (promotionType === '') {
       record.promotionText = '';
       record.promotionDescription = '';
+      record.promotionShortDescription = '';
     }
   }, [promotionType]);
 
   return (
-    <TabbedForm>
+    <TabbedForm id="rental_product_form">
       <FormTab label="Привязать продукт к ренталу">
         <Box>
           <ReferenceInput
@@ -65,8 +70,19 @@ const RentalProductBase = () => {
             onChange={(e) => setPromotionType(e.target.value)}
           />
           <DependedTextField
-            label="Текст"
+            label="Дата окончания акции"
+            source="date"
+            refValue={promotionType}
+            type="date"
+          />
+          <DependedTextField
+            label="Текст для лейбла (на карточке)"
             source="promotionText"
+            refValue={promotionType}
+          />
+          <DependedTextField
+            label="Короткое описание (для карточки)"
+            source="promotionShortDescription"
             refValue={promotionType}
           />
           <DependedTextField
@@ -77,6 +93,12 @@ const RentalProductBase = () => {
             rows={8}
           />
         </Box>
+      </FormTab>
+      <FormTab label="Preview: Card">
+        <RentalProductPreviewCard />
+      </FormTab>
+      <FormTab label="Preview: Page">
+        <RentalProductPreviewPage />
       </FormTab>
     </TabbedForm>
   );

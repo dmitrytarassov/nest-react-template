@@ -6,12 +6,11 @@ import {
   RentalProcuct,
   RentalProcuctSchema,
 } from './crud_rental_product.schema';
+import mongoConfig from '@backend/utils/mongoConfig';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
-    ),
+    MongooseModule.forRoot(mongoConfig),
     MongooseModule.forFeature([
       { name: RentalProcuct.name, schema: RentalProcuctSchema },
     ]),

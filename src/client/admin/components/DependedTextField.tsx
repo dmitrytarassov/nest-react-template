@@ -1,8 +1,8 @@
-import { TextInput, useInput } from 'react-admin';
+import { DateInput, TextInput, useInput } from 'react-admin';
 import React from 'react';
 
 export const DependedTextField = (props) => {
-  const { onChange, onBlur, refValue, ...rest } = props;
+  const { onChange, onBlur, refValue, type = 'text', ...rest } = props;
   const {
     field,
     fieldState: { isTouched, invalid, error },
@@ -19,14 +19,30 @@ export const DependedTextField = (props) => {
   return (
     <>
       {refValue && (
-        <TextInput
-          {...field}
-          label={props.label}
-          error={(isTouched || isSubmitted) && invalid}
-          helperText={(isTouched || isSubmitted) && invalid ? error : ''}
-          required={isRequired}
-          {...rest}
-        />
+        <>
+          {type === 'text' && (
+            <TextInput
+              type={type}
+              {...field}
+              label={props.label}
+              error={(isTouched || isSubmitted) && invalid}
+              helperText={(isTouched || isSubmitted) && invalid ? error : ''}
+              required={isRequired}
+              {...rest}
+            />
+          )}
+          {type === 'date' && (
+            <DateInput
+              type={type}
+              {...field}
+              label={props.label}
+              error={(isTouched || isSubmitted) && invalid}
+              helperText={(isTouched || isSubmitted) && invalid ? error : ''}
+              required={isRequired}
+              {...rest}
+            />
+          )}
+        </>
       )}
     </>
   );

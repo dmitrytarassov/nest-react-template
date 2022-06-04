@@ -1,8 +1,6 @@
-import Card, { ICardProps } from '@frontend/components/Card';
+import { ICardProps } from '@frontend/components/Card';
 import React, { useEffect, useState } from 'react';
-import { theme } from '@frontend/utils/theme';
-import { ThemeProvider } from 'styled-components';
-import PreviewContainer, { PreviewCardContainer } from '../PreviewContainer';
+import ProductCardPreview from '../previews/ProductCardPreview';
 
 export default function ProductPreviewCard() {
   const [record, setRecord] = useState<ICardProps>({
@@ -51,13 +49,5 @@ export default function ProductPreviewCard() {
     };
   }, []);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <PreviewContainer>
-        <PreviewCardContainer>
-          <Card {...record} />
-        </PreviewCardContainer>
-      </PreviewContainer>
-    </ThemeProvider>
-  );
+  return <ProductCardPreview record={record} />;
 }

@@ -11,6 +11,9 @@ import RentalProductsList from '@frontend/admin/components/rental_products/Renta
 import RentalProductAdd from '@frontend/admin/components/rental_products/RentalProductAdd';
 import RentalProductEdit from '@frontend/admin/components/rental_products/RentalProductEdit';
 import dynamic from 'next/dynamic';
+import PromotionsList from './components/promotions/PromotionsList';
+import PromotionsAdd from './components/promotions/PromotionsAdd';
+import PromotionsEdit from './components/promotions/PromotionsEdit';
 
 const dataProvider = crudProvider('/crud');
 
@@ -94,6 +97,12 @@ const App = () => {
         list={RentalProductsList}
         create={RentalProductAdd}
         edit={RentalProductEdit}
+      />
+      <Resource
+        name="promotions"
+        list={PromotionsList}
+        create={PromotionsAdd}
+        edit={PromotionsEdit}
       />
     </Admin>
   );

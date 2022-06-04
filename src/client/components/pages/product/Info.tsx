@@ -89,14 +89,26 @@ const Props = styled.div`
 
 const Info = ({ product }: InfoProps) => {
   const [show, setShow] = useState<string>(
-    product.properties.length || product.propertiesText
+    product.properties?.length || product.propertiesText
       ? 'properties'
       : 'description',
   );
 
+  const _properties = product.properties
+    .split('\n')
+    .map((e) => {
+      if (e.startsWith('**')) {
+        return ['**', e.replace('**', '')];
+      } else {
+        const [param = '', value = ''] = e.split('===');
+        return [param, value];
+      }
+    })
+    .filter(([a, b]) => a && b);
+
   return (
     <StyledInfo>
-      {(product.propertiesText || product.properties.length) &&
+      {(product.propertiesText || _properties.length > 0) &&
         product.description && (
           <Buttons>
             <Tabs
@@ -112,8 +124,8 @@ const Info = ({ product }: InfoProps) => {
 
       {show === 'properties' && (
         <>
-          <Title>Характеристики устройства</Title>
-          {product.properties.map(([name, value]) => (
+          <Title>Характеристики</Title>
+          {_properties.map(([name, value]) => (
             <Props>
               {name === '**' ? (
                 <PropValue>{value}</PropValue>
@@ -138,7 +150,7 @@ const Info = ({ product }: InfoProps) => {
 
       {show === 'description' && (
         <>
-          <Title>Описание устройства</Title>
+          <Title>Описание</Title>
           {product.description && <PropText>{product.description}</PropText>}
         </>
       )}

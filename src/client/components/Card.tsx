@@ -123,6 +123,7 @@ export interface ICardProps {
   discountPrice?: number;
   tag?: IPromotionTag;
   date?: string;
+  promotionText?: string;
 }
 
 const Card = ({
@@ -134,6 +135,7 @@ const Card = ({
   discountPrice,
   tag,
   date,
+  promotionText,
 }: ICardProps) => {
   const dateText = getExpirationDateText(date);
 
@@ -147,7 +149,7 @@ const Card = ({
             <CardImage src={image} />
             <CardContent>
               <CardTitle>{title}</CardTitle>
-              <CardDescription>{description}</CardDescription>
+              <CardDescription>{promotionText || description}</CardDescription>
             </CardContent>
           </CardMainContent>
           {price && (
