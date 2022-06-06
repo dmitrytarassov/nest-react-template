@@ -22,7 +22,7 @@ const StyledContainer = styled(Container)`
   overflow: visible;
 
   & + div {
-    margin-top: 72px;
+    padding-top: 72px;
   }
 `;
 
