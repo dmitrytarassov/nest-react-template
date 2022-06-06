@@ -23,27 +23,28 @@ interface PromotionsCarouselProps {
 }
 
 const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
-  const promotions: SWRResponse<IControllerResponse<IPromotion[]>> = useSWR(
-    `/api/promotions/${id}`,
+  const promotions: SWRResponse<IPromotion[]> = useSWR(
+    `/crud/promotions/${id}`,
     get,
   );
 
-  const promotionsFullInfo: IPromotion[] = promotions?.data?.data || [];
+  const promotionsFullInfo: IPromotion[] = promotions?.data || [];
 
   return (
     <StyledPromotionsCarousel>
       <Swiper {...halfPageSwiperProps}>
         {promotionsFullInfo.map((promotion) => (
-          <SwiperSlide key={promotion.title}>
+          <SwiperSlide key={promotion.id}>
             <Card
-              title={promotion.title}
+              title={promotion.name}
               description={promotion.shortText}
-              price={promotion.price}
-              discountPrice={promotion.discountPrice}
-              image={promotion.images[0] || logoWithCover.src}
-              link={`/${promotion.type}/${promotion.id}`}
-              tag={promotion.tag}
-              date={promotion.expirationDate}
+              image={promotion.photos[0] || logoWithCover.src}
+              link={`/promotion/${promotion.id}`}
+              tag={{
+                type: promotion.promotionType,
+                text: promotion.text,
+              }}
+              date={promotion.date}
             />
           </SwiperSlide>
         ))}

@@ -68,7 +68,11 @@ const getIcon = (src: string, active: boolean) =>
     ),
   });
 
-const Markers = () => {
+const Markers = ({
+  currentLocation = [0, 0],
+}: {
+  currentLocation?: [number, number];
+}) => {
   const [markers, setMarkers] = useState<IMarker[]>([]);
   const [center, setCenter] = useState<[number, number]>([0, 0]);
   const map = useMap();
@@ -98,7 +102,7 @@ const Markers = () => {
           });
         });
 
-        if (activeMarker) {
+        if (activeMarker?.coordinates) {
           setCenter(activeMarker.coordinates);
         } else {
           setCenter(
@@ -125,6 +129,13 @@ const Markers = () => {
   useEffect(() => {
     map.panTo(new LatLng(+center[0].toFixed(6), +center[1].toFixed(6)));
   }, [center.join('-')]);
+
+  useEffect(() => {
+    const [lat, lan] = currentLocation;
+    if (lat !== 0 && lan !== 0) {
+      map.panTo(new LatLng(+lat.toFixed(6), +lan.toFixed(6)));
+    }
+  }, [currentLocation]);
 
   return (
     <>

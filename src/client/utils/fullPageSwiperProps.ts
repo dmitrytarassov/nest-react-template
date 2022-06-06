@@ -14,9 +14,5 @@ export const fullPageSwiperProps = {
       slidesPerView: 3,
       spaceBetween: 24,
     },
-    // [breakpoints.laptop]: {
-    //   slidesPerView: 4,
-    //   spaceBetween: 24,
-    // },
   },
 };

@@ -41,7 +41,7 @@ const __dataProvider = async (type, resource, params) => {
         }
         params.data[paramName] = data;
       } else {
-        if (params.data[paramName].rawFile instanceof File) {
+        if (params.data[paramName]?.rawFile instanceof File) {
           const img = params.data[paramName];
           if (img.rawFile) {
             const pic = await convertFileToBase64(img);

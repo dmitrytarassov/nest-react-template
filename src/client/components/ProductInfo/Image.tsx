@@ -2,10 +2,12 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
 
-const StyledImage = styled.img`
-  max-height: 320px;
+const Image = styled.img`
   position: relative;
   padding: 32px 0;
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.halfScreenBreak(css`
@@ -13,4 +15,4 @@ const StyledImage = styled.img`
     `)};
 `;
 
-export default StyledImage;
+export default Image;

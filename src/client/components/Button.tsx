@@ -16,15 +16,17 @@ const base = css`
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.15em;
+  transition: all 0.3s ease-in-out;
 
   color: ${({ theme }: WithTheme) => theme.colors.buttons.default.color};
   background: ${({ theme }: WithTheme) =>
     theme.colors.buttons.default.background};
 
   :hover {
-    color: ${({ theme }: WithTheme) => theme.colors.buttons.hover.color};
+    color: ${({ theme }: WithTheme) =>
+      theme.colors.buttons.hover.color}!important;
     background: ${({ theme }: WithTheme) =>
-      theme.colors.buttons.hover.background};
+      theme.colors.buttons.hover.background}!important;
   }
 
   :disabled {

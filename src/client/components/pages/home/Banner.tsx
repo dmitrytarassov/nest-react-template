@@ -29,6 +29,7 @@ const StyledBanner = styled(BannerBase)`
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 32px;
+  font-family: 'Neue Machina';
 `;
 
 const Banner = () => {

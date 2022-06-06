@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
+import imageUrl from '@frontend/utils/imageUrl';
 
 const StyledImages = styled.div`
   position: absolute;
@@ -27,6 +28,11 @@ const ImagesLine = styled.div`
   overflow-x: auto;
   margin-left: 24px;
   flex-direction: row;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      margin-left: 0;
+    `)};
 `;
 
 interface ImageProps {
@@ -41,6 +47,11 @@ const Image = styled.img<ImageProps>`
   border-color: ${({ active, theme }: WithThemeAndProps<ImageProps>) =>
     active ? theme.colors.borders.active : theme.colors.borders.default};
   cursor: pointer;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      height: 48px;
+    `)};
 
   ${({ active, theme }: WithThemeAndProps<ImageProps>) =>
     active
@@ -65,7 +76,7 @@ const Image = styled.img<ImageProps>`
     `}
 
   :not(:last-child) {
-    margin-right: 8px;
+    margin-right: 12px;
   }
 `;
 
@@ -84,7 +95,7 @@ const Images = ({ logo, images, current, onChange }: ImagesProps) => {
         <Image src={logo} active={false} logo />
         {images.map((image) => (
           <Image
-            src={image}
+            src={imageUrl(image)}
             key={image}
             active={current === image}
             onClick={() => onChange(image)}

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Content from '@frontend/layout/Content';
 
-import logoWithCover from '@frontend/assets/logoWithCover.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { usePromotions } from '@frontend/hooks/usePromotions';
 import Card from '@frontend/components/Card';
@@ -12,6 +11,7 @@ import { fullPageSwiperProps } from '@frontend/utils/fullPageSwiperProps';
 import CarouselFooter from '@frontend/components/CarouselFooter';
 import CarouselContainer from '@frontend/components/CarouselContainer';
 import Heading from '@frontend/components/Heading';
+import imageUrl from '@frontend/utils/imageUrl';
 
 const Container = styled.div`
   display: flex;
@@ -24,39 +24,45 @@ const StyledHeading = styled(Heading)`
 `;
 
 const PromotionsCarousel = () => {
-  const { promotionsFullInfo } = usePromotions();
+  const { promotions } = usePromotions();
 
   return (
-    <Content>
-      <Container>
-        <StyledHeading level="h3" useLines>
-          Акции и новинки ренталов
-        </StyledHeading>
-        <CarouselContainer>
-          <Swiper {...fullPageSwiperProps}>
-            {promotionsFullInfo.map((promotion) => (
-              <SwiperSlide key={promotion.title}>
-                <Card
-                  title={promotion.title}
-                  description={promotion.shortText}
-                  price={promotion.price}
-                  discountPrice={promotion.discountPrice}
-                  image={promotion.images[0] || logoWithCover.src}
-                  link={`/${promotion.type}/${promotion.id}`}
-                  tag={promotion.tag}
-                />
-              </SwiperSlide>
-            ))}
-            <CarouselFooter>
-              <Button type="link" href="/promotions">
-                Посмотреть все
-              </Button>
-              <CarouselControls />
-            </CarouselFooter>
-          </Swiper>
-        </CarouselContainer>
-      </Container>
-    </Content>
+    <>
+      {promotions.length > 0 && (
+        <Content>
+          <Container>
+            <StyledHeading level="h3" useLines>
+              Акции и новинки ренталов
+            </StyledHeading>
+            <CarouselContainer>
+              <Swiper {...fullPageSwiperProps}>
+                {promotions.map((promotion) => (
+                  <SwiperSlide key={promotion.id}>
+                    <Card
+                      title={promotion.name}
+                      description={promotion.shortText}
+                      image={imageUrl(promotion.photos[0])}
+                      link={`/promotion/${promotion.id}`}
+                      tag={{
+                        type: promotion.promotionType,
+                        text: promotion.promotionText,
+                      }}
+                      date={promotion.date}
+                    />
+                  </SwiperSlide>
+                ))}
+                <CarouselFooter>
+                  <Button type="link" href="/promotions">
+                    Посмотреть все
+                  </Button>
+                  <CarouselControls count={promotions.length} />
+                </CarouselFooter>
+              </Swiper>
+            </CarouselContainer>
+          </Container>
+        </Content>
+      )}
+    </>
   );
 };
 

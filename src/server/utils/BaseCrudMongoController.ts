@@ -33,11 +33,11 @@ export class BaseCrudMongoController<T, E> {
   }
 
   @Get()
-  async fetchAll(@Query() query: number, @Res() response) {
+  async fetchAll(@Query() query: any, @Res() response) {
     // @ts-ignore
     const data = await this.service.readAll(query);
     // @ts-ignore
-    const total = await this.service.getTotal();
+    const total = await this.service.getTotal(query);
 
     return response.status(HttpStatus.OK).json({
       data,
@@ -50,12 +50,18 @@ export class BaseCrudMongoController<T, E> {
     // @ts-ignore
     const element = await this.service.readById(_id);
 
-    return response.status(HttpStatus.OK).json({
-      // @ts-ignore
-      ...element._doc,
-      // @ts-ignore
-      id: element.id,
-    });
+    if (element) {
+      return response.status(HttpStatus.OK).json({
+        // @ts-ignore
+        ...element._doc,
+        // @ts-ignore
+        id: element.id,
+      });
+    } else {
+      return response.status(HttpStatus.NOT_FOUND).json({
+        statusCode: 404,
+      });
+    }
   }
 
   @Patch('/:id')

@@ -10,13 +10,13 @@ import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { useRouter } from 'next/router';
 import { IPromotion } from '@lib/interfaces/IPromotion';
-import Block from '@frontend/components/pages/product/Block';
-import Image from '@frontend/components/pages/product/Image';
+import Block from '@frontend/components/ProductInfo/Block';
+import Image from '@frontend/components/ProductInfo/Image';
 import { getExpirationDateText } from '@frontend/utils/getExpirationDateText';
 import Tag from '@frontend/components/pages/product/Tag';
 import DateTag from '@frontend/components/pages/product/DateTag';
-import Images from '@frontend/components/pages/product/Images';
-import Price from '@frontend/components/pages/product/Price';
+import Images from '@frontend/components/ProductInfo/Images';
+import Price from '@frontend/components/ProductInfo/Price';
 import Info from '@frontend/components/pages/product/Info';
 import Tags from '@frontend/components/pages/product/Tags';
 
@@ -79,7 +79,7 @@ const ProductPage = ({
 
   const [promotion] = promotions;
 
-  const dateText = getExpirationDateText(promotion?.expirationDate);
+  // const dateText = getExpirationDateText(promotion?.expirationDate);
 
   return (
     <PageMainColumnContainer>
@@ -93,10 +93,10 @@ const ProductPage = ({
         <Image src={currentImage} />
         {promotion && (
           <Tags>
-            {promotion.tag && (
+            {/* {promotion.tag && (
               <Tag tag={promotion.tag} text={promotion.tag.text} />
-            )}
-            {dateText && <DateTag>{dateText}</DateTag>}
+            )} */}
+            {/* {dateText && <DateTag>{dateText}</DateTag>} */}
           </Tags>
         )}
         <Images
@@ -109,7 +109,7 @@ const ProductPage = ({
       <Block>
         <Price
           price={rentalProduct.price}
-          discountPrice={promotion?.discountPrice}
+          // discountPrice={promotion?.discountPrice}
           link={rentalProduct.url}
         />
       </Block>

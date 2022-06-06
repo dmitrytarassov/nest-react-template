@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { WithTheme } from '@frontend/utils/theme';
 import clocks from '@frontend/assets/clocks.svg';
 import TagBase from '@frontend/components/TagBase';
 
@@ -11,7 +10,8 @@ const StyledCardDate = styled(TagBase)`
   right: 24px;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 10px;
+  font-family: 'Neue Machina';
 
   img {
     margin-right: 4px;

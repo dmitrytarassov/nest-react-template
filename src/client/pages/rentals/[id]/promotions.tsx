@@ -45,7 +45,6 @@ const RentalPromotions = ({
     <CityProvider currentCity={city}>
       <PromotionsProvider>
         <RentalsProvider>
-          <Header />
           <RentalPromotionsPage
             rental={rentalData}
             promotions={promotionsData}

@@ -74,13 +74,13 @@ const RentalPromotionsPage = ({
         // image={rental.icon}
       />
       <Title>Акции</Title>
-      <PromotionsCarousel
+      {/* <PromotionsCarousel
         promotions={promotions.filter(({ type }) => type === 'promotion')}
-      />
+      /> */}
       <Title>Новинки</Title>
-      <PromotionsCarousel
+      {/* <PromotionsCarousel
         promotions={promotions.filter(({ type }) => type === 'news')}
-      />
+      /> */}
     </PageMainColumnContainer>
   );
 };

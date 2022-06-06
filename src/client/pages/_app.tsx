@@ -31,6 +31,8 @@ interface IApp extends AppProps {
 function Client(props: IApp) {
   const { Component, pageProps } = props;
 
+  console.log(pageProps);
+
   // @ts-ignore
   return props.router.route.startsWith('/admin') ? (
     // @ts-ignore

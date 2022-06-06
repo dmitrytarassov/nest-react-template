@@ -1,27 +1,39 @@
 import { City } from '@lib/types/City';
 
-export interface IRental {
+export interface ICrudRental {
   id: string;
+
   name: string;
+
   email?: string;
+
   url: string;
+
   icon: string;
-  address: {
-    name: string;
-    coordinates: [number, number];
-  };
+
+  address: string;
+
+  coordinates: string;
+
   workingTime: string;
-  socials: {
-    vk?: string;
-    telegram?: string;
-    web?: string;
-  };
+
+  vk?: string;
+
+  telegram?: string;
+
+  web?: string;
+
   rating: number;
-  phone: number;
-  services: string[];
+
+  phone: string;
+
   city: City;
-  insurance?: string;
+
   delivery?: string;
+
   selfService?: string;
+
   repair?: string;
+
+  insurance?: string;
 }

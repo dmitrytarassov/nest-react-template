@@ -38,7 +38,7 @@ export const theme = {
       },
       hover: {
         color: '#0F0E0E',
-        background: '#23B94D',
+        background: '#15D14A',
       },
       disabled: {
         color: '#6C768A',

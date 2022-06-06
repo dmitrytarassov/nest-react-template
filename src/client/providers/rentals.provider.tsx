@@ -5,6 +5,8 @@ import { IRental } from '@lib/interfaces/IRental';
 import { get } from '@frontend/utils/fetcher';
 import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 import { useCity } from '@frontend/hooks/useCity';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
+import parseRental from '@frontend/utils/parseRental';
 
 export const RentalsProvider = ({
   children,
@@ -12,9 +14,8 @@ export const RentalsProvider = ({
   children: React.ReactNode;
 }) => {
   const [init, setInit] = useState<boolean>(false);
-  const [rentals, setRentals] = useState<IRental[]>([]);
-  const fetchData: SWRResponse<IControllerResponse<IRental[]>> = useSWR(
-    '/api/rentals',
+  const fetchData: SWRResponse<IControllerResponse<ICrudRental[]>> = useSWR(
+    '/crud/rental',
     get,
   );
 
@@ -27,17 +28,15 @@ export const RentalsProvider = ({
   }, [city]);
 
   useEffect(() => {
-    if (fetchData.data) {
-      setRentals(fetchData.data.data);
-    }
-  }, [fetchData.data]);
-
-  useEffect(() => {
     setInit(true);
   }, []);
 
+  const _rentals: IRental[] = fetchData?.data?.data
+    ? fetchData?.data?.data.map((e) => parseRental(e))
+    : [];
+
   return (
-    <RentalsContext.Provider value={{ rentals }}>
+    <RentalsContext.Provider value={{ rentals: _rentals }}>
       {children}
     </RentalsContext.Provider>
   );

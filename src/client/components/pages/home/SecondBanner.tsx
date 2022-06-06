@@ -8,7 +8,6 @@ import Heading from '@frontend/components/Heading';
 import InfoText from '@frontend/components/InfoText';
 import BannerBase from '@frontend/components/pages/home/BannerBase';
 import Button from '@frontend/components/Button';
-import { useRouter } from 'next/router';
 
 const StyledBanner = styled(BannerBase)`
   background-image: url(${banner.src});
@@ -29,21 +28,16 @@ const StyledBanner = styled(BannerBase)`
 `;
 
 const StyledHeading = styled(Heading)`
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+  font-family: 'Neue Machina';
+  font-size: 32px;
 `;
 
 const StyledInfoText = styled(InfoText)`
-  margin-bottom: 32px;
+  margin-bottom: 58px;
 `;
 
 const SecondBanner = () => {
-  const router = useRouter();
-
-  const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    router.push('/promotions');
-  };
-
   return (
     <Content>
       <StyledBanner>

@@ -23,11 +23,11 @@ export class PromotionsService {
       );
     }
 
-    if (filter.rentalProduct) {
-      return [...promotions, ...news].filter(
-        ({ productId }) => filter.rentalProduct === productId,
-      );
-    }
+    // if (filter.rentalProduct) {
+    //   return [...promotions, ...news].filter(
+    //     ({ productId }) => filter.rentalProduct === productId,
+    //   );
+    // }
 
     const data = filter.type
       ? filter.type === 'promotion'

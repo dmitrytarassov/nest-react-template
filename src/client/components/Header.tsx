@@ -101,6 +101,15 @@ const CitySelectContainer = styled.div`
   }
 `;
 
+const Logo = styled.img`
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(
+      css`
+        width: 148px;
+      `,
+    )}
+`;
+
 interface CityButtonProps {
   active: boolean;
 }
@@ -163,7 +172,7 @@ const Header = () => {
     <StyledContainer>
       <StyledContent>
         <Link href="/" passHref>
-          <img src={logo.src} />
+          <Logo src={logo.src} />
         </Link>
         <CityDisplay ref={selectRef}>
           {selectIsOpen && (

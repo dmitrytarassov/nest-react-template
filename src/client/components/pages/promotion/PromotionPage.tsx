@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { IRental } from '@lib/interfaces/IRental';
 import { IPromotion } from '@lib/interfaces/IPromotion';
 import { useRouter } from 'next/router';
@@ -10,14 +9,9 @@ import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
-import Heading from '@frontend/components/Heading';
-import PromotionsCarousel from '@frontend/components/pages/rentalPromotions/PromotionsCarousel';
-
-const StyledRentalPromotions = styled.div``;
-
-const StyledHeading = styled(Heading)`
-  margin-bottom: 36px;
-`;
+import ProductInfo, {
+  ProductLike,
+} from '@frontend/components/ProductInfo/ProductInfo';
 
 interface PromotionPageProps {
   rental: IRental;
@@ -49,11 +43,8 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
   ];
 
   useEffect(() => {
-    const _rentals = rentals.find(({ id }) => id === rental.id)
-      ? rentals
-      : [...rentals, rental];
-    updateMapRentals(_rentals, rental.id, 500);
-  }, [rentals, rental.id]);
+    updateMapRentals(rentals, rental.id, 500);
+  }, [rental.id, rentals]);
 
   useEffect(() => {
     updateMapRentals([rental], rental.id);
@@ -69,22 +60,25 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
     };
   }, []);
 
+  const _product: ProductLike = {
+    photos: promotion.photos,
+    date: promotion.date,
+    promotionText: promotion.text,
+    promotion: {
+      tag: promotion.promotionType,
+      tagText: promotion.promotionText,
+    },
+  };
+
   return (
     <PageMainColumnContainer>
       <ListTop
         breadcrumbs={breadcrumbs}
-        backLink={`/rentals/${rental.id}/promotions`}
-        title={promotion.title}
+        backLink={`/rentals/${rental.id}`}
+        title={promotion.name}
         // image={rental.icon}
       />
-      <StyledHeading level="h3">Акции</StyledHeading>
-      {/*<PromotionsCarousel*/}
-      {/*  promotions={promotions.filter(({ type }) => type === 'promotion')}*/}
-      {/*/>*/}
-      {/*<StyledHeading level="h3">Новинки</StyledHeading>*/}
-      {/*<PromotionsCarousel*/}
-      {/*  promotions={promotions.filter(({ type }) => type === 'news')}*/}
-      {/*/>*/}
+      <ProductInfo rental={rental} product={_product} />
     </PageMainColumnContainer>
   );
 };

@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Theme, WithTheme } from '@frontend/utils/theme';
+import { WithTheme } from '@frontend/utils/theme';
 import Link from 'next/link';
 import { moneyFormat } from '@frontend/utils/moneyFormat';
 import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
 import CardTag from '@frontend/components/CardTag';
-import format from 'date-fns/format';
-import ruLocale from 'date-fns/locale/ru';
 import CardDate from '@frontend/components/CardDate';
 import { getExpirationDateText } from '@frontend/utils/getExpirationDateText';
 
@@ -16,6 +14,11 @@ const StyledCard = styled.a`
   width: 100%;
   position: relative;
   text-decoration: none;
+  transition: filter 0.3s ease-in-out;
+
+  :hover {
+    filter: drop-shadow(0px 8px 16px rgba(156, 164, 169, 0.32));
+  }
 `;
 
 const CardContainer = styled.div`
@@ -29,6 +32,7 @@ const CardContainer = styled.div`
   cursor: pointer;
   height: 100%;
   justify-content: space-between;
+  border: 1px solid ${({ theme }: WithTheme) => theme.colors.borders.default};
 `;
 
 const CardMainContent = styled.div``;
@@ -40,8 +44,6 @@ const CardImage = styled.div<{ src: string }>`
   position: relative;
   background-color: ${({ theme }: WithTheme) =>
     theme.colors.background.default};
-  border-bottom-right-radius: 24px;
-  border-bottom-left-radius: 24px;
   overflow: hidden;
 
   :after {
@@ -55,11 +57,12 @@ const CardImage = styled.div<{ src: string }>`
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    border-radius: 24px;
   }
 `;
 
 const CardContent = styled.div`
-  padding: 24px 32px 0;
+  padding: 24px 32px;
   display: flex;
   flex-direction: column;
 `;
@@ -75,10 +78,9 @@ const CardTitle = styled.div`
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 700;
-  font-size: 22px;
-  line-height: 100%;
-  padding: 8px 0;
-  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 16px;
   color: ${({ theme }: WithTheme) => theme.colors.text.additional};
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -22,7 +22,7 @@ const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {
   return (
     <StyledPromotionsCarousel>
       <Swiper {...halfPageSwiperProps}>
-        {promotions.map((promotion) => (
+        {/* {promotions.map((promotion) => (
           <SwiperSlide key={promotion.title}>
             <Card
               title={promotion.title}
@@ -34,7 +34,7 @@ const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {
               tag={promotion.tag}
             />
           </SwiperSlide>
-        ))}
+        ))} */}
         <CarouselFooter>
           <div />
           <CarouselControls />

@@ -1,10 +1,11 @@
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 
 interface Query {
   limit: string;
   page: string;
   sort: string[];
   offset: string;
+  filter?: string[];
 }
 
 const sanitize = ({ $__, $isNew, _v, ...rest }) => ({
@@ -34,8 +35,23 @@ export class BaseCrudMongoModel<T> {
     const skip = +query.limit * (+query.page - 1) || undefined;
     const limit = +query.limit || undefined;
 
+    const filter: FilterQuery<T> = {};
+    if (query?.filter?.length) {
+      for (const el of query.filter) {
+        const [name, typeOrValue, value] = el.split(',');
+        // @ts-ignore
+        filter[name] = {};
+        const _type = !value ? '$eq' : `$${typeOrValue}`;
+        let _value = value || typeOrValue;
+        if (_value === 'now') {
+          _value = new Date().toString();
+        }
+        filter[name][_type] = _value;
+      }
+    }
+
     const data = await this.model
-      .find()
+      .find(filter)
       // @ts-ignore
       .sort(order)
       .skip(skip)
@@ -68,7 +84,21 @@ export class BaseCrudMongoModel<T> {
     return await this.model.findByIdAndRemove(id);
   }
 
-  async getTotal(): Promise<number> {
-    return await this.model.count();
+  async getTotal(query: Query): Promise<number> {
+    const filter: FilterQuery<T> = {};
+    if (query?.filter?.length) {
+      for (const el of query.filter) {
+        const [name, typeOrValue, value] = el.split(',');
+        // @ts-ignore
+        filter[name] = {};
+        const _type = !value ? '$eq' : `$${typeOrValue}`;
+        let _value = value || typeOrValue;
+        if (_value === 'now') {
+          _value = new Date().toString();
+        }
+        filter[name][_type] = _value;
+      }
+    }
+    return await this.model.count(filter);
   }
 }
