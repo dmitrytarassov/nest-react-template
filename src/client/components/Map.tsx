@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapContainer, Marker } from 'react-leaflet';
 import { TileLayer } from 'react-leaflet';
 import dynamic from 'next/dynamic';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import 'leaflet/dist/leaflet.css';
 import Markers from '@frontend/components/Markers';
 import { DivIcon, divIcon } from 'leaflet';
 import { renderToString } from 'react-dom/server';
+import { WithTheme } from '@frontend/utils/theme';
+import { Resizable } from 'react-resizable';
+import 'react-resizable/css/styles.css';
+import CurrentLocation from '@frontend/components/CurrentLocation';
+import { useCurrentLocation } from '@frontend/hooks/useCurrentLocation';
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.tablet(css`
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(70vh + 72px);
+    `)}
 
   .leaflet-container {
     width: 100%;
@@ -104,7 +118,9 @@ const currentLocationIcon = new DivIcon({
   ),
 });
 
-const Map = ({ currentLocation }: { currentLocation?: [number, number] }) => {
+const Map = () => {
+  const { coordinates: currentLocation } = useCurrentLocation();
+
   return (
     <Container>
       <MapContainer center={[0, 0]} zoom={10} attributionControl={false}>
@@ -117,6 +133,7 @@ const Map = ({ currentLocation }: { currentLocation?: [number, number] }) => {
         )}
         <Markers currentLocation={currentLocation} />
       </MapContainer>
+      <CurrentLocation />
     </Container>
   );
 };

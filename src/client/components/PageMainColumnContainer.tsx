@@ -9,7 +9,7 @@ const PageMainColumnContainer = styled.div`
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
-      margin-top: 0 !important;
+      padding-top: 32px !important;
     `)};
 `;
 

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import dynamic from 'next/dynamic';
-import { theme, WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
+import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
 import { useRouter } from 'next/router';
 import Footer from '@frontend/components/Footer';
 import Header from './Header';
 import { CityProvider } from '@frontend/providers/city.provider';
-import getLocationIcon from '@frontend/assets/get_location.svg';
-import getLocation from '@frontend/utils/getLocation';
+import { CurrentLocationProvider } from '@frontend/providers/current_location.provider';
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import('@frontend/components/Map'),
@@ -25,6 +24,7 @@ const Container = styled.div`
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
       flex-direction: column;
+      height: unset;
     `)};
 `;
 
@@ -50,7 +50,7 @@ const MapContainer = styled.div<MapContainerProps>`
 
         ${size === 'small' &&
         css`
-          height: 30%;
+          height: calc(70vh + 72px);
         `}
       `)}
     `}
@@ -63,7 +63,7 @@ const ContentContainer = styled.div`
   overflow-y: scroll;
   background-color: ${({ theme }: WithTheme) =>
     theme.colors.background.primary};
-  box-shadow: 0px 8px 16px rgba(156, 164, 169, 0.32);
+  box-shadow: 0 8px 16px rgba(156, 164, 169, 0.32);
   z-index: 2;
 
   ${({ theme }: WithTheme) =>
@@ -77,6 +77,19 @@ const ContentContainer = styled.div`
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
       margin-top: -16px;
+      position: relative;
+      overflow: visible;
+
+      :after {
+        content: '';
+        height: 8px;
+        width: 56px;
+        background: #fff;
+        left: calc(50% - 28px);
+        position: absolute;
+        top: -24px;
+        border-radius: 4px;
+      }
     `)};
 `;
 
@@ -94,45 +107,10 @@ const ChildrenContainer = styled.div`
     `)};
 `;
 
-interface GetLocationIconProps {
-  disabled?: boolean;
-}
-const GetLocationIcon = styled.div<{ disabled?: boolean }>`
-  z-index: 10;
-  position: absolute;
-  background-image: url(${getLocationIcon.src});
-  width: 64px;
-  height: 64px;
-  background-color: ${({
-    disabled,
-    theme,
-  }: WithThemeAndProps<GetLocationIconProps>) =>
-    disabled
-      ? theme.colors.buttons.disabled.background
-      : theme.colors.buttons.default.background};
-  bottom: 48px;
-  right: 48px;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-  cursor: pointer;
-
-  :hover {
-    ${({ disabled }) => css`
-      ${!disabled &&
-      css`
-        background-color: ${({ theme }) =>
-          theme.colors.buttons.hover.background};
-      `}
-    `}
-  }
-`;
-
 const ContainerWithMap = ({ children }: { children: React.ReactNode }) => {
   const isClient = typeof window !== 'undefined';
-  const [currentLocation, setCurrentLocation] = useState<[number, number]>();
   const router = useRouter();
-  const [loadLocation, setLoadLocation] = useState<boolean>(false);
+  const ref = useRef();
 
   const isSmallMap = [
     '/products/[id]',
@@ -146,37 +124,29 @@ const ContainerWithMap = ({ children }: { children: React.ReactNode }) => {
   // @ts-ignore
   const city = children.props.city;
 
-  const handleGetLocation = async () => {
-    try {
-      setLoadLocation(true);
-      const location = await getLocation();
-      setCurrentLocation(location);
-    } catch (e) {
-      console.log(e);
+  useEffect(() => {
+    if (isSmallMap && ref.current) {
+      // @ts-ignore
+      window.scrollTo(0, ref.current.getBoundingClientRect().y - 172);
     }
-    setLoadLocation(false);
-  };
+  }, []);
 
   return (
     <CityProvider currentCity={city}>
-      <Container>
-        <Header />
-        <MapContainer size={isSmallMap || isError ? 'small' : 'big'}>
-          {isClient && (
-            <DynamicComponentWithNoSSR currentLocation={currentLocation} />
-          )}
-          <GetLocationIcon
-            disabled={loadLocation}
-            onClick={handleGetLocation}
-          />
-        </MapContainer>
-        <ContentContainer>
-          <ChildrenContainer>
-            {children}
-            <Footer halfScreen />
-          </ChildrenContainer>
-        </ContentContainer>
-      </Container>
+      <CurrentLocationProvider>
+        <Container>
+          <Header />
+          <MapContainer size={isSmallMap || isError ? 'small' : 'big'}>
+            {isClient && <DynamicComponentWithNoSSR />}
+          </MapContainer>
+          <ContentContainer ref={ref}>
+            <ChildrenContainer>
+              {children}
+              <Footer halfScreen />
+            </ChildrenContainer>
+          </ContentContainer>
+        </Container>
+      </CurrentLocationProvider>
     </CityProvider>
   );
 };
