@@ -8,7 +8,6 @@ import Markers from '@frontend/components/Markers';
 import { DivIcon, divIcon } from 'leaflet';
 import { renderToString } from 'react-dom/server';
 import { WithTheme } from '@frontend/utils/theme';
-import 'react-resizable/css/styles.css';
 import CurrentLocation from '@frontend/components/CurrentLocation';
 import { useCurrentLocation } from '@frontend/hooks/useCurrentLocation';
 

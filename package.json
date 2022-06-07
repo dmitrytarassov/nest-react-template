@@ -15,7 +15,7 @@
     "start:debug": "nest start --debug --watch",
     "prod:start": "pm2 start --name=\"kinoscope\"",
     "prod:stop": "pm2 stop kinoscope",
-    "prod:restart": "yarn prod:staop; yarn prod:start",
+    "prod:restart": "yarn prod:stop; yarn prod:start",
     "log": "pm2 log",
     "status": "pm2 status",
     "console:dev": "ts-node -r tsconfig-paths/register src/server/console.ts",
