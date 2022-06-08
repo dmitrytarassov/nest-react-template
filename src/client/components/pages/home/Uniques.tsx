@@ -120,7 +120,7 @@ const Uniques = () => {
     link: `/rentals/${el.rental.url}/${el.rentalProduct.url}`,
     price: el.rentalProduct.price,
     discountPrice: el.rentalProduct.discountPrice,
-    date: el.rentalProduct.date.toString(),
+    date: el.rentalProduct.date?.toString(),
     promotionText: el.rentalProduct.promotionShortDescription,
     rentalLogo: imageUrl(el.rental.icon),
     ...(el.rentalProduct.promotionType && el.rentalProduct.promotionText

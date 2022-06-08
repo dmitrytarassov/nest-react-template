@@ -2,10 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@backend/app/app.module';
 import * as session from 'express-session';
 import * as path from 'path';
-import * as multer from 'multer';
 import * as bodyParser from 'body-parser';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const MongoStore = require('connect-mongo');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
 async function bootstrap() {
@@ -26,8 +27,8 @@ async function bootstrap() {
     prefix: '/public',
   });
 
-  app.use(bodyParser.json({limit: '5mb'}));
-  app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
+  app.use(bodyParser.json({ limit: '5mb' }));
+  app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
   await app.listen(process.env.PORT || 8080);
 
