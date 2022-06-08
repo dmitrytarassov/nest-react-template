@@ -42,7 +42,7 @@ export class BaseCrudMongoModel<T> {
         // @ts-ignore
         filter[name] = {};
         const _type = !value ? '$eq' : `$${typeOrValue}`;
-        let _value = value || typeOrValue;
+        let _value = _type === '$in' ? value.split('|') : value || typeOrValue;
         if (_value === 'now') {
           _value = new Date().toString();
         }

@@ -62,16 +62,17 @@ const CardImage = styled.div<{ src: string }>`
 `;
 
 const CardContent = styled.div`
-  padding: 24px 32px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 `;
 
 const CardFooter = styled.div`
-  padding: 24px 32px;
+  margin-top: -16px;
+  padding: 0 24px 24px;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
 
 const CardTitle = styled.div`
@@ -82,9 +83,9 @@ const CardTitle = styled.div`
   line-height: 24px;
   margin-bottom: 16px;
   color: ${({ theme }: WithTheme) => theme.colors.text.additional};
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const CardDescription = styled.div`
@@ -94,6 +95,14 @@ const CardDescription = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: ${({ theme }: WithTheme) => theme.colors.text.secondary};
+`;
+
+const Prices = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-left: 8px;
+  white-space: nowrap;
 `;
 
 const Price = styled.div`
@@ -116,6 +125,20 @@ const OldPrice = styled.div`
   color: ${({ theme }: WithTheme) => theme.colors.text.secondary};
 `;
 
+const PriceTitle = styled.div`
+  font-family: 'Neue Machina';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: ${({ theme }: WithTheme) => theme.colors.text.additional};
+  line-height: 100%;
+`;
+
+const RentalLogo = styled.img`
+  height: 40px;
+  margin-left: 8px;
+`;
+
 export interface ICardProps {
   title: string;
   description?: string;
@@ -126,6 +149,7 @@ export interface ICardProps {
   tag?: IPromotionTag;
   date?: string;
   promotionText?: string;
+  rentalLogo?: string;
 }
 
 const Card = ({
@@ -138,6 +162,7 @@ const Card = ({
   tag,
   date,
   promotionText,
+  rentalLogo,
 }: ICardProps) => {
   const dateText = getExpirationDateText(date);
 
@@ -150,14 +175,20 @@ const Card = ({
           <CardMainContent>
             <CardImage src={image} />
             <CardContent>
-              <CardTitle>{title}</CardTitle>
+              <CardTitle>
+                {title}
+                {rentalLogo && <RentalLogo src={rentalLogo} />}
+              </CardTitle>
               <CardDescription>{promotionText || description}</CardDescription>
             </CardContent>
           </CardMainContent>
           {price && (
             <CardFooter>
-              {discountPrice && <OldPrice>{moneyFormat(price)}</OldPrice>}
-              <Price>{moneyFormat(discountPrice || price)}</Price>
+              <PriceTitle>Цена за сутки:</PriceTitle>
+              <Prices>
+                {discountPrice && <OldPrice>{moneyFormat(price)}</OldPrice>}
+                <Price>{moneyFormat(discountPrice || price)}</Price>
+              </Prices>
             </CardFooter>
           )}
         </CardContainer>

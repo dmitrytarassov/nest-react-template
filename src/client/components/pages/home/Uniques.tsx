@@ -9,13 +9,18 @@ import Heading from '@frontend/components/Heading';
 import { get } from '@frontend/utils/fetcher';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { fullPageSwiperProps } from '@frontend/utils/fullPageSwiperProps';
-import Card from '@frontend/components/Card';
+import Card, { ICardProps } from '@frontend/components/Card';
 import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
 import CarouselFooter from '@frontend/components/CarouselFooter';
 import { IRentalProduct } from '@lib/interfaces/IRentalProduct';
 import ContainerWithRadius from '@frontend/components/ContainerWithRadius';
 import { useCity } from '@frontend/hooks/useCity';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
+import { ICrudProduct } from '@lib/interfaces/ICrudProduct';
+import { ICrudRentalProduct } from '@lib/interfaces/ICrudRentalProduct';
+import imageUrl from '@frontend/utils/imageUrl';
+import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
 
 const CarouselContainer = styled.div`
   display: block;
@@ -45,61 +50,88 @@ const StyledHeading = styled(Heading)`
   margin-bottom: 48px;
 `;
 
-interface IUniqueProduct {
-  product: IProduct;
-  price: number;
-  discountPrice?: number;
-}
-
 const Uniques = () => {
-  const [uniqueProducts, setUniqueProducts] = useState<IUniqueProduct[]>([]);
-  const [init, setInit] = useState<boolean>(false);
   const { city } = useCity();
-  const [ids, setIds] = useState<string[]>([]);
 
-  const { data }: SWRResponse<IControllerResponse<IProduct[]>> = useSWR(
-    `/api/products?ids=${ids.join(',')}`,
+  const rentalsData: SWRResponse<IControllerResponse<ICrudRental[]>> = useSWR(
+    `/crud/rental?filter[]=city,${city}`,
     get,
   );
 
-  const uniqueProductsResponse: SWRResponse<
-    IControllerResponse<IRentalProduct[]>
-  > = useSWR('/api/rentals/unique_products', get);
+  const rentals = rentalsData?.data?.data || [];
+  const rentalIds = rentals.map(({ id }) => id);
 
-  const { data: uniqueProductsData } = uniqueProductsResponse;
+  const rentalProductsData: SWRResponse<
+    IControllerResponse<ICrudRentalProduct[]>
+  > = useSWR(
+    rentalIds.length
+      ? `/crud/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}`
+      : null,
+    get,
+  );
 
-  useEffect(() => {
-    if (uniqueProductsData?.data) {
-      setIds(uniqueProductsData.data.map(({ productId }) => productId));
-    }
-  }, [uniqueProductsData]);
+  const rentalProducts = rentalProductsData?.data?.data || [];
+  const productsIds = rentalProducts.map(({ productId }) => productId);
 
-  useEffect(() => {
-    if (data?.data?.length) {
-      setUniqueProducts(
-        data.data.map((product) => {
-          const _product = uniqueProductsData.data.find(
-            ({ productId }) => productId === product.id,
-          );
-          return {
-            product,
-            price: _product?.price,
-            discountPrice: _product?.discountPrice,
-          };
-        }),
-      );
-    }
-  }, [data, uniqueProductsData]);
+  const productsData: SWRResponse<IControllerResponse<ICrudProduct[]>> = useSWR(
+    rentalIds.length
+      ? `/crud/product?filter[]=productId,in,${productsIds.join('|')}`
+      : null,
+    get,
+  );
 
-  useEffect(() => {
-    if (init) {
-      uniqueProductsResponse.mutate();
-    }
-  }, [city]);
+  const products = productsData?.data?.data || [];
 
-  useEffect(() => {
-    setInit(true);
-  }, []);
+  const _rentalProducts = rentalProducts
+    .map((rentalProduct) => {
+      const product = products.find(({ id }) => id === rentalProduct.productId);
+
+      const rental = rentals.find(({ id }) => id === rentalProduct.rentalId);
+
+      if (!rental) {
+        console.log(
+          'can not find rental with id ',
+          rentalProduct.rentalId,
+          rentals,
+        );
+      }
+      if (!product) {
+        console.log(
+          'can not find product with id ',
+          rentalProduct.productId,
+          products,
+        );
+      }
+      if (product && rental) {
+        return {
+          product,
+          rentalProduct,
+          rental,
+        };
+      }
+    })
+    .filter(Boolean);
+
+  const cards: (ICardProps & { id: string })[] = _rentalProducts.map((el) => ({
+    id: el.rentalProduct.id,
+    title: el.product.name,
+    description: el.product.shortDescription,
+    image: imageUrl(el.product.photos[0]),
+    link: `/rentals/${el.rental.url}/${el.rentalProduct.url}`,
+    price: el.rentalProduct.price,
+    discountPrice: el.rentalProduct.discountPrice,
+    date: el.rentalProduct.date.toString(),
+    promotionText: el.rentalProduct.promotionShortDescription,
+    rentalLogo: imageUrl(el.rental.icon),
+    ...(el.rentalProduct.promotionType && el.rentalProduct.promotionText
+      ? {
+          tag: {
+            type: el.rentalProduct.promotionType,
+            text: el.rentalProduct.promotionText,
+          } as IPromotionTag,
+        }
+      : {}),
+  }));
 
   return (
     <ContainerWithRadius alternateColors>
@@ -108,23 +140,16 @@ const Uniques = () => {
       </StyledHeading>
       <CarouselContainer>
         <Swiper {...fullPageSwiperProps}>
-          {uniqueProducts.map(({ price, discountPrice, product }) => (
-            <SwiperSlide key={product.id}>
-              <Card
-                title={product.name}
-                image={product.photos[0]!}
-                link={`/products/${product.id}`}
-                description={product.shortDescription}
-                price={price}
-                discountPrice={discountPrice}
-              />
+          {cards.map(({ id, ...card }) => (
+            <SwiperSlide key={id}>
+              <Card {...card} />
             </SwiperSlide>
           ))}
           <CarouselFooter>
             <Button type="link" href="/uniques">
               Посмотреть все
             </Button>
-            <CarouselControls revertColors />
+            <CarouselControls count={cards.length} revertColors />
           </CarouselFooter>
         </Swiper>
       </CarouselContainer>

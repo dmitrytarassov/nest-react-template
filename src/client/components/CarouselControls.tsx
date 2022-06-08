@@ -53,8 +53,6 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
     swiper.slidePrev();
   };
 
-  console.log(count);
-
   return (
     <StyledCarouselControls
       className={classNames(
