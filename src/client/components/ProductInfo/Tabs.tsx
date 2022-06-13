@@ -56,6 +56,7 @@ const Tabs = ({ options, active, onChange }: TabsProps) => {
         <Option
           active={option.value === active}
           onClick={() => onChange(option.value)}
+          key={option.value}
         >
           {option.name}
         </Option>

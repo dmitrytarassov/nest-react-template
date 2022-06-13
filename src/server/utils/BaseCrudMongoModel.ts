@@ -1,79 +1,16 @@
 import { FilterQuery, Model } from 'mongoose';
+import { BaseApiMongoModel } from '@backend/utils/BaseApiMongoModel';
 
-interface Query {
-  limit: string;
-  page: string;
-  sort: string[];
-  offset: string;
-  filter?: string[];
-}
-
-const sanitize = ({ $__, $isNew, _v, ...rest }) => ({
-  ...rest,
-  ...rest._doc,
-  id: rest._doc._id,
-});
-
-export class BaseCrudMongoModel<T> {
-  constructor(private readonly model: Model<T>) {}
+// @ts-ignore
+export class BaseCrudMongoModel<T> extends BaseApiMongoModel<T> {
+  constructor(private readonly model: Model<T>) {
+    super(model);
+  }
 
   async create(book: T): Promise<T> {
     const newBook = new this.model(book);
     // @ts-ignore
     return newBook.save();
-  }
-
-  async readAll(query: Query): Promise<T[]> {
-    const order: { [name: string]: string } = {};
-    if (query?.sort?.length) {
-      for (const el of query.sort) {
-        const [name, value] = el.split(',');
-        order[name] = value;
-      }
-    }
-
-    const skip = +query.limit * (+query.page - 1) || undefined;
-    const limit = +query.limit || undefined;
-
-    const filter: FilterQuery<T> = {};
-    if (query?.filter?.length) {
-      for (const el of query.filter) {
-        const [name, typeOrValue, value] = el.split(',');
-        // @ts-ignore
-        filter[name] = {};
-        const _type = !value ? '$eq' : `$${typeOrValue}`;
-        let _value = _type === '$in' ? value.split('|') : value || typeOrValue;
-        if (_value === 'now') {
-          _value = new Date().toString();
-        }
-        filter[name][_type] = _value;
-      }
-    }
-
-    const data = await this.model
-      .find(filter)
-      // @ts-ignore
-      .sort(order)
-      .skip(skip)
-      .limit(limit)
-      .exec();
-
-    // @ts-ignore
-    return data.map(sanitize);
-  }
-
-  async find(query): Promise<T[]> {
-    return await this.model.find(query).exec();
-  }
-
-  async getUniqueIds(): Promise<string[]> {
-    const data = await this.find({});
-    // @ts-ignore
-    return data.map(({ id }) => id);
-  }
-
-  async readById(id): Promise<T> {
-    return await this.model.findById(id).exec();
   }
 
   async update(id, element: T): Promise<T> {
@@ -82,23 +19,5 @@ export class BaseCrudMongoModel<T> {
 
   async delete(id): Promise<any> {
     return await this.model.findByIdAndRemove(id);
-  }
-
-  async getTotal(query: Query): Promise<number> {
-    const filter: FilterQuery<T> = {};
-    if (query?.filter?.length) {
-      for (const el of query.filter) {
-        const [name, typeOrValue, value] = el.split(',');
-        // @ts-ignore
-        filter[name] = {};
-        const _type = !value ? '$eq' : `$${typeOrValue}`;
-        let _value = value || typeOrValue;
-        if (_value === 'now') {
-          _value = new Date().toString();
-        }
-        filter[name][_type] = _value;
-      }
-    }
-    return await this.model.count(filter);
   }
 }

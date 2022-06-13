@@ -24,8 +24,6 @@ export default function PromotionPreviewCard() {
         }
       : undefined;
 
-  console.log(tag);
-
   const _record = {
     link: '#',
     image: record.photos?.[0] || '',

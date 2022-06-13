@@ -26,9 +26,7 @@ import { CrudRentalModule } from '@backend/crud_rental/crud_rental.module';
 import { CrudRentalController } from '@backend/crud_rental/crud_rental.controller';
 import { CrudRentalService } from '@backend/crud_rental/crud_rental.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CrudIconModule } from '@backend/crud_icon/crud_icon.module';
-import { CrudIconController } from '@backend/crud_icon/crud_icon.controller';
-import { CrudIconService } from '@backend/crud_icon/crud_icon.service';
+
 import { CrudProductService } from '@backend/crud_product/crud_product.service';
 import { CrudProductController } from '@backend/crud_product/crud_product.controller';
 import { CrudProductModule } from '@backend/crud_product/crud_product.module';
@@ -38,6 +36,17 @@ import { CrudRentalProcuctService } from '@backend/crud_rental_product/crud_rent
 import { CrudPromotionModule } from '@backend/crud_promotion/crud_product.module';
 import { CrudPromotionController } from '@backend/crud_promotion/crud_promotion.controller';
 import { CrudPromotionService } from '@backend/crud_promotion/crud_promotion.service';
+import { CrudAuthService } from '@backend/crud_auth/crud_auth.service';
+import { CrudAuthModule } from '@backend/crud_auth/crud_auth.module';
+import { CrudAuthController } from '@backend/crud_auth/crud_auth.controller';
+import { ApiRentalProductService } from '@backend/crud_rental_product/api_rental_product.service';
+import { ApiRentalProductController } from '@backend/crud_rental_product/api_rental_product.controller';
+import { ApiProductController } from '@backend/crud_product/api_product.controller';
+import { ApiProductService } from '@backend/crud_product/api_product.service';
+import { ApiPromotionService } from '@backend/crud_promotion/api_promotion.service';
+import { ApiRentalController } from '@backend/crud_rental/api_rental.controller';
+import { ApiPromotionController } from '@backend/crud_promotion/api_promotion.controller';
+import { ApiRentalService } from '@backend/crud_rental/api_rental.service';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -66,7 +75,7 @@ console.log(
     PromotionsModule,
     CityModule,
     RentalProductsModule,
-    CrudIconModule,
+    CrudAuthModule,
   ],
   controllers: [
     AppController,
@@ -79,7 +88,11 @@ console.log(
     PromotionsController,
     CityController,
     RentalProductsController,
-    CrudIconController,
+    CrudAuthController,
+    ApiRentalProductController,
+    ApiProductController,
+    ApiPromotionController,
+    ApiRentalController,
   ],
   providers: [
     AppService,
@@ -92,7 +105,11 @@ console.log(
     PromotionsService,
     CityService,
     RentalProductsService,
-    CrudIconService,
+    CrudAuthService,
+    ApiRentalProductService,
+    ApiProductService,
+    ApiPromotionService,
+    ApiRentalService,
   ],
   exports: [MongooseModule],
 })

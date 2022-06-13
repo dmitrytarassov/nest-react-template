@@ -20,4 +20,6 @@ export interface ICrudRentalProduct {
   promotionShortDescription?: string;
 
   date: Date;
+
+  externalUrl: string;
 }

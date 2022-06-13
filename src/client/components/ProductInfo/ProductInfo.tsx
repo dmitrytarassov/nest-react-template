@@ -9,6 +9,7 @@ import Images from './Images';
 import Info from './Info';
 import Price from './Price';
 import Tag from './Tag';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
 
 export type ProductLike = {
   photos: string[];
@@ -21,11 +22,14 @@ export type ProductLike = {
   price?: string;
   discountPrice?: string;
   externalUrl?: string;
+  description?: string;
+  properties?: string;
+  propertiesText?: string;
 };
 
 type Props = {
   product: ProductLike;
-  rental: IRental;
+  rental: ICrudRental;
 };
 
 export default function ProductInfo({ product, rental }: Props) {
@@ -52,7 +56,7 @@ export default function ProductInfo({ product, rental }: Props) {
           </Tags>
         }
         <Images
-          logo={rental.icon}
+          logo={imageUrl(rental.icon)}
           images={product.photos}
           current={currentImage}
           onChange={setCurrentImage}
@@ -68,7 +72,12 @@ export default function ProductInfo({ product, rental }: Props) {
         </Block>
       )}
       <Block>
-        <Info promotion={product.promotionText} />
+        <Info
+          promotion={product.promotionText}
+          description={product.description}
+          properties={product.properties}
+          propertiesText={product.propertiesText}
+        />
       </Block>
     </>
   );

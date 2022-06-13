@@ -12,15 +12,16 @@ import { ESelectRental } from '@frontend/dtos/ESelectRental';
 import ProductInfo, {
   ProductLike,
 } from '@frontend/components/ProductInfo/ProductInfo';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
+import imageUrl from '@frontend/utils/imageUrl';
 
 interface PromotionPageProps {
-  rental: IRental;
+  rental: ICrudRental;
   promotion: IPromotion;
 }
 
 const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
   const router = useRouter();
-  const { city } = useCity();
 
   const { rentals } = useRentals();
   const breadcrumbs: IBreadCrumb[] = [
@@ -34,7 +35,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
     },
     {
       name: rental.name,
-      link: `/rentals/${rental.id}`,
+      link: `/rentals/${rental.url}`,
     },
     {
       name: 'Новинки и акции',
@@ -76,7 +77,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
         breadcrumbs={breadcrumbs}
         backLink={`/rentals/${rental.id}`}
         title={promotion.name}
-        // image={rental.icon}
+        image={imageUrl(rental.icon)}
       />
       <ProductInfo rental={rental} product={_product} />
     </PageMainColumnContainer>

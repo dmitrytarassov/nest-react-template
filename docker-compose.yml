@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
   database:
-    image: mongo:4.0
+    image: ${DOCKER_MONGO_IMAGE}
     container_name: kinoscope-mongodb
     hostname: kinoscope
     environment:

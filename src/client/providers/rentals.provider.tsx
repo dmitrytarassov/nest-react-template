@@ -31,12 +31,8 @@ export const RentalsProvider = ({
     setInit(true);
   }, []);
 
-  const _rentals: IRental[] = fetchData?.data?.data
-    ? fetchData?.data?.data.map((e) => parseRental(e))
-    : [];
-
   return (
-    <RentalsContext.Provider value={{ rentals: _rentals }}>
+    <RentalsContext.Provider value={{ rentals: fetchData?.data?.data || [] }}>
       {children}
     </RentalsContext.Provider>
   );

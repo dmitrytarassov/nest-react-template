@@ -25,6 +25,11 @@ const Title = styled.div`
   font-size: 22px;
   line-height: 40px;
   margin-bottom: 24px;
+  margin-top: 24px;
+
+  :first-child() {
+    margin-top: 0;
+  }
 `;
 
 const base = css`
@@ -44,6 +49,16 @@ const PropName = styled.div`
 const PropValue = styled.div`
   ${base};
   margin-left: 8px;
+`;
+
+const PropTitle = styled.div`
+  font-family: 'Roboto Mono';
+  white-space: pre;
+  line-height: 20px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: capitalize;
 `;
 
 const PropValueLine = styled.p`
@@ -133,16 +148,18 @@ const Info = ({
         <>
           <Title>Характеристики</Title>
           {_properties.map(([name, value]) => (
-            <Props>
+            <Props key={`${name}_${value}`}>
               {name === '**' ? (
-                <PropValue>{value}</PropValue>
+                <PropTitle>{value}</PropTitle>
               ) : (
                 <>
                   <PropName>{name}</PropName>
                   <PropSeparator />
                   <PropValue>
-                    {value.split('==').map((e) => (
-                      <PropValueLine key={e}>{e}</PropValueLine>
+                    {value.split('==').map((e, i) => (
+                      <PropValueLine key={`${name}_${e}_${i}`}>
+                        {e}
+                      </PropValueLine>
                     ))}
                   </PropValue>
                 </>
@@ -157,7 +174,7 @@ const Info = ({
         <>
           {promotion && (
             <>
-              <Title>Описание акции</Title>
+              <Title>Акция</Title>
               <PropText>{promotion}</PropText>
             </>
           )}

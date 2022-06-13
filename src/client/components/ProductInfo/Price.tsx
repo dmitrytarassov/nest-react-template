@@ -9,7 +9,7 @@ const StyledPrice = styled.div`
   font-family: 'Roboto';
   display: flex;
   width: 100%;
-  padding: 16px 24px;
+  padding: 16px;
   align-items: center;
   font-weight: 700;
   font-size: 22px;
@@ -20,10 +20,28 @@ const StyledPrice = styled.div`
   flex-wrap: wrap;
 
   ${({ theme }: WithTheme) =>
-    theme.mixins.halfScreenBreak(css`
+    theme.mixins.tablet(css`
       flex-direction: column;
       align-items: flex-start;
     `)};
+`;
+
+const Text = styled.div`
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  margin-right: 24px;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.tablet(css`
+      width: 100%;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 16px;
+    `)}
 `;
 
 const Prices = styled.div`
@@ -31,23 +49,8 @@ const Prices = styled.div`
   align-items: center;
 
   ${({ theme }: WithTheme) =>
-    theme.mixins.halfScreenBreak(css`
-      flex-direction: column;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    `)}
-`;
-
-const Text = styled.div`
-  font-family: 'Roboto Mono';
-  margin-right: 12px;
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.halfScreenBreak(css`
-      margin-right: 0;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 20px;
+    theme.mixins.tablet(css`
+      flex-wrap: wrap;
       margin-bottom: 16px;
     `)}
 `;
@@ -65,9 +68,16 @@ interface PriceProps {
 }
 
 const CurrentPrice = styled.div`
+  font-style: normal;
   font-weight: 700;
   font-size: 32px;
   line-height: 130%;
+  font-family: 'Roboto Mono';
+
+  span {
+    font-family: 'Roboto';
+    font-weight: 500;
+  }
 `;
 
 const OldPrice = styled.div`
@@ -77,8 +87,15 @@ const OldPrice = styled.div`
   display: flex;
   align-items: center;
   text-decoration-line: line-through;
-  color: ${({ theme }: WithTheme) => theme.colors.text.secondary};
+  color: ${({ theme }: WithTheme) => theme.colors.text.oldPrice};
   margin-left: 12px;
+  font-family: 'Roboto Mono';
+
+  span {
+    font-family: 'Roboto';
+    font-weight: 400;
+    margin-top: 1px;
+  }
 `;
 
 const Price = ({ price, discountPrice, link }: PriceProps) => {
@@ -86,13 +103,20 @@ const Price = ({ price, discountPrice, link }: PriceProps) => {
     <StyledPrice>
       <Prices>
         <Text>Стоимость за сутки:</Text>
-        <CurrentPrice>{moneyFormat(discountPrice || price)}</CurrentPrice>
-        {discountPrice && <OldPrice>{moneyFormat(price)}</OldPrice>}
+        <CurrentPrice>
+          {moneyFormat(discountPrice || price, false)}
+          <span>₽</span>
+        </CurrentPrice>
+        {discountPrice && (
+          <OldPrice>
+            {moneyFormat(price, false)} <span>₽</span>
+          </OldPrice>
+        )}
       </Prices>
       <Buttons>
         <ShareButton />
         {link && (
-          <Button href={link} blank>
+          <Button href={link} blank type="link">
             Арендовать
           </Button>
         )}

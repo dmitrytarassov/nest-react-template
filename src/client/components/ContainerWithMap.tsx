@@ -7,6 +7,8 @@ import Footer from '@frontend/components/Footer';
 import Header from './Header';
 import { CityProvider } from '@frontend/providers/city.provider';
 import { CurrentLocationProvider } from '@frontend/providers/current_location.provider';
+import { IApp } from '@frontend/pages/_app';
+import ErrorPage from '@frontend/components/pages/errors/ErrorPage';
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import('@frontend/components/Map'),
@@ -107,7 +109,7 @@ const ChildrenContainer = styled.div`
     `)};
 `;
 
-const ContainerWithMap = ({ children }: { children: React.ReactNode }) => {
+const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
   const isClient = typeof window !== 'undefined';
   const router = useRouter();
   const ref = useRef();
@@ -118,8 +120,7 @@ const ContainerWithMap = ({ children }: { children: React.ReactNode }) => {
     '/promotion/[id]',
   ].includes(router.route);
 
-  const isError = // @ts-ignore
-    +children?.props?.statusCode >= 400 || children.type?.name?.includes('404');
+  const isError = typeof statusCode !== 'undefined' && statusCode >= 400;
 
   // @ts-ignore
   const city = children.props.city;
@@ -136,12 +137,12 @@ const ContainerWithMap = ({ children }: { children: React.ReactNode }) => {
       <CurrentLocationProvider>
         <Container>
           <Header />
-          <MapContainer size={isSmallMap || isError ? 'small' : 'big'}>
+          <MapContainer size={isSmallMap ? 'small' : 'big'}>
             {isClient && <DynamicComponentWithNoSSR />}
           </MapContainer>
           <ContentContainer ref={ref}>
             <ChildrenContainer>
-              {children}
+              {isError ? <ErrorPage statusCode={statusCode} /> : children}
               <Footer halfScreen />
             </ChildrenContainer>
           </ContentContainer>

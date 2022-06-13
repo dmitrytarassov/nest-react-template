@@ -15,7 +15,16 @@ import PromotionsList from './components/promotions/PromotionsList';
 import PromotionsAdd from './components/promotions/PromotionsAdd';
 import PromotionsEdit from './components/promotions/PromotionsEdit';
 
-const dataProvider = crudProvider('/crud');
+const httpClient = (url, options: { headers?: any } = {}) => {
+  if (!options.headers) {
+    options.headers = new Headers({ Accept: 'application/json' });
+  }
+  const { token } = JSON.parse(localStorage.getItem('auth') || '{}');
+  options.headers.set('Authorization', `Bearer ${token}`);
+  return fetchUtils.fetchJson(url, options);
+};
+
+const dataProvider = crudProvider('/crud', httpClient);
 
 const convertFileToBase64 = (file) =>
   new Promise((resolve, reject) => {

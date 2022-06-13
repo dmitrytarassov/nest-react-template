@@ -72,7 +72,7 @@ const Button = ({
     </StyledButton>
   ) : (
     <Link href={href} passHref {...target}>
-      <StyledLink>{children}</StyledLink>
+      <StyledLink {...target}>{children}</StyledLink>
     </Link>
   );
 };

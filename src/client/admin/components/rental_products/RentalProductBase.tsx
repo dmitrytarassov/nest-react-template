@@ -16,7 +16,6 @@ import RentalProductPreviewPage from './RentalProductPreviewPage';
 
 const RentalProductBase = () => {
   const record = useRecordContext();
-  console.log(record);
 
   const [promotionType, setPromotionType] = useState(record?.promotionType);
 
@@ -48,6 +47,12 @@ const RentalProductBase = () => {
           >
             <SelectInput optionText="name" label="Рентал" />
           </ReferenceInput>
+          <TextInput
+            resettable
+            source="externalUrl"
+            label="Ссылка на позицию на сайте рентала"
+            validate={validateRequired}
+          />
           <TextInput
             resettable
             source="url"

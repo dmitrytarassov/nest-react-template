@@ -39,7 +39,7 @@ const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
               title={promotion.name}
               description={promotion.shortText}
               image={promotion.photos[0] || logoWithCover.src}
-              link={`/promotion/${promotion.id}`}
+              link={`/promotion/${promotion.url}`}
               tag={{
                 type: promotion.promotionType,
                 text: promotion.text,

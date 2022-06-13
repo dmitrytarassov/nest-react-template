@@ -15,6 +15,7 @@ export const theme = {
       accent: '#000000',
       additional: '#0F0E0E',
       alternate: '#FFFFFF',
+      oldPrice: '#9EA6B6',
     },
     links: {
       default: '#000000',

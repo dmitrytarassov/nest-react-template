@@ -8,17 +8,15 @@ import { PageWithCity } from '@frontend/dtos/PageWithCity';
 import { PageProps } from '@frontend/dtos/PageProps';
 import { get } from '@frontend/utils/fetcher';
 import { IRental } from '@lib/interfaces/IRental';
-import RentalPage from '@frontend/components/pages/rental/RentalPage';
 import { useRouter } from 'next/router';
 import useSWR, { SWRResponse } from 'swr';
-import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 import { IPromotion } from '@lib/interfaces/IPromotion';
-import RentalPromotionsPage from '@frontend/components/pages/rentalPromotions/RentalPromotionsPage';
 import PromotionPage from '@frontend/components/pages/promotion/PromotionPage';
 import { City } from '@lib/types/City';
 import ErrorPage from '@frontend/components/pages/errors/ErrorPage';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import parseRental from '@frontend/utils/parseRental';
+import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 
 interface RentalPromotionsPageProps extends PageWithCity {
   rental?: IRental;
@@ -35,17 +33,19 @@ const RentalPromotions = ({
   promotion,
   statusCode,
 }: RentalPromotionsPageProps) => {
+  return null;
   const router = useRouter();
 
-  const _promotion: SWRResponse<IPromotion> = useSWR(
-    `/crud/promotions/${router.query.id}`,
+  const _promotions: SWRResponse<IControllerResponse<IPromotion[]>> = useSWR(
+    `/crud/promotions?filter[]=url,${router.query.id}`,
     get,
   );
 
+  const promotionsData = _promotions?.data?.data || [];
+  const [_promotion] = promotionsData;
+
   const _rentalData: SWRResponse<ICrudRental> = useSWR(
-    _promotion?.data?.rentalId
-      ? `/crud/rental/${_promotion.data.rentalId}`
-      : null,
+    _promotion?.rentalId ? `/crud/rental/${_promotion?.rentalId}` : null,
     get,
   );
 
@@ -54,7 +54,7 @@ const RentalPromotions = ({
     : undefined;
 
   const rentalData = rental || _rental;
-  const promotionData = promotion || _promotion?.data;
+  const promotionData = promotion || _promotion;
 
   // @ts-ignore
   const _statusCode = promotionData?.statusCode || statusCode;
@@ -66,6 +66,7 @@ const RentalPromotions = ({
           <Header />
           {/* @ts-ignore */}
           {promotionData && typeof _statusCode === 'undefined' ? (
+            // @ts-ignore
             <PromotionPage rental={rentalData} promotion={promotionData} />
           ) : (
             <ErrorPage statusCode={_statusCode} />
@@ -81,9 +82,11 @@ export async function getServerSideProps(context): Promise<Props> {
     const _id = (context.req.originalUrl.split('promotion/')[1] || '').split(
       '.',
     )[0];
-    const _promotion: IPromotion | undefined = await get(
-      `${process.env.API_URL}/crud/promotions/${_id}`,
+    const _promotions: IControllerResponse<IPromotion[]> = await get(
+      `${process.env.API_URL}/crud/promotions?filter[]=url,${_id}`,
     );
+
+    const [_promotion] = _promotions?.data || [];
 
     //@ts-ignore
     if (_promotion && !_promotion.statusCode) {

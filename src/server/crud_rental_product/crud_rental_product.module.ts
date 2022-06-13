@@ -7,6 +7,8 @@ import {
   RentalProcuctSchema,
 } from './crud_rental_product.schema';
 import mongoConfig from '@backend/utils/mongoConfig';
+import { ApiRentalProductController } from '@backend/crud_rental_product/api_rental_product.controller';
+import { ApiRentalProductService } from '@backend/crud_rental_product/api_rental_product.service';
 
 @Module({
   imports: [
@@ -15,8 +17,8 @@ import mongoConfig from '@backend/utils/mongoConfig';
       { name: RentalProcuct.name, schema: RentalProcuctSchema },
     ]),
   ],
-  controllers: [CrudRentalProcuctController],
-  providers: [CrudRentalProcuctService],
+  controllers: [CrudRentalProcuctController, ApiRentalProductController],
+  providers: [CrudRentalProcuctService, ApiRentalProductService],
   exports: [MongooseModule],
 })
 export class CrudRentalProductModule {}

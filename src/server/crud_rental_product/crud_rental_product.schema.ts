@@ -32,6 +32,9 @@ export class RentalProcuct {
 
   @Prop()
   date: Date;
+
+  @Prop()
+  externalUrl: string;
 }
 
 export type RentalProcuctDocument = RentalProcuct & Document;

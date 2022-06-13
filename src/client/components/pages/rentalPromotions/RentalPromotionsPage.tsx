@@ -21,6 +21,7 @@ const RentalPromotionsPage = ({
   rental,
   promotions,
 }: RentalPromotionsProps) => {
+  return null;
   const router = useRouter();
   const { city } = useCity();
 
@@ -48,10 +49,12 @@ const RentalPromotionsPage = ({
     const _rentals = rentals.find(({ id }) => id === rental.id)
       ? rentals
       : [...rentals, rental];
+    // @ts-ignore
     updateMapRentals(_rentals, rental.id, 500);
   }, [rentals, rental.id]);
 
   useEffect(() => {
+    // @ts-ignore
     updateMapRentals([rental], rental.id);
     function callBack(e) {
       // @ts-ignore

@@ -8,6 +8,7 @@ import 'swiper/css';
 import './index.css';
 import { Router } from 'next/router';
 import ContainerWithMap from '@frontend/components/ContainerWithMap';
+import { City } from '@lib/types/City';
 
 export interface IMetaTags {
   title?: string;
@@ -21,10 +22,16 @@ export interface IHeadProps {
   defaultMetaTags?: IMetaTags;
 }
 
-interface IApp extends AppProps {
-  pageProps: IHeadProps & {
-    children?: React.ReactNode;
-  };
+export type PageProps = {
+  statusCode?: number;
+  city: City;
+};
+
+export interface IApp extends AppProps {
+  pageProps: IHeadProps &
+    PageProps & {
+      children?: React.ReactNode;
+    };
   router: Router;
 }
 
@@ -43,7 +50,7 @@ function Client(props: IApp) {
           <Component {...pageProps} />
         </>
       ) : (
-        <ContainerWithMap>
+        <ContainerWithMap {...pageProps}>
           {/* @ts-ignore */}
           <Component {...pageProps} />
         </ContainerWithMap>

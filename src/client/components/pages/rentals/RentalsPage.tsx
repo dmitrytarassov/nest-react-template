@@ -8,6 +8,7 @@ import PageMainColumnContainer from '@frontend/components/PageMainColumnContaine
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 
 const RentalsPage = () => {
+  return null;
   const { rentals } = useRentals();
   const [active, setActive] = useState<string>('');
   const [searchString, setSearchString] = useState<string>('');
@@ -43,6 +44,7 @@ const RentalsPage = () => {
     searchString === ''
       ? rentals
       : rentals.filter(
+          // @ts-ignore
           ({ name, address: { name: addressName } }) =>
             name.toLowerCase().includes(searchString.toLowerCase()) ||
             addressName.toLowerCase().includes(searchString.toLowerCase()),
@@ -58,11 +60,12 @@ const RentalsPage = () => {
       />
 
       {filteredRentals.map((rental) => (
-        <RentalCard
-          key={rental.id}
-          rental={rental}
-          active={active === rental.id}
-        />
+        <></>
+        // <RentalCard
+        //   key={rental.id}
+        //   rental={rental}
+        //   active={active === rental.id}
+        // />
       ))}
     </PageMainColumnContainer>
   );

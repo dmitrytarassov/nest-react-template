@@ -9,6 +9,7 @@ import shadow from '@frontend/assets/shadow.svg';
 import { renderToString } from 'react-dom/server';
 import { Marker, useMap } from 'react-leaflet';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
+import imageUrl from '@frontend/utils/imageUrl';
 
 const IconBase = styled.div`
   background-image: url(${marker.src});
@@ -63,7 +64,7 @@ const getIcon = (src: string, active: boolean) =>
     shadowAnchor: [9, 0],
     html: renderToString(
       <IconBase>
-        <IconImage active={active} src={src} />
+        <IconImage active={active} src={imageUrl(src)} />
       </IconBase>,
     ),
   });
@@ -117,7 +118,7 @@ const Markers = ({
           );
         }
       } else {
-        setMarkers([]);
+        // setMarkers([]);
       }
     });
   }, []);

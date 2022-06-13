@@ -33,6 +33,7 @@ const ProductPage = ({
   rentalProduct,
   promotions,
 }: ProductPageProps) => {
+  return null;
   const [currentImage, setCurrentImage] = useState<string>(product.photos[0]);
   const { rentals } = useRentals();
   const router = useRouter();
@@ -60,10 +61,12 @@ const ProductPage = ({
     const _rentals = rentals.find(({ id }) => id === rental.id)
       ? rentals
       : [...rentals, rental];
+    // @ts-ignore
     updateMapRentals(_rentals, rental.id, 500);
   }, [rentals, rental.id]);
 
   useEffect(() => {
+    // @ts-ignore
     updateMapRentals([rental], rental.id);
     function callBack(e) {
       // @ts-ignore

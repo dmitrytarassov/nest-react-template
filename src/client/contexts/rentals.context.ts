@@ -1,9 +1,8 @@
 import { createContext } from 'react';
-import { FullRentalInfo } from '@frontend/dtos/FullRentalInfo';
-import { IRental } from '@lib/interfaces/IRental';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
 
 export interface IRentalsContext {
-  rentals: IRental[];
+  rentals: ICrudRental[];
 }
 
 export const RentalsContext = createContext<IRentalsContext>({
