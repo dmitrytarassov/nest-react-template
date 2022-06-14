@@ -10,7 +10,7 @@ import mongoConfig from '@backend/utils/mongoConfig';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([{ name: Rental.name, schema: RentalSchema }]),
   ],
   controllers: [RentalsController],

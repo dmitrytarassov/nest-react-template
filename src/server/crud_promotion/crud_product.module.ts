@@ -9,7 +9,7 @@ import { ApiPromotionController } from '@backend/crud_promotion/api_promotion.co
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([
       { name: Promotion.name, schema: PromotionSchema },
     ]),

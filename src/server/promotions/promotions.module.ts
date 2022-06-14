@@ -7,12 +7,11 @@ import { ProductsService } from '@backend/products/products.service';
 import { CrudRentalService } from '@backend/crud_rental/crud_rental.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Rental, RentalSchema } from '@backend/crud_rental/crud_rental.schema';
+import mongoConfig from '@backend/utils/mongoConfig';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
-    ),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([{ name: Rental.name, schema: RentalSchema }]),
   ],
   controllers: [PromotionsController],

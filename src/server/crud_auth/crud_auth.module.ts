@@ -7,7 +7,7 @@ import mongoConfig from '@backend/utils/mongoConfig';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([{ name: Auth.name, schema: AuthSchema }]),
   ],
   controllers: [CrudAuthController],

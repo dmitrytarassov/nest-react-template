@@ -10,7 +10,7 @@ import { ProductsService } from './products.service';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
   ],
   controllers: [ProductsController],

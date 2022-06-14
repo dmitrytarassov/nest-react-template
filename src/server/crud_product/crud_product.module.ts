@@ -9,7 +9,7 @@ import { ApiProductController } from '@backend/crud_product/api_product.controll
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
   ],
   controllers: [CrudProductController, ApiProductController],

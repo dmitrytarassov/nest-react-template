@@ -9,7 +9,7 @@ import { ApiRentalService } from '@backend/crud_rental/api_rental.service';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([{ name: Rental.name, schema: RentalSchema }]),
   ],
   controllers: [CrudRentalController, ApiRentalController],

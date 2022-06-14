@@ -27,9 +27,15 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "mocks:generate": "ts-node -r tsconfig-paths/register src/lib/mocks/generate.ts",
-    "docker:start:local": "docker-compose --env-file ./.env up -d",
-    "docker:down:local": "docker-compose down",
-    "docker:restart:local": "yarn docker:down:local && yarn docker:start:local"
+    "docker:start:prod": "docker-compose up -d database",
+    "docker:start:local": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:restart:prod": "yarn docker:down && yarn docker:start:prod",
+    "docker:restart:local": "yarn docker:down && yarn docker:start:local",
+    "dsp": "yarn docker:start:prod",
+    "dsl": "yarn docker:start:local",
+    "drp": "yarn docker:restart:prod",
+    "drl": "yarn docker:restart:local"
   },
   "dependencies": {
     "@fusionworks/ra-data-nest-crud": "^1.0.8",

@@ -12,7 +12,7 @@ import { ApiRentalProductService } from '@backend/crud_rental_product/api_rental
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([
       { name: RentalProcuct.name, schema: RentalProcuctSchema },
     ]),

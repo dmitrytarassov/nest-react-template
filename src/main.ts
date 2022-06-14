@@ -3,6 +3,7 @@ import { AppModule } from '@backend/app/app.module';
 import * as session from 'express-session';
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
+import mongoConfig from '@backend/utils/mongoConfig';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MongoStore = require('connect-mongo');
@@ -16,7 +17,7 @@ async function bootstrap() {
     session({
       secret: 'nlnbjbde833qhn',
       store: MongoStore.create({
-        mongoUrl: `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
+        mongoUrl: mongoConfig.uri,
       }),
     }),
   );

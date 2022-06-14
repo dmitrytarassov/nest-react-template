@@ -47,19 +47,13 @@ import { ApiPromotionService } from '@backend/crud_promotion/api_promotion.servi
 import { ApiRentalController } from '@backend/crud_rental/api_rental.controller';
 import { ApiPromotionController } from '@backend/crud_promotion/api_promotion.controller';
 import { ApiRentalService } from '@backend/crud_rental/api_rental.service';
+import mongoConfig from '@backend/utils/mongoConfig';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
-
-console.log(
-  `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
-);
+console.log(mongoConfig);
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`,
-    ),
+    MongooseModule.forRoot(mongoConfig.uri),
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, '..', 'public'),
       // renderPath: 'uploads',

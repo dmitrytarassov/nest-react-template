@@ -10,7 +10,7 @@ import { RentalProductsService } from './rental-products.service';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(mongoConfig),
+    MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([
       { name: RentalProcuct.name, schema: RentalProcuctSchema },
     ]),
