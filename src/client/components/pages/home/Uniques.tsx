@@ -54,7 +54,7 @@ const Uniques = () => {
   const { city } = useCity();
 
   const rentalsData: SWRResponse<IControllerResponse<ICrudRental[]>> = useSWR(
-    `/crud/rental?filter[]=city,${city}`,
+    `/api/rental?filter[]=city,${city}`,
     get,
   );
 
@@ -65,7 +65,7 @@ const Uniques = () => {
     IControllerResponse<ICrudRentalProduct[]>
   > = useSWR(
     rentalIds.length
-      ? `/crud/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}`
+      ? `/api/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}`
       : null,
     get,
   );
@@ -74,8 +74,8 @@ const Uniques = () => {
   const productsIds = rentalProducts.map(({ productId }) => productId);
 
   const productsData: SWRResponse<IControllerResponse<ICrudProduct[]>> = useSWR(
-    rentalIds.length
-      ? `/crud/product?filter[]=productId,in,${productsIds.join('|')}`
+    productsIds.length > 0
+      ? `/api/product?filter[]=_id,in,${productsIds.join('|')}`
       : null,
     get,
   );

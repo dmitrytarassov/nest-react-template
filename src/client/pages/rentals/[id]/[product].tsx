@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
-import { IPromotion } from '@lib/interfaces/IPromotion';
-import { get } from '@frontend/utils/fetcher';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
-import parseRental from '@frontend/utils/parseRental';
 import { getCity } from '@frontend/utils/getCity';
-import { RentalProcuct } from '@backend/crud_rental_product/crud_rental_product.schema';
 import {
   loadProductById,
   loadRental,
