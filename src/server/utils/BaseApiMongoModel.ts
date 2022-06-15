@@ -17,19 +17,9 @@ const sanitize = ({ $__, $isNew, __v, _doc, ...rest }) => ({
 export class BaseApiMongoModel<T> {
   constructor(private readonly model: Model<T>) {}
 
-  async readAll(query: Query): Promise<T[]> {
-    const order: { [name: string]: string } = {};
-    if (query?.sort?.length) {
-      for (const el of query.sort) {
-        const [name, value] = el.split(',');
-        order[name] = value;
-      }
-    }
-
-    const skip = +query.limit * (+query.page - 1) || undefined;
-    const limit = +query.limit || undefined;
-
+  createFilter(query: Query): FilterQuery<T> {
     const filter: FilterQuery<T> = {};
+
     if (query?.filter?.length) {
       for (const el of query.filter) {
         const [name, typeOrValue, value] = el.split(',');
@@ -43,6 +33,22 @@ export class BaseApiMongoModel<T> {
         filter[name][_type] = _value;
       }
     }
+    return filter;
+  }
+
+  async readAll(query: Query): Promise<T[]> {
+    const order: { [name: string]: string } = {};
+    if (query?.sort?.length) {
+      for (const el of query.sort) {
+        const [name, value] = el.split(',');
+        order[name] = value;
+      }
+    }
+
+    const skip = +query.limit * (+query.page - 1) || undefined;
+    const limit = +query.limit || undefined;
+
+    const filter: FilterQuery<T> = this.createFilter(query);
 
     const data = await this.model
       .find(filter)
@@ -71,20 +77,7 @@ export class BaseApiMongoModel<T> {
   }
 
   async getTotal(query: Query): Promise<number> {
-    const filter: FilterQuery<T> = {};
-    if (query?.filter?.length) {
-      for (const el of query.filter) {
-        const [name, typeOrValue, value] = el.split(',');
-        // @ts-ignore
-        filter[name] = {};
-        const _type = !value ? '$eq' : `$${typeOrValue}`;
-        let _value = value || typeOrValue;
-        if (_value === 'now') {
-          _value = new Date().toString();
-        }
-        filter[name][_type] = _value;
-      }
-    }
-    return await this.model.count(filter);
+    const filter: FilterQuery<T> = this.createFilter(query);
+    return this.model.count(filter);
   }
 }
