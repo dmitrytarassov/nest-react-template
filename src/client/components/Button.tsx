@@ -53,6 +53,7 @@ interface ButtonProps {
   type?: 'link' | 'button';
   href?: string;
   blank?: boolean;
+  className?: string;
 }
 
 const Button = ({
@@ -64,15 +65,18 @@ const Button = ({
   type = 'button',
   href = '',
   blank = false,
+  className,
 }: ButtonProps) => {
   const target = blank ? { target: '_blank' } : {};
   return type === 'button' ? (
-    <StyledButton onClick={onClick} disabled={disabled}>
+    <StyledButton className={className} onClick={onClick} disabled={disabled}>
       {children}
     </StyledButton>
   ) : (
     <Link href={href} passHref {...target}>
-      <StyledLink {...target}>{children}</StyledLink>
+      <StyledLink className={className} {...target}>
+        {children}
+      </StyledLink>
     </Link>
   );
 };

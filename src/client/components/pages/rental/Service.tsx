@@ -11,6 +11,11 @@ const StyledService = styled.div`
   float: left;
   min-width: 50%;
   margin-top: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.02em;
 
   svg {
     margin-right: 8px;

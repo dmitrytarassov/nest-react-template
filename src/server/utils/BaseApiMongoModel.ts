@@ -22,32 +22,44 @@ export class BaseApiMongoModel<T> {
 
     if (query?.filter?.length) {
       for (const el of query.filter) {
-        const [name, typeOrValue, value] = el.split(',');
-        // @ts-ignore
-        filter[name] = {};
-        let _type;
-        let _value;
-
-        if (!value) {
-          _type = '$eq';
-          if (typeOrValue === 'in') {
-            _value = null;
-          } else {
-            _value = typeOrValue;
-          }
+        if (el.includes('||')) {
+          const [_name, type, _value] = el.split('||');
+          const value = _value.includes(',') ? _value.split(',') : _value;
+          const name = _name === 'id' ? '_id' : _name;
+          // @ts-ignore
+          filter[name] = {};
+          filter[name][type] = value;
         } else {
-          _type = `$${typeOrValue}`;
-          _value = typeOrValue === 'in' ? value.split('|') : value;
+          const [name, typeOrValue, value] = el.split(',');
+          // console.log(el);
+          // @ts-ignore
+          filter[name] = {};
+          let _type;
+          let _value;
+
+          if (!value) {
+            _type = '$eq';
+            if (typeOrValue === 'in') {
+              _value = null;
+            } else {
+              _value = typeOrValue;
+            }
+          } else {
+            _type = `$${typeOrValue}`;
+            _value = typeOrValue === 'in' ? value.split('|') : value;
+          }
+          // const _type = !value ? '$eq' : `$${typeOrValue}`;
+          // let _value = _type === '$in' ? value.split('|') : value || typeOrValue;
+          if (_value === 'now') {
+            _value = new Date().toString();
+          }
+          // console.log(_value);
+          filter[name][_type] = _value;
         }
-        // const _type = !value ? '$eq' : `$${typeOrValue}`;
-        // let _value = _type === '$in' ? value.split('|') : value || typeOrValue;
-        if (_value === 'now') {
-          _value = new Date().toString();
-        }
-        console.log(_value);
-        filter[name][_type] = _value;
       }
     }
+
+    // console.log(filter);
     return filter;
   }
 

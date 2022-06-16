@@ -7,10 +7,11 @@ import TagBase from '@frontend/components/TagBase';
 const StyledCardTag = styled(TagBase)`
   position: absolute;
   top: -16px;
-  transform: matrix(0.98, -0.17, 0.17, 0.98, 0, 0);
+  transform: rotate(-10deg) translateY(12px) translateX(-2px);
   height: 40px;
   line-height: 40;
   font-size: 20px;
+  overflow: hidden;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`

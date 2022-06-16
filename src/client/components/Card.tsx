@@ -33,6 +33,7 @@ const CardContainer = styled.div`
   height: 100%;
   justify-content: space-between;
   border: 1px solid ${({ theme }: WithTheme) => theme.colors.borders.default};
+  box-sizing: border-box;
 `;
 
 const CardMainContent = styled.div``;

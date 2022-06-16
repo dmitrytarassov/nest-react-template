@@ -6,7 +6,7 @@ const StyledBlock = styled.div<{ columns: number }>`
   font-family: 'Roboto Mono';
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 16px 16px 4px;
   border-radius: 12px;
   border: 1px solid;
   border-color: ${({ theme }: WithTheme) => theme.colors.borders.default};
@@ -14,7 +14,14 @@ const StyledBlock = styled.div<{ columns: number }>`
     theme.colors.background.default};
   width: ${({ columns }) => (columns === 2 ? 'calc(50% - 8px)' : '100%')};
   box-sizing: border-box;
-  justify-content: space-around;
+  justify-content: space-between;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(
+      css`
+        width: 100%;
+      `,
+    )};
 
   ${({ columns }) =>
     columns === 1

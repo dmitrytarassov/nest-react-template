@@ -9,6 +9,8 @@ const BlockColumn = styled.div`
   font-weight: 400;
   font-size: 15px;
   line-height: 140%;
+  align-items: center;
+  margin-bottom: 12px;
 `;
 
 export default BlockColumn;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import useSWR, { SWRResponse } from 'swr';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { fullPageSwiperProps } from '@frontend/utils/fullPageSwiperProps';
@@ -13,9 +13,30 @@ import { IPromotion } from '@lib/interfaces/IPromotion';
 import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 import { get } from '@frontend/utils/fetcher';
 import { halfPageSwiperProps } from '@frontend/utils/halfPageSwiperProps';
+import imageUrl from '@frontend/utils/imageUrl';
+import { WithTheme } from '@frontend/utils/theme';
+import CarouselControlsWithMap from '@frontend/components/CarouselControlsWithMap';
 
 const StyledPromotionsCarousel = styled(CarouselContainer)`
-  margin-bottom: 24px;
+  //margin-bottom: 24px;
+`;
+
+const StyledCarouselFooterMobile = styled(CarouselFooter)`
+  display: none;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.laptop(css`
+      display: flex;
+    `)}
+`;
+
+const StyledCarouselFooterDesktop = styled(CarouselFooter)`
+  display: flex;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.laptop(css`
+      display: none;
+    `)}
 `;
 
 interface PromotionsCarouselProps {
@@ -23,12 +44,12 @@ interface PromotionsCarouselProps {
 }
 
 const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
-  const promotions: SWRResponse<IPromotion[]> = useSWR(
-    `/crud/promotions/${id}`,
+  const promotions: SWRResponse<IControllerResponse<IPromotion[]>> = useSWR(
+    `/api/promotions?filter[]=rentalId,${id}&filter[]=date,gte,now`,
     get,
   );
 
-  const promotionsFullInfo: IPromotion[] = promotions?.data || [];
+  const promotionsFullInfo: IPromotion[] = promotions?.data?.data || [];
 
   return (
     <StyledPromotionsCarousel>
@@ -38,22 +59,32 @@ const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
             <Card
               title={promotion.name}
               description={promotion.shortText}
-              image={promotion.photos[0] || logoWithCover.src}
+              image={
+                promotion.photos[0]
+                  ? imageUrl(promotion.photos[0])
+                  : logoWithCover.src
+              }
               link={`/promotion/${promotion.url}`}
               tag={{
                 type: promotion.promotionType,
-                text: promotion.text,
+                text: promotion.promotionText,
               }}
               date={promotion.date}
             />
           </SwiperSlide>
         ))}
-        <CarouselFooter>
+        {promotionsFullInfo.length > 2 && (
+          <StyledCarouselFooterDesktop>
+            <CarouselControlsWithMap count={promotionsFullInfo.length} />
+          </StyledCarouselFooterDesktop>
+        )}
+
+        <StyledCarouselFooterMobile>
           <Button type="link" href={`/rentals/${id}/promotions`}>
             Посмотреть все
           </Button>
-          <CarouselControls />
-        </CarouselFooter>
+          <CarouselControlsWithMap count={promotionsFullInfo.length} />
+        </StyledCarouselFooterMobile>
       </Swiper>
     </StyledPromotionsCarousel>
   );

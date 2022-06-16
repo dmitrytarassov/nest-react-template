@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
+import { lintStyles } from '@frontend/utils/styles';
 
 export const Container = styled.div<WithTheme>`
   min-height: 100vh;
@@ -19,16 +20,6 @@ export const Container = styled.div<WithTheme>`
     `)}
 
   a {
-    color: ${({ theme }: WithTheme) => theme.colors.links.default};
-    :hover {
-      color: ${({ theme }: WithTheme) => theme.colors.links.hover};
-    }
-    :visited,
-    :active,
-    :focus,
-    :focus-visible,
-    :focus-within {
-      color: ${({ theme }: WithTheme) => theme.colors.links.active};
-    }
+    ${lintStyles}
   }
 `;
