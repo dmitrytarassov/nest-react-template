@@ -22,12 +22,11 @@ const Title = styled.div`
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 700;
-  font-size: 22px;
-  line-height: 40px;
-  margin-bottom: 24px;
-  margin-top: 24px;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 40px;
 
-  :first-child() {
+  :first-child {
     margin-top: 0;
   }
 `;
@@ -44,11 +43,13 @@ const base = css`
 const PropName = styled.div`
   ${base};
   margin-right: 8px;
+  white-space: initial;
 `;
 
 const PropValue = styled.div`
   ${base};
   margin-left: 8px;
+  white-space: initial;
 `;
 
 const PropTitle = styled.div`
@@ -57,7 +58,7 @@ const PropTitle = styled.div`
   line-height: 20px;
   width: 100%;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 14px;
   text-transform: capitalize;
 `;
 
@@ -65,6 +66,7 @@ const PropValueLine = styled.p`
   margin: 0;
   width: 100%;
   text-align: right;
+  color: ${({ theme }: WithTheme) => theme.colors.text.additional};
 `;
 
 const PropSeparator = styled.div`
@@ -172,18 +174,14 @@ const Info = ({
 
       {show === 'description' && (
         <>
-          {promotion && (
-            <>
-              <Title>Акция</Title>
-              <PropText>{promotion}</PropText>
-            </>
-          )}
-          {description && (
-            <>
-              <Title>Описание</Title>
-              <PropText>{description}</PropText>
-            </>
-          )}
+          <Title>
+            {promotion && !description
+              ? 'Описание акци'
+              : 'Описание устройства'}
+          </Title>
+
+          {promotion && <PropText>{promotion}</PropText>}
+          {description && <PropText>{description}</PropText>}
         </>
       )}
     </StyledInfo>

@@ -14,6 +14,11 @@ import ProductInfo, {
 } from '@frontend/components/ProductInfo/ProductInfo';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
+import styled from 'styled-components';
+
+const StyledPageMainColumnContainer = styled(PageMainColumnContainer)`
+  padding-top: 64px;
+`;
 
 interface PromotionPageProps {
   rental: ICrudRental;
@@ -45,13 +50,13 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
 
   useEffect(() => {
     updateMapRentals(rentals, rental.id, 500);
-  }, [rental.id, rentals]);
 
-  useEffect(() => {
-    updateMapRentals([rental], rental.id);
     function callBack(e) {
       // @ts-ignore
-      router.push(`/rentals/${e.detail}/promotions`);
+      const rental = rentals.find(({ id }) => id === e.detail);
+      if (rental) {
+        router.push(`/rentals/${rental.url}/promotions`);
+      }
     }
 
     window.addEventListener(ESelectRental, callBack);
@@ -59,6 +64,10 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
     return () => {
       window.removeEventListener(ESelectRental, callBack);
     };
+  }, [rental.id, rentals]);
+
+  useEffect(() => {
+    updateMapRentals([rental], rental.id);
   }, []);
 
   const _product: ProductLike = {
@@ -72,7 +81,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
   };
 
   return (
-    <PageMainColumnContainer>
+    <StyledPageMainColumnContainer>
       <ListTop
         breadcrumbs={breadcrumbs}
         backLink={`/rentals/${rental.id}`}
@@ -80,7 +89,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
         image={imageUrl(rental.icon)}
       />
       <ProductInfo rental={rental} product={_product} />
-    </PageMainColumnContainer>
+    </StyledPageMainColumnContainer>
   );
 };
 

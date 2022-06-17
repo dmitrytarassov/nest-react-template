@@ -117,6 +117,7 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
   const isSmallMap = [
     '/products/[id]',
     '/rentals/[id]',
+    '/rentals/[id]/[product]',
     '/promotion/[id]',
   ].includes(router.route);
 
@@ -127,8 +128,10 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
 
   useEffect(() => {
     if (isSmallMap && ref.current) {
-      // @ts-ignore
-      window.scrollTo(0, ref.current.getBoundingClientRect().y - 172);
+      setTimeout(() => {
+        // @ts-ignore
+        window.scrollTo(0, ref.current.getBoundingClientRect().y - 172);
+      }, 300);
     }
   }, []);
 

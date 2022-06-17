@@ -16,6 +16,14 @@ const StyledShareButton = styled.div`
   height: 48px;
   position: relative;
   cursor: pointer;
+  background-color: ${({ theme }: WithTheme) =>
+    theme.colors.buttons.alternate.default.background};
+  border-radius: 12px;
+
+  :hover {
+    background-color: ${({ theme }: WithTheme) =>
+      theme.colors.buttons.alternate.hover.background};
+  }
 `;
 
 const PopUp = styled.div`

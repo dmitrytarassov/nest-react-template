@@ -98,6 +98,12 @@ const OldPrice = styled.div`
   }
 `;
 
+const StyledButton = styled(Button)`
+  & + {
+    margin-left: 16px;
+  }
+`;
+
 const Price = ({ price, discountPrice, link }: PriceProps) => {
   return (
     <StyledPrice>
@@ -116,9 +122,9 @@ const Price = ({ price, discountPrice, link }: PriceProps) => {
       <Buttons>
         <ShareButton />
         {link && (
-          <Button href={link} blank type="link">
+          <StyledButton href={link} blank type="link">
             Арендовать
-          </Button>
+          </StyledButton>
         )}
       </Buttons>
     </StyledPrice>

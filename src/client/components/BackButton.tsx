@@ -7,7 +7,7 @@ const StyledBackButton = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 12px;
+  margin-right: 16px;
 `;
 
 const BackgroundPath = styled.path`

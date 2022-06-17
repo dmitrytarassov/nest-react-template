@@ -12,7 +12,7 @@ const StyledTags = styled.div`
   top: 24px;
 
   ${({ theme }: WithTheme) => css`
-    ${theme.mixins.halfScreenBreak(css`
+    ${theme.mixins.tablet(css`
       justify-content: flex-start;
 
       ${TagBase} + ${TagBase} {

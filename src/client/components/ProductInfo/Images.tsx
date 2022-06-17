@@ -11,27 +11,67 @@ const StyledImages = styled.div`
   width: calc(100% - 48px);
   display: flex;
   justify-content: space-between;
-`;
-
-const Logo = styled.img`
-  height: 56px;
-  display: block;
 
   ${({ theme }: WithTheme) =>
-    theme.mixins.laptop(css`
-      display: none;
+    theme.mixins.mobile(css`
+      flex-direction: row-reverse;
+    `)};
+`;
+
+const Logo = styled.div`
+  height: 56px;
+  width: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  background: ${({ theme }: WithTheme) =>
+    theme.colors.buttons.alternate.default.background};
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      height: 48px;
+      width: 48px;
+      margin-left: 24px;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
     `)};
 `;
 
 const ImagesLine = styled.div`
-  display: flex;
+  display: block;
   overflow-x: auto;
   margin-left: 24px;
-  flex-direction: row;
+  width: calc(100% - 80px);
+
+  ${Logo} {
+    display: flex;
+    margin-left: 12px;
+  }
 
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`
+      width: calc(100% - 68px);
       margin-left: 0;
+    `)};
+`;
+
+const ImagesLineScroll = styled.div`
+  display: flex;
+  float: right;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      float: left;
     `)};
 `;
 
@@ -47,6 +87,7 @@ const Image = styled.img<ImageProps>`
   border-color: ${({ active, theme }: WithThemeAndProps<ImageProps>) =>
     active ? theme.colors.borders.active : theme.colors.borders.default};
   cursor: pointer;
+  box-sizing: border-box;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`
@@ -75,8 +116,8 @@ const Image = styled.img<ImageProps>`
       `)}}
     `}
 
-  :not(:last-child) {
-    margin-right: 12px;
+  :not(:first-child) {
+    margin-left: 12px;
   }
 `;
 
@@ -90,17 +131,20 @@ interface ImagesProps {
 const Images = ({ logo, images, current, onChange }: ImagesProps) => {
   return (
     <StyledImages>
-      <Logo src={logo} />
+      <Logo>
+        <img src={logo} />
+      </Logo>
       <ImagesLine>
-        <Image src={logo} active={false} logo />
-        {images.map((image) => (
-          <Image
-            src={imageUrl(image)}
-            key={image}
-            active={current === image}
-            onClick={() => onChange(image)}
-          />
-        ))}
+        <ImagesLineScroll>
+          {images.map((image) => (
+            <Image
+              src={imageUrl(image)}
+              key={image}
+              active={current === image}
+              onClick={() => onChange(image)}
+            />
+          ))}
+        </ImagesLineScroll>
       </ImagesLine>
     </StyledImages>
   );

@@ -38,15 +38,21 @@ const H1 = styled.h1`
   line-height: 40px;
   margin: 0;
   padding: 0;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.tablet(css`
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 140%;
+    `)}
 `;
 
 const Image = styled.img`
   height: 48px;
-  background: #fff;
-  border-radius: 16px;
+  width: 48px;
   object-fit: contain;
   margin-right: 16px;
-  max-width: 96px;
+  border-radius: 8px;
 `;
 
 const PageHeader = ({ backLink, title, children, image }: PageHeaderProps) => {

@@ -22,7 +22,7 @@ const TagBase = styled.div<TagBaseProps>`
     background-color: ${theme.colors.tags[type]};
     color: ${theme.colors.tags.text};
 
-    ${theme.mixins.halfScreenBreak(css`
+    ${theme.mixins.tablet(css`
       height: 32px;
       font-size: 14px;
     `)}

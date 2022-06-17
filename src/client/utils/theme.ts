@@ -55,6 +55,16 @@ export const theme = {
           background: '#ffffff',
         },
       },
+      alternate: {
+        hover: {
+          color: '#222222',
+          background: '#D8DDE2',
+        },
+        default: {
+          color: '#000000',
+          background: '#F1F5F6',
+        },
+      },
     },
     thumbs: {
       active: '#13EC50',
