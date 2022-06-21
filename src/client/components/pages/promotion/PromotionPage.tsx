@@ -55,7 +55,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
       // @ts-ignore
       const rental = rentals.find(({ id }) => id === e.detail);
       if (rental) {
-        router.push(`/rentals/${rental.url}/promotions`);
+        router.push(`/rentals/${rental.url}`);
       }
     }
 
