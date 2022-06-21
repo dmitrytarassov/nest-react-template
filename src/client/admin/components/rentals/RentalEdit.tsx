@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Edit } from 'react-admin';
 import MapModal from '@admin/components/MapModal';
 import RentalBase from './RentalBase';
@@ -9,9 +9,24 @@ const RentalEdit = (props) => {
   const [coordinates, setCoordinates] = useState([0, 0]);
 
   const applyCoordinates = (coords) => {
-    setCoordinates(coords);
-    setMapIsOpen(false);
+    if (coords) {
+      setCoordinates(coords);
+      setMapIsOpen(false);
+    } else {
+      setMapIsOpen(false);
+    }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      const el = document.querySelector('#coordinates_input');
+      if (el) {
+        // @ts-ignore
+        setCoordinates(el.value.split(',').map((e) => +e));
+        console.log(el);
+      }
+    }, 500);
+  }, []);
 
   return (
     <>

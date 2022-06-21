@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { IRental } from '@lib/interfaces/IRental';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import ListTop from '@frontend/components/ListTop';
@@ -11,13 +10,9 @@ import Block from '@frontend/components/pages/rental/Block';
 import BlockRow from '@frontend/components/pages/rental/BlockRow';
 import BlockColumn from '@frontend/components/pages/rental/BlockColumn';
 import styled, { css } from 'styled-components';
-import Services from '@frontend/components/pages/rental/Services';
-import Contacts from '@frontend/components/pages/rental/Contacts';
 import PromotionsCarousel from '@frontend/components/pages/rental/PromotionsCarousel';
-import Uniques from '@frontend/components/pages/rental/Uniques';
 import Title from '@frontend/components/pages/Title';
 import { WithTheme } from '@frontend/utils/theme';
-import Catalog from '@frontend/components/pages/rental/Catalog';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
 
@@ -31,8 +26,8 @@ import SocialsRow from '@frontend/components/pages/rental/SocialsRow';
 import SocialsBlock from '@frontend/components/pages/rental/SocialsBlock';
 import { phoneFormat } from '@frontend/utils/phoneFormat';
 import Service from '@frontend/components/pages/rental/Service';
-import CarouselFooter from '@frontend/components/CarouselFooter';
 import Button from '@frontend/components/Button';
+import { parseTelegram, parseUrl, parseVk } from '@frontend/utils/socials';
 
 interface RentalPageProps {
   rental: ICrudRental;
@@ -59,40 +54,16 @@ const UniquesContainer = styled.div`
   }
 `;
 
-const PositionsContainer = styled.div`
-  margin: 0 -24px 0 -24px;
-  background-color: ${({ theme }: WithTheme) =>
-    theme.colors.background.primary};
-  padding: 32px 24px;
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
-`;
-
 const SocialIcon = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 8px;
 `;
 
-const StyledCarouselPromotionsButton = styled(Button)`
-  display: flex;
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.laptop(css`
-      display: none;
-    `)}
-`;
-
-const StyledTitle = styled(Title)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 const RentalPage = ({ rental }: RentalPageProps) => {
   const router = useRouter();
-
   const { rentals } = useRentals();
+
   const breadcrumbs: IBreadCrumb[] = [
     {
       name: 'Главная',
@@ -170,8 +141,8 @@ const RentalPage = ({ rental }: RentalPageProps) => {
             {rental.telegram && (
               <SocialsRow>
                 <a href={rental.telegram} target="_blank">
-                  <SocialIcon src={telegram.src} />@
-                  {rental.telegram.toLowerCase().replace('https://t.me/', '')}
+                  <SocialIcon src={telegram.src} />
+                  {parseTelegram(rental.telegram)}
                 </a>
               </SocialsRow>
             )}
@@ -179,7 +150,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
               <SocialsRow>
                 <a href={rental.vk} target="_blank">
                   <SocialIcon src={vk.src} />
-                  {rental.vk.toLowerCase().replace('https://', '')}
+                  {parseVk(rental.vk)}
                 </a>
               </SocialsRow>
             )}
@@ -187,13 +158,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
               <SocialsRow>
                 <a href={rental.web} target="_blank">
                   <SocialIcon src={web.src} />
-                  {
-                    rental.web
-                      .toLowerCase()
-                      .replace('https://', '')
-                      .split('#')[0]
-                      .split('/')[0]
-                  }
+                  {parseUrl(rental.web)}
                 </a>
               </SocialsRow>
             )}
@@ -243,18 +208,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
       {/*  <Title>Уникальные позиции</Title>*/}
       {/*  <Uniques id={rental.id} />*/}
       {/*</UniquesContainer>*/}
-      <PositionsContainer>
-        <StyledTitle>
-          Акции и новости рентала
-          <StyledCarouselPromotionsButton
-            type="link"
-            href={`/rentals/${rental.id}/promotions`}
-          >
-            Посмотреть все
-          </StyledCarouselPromotionsButton>
-        </StyledTitle>
-        <PromotionsCarousel id={rental.id} />
-      </PositionsContainer>
+      <PromotionsCarousel id={rental.id} />
     </PageMainColumnContainer>
   );
 };

@@ -43,7 +43,7 @@ const SecondBanner = () => {
       <StyledBanner>
         <StyledHeading level="h3">Ренталы на карте</StyledHeading>
         <StyledInfoText>
-          Посмотрите на карте, где{'\n'}находятся ренталы в вашем{'\n'}городе
+          Посмотрите на карте, где {'\n'}находятся ренталы в вашем городе
         </StyledInfoText>
         <Button type="link" href="/rentals">
           Посмотреть на карте

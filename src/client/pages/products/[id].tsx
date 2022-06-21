@@ -73,16 +73,14 @@ const Product = ({ city, productData }: RentalPageProps) => {
       });
 
   return (
-    <CityProvider currentCity={city}>
-      <ProductsProvider>
-        <PromotionsProvider>
-          <RentalsProvider>
-            <Header />
-            {data && <ProductPage {...data} />}
-          </RentalsProvider>
-        </PromotionsProvider>
-      </ProductsProvider>
-    </CityProvider>
+    <ProductsProvider>
+      <PromotionsProvider>
+        <RentalsProvider>
+          <Header />
+          {data && <ProductPage {...data} />}
+        </RentalsProvider>
+      </PromotionsProvider>
+    </ProductsProvider>
   );
 };
 

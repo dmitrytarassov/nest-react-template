@@ -9,6 +9,7 @@ export interface ICityContext {
 export const CityContext = createContext<ICityContext>({
   city: 'spb',
   setCity: () => {
+    console.log('setCity do nothing');
     // do nothing
   },
 });

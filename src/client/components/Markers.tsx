@@ -1,82 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { IMarker } from '@frontend/dtos/IMarker';
 import { ESetMarkers } from '@frontend/dtos/ESetMarkers';
-import styled, { css } from 'styled-components';
-import marker from '@frontend/assets/marker.svg';
-import markerHover from '@frontend/assets/marker-hover.svg';
-import { DivIcon, LatLng } from 'leaflet';
-import shadow from '@frontend/assets/shadow.svg';
-import { renderToString } from 'react-dom/server';
-import { Marker, useMap } from 'react-leaflet';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
 import imageUrl from '@frontend/utils/imageUrl';
+import { MarkerRental } from '@frontend/components/MarkerRental';
 
-const IconBase = styled.div`
-  background-image: url(${marker.src});
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-
-  :hover {
-    background-image: url(${markerHover.src});
-  }
-
-  :after {
-    content: '';
-    background-image: url(${shadow.src});
-    position: absolute;
-    top: 105%;
-    left: 0;
-    width: 100%;
-    height: 10%;
-    background-position: top center;
-    background-repeat: no-repeat;
-  }
-`;
-
-const IconImage = styled.img<{ active: boolean }>`
-  object-fit: cover;
-  border-radius: 100%;
-  ${({ active }) =>
-    active
-      ? css`
-          width: 60px !important;
-          height: 60px !important;
-          margin-left: 8px;
-          margin-top: 8px;
-        `
-      : css`
-          width: 30px !important;
-          height: 30px !important;
-          margin-left: 4px;
-          margin-top: 4px;
-        `}
-`;
-
-const getIcon = (src: string, active: boolean) =>
-  new DivIcon({
-    iconUrl: marker.src,
-    shadowUrl: shadow.src,
-    iconSize: active ? [76, 92] : [38, 46],
-    iconAnchor: active ? [38, 92] : [19, 46],
-    shadowSize: [19, 4],
-    shadowAnchor: [9, 0],
-    html: renderToString(
-      <IconBase>
-        <IconImage active={active} src={imageUrl(src)} />
-      </IconBase>,
-    ),
-  });
-
-const Markers = ({
-  currentLocation = [0, 0],
-}: {
-  currentLocation?: [number, number];
-}) => {
+const Markers = ({ map }: { map: any }) => {
   const [markers, setMarkers] = useState<IMarker[]>([]);
   const [center, setCenter] = useState<[number, number]>([0, 0]);
-  const map = useMap();
 
   useEffect(() => {
     window.addEventListener(ESetMarkers, (e) => {
@@ -123,31 +54,27 @@ const Markers = ({
     });
   }, []);
 
-  const selectRental = (rentalId: string) => {
+  const selectRental = (rentalId: string) => () => {
     window.dispatchEvent(new CustomEvent(ESelectRental, { detail: rentalId }));
   };
 
   useEffect(() => {
-    map.panTo(new LatLng(+center[0].toFixed(6), +center[1].toFixed(6)));
-  }, [center.join('-')]);
-
-  useEffect(() => {
-    const [lat, lan] = currentLocation;
-    if (lat !== 0 && lan !== 0) {
-      map.panTo(new LatLng(+lat.toFixed(6), +lan.toFixed(6)));
+    if (center.join() !== '0,0') {
+      map.setCenter(center);
     }
-  }, [currentLocation]);
+  }, [center.join()]);
 
   return (
     <>
       {markers.map((marker) => (
-        <Marker
+        <MarkerRental
           key={marker.rentalId}
-          position={marker.coordinates}
-          icon={getIcon(marker.icon, marker.active)}
-          eventHandlers={{
-            click: (e) => selectRental(marker.rentalId),
-          }}
+          coordinates={marker.coordinates}
+          icon={imageUrl(marker.icon)}
+          map={map}
+          active={marker.active}
+          rentalId={marker.rentalId}
+          onClick={selectRental(marker.rentalId)}
         />
       ))}
     </>

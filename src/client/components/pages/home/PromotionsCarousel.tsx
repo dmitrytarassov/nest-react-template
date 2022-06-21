@@ -42,7 +42,7 @@ const PromotionsCarousel = () => {
                       title={promotion.name}
                       description={promotion.shortText}
                       image={imageUrl(promotion.photos[0])}
-                      link={`/promotion/${promotion.url}`}
+                      link={promotion.url}
                       tag={{
                         type: promotion.promotionType,
                         text: promotion.promotionText,

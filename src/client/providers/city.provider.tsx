@@ -24,6 +24,8 @@ export const CityProvider = ({
     }
   };
 
+  console.log('===city', city);
+
   return (
     <CityContext.Provider value={{ city, setCity: updateCity }}>
       {children}

@@ -15,6 +15,13 @@ export const loadRentalProduct = async (url): Promise<ICrudRentalProduct> => {
   return rentalProduct;
 };
 
+export const loadRentalPromotions = async (rentalId): Promise<IPromotion[]> => {
+  const _promotions: IControllerResponse<IPromotion[]> = await get(
+    makeUrl(`/api/promotions?rentalId[]=url,${rentalId}`),
+  );
+  return _promotions.data;
+};
+
 export const loadRental = async (url): Promise<ICrudRental> => {
   const _rental: IControllerResponse<ICrudRental[]> = await get(
     makeUrl(`/api/rental?filter[]=url,${url}`),

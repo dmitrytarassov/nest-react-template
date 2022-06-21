@@ -50,7 +50,7 @@ const Container = styled.div`
 interface MapModalProps {
   open: boolean;
   city?: string;
-  onClose: (v: number[]) => void;
+  onClose: (v?: number[]) => void;
   coordinates?: number[];
 }
 
@@ -142,6 +142,7 @@ const MapModal = ({
         <Coordinates>
           Координаты: {coordinates.join(', ')}{' '}
           <button onClick={() => onClose(coordinates)}>Принять</button>
+          <button onClick={() => onClose()}>Закрыть (без сохранения)</button>
         </Coordinates>
         <Container>
           <MapContainer center={center} zoom={10} attributionControl={false}>

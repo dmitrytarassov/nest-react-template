@@ -7,6 +7,8 @@ import Link from 'next/link';
 import logo from '@frontend/assets/logo.svg';
 import { getCityName } from '@frontend/utils/getCityName';
 import { useCity } from '@frontend/hooks/useCity';
+import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 const StyledContainer = styled(Container)`
   background-color: ${({ theme }: WithTheme) => theme.colors.background.header};
@@ -31,7 +33,11 @@ const StyledContent = styled(Content)`
   height: 72px;
   align-items: center;
   justify-content: space-between;
-  max-width: unset;
+  max-width: 1212px;
+
+  &.withMap {
+    max-width: unset;
+  }
 `;
 
 const CityDisplay = styled.div`
@@ -141,6 +147,7 @@ const CityButton = styled.div<CityButtonProps>`
 `;
 
 const Header = () => {
+  const router = useRouter();
   const selectRef = useRef();
   const { city, setCity } = useCity();
   const [selectIsOpen, setSelectIsOpen] = useState<boolean>(true);
@@ -152,6 +159,8 @@ const Header = () => {
   useEffect(() => {
     close();
   }, [city]);
+
+  console.log('==HEADER', city);
 
   useEffect(() => {
     document.body.addEventListener('click', (e) => {
@@ -168,9 +177,11 @@ const Header = () => {
     });
   }, []);
 
+  const isPageWithMap = router.pathname !== '/';
+
   return (
     <StyledContainer>
-      <StyledContent>
+      <StyledContent className={classNames({ withMap: isPageWithMap })}>
         <Link href="/" passHref>
           <Logo src={logo.src} />
         </Link>

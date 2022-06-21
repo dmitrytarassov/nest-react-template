@@ -6,7 +6,6 @@ import { get } from '@frontend/utils/fetcher';
 import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 import { useCity } from '@frontend/hooks/useCity';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
-import parseRental from '@frontend/utils/parseRental';
 
 export const RentalsProvider = ({
   children,
@@ -14,12 +13,11 @@ export const RentalsProvider = ({
   children: React.ReactNode;
 }) => {
   const [init, setInit] = useState<boolean>(false);
+  const { city } = useCity();
   const fetchData: SWRResponse<IControllerResponse<ICrudRental[]>> = useSWR(
-    '/crud/rental',
+    `/crud/rental?filter[]=city,${city}`,
     get,
   );
-
-  const { city } = useCity();
 
   useEffect(() => {
     if (init) {

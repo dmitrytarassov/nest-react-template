@@ -15,6 +15,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
             rel="stylesheet"
           />
+          <script
+            src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=b7864477-45e4-4183-8d4d-95c71da0e7c4"
+            type="text/javascript"
+          ></script>
         </Head>
         <body>
           <Main />

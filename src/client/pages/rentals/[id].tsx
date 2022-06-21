@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { loadRental } from '@frontend/utils/loaders';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import { PageProps } from '@frontend/pages/_app';
+import { useCity } from '@frontend/hooks/useCity';
 
 interface RentalPageProps {
   rental?: ICrudRental;
@@ -19,7 +20,7 @@ const loadData = async (rentalUrl): Promise<ICrudRental> => {
   return await loadRental(rentalUrl);
 };
 
-const Rental = ({ city, rental }: RentalPageProps & PageProps) => {
+const Rental = ({ rental }: RentalPageProps & PageProps) => {
   const router = useRouter();
   const [_rental, set_rental] = useState<ICrudRental>(rental);
 
@@ -30,16 +31,14 @@ const Rental = ({ city, rental }: RentalPageProps & PageProps) => {
   const rentalData = rental || _rental;
 
   return (
-    <CityProvider currentCity={city}>
-      <ProductsProvider>
-        <PromotionsProvider>
-          <RentalsProvider>
-            <Header />
-            {rentalData && <RentalPage rental={rentalData} />}
-          </RentalsProvider>
-        </PromotionsProvider>
-      </ProductsProvider>
-    </CityProvider>
+    <ProductsProvider>
+      <PromotionsProvider>
+        <RentalsProvider>
+          <Header />
+          {rentalData && <RentalPage rental={rentalData} />}
+        </RentalsProvider>
+      </PromotionsProvider>
+    </ProductsProvider>
   );
 };
 

@@ -32,7 +32,7 @@ export default function RentalBase({
   const [name, setName] = useState<string>('');
 
   return (
-    <TabbedForm warnWhenUnsavedChanges id="rental_form">
+    <TabbedForm id="rental_form">
       <FormTab label="Основная информация">
         <Box>
           <TextInput
@@ -97,6 +97,7 @@ export default function RentalBase({
             label="Заголовок адреса"
           />
           <BoundedTextField
+            id="coordinates_input"
             source="coordinates"
             validate={validateRequired}
             label="Координаты"
