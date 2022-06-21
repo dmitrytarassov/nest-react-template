@@ -58,7 +58,7 @@ const RentalPromotionsPage = ({
     updateMapRentals([rental], rental.id);
     function callBack(e) {
       // @ts-ignore
-      router.push(`/rentals/${e.detail}/promotions`);
+      router.push(`/rentals/${e.detail}`);
     }
 
     window.addEventListener(ESelectRental, callBack);
