@@ -78,8 +78,9 @@ const Column = styled.div`
 
       :active,
       :focus,
-      :focus-within {
-        color: ${theme.colors.links.alternate.active};
+      :visited,
+      :focus-visible :focus-within {
+        color: ${theme.colors.links.alternate.default};
       }
     `}
   }
@@ -121,9 +122,7 @@ const Footer = ({ halfScreen }: FooterProps) => {
           </Link>
         </Column>
         <Column>
-          <Link href={'/?'} passHref>
-            Link 1
-          </Link>
+          <Link href={'/rentals'}>Ренталы на карте</Link>
           <Link href={'/?'} passHref>
             Link 2
           </Link>

@@ -6,8 +6,13 @@ import PromotionsCarousel from '@frontend/components/pages/home/PromotionsCarous
 import Uniques from '@frontend/components/pages/home/Uniques';
 import FeedbackForm from '@frontend/components/pages/home/FeedbackForm';
 import Footer from '@frontend/components/Footer';
+import { ICardProps } from '@frontend/components/Card';
 
-const HomePage = () => {
+interface HomePageProps {
+  uniques: (ICardProps & { id: string })[];
+}
+
+const HomePage: React.FC<HomePageProps> = ({ uniques }) => {
   return (
     <>
       <Container>
@@ -15,7 +20,7 @@ const HomePage = () => {
         <SecondBanner />
         <PromotionsCarousel />
       </Container>
-      <Uniques />
+      <Uniques _positions={uniques} />
       <FeedbackForm />
       <Footer />
     </>

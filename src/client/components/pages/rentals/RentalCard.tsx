@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { phoneFormat } from '@frontend/utils/phoneFormat';
 import phone from '@frontend/assets/phone.svg';
 import location from '@frontend/assets/location.svg';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
+import imageUrl from '@frontend/utils/imageUrl';
 
 interface StyledRentalCardProps {
   active: boolean;
@@ -99,7 +101,7 @@ const RentalCardPhone = styled.a`
 `;
 
 interface RentalCardProps {
-  rental: IRental;
+  rental: ICrudRental;
   active: boolean;
 }
 
@@ -116,12 +118,12 @@ const RentalCard = ({ rental, active }: RentalCardProps) => {
   return (
     <Link href={`/rentals/${rental.url}`} passHref>
       <StyledRentalCard active={active} ref={ref}>
-        <RentalCardImage src={rental.icon} />
+        <RentalCardImage src={imageUrl(rental.icon)} />
         <RentalCardContent>
           <RentalCardName>{rental.name}</RentalCardName>
           <RentalCardAddress>
             <img src={location.src} alt="" />
-            {rental.address.name}
+            {rental.address}
           </RentalCardAddress>
           <RentalCardPhone href={`tel:${rental.phone}`}>
             <img src={phone.src} />

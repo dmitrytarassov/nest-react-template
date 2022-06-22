@@ -21,6 +21,7 @@ import { ICrudProduct } from '@lib/interfaces/ICrudProduct';
 import { ICrudRentalProduct } from '@lib/interfaces/ICrudRentalProduct';
 import imageUrl from '@frontend/utils/imageUrl';
 import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
+import { loadUniques } from '@frontend/utils/loaders';
 
 const CarouselContainer = styled.div`
   display: block;
@@ -50,88 +51,20 @@ const StyledHeading = styled(Heading)`
   margin-bottom: 48px;
 `;
 
-const Uniques = () => {
+interface UniquesProps {
+  _positions: (ICardProps & { id: string })[];
+}
+
+const Uniques: React.FC<UniquesProps> = ({ _positions }) => {
   const { city } = useCity();
+  const [products, setProducts] =
+    useState<(ICardProps & { id: string })[]>(_positions);
 
-  const rentalsData: SWRResponse<IControllerResponse<ICrudRental[]>> = useSWR(
-    `/api/rental?filter[]=city,${city}`,
-    get,
-  );
-
-  const rentals = rentalsData?.data?.data || [];
-  const rentalIds = rentals.map(({ id }) => id);
-
-  const rentalProductsData: SWRResponse<
-    IControllerResponse<ICrudRentalProduct[]>
-  > = useSWR(
-    rentalIds.length
-      ? `/api/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}`
-      : null,
-    get,
-  );
-
-  const rentalProducts = rentalProductsData?.data?.data || [];
-  const productsIds = rentalProducts.map(({ productId }) => productId);
-
-  const productsData: SWRResponse<IControllerResponse<ICrudProduct[]>> = useSWR(
-    productsIds.length > 0
-      ? `/api/product?filter[]=_id,in,${productsIds.join('|')}`
-      : null,
-    get,
-  );
-
-  const products = productsData?.data?.data || [];
-
-  const _rentalProducts = rentalProducts
-    .map((rentalProduct) => {
-      const product = products.find(({ id }) => id === rentalProduct.productId);
-
-      const rental = rentals.find(({ id }) => id === rentalProduct.rentalId);
-
-      if (!rental) {
-        console.log(
-          'can not find rental with id ',
-          rentalProduct.rentalId,
-          rentals,
-        );
-      }
-      if (!product) {
-        console.log(
-          'can not find product with id ',
-          rentalProduct.productId,
-          products,
-        );
-      }
-      if (product && rental) {
-        return {
-          product,
-          rentalProduct,
-          rental,
-        };
-      }
-    })
-    .filter(Boolean);
-
-  const cards: (ICardProps & { id: string })[] = _rentalProducts.map((el) => ({
-    id: el.rentalProduct.id,
-    title: el.product.name,
-    description: el.product.shortDescription,
-    image: imageUrl(el.product.photos[0]),
-    link: `/rentals/${el.rental.url}/${el.rentalProduct.url}`,
-    price: el.rentalProduct.price,
-    discountPrice: el.rentalProduct.discountPrice,
-    date: el.rentalProduct.date?.toString(),
-    promotionText: el.rentalProduct.promotionShortDescription,
-    rentalLogo: imageUrl(el.rental.icon),
-    ...(el.rentalProduct.promotionType && el.rentalProduct.promotionText
-      ? {
-          tag: {
-            type: el.rentalProduct.promotionType,
-            text: el.rentalProduct.promotionText,
-          } as IPromotionTag,
-        }
-      : {}),
-  }));
+  useEffect(() => {
+    loadUniques(city).then((data) => {
+      setProducts(data);
+    });
+  }, []);
 
   return (
     <ContainerWithRadius alternateColors>
@@ -140,7 +73,7 @@ const Uniques = () => {
       </StyledHeading>
       <CarouselContainer>
         <Swiper {...fullPageSwiperProps}>
-          {cards.map(({ id, ...card }) => (
+          {products.map(({ id, ...card }) => (
             <SwiperSlide key={id}>
               <Card {...card} />
             </SwiperSlide>
@@ -149,7 +82,7 @@ const Uniques = () => {
             <Button type="link" href="/uniques">
               Посмотреть все
             </Button>
-            <CarouselControls count={cards.length} revertColors />
+            <CarouselControls count={products.length} revertColors />
           </CarouselFooter>
         </Swiper>
       </CarouselContainer>

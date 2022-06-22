@@ -5,21 +5,30 @@ import { RentalsProvider } from '@frontend/providers/rentals.provider';
 import { PromotionsProvider } from '@frontend/providers/promotions.provider';
 import { ProductsProvider } from '@frontend/providers/products.provider';
 import { CityProvider } from '@frontend/providers/city.provider';
-import { PageWithCity } from '@frontend/dtos/PageWithCity';
-import { PageProps } from '@frontend/dtos/PageProps';
 import Header from '@frontend/components/Header';
 import { getCity } from '@frontend/utils/getCity';
+import { IPromotion } from '@lib/interfaces/IPromotion';
+import { loadAllPromotions, loadUniques } from '@frontend/utils/loaders';
+import { PageProps } from '@frontend/pages/_app';
+import { ICardProps } from '@frontend/components/Card';
 
-type HomeProps = PageProps<PageWithCity>;
+type HomePageProps = {
+  promotions: IPromotion[];
+  uniques: (ICardProps & { id: string })[];
+};
 
-const Home: NextPage = ({ city }: PageWithCity) => {
+const Home: NextPage = ({
+  city,
+  promotions,
+  uniques,
+}: HomePageProps & PageProps) => {
   return (
     <CityProvider currentCity={city}>
       <ProductsProvider>
-        <PromotionsProvider>
+        <PromotionsProvider _promotions={promotions}>
           <RentalsProvider>
             <Header />
-            <HomePage />
+            <HomePage uniques={uniques} />
           </RentalsProvider>
         </PromotionsProvider>
       </ProductsProvider>
@@ -27,10 +36,16 @@ const Home: NextPage = ({ city }: PageWithCity) => {
   );
 };
 
-export async function getServerSideProps(context): Promise<HomeProps> {
+export async function getServerSideProps(
+  context,
+): Promise<{ props: HomePageProps & PageProps }> {
+  const promotions = await loadAllPromotions(context.req.session.city);
+  const uniques = await loadUniques(context.req.session.city);
   return {
     props: {
       city: getCity(context.req.session.city),
+      promotions,
+      uniques,
     },
   };
 }

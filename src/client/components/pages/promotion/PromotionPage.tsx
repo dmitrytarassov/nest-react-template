@@ -84,7 +84,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
     <StyledPageMainColumnContainer>
       <ListTop
         breadcrumbs={breadcrumbs}
-        backLink={`/rentals/${rental.id}`}
+        backLink={`/rentals/${rental.url}`}
         title={promotion.name}
         image={imageUrl(rental.icon)}
       />

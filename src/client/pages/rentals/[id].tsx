@@ -3,14 +3,12 @@ import { ProductsProvider } from '@frontend/providers/products.provider';
 import { PromotionsProvider } from '@frontend/providers/promotions.provider';
 import { RentalsProvider } from '@frontend/providers/rentals.provider';
 import Header from '@frontend/components/Header';
-import { CityProvider } from '@frontend/providers/city.provider';
 import { getCity } from '@frontend/utils/getCity';
 import RentalPage from '@frontend/components/pages/rental/RentalPage';
 import { useRouter } from 'next/router';
 import { loadRental } from '@frontend/utils/loaders';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import { PageProps } from '@frontend/pages/_app';
-import { useCity } from '@frontend/hooks/useCity';
 
 interface RentalPageProps {
   rental?: ICrudRental;
@@ -53,6 +51,10 @@ export async function getServerSideProps(
 
     if (id) {
       const rental = await loadData(id);
+
+      if (!rental) {
+        throw new Error();
+      }
 
       return {
         props: {

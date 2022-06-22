@@ -88,7 +88,7 @@ const ProductPage = ({
     <PageMainColumnContainer>
       <ListTop
         breadcrumbs={breadcrumbs}
-        backLink={`/rentals/${rental.id}`}
+        backLink={`/rentals/${rental.url}`}
         title={product.name}
         // image={rental.icon}
       />

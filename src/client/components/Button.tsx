@@ -22,17 +22,19 @@ const base = css`
   background: ${({ theme }: WithTheme) =>
     theme.colors.buttons.default.background};
 
-  :hover {
-    color: ${({ theme }: WithTheme) =>
-      theme.colors.buttons.hover.color}!important;
-    background: ${({ theme }: WithTheme) =>
-      theme.colors.buttons.hover.background}!important;
-  }
+  &[data-button-link] {
+    :hover {
+      color: ${({ theme }: WithTheme) =>
+        theme.colors.buttons.hover.color}!important;
+      background: ${({ theme }: WithTheme) =>
+        theme.colors.buttons.hover.background}!important;
+    }
 
-  :disabled {
-    color: ${({ theme }: WithTheme) => theme.colors.buttons.disabled.color};
-    background: ${({ theme }: WithTheme) =>
-      theme.colors.buttons.disabled.background};
+    :disabled {
+      color: ${({ theme }: WithTheme) => theme.colors.buttons.disabled.color};
+      background: ${({ theme }: WithTheme) =>
+        theme.colors.buttons.disabled.background};
+    }
   }
 `;
 
@@ -43,7 +45,7 @@ const StyledButton = styled.button`
 const StyledLink = styled.a`
   text-decoration: none;
   display: flex;
-  ${base}
+  ${base};
 `;
 
 interface ButtonProps {
@@ -69,12 +71,17 @@ const Button = ({
 }: ButtonProps) => {
   const target = blank ? { target: '_blank' } : {};
   return type === 'button' ? (
-    <StyledButton className={className} onClick={onClick} disabled={disabled}>
+    <StyledButton
+      className={className}
+      data-button-link
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </StyledButton>
   ) : (
     <Link href={href} passHref {...target}>
-      <StyledLink className={className} {...target}>
+      <StyledLink className={className} data-button-link {...target}>
         {children}
       </StyledLink>
     </Link>

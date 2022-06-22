@@ -1,35 +1,33 @@
 import React from 'react';
-import { ProductsProvider } from '@frontend/providers/products.provider';
-import { PromotionsProvider } from '@frontend/providers/promotions.provider';
 import { RentalsProvider } from '@frontend/providers/rentals.provider';
 import Header from '@frontend/components/Header';
-import HomePage from '@frontend/components/pages/home/HomePage';
-import { CityProvider } from '@frontend/providers/city.provider';
 import { getCity } from '@frontend/utils/getCity';
-import { PageWithCity } from '@frontend/dtos/PageWithCity';
-import { PageProps } from '@frontend/dtos/PageProps';
 import RentalsPage from '@frontend/components/pages/rentals/RentalsPage';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
+import { PageProps } from '@frontend/pages/_app';
+import { getAllRentalsForCity } from '@frontend/utils/loaders';
+import { CityProvider } from '@frontend/providers/city.provider';
 
-type Props = PageProps<PageWithCity>;
+type HomePageProps = {
+  rentals: ICrudRental[];
+};
 
-const Rentals = ({ city }: PageWithCity) => {
+const Rentals: React.FC<HomePageProps & PageProps> = ({ rentals, city }) => {
   return (
-    <CityProvider currentCity={city}>
-      <ProductsProvider>
-        <PromotionsProvider>
-          <RentalsProvider>
-            <Header />
-            <RentalsPage />
-          </RentalsProvider>
-        </PromotionsProvider>
-      </ProductsProvider>
-    </CityProvider>
+    <RentalsProvider _rentals={rentals}>
+      <Header />
+      <RentalsPage />
+    </RentalsProvider>
   );
 };
 
-export async function getServerSideProps(context): Promise<Props> {
+export async function getServerSideProps(
+  context,
+): Promise<{ props: HomePageProps & PageProps }> {
+  const rentals = await getAllRentalsForCity(context.req.session.city);
   return {
     props: {
+      rentals,
       city: getCity(context.req.session.city),
     },
   };

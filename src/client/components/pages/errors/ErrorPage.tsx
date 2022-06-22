@@ -1,9 +1,13 @@
 import Button from '@frontend/components/Button';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import _500 from './500.svg';
 import _400 from './400.svg';
 import { WithTheme } from '@frontend/utils/theme';
+import { useRentals } from '@frontend/hooks/useRentals';
+import { updateMapRentals } from '@frontend/utils/updateMapRentals';
+import { ESelectRental } from '@frontend/dtos/ESelectRental';
+import { useRouter } from 'next/router';
 
 type Props = {
   statusCode: number;
@@ -18,6 +22,7 @@ const Container = styled.div<{ image: string }>`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  min-height: calc(100vh - 72px - 203px);
 `;
 
 const Text = styled.div`
@@ -56,6 +61,28 @@ const images = {
 };
 
 export default function ErrorPage({ statusCode }: Props) {
+  const router = useRouter();
+  const { rentals } = useRentals();
+
+  console.log(rentals);
+
+  useEffect(() => {
+    updateMapRentals(rentals, '-1');
+
+    function callBack(e) {
+      // @ts-ignore
+      const rental = rentals.find(({ id }) => id === e.detail);
+      if (rental) {
+        router.push(`/rentals/${rental.url}`);
+      }
+    }
+    window.addEventListener(ESelectRental, callBack);
+
+    return () => {
+      window.removeEventListener(ESelectRental, callBack);
+    };
+  }, [rentals]);
+
   const code = statusCode < 500 ? 400 : 500;
   const text =
     code === 500

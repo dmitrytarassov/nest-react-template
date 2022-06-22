@@ -72,7 +72,7 @@ const RentalPromotionsPage = ({
     <PageMainColumnContainer>
       <ListTop
         breadcrumbs={breadcrumbs}
-        backLink={`/rentals/${rental.id}`}
+        backLink={`/rentals/${rental.url}`}
         title={`${rental.name}: Новинки и акции`}
         // image={rental.icon}
       />

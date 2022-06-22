@@ -9,6 +9,7 @@ import { CityProvider } from '@frontend/providers/city.provider';
 import { CurrentLocationProvider } from '@frontend/providers/current_location.provider';
 import { IApp } from '@frontend/pages/_app';
 import ErrorPage from '@frontend/components/pages/errors/ErrorPage';
+import { RentalsProvider } from '@frontend/providers/rentals.provider';
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import('@frontend/components/Map'),
@@ -98,7 +99,7 @@ const ContentContainer = styled.div`
 const ChildrenContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   min-height: 100vh;
   width: 100%;
 
@@ -116,6 +117,7 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
 
   const isSmallMap = [
     '/products/[id]',
+    '/rentals',
     '/rentals/[id]',
     '/rentals/[id]/[product]',
     '/promotion/[id]',
@@ -127,16 +129,16 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
   const city = children.props.city;
 
   useEffect(() => {
-    if (isSmallMap && ref.current) {
+    if (isSmallMap) {
       setTimeout(() => {
         // @ts-ignore
-        window.scrollTo(0, ref.current.getBoundingClientRect().y - 172);
-      }, 300);
+        window.scrollTo(0, window.innerHeight - 172 - 300);
+      }, 500);
     }
-  }, []);
+  }, [router.route]);
 
   return (
-    <CityProvider currentCity={city}>
+    <CityProvider currentCity={city || 'spb'}>
       <CurrentLocationProvider>
         <Container>
           <Header />
@@ -145,7 +147,13 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
           </MapContainer>
           <ContentContainer ref={ref}>
             <ChildrenContainer>
-              {isError ? <ErrorPage statusCode={statusCode} /> : children}
+              {isError ? (
+                <RentalsProvider>
+                  <ErrorPage statusCode={statusCode} />
+                </RentalsProvider>
+              ) : (
+                children
+              )}
               <Footer halfScreen />
             </ChildrenContainer>
           </ContentContainer>

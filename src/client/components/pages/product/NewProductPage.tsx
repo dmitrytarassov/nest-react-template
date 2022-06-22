@@ -90,7 +90,7 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
     <StyledPageMainColumnContainer>
       <ListTop
         breadcrumbs={breadcrumbs}
-        backLink={`/rentals/${rental.id}`}
+        backLink={`/rentals/${rental.url}`}
         title={product.name}
         // image={imageUrl(rental.icon)}
       />

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRentals } from '@frontend/hooks/useRentals';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
-import RentalCard from '@frontend/components/pages/rentals/RentalCard';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
+import RentalCard from '@frontend/components/pages/rentals/RentalCard';
 
 const RentalsPage = () => {
-  return null;
   const { rentals } = useRentals();
   const [active, setActive] = useState<string>('');
   const [searchString, setSearchString] = useState<string>('');
@@ -45,9 +44,9 @@ const RentalsPage = () => {
       ? rentals
       : rentals.filter(
           // @ts-ignore
-          ({ name, address: { name: addressName } }) =>
+          ({ name, address }) =>
             name.toLowerCase().includes(searchString.toLowerCase()) ||
-            addressName.toLowerCase().includes(searchString.toLowerCase()),
+            address.toLowerCase().includes(searchString.toLowerCase()),
         );
 
   return (
@@ -60,12 +59,11 @@ const RentalsPage = () => {
       />
 
       {filteredRentals.map((rental) => (
-        <></>
-        // <RentalCard
-        //   key={rental.id}
-        //   rental={rental}
-        //   active={active === rental.id}
-        // />
+        <RentalCard
+          key={rental.id}
+          rental={rental}
+          active={active === rental.id}
+        />
       ))}
     </PageMainColumnContainer>
   );
