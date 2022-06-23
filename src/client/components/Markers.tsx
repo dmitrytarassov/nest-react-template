@@ -60,7 +60,11 @@ const Markers = ({ map }: { map: any }) => {
 
   useEffect(() => {
     if (center.join() !== '0,0') {
-      map.setCenter(center);
+      if (markers.find(({ active }) => active)) {
+        map.setCenter(center, 14);
+      } else {
+        map.setCenter(center);
+      }
     }
   }, [center.join()]);
 

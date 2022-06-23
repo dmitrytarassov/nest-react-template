@@ -72,7 +72,7 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
 
   const _product: ProductLike = {
     photos: product.photos,
-    date: rentalProduct.date.toString(),
+    date: rentalProduct.date?.toString(),
     promotionText: rentalProduct.promotionText,
     promotion: {
       tag: rentalProduct.promotionType,

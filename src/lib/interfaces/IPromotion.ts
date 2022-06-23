@@ -12,4 +12,6 @@ export interface IPromotion {
   promotionType: 'new' | 'sale';
   promotionText?: string;
   date?: string;
+  price?: number;
+  discountPrice?: number;
 }

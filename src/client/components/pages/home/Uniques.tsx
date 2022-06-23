@@ -67,26 +67,30 @@ const Uniques: React.FC<UniquesProps> = ({ _positions }) => {
   }, []);
 
   return (
-    <ContainerWithRadius alternateColors>
-      <StyledHeading level="h3" useLines>
-        Уникальные позиции
-      </StyledHeading>
-      <CarouselContainer>
-        <Swiper {...fullPageSwiperProps}>
-          {products.map(({ id, ...card }) => (
-            <SwiperSlide key={id}>
-              <Card {...card} />
-            </SwiperSlide>
-          ))}
-          <CarouselFooter>
-            <Button type="link" href="/uniques">
-              Посмотреть все
-            </Button>
-            <CarouselControls count={products.length} revertColors />
-          </CarouselFooter>
-        </Swiper>
-      </CarouselContainer>
-    </ContainerWithRadius>
+    <>
+      {products.length > 0 && (
+        <ContainerWithRadius alternateColors>
+          <StyledHeading level="h3" useLines>
+            Уникальные позиции
+          </StyledHeading>
+          <CarouselContainer>
+            <Swiper {...fullPageSwiperProps}>
+              {products.map(({ id, ...card }) => (
+                <SwiperSlide key={id}>
+                  <Card {...card} />
+                </SwiperSlide>
+              ))}
+              <CarouselFooter>
+                <Button type="link" href="/uniques">
+                  Посмотреть все
+                </Button>
+                <CarouselControls count={products.length} revertColors />
+              </CarouselFooter>
+            </Swiper>
+          </CarouselContainer>
+        </ContainerWithRadius>
+      )}
+    </>
   );
 };
 

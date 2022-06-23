@@ -197,7 +197,9 @@ export const loadAllPromotions = async (city: City): Promise<IPromotion[]> => {
                 promotionType:
                   rentalProduct.promotionType as IPromotion['promotionType'],
                 promotionText: rentalProduct.promotionText,
-                date: '',
+                date: rentalProduct?.date?.toString(),
+                price: rentalProduct.price,
+                discountPrice: rentalProduct.discountPrice,
               };
               return data;
             }

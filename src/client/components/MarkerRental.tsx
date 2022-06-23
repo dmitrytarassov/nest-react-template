@@ -45,6 +45,16 @@ export const MarkerRental: React.FC<
     if (element) {
       element.classList.add('rental_icon');
       if (active) {
+        const parent = element.parentNode.parentNode;
+        if (parent.classList.contains('ymaps-2-1-79-placemark-overlay')) {
+          [
+            // @ts-ignore
+            ...document.querySelectorAll('.ymaps-2-1-79-placemark-overlay'),
+          ].forEach((e) => {
+            e.classList.remove('active');
+          });
+          parent.classList.add('active');
+        }
         const elements = [
           // @ts-ignore
           ...document.querySelectorAll('.ymaps-2-1-79-image-with-content'),

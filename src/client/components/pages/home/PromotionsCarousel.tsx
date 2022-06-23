@@ -48,6 +48,8 @@ const PromotionsCarousel = () => {
                         text: promotion.promotionText,
                       }}
                       date={promotion.date}
+                      price={promotion.price}
+                      discountPrice={promotion.discountPrice}
                     />
                   </SwiperSlide>
                 ))}
