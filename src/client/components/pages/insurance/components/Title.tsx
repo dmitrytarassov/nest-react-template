@@ -9,6 +9,7 @@ const Title = styled.h3`
   line-height: 100%;
   width: 100%;
   margin-bottom: 24px;
+  margin-top: 0;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`

@@ -20,6 +20,11 @@ import Title from '@frontend/components/pages/Title';
 
 const StyledPromotionsCarousel = styled(CarouselContainer)`
   //margin-bottom: 24px;
+  width: 100%;
+  .swiper {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const StyledCarouselFooterMobile = styled(CarouselFooter)`
@@ -47,6 +52,9 @@ const PositionsContainer = styled.div`
   padding: 32px 24px;
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledTitle = styled(Title)`
@@ -123,9 +131,9 @@ const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
               )}
 
               <StyledCarouselFooterMobile>
-                <Button type="link" href={`/rentals/${id}/promotions`}>
-                  Посмотреть все
-                </Button>
+                {/*<Button type="link" href={`/rentals/${id}/promotions`}>*/}
+                {/*  Посмотреть все*/}
+                {/*</Button>*/}
                 <CarouselControlsWithMap count={promotionsFullInfo.length} />
               </StyledCarouselFooterMobile>
             </Swiper>

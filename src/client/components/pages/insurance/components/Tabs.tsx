@@ -4,12 +4,12 @@ import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
 
 const StyledTabs = styled.div`
   display: flex;
-  height: 46px;
+  height: 48px;
   padding: 0px;
   box-sizing: border-box;
   border-radius: 28px;
   justify-content: flex-start;
-  outline: 1px solid ${({ theme }: WithTheme) => theme.colors.borders.default};
+  border: 1px solid ${({ theme }: WithTheme) => theme.colors.borders.default};
 `;
 
 interface OptionProps {

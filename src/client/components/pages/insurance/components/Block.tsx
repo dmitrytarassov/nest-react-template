@@ -17,6 +17,7 @@ const Block = styled.div`
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
       padding: 32px 24px;
+      overflow-x: hidden;
     `)}
 `;
 

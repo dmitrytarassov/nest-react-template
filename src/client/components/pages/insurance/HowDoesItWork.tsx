@@ -4,7 +4,7 @@ import { WithTheme } from '@frontend/utils/theme';
 import Subtitle from '@frontend/components/pages/insurance/components/Subtitle';
 import Text from '@frontend/components/pages/insurance/components/Text';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
+import { Navigation, Pagination } from 'swiper';
 
 const Container = styled.div`
   display: flex;
@@ -43,6 +43,37 @@ const Container = styled.div`
 
     ${Subtitle} {
       margin-bottom: 16px;
+    }
+
+    ${Text} {
+      text-align: left;
+    }
+
+    .swiper-pagination {
+      display: flex;
+      width: 100%;
+      margin-top: 32px;
+      justify-content: center;
+    }
+
+    .swiper-pagination-bullet {
+      width: 32px;
+      height: 6px;
+      background: #d8dde2;
+      border-radius: 3px;
+
+      & + .swiper-pagination-bullet {
+        margin-left: 8px;
+      }
+
+      &.swiper-pagination-bullet-active {
+        background: #fe6b01;
+      }
+    }
+
+    .swiper {
+      flex-direction: column-reverse;
+      display: flex;
     }
   }
 
@@ -143,9 +174,13 @@ const Container = styled.div`
 `;
 
 const swiperProps = {
-  modules: [Navigation],
+  modules: [Navigation, Pagination],
   spaceBetween: 24,
-  slidesPerView: 1,
+  slidesPerView: 1.1,
+  speed: 300,
+  pagination: {
+    clickable: true,
+  },
 };
 
 const HowDoesItWork: React.FC = () => {
@@ -184,7 +219,7 @@ const HowDoesItWork: React.FC = () => {
           </Text>
         </div>
         <div className="block">
-          <div className="number">5</div>
+          <div className="number breakLast">5</div>
           <Subtitle>Не забудь</Subtitle>
           <Text>
             Наступил страховой случай? Напиши нам, пришли фото/видео повреждений

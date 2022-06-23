@@ -160,8 +160,6 @@ const Header = () => {
     close();
   }, [city]);
 
-  console.log('==HEADER', city);
-
   useEffect(() => {
     document.body.addEventListener('click', (e) => {
       let _target = e.target;
@@ -177,7 +175,8 @@ const Header = () => {
     });
   }, []);
 
-  const isPageWithMap = router.pathname !== '/';
+  const isPageWithMap =
+    router.pathname !== '/' && router.pathname !== '/insurance';
 
   return (
     <StyledContainer>

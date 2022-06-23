@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from '@frontend/layout/Container';
 import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
@@ -7,6 +7,10 @@ import Block from '@frontend/components/pages/insurance/components/Block';
 import Title from '@frontend/components/pages/insurance/components/Title';
 import WhyUs from '@frontend/components/pages/insurance/WhyUs';
 import HowDoesItWork from '@frontend/components/pages/insurance/HowDoesItWork';
+import Risks from '@frontend/components/pages/insurance/Risks';
+import Prices from '@frontend/components/pages/insurance/Prices';
+import Form from '@frontend/components/pages/insurance/Form';
+import classNames from 'classnames';
 
 const StyledContainer = styled(Container)`
   ${({ theme }: WithTheme) =>
@@ -43,7 +47,31 @@ const StyledContent = styled.div`
     `)}
 `;
 
+const BixWithImage = styled(Block)`
+  background-image: url(/public/insurance-end.png);
+  min-height: 500px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+
+  &.formSended {
+    background-image: url(/public/sended.png);
+    background-position: bottom center;
+    background-size: cover;
+  }
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.tablet(css`
+      background-image: unset;
+      &.formSended {
+        background-position: bottom center;
+      }
+    `)}
+`;
+
 const InsurancePage: React.FC = () => {
+  const [formSended, setFormSended] = useState<boolean>(false);
+
   return (
     <StyledContainer>
       <Content>
@@ -58,13 +86,20 @@ const InsurancePage: React.FC = () => {
           </Block>
           <Block>
             <Title>Какие риски покрывает наша страховка?</Title>
+            <Risks />
           </Block>
           <Block>
             <Title>Таблица цен</Title>
+            <Prices />
           </Block>
-          <Block>
-            <Title>Хотите застраховать свою технику?</Title>
-          </Block>
+          <BixWithImage className={classNames({ formSended })}>
+            <Title>
+              {formSended
+                ? 'Спасибо за вашу заявку!'
+                : 'Хотите застраховать свою технику?'}
+            </Title>
+            <Form onSend={() => setFormSended(true)} />
+          </BixWithImage>
         </StyledContent>
       </Content>
     </StyledContainer>
