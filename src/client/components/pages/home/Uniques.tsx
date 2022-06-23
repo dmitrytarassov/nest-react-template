@@ -2,25 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
 import lightningLine from '@frontend/assets/lightning-line.svg';
-import useSWR, { SWRResponse } from 'swr';
-import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
-import { IProduct } from '@lib/interfaces/IProduct';
 import Heading from '@frontend/components/Heading';
-import { get } from '@frontend/utils/fetcher';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { fullPageSwiperProps } from '@frontend/utils/fullPageSwiperProps';
 import Card, { ICardProps } from '@frontend/components/Card';
 import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
 import CarouselFooter from '@frontend/components/CarouselFooter';
-import { IRentalProduct } from '@lib/interfaces/IRentalProduct';
 import ContainerWithRadius from '@frontend/components/ContainerWithRadius';
 import { useCity } from '@frontend/hooks/useCity';
-import { ICrudRental } from '@lib/interfaces/ICrudRental';
-import { ICrudProduct } from '@lib/interfaces/ICrudProduct';
-import { ICrudRentalProduct } from '@lib/interfaces/ICrudRentalProduct';
-import imageUrl from '@frontend/utils/imageUrl';
-import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
 import { loadUniques } from '@frontend/utils/loaders';
 
 const CarouselContainer = styled.div`
@@ -51,6 +41,10 @@ const StyledHeading = styled(Heading)`
   margin-bottom: 48px;
 `;
 
+const StyledContainerWithRadius = styled(ContainerWithRadius)`
+  padding-bottom: 0;
+`;
+
 interface UniquesProps {
   _positions: (ICardProps & { id: string })[];
 }
@@ -69,7 +63,7 @@ const Uniques: React.FC<UniquesProps> = ({ _positions }) => {
   return (
     <>
       {products.length > 0 && (
-        <ContainerWithRadius alternateColors>
+        <StyledContainerWithRadius alternateColors>
           <StyledHeading level="h3" useLines>
             Уникальные позиции
           </StyledHeading>
@@ -88,7 +82,7 @@ const Uniques: React.FC<UniquesProps> = ({ _positions }) => {
               </CarouselFooter>
             </Swiper>
           </CarouselContainer>
-        </ContainerWithRadius>
+        </StyledContainerWithRadius>
       )}
     </>
   );

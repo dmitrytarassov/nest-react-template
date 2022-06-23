@@ -32,7 +32,6 @@ const Rental = ({ rental }: RentalPageProps & PageProps) => {
     <ProductsProvider>
       <PromotionsProvider>
         <RentalsProvider>
-          <Header />
           {rentalData && <RentalPage rental={rentalData} />}
         </RentalsProvider>
       </PromotionsProvider>

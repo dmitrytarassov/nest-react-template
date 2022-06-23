@@ -7,6 +7,7 @@ import Uniques from '@frontend/components/pages/home/Uniques';
 import FeedbackForm from '@frontend/components/pages/home/FeedbackForm';
 import Footer from '@frontend/components/Footer';
 import { ICardProps } from '@frontend/components/Card';
+import Insurance from '@frontend/components/pages/home/Insurance';
 
 interface HomePageProps {
   uniques: (ICardProps & { id: string })[];
@@ -21,7 +22,8 @@ const HomePage: React.FC<HomePageProps> = ({ uniques }) => {
         <PromotionsCarousel />
       </Container>
       <Uniques _positions={uniques} />
-      <FeedbackForm />
+      <Insurance />
+      {/*<FeedbackForm />*/}
       <Footer />
     </>
   );

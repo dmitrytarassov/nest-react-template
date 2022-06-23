@@ -19,6 +19,10 @@ class MyDocument extends Document {
             src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=b7864477-45e4-4183-8d4d-95c71da0e7c4"
             type="text/javascript"
           ></script>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          />
         </Head>
         <body>
           <Main />

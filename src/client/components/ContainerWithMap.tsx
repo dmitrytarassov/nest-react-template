@@ -97,16 +97,15 @@ const ContentContainer = styled.div`
 `;
 
 const ChildrenContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 100vh;
-  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
+  padding-top: 72px;
+  min-height: calc(100vh - 72px);
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
-      min-height: unset;
-      /* height: 100%; */
+      padding-top: 0;
     `)};
 `;
 
@@ -117,7 +116,14 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
 
   const isSmallMap = [
     '/products/[id]',
+    '/rentals/[id]',
+    '/rentals/[id]/[product]',
+    '/promotion/[id]',
     '/rentals',
+  ].includes(router.route);
+
+  const showMap = [
+    '/products/[id]',
     '/rentals/[id]',
     '/rentals/[id]/[product]',
     '/promotion/[id]',
@@ -129,11 +135,17 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
   const city = children.props.city;
 
   useEffect(() => {
-    if (isSmallMap) {
+    if (showMap) {
       setTimeout(() => {
         // @ts-ignore
         window.scrollTo(0, window.innerHeight - 172 - 300);
       }, 500);
+    } else {
+      window.scrollTo(0, 0);
+    }
+    if (ref) {
+      // @ts-ignore
+      ref.current.scrollTo(0, 0);
     }
   }, [router.route]);
 

@@ -43,7 +43,12 @@ const base = css`
 const PropName = styled.div`
   ${base};
   margin-right: 8px;
-  white-space: initial;
+  white-space: pre;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.tablet(css`
+      white-space: initial;
+    `)}
 `;
 
 const PropValue = styled.div`

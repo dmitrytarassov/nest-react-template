@@ -15,7 +15,6 @@ type HomePageProps = {
 const Rentals: React.FC<HomePageProps & PageProps> = ({ rentals, city }) => {
   return (
     <RentalsProvider _rentals={rentals}>
-      <Header />
       <RentalsPage />
     </RentalsProvider>
   );

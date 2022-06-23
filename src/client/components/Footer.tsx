@@ -112,9 +112,14 @@ interface FooterProps {
   halfScreen?: boolean;
 }
 
+const StyledContainerWithRadius = styled(ContainerWithRadius)`
+  background-color: ${({ theme }: WithTheme) => theme.colors.background.footer};
+  position: relative;
+`;
+
 const Footer = ({ halfScreen }: FooterProps) => {
   return (
-    <ContainerWithRadius alternateColors>
+    <StyledContainerWithRadius>
       <Container className={classNames(halfScreen && 'half_screen')}>
         <Column>
           <Link href="/" passHref>
@@ -123,9 +128,7 @@ const Footer = ({ halfScreen }: FooterProps) => {
         </Column>
         <Column>
           <Link href={'/rentals'}>Ренталы на карте</Link>
-          <Link href={'/?'} passHref>
-            Link 2
-          </Link>
+          <Link href={'/insurance'}>Страхование оборудования</Link>
         </Column>
         <Column>
           <a href="mailto:kinoscope@inbox.ru">kinoscope@inbox.ru</a>
@@ -140,7 +143,7 @@ const Footer = ({ halfScreen }: FooterProps) => {
           </Socials>
         </Column>
       </Container>
-    </ContainerWithRadius>
+    </StyledContainerWithRadius>
   );
 };
 

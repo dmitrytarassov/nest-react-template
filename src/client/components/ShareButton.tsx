@@ -19,6 +19,7 @@ const StyledShareButton = styled.div`
   background-color: ${({ theme }: WithTheme) =>
     theme.colors.buttons.alternate.default.background};
   border-radius: 12px;
+  margin-left: 16px;
 
   :hover {
     background-color: ${({ theme }: WithTheme) =>

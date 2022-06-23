@@ -12,6 +12,8 @@ import CarouselFooter from '@frontend/components/CarouselFooter';
 import CarouselContainer from '@frontend/components/CarouselContainer';
 import Heading from '@frontend/components/Heading';
 import imageUrl from '@frontend/utils/imageUrl';
+import { Navigation } from 'swiper';
+import { breakpoints } from '@frontend/utils/theme';
 
 const Container = styled.div`
   display: flex;

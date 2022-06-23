@@ -16,9 +16,7 @@ import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
 import styled from 'styled-components';
 
-const StyledPageMainColumnContainer = styled(PageMainColumnContainer)`
-  padding-top: 64px;
-`;
+const StyledPageMainColumnContainer = styled(PageMainColumnContainer)``;
 
 interface PromotionPageProps {
   rental: ICrudRental;

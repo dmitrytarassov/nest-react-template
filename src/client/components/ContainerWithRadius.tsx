@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { Container } from '@frontend/layout/Container';
 import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
 import Content from '@frontend/layout/Content';
+import classNames from 'classnames';
 
 interface StyledContainerProps {
   alternateColors?: boolean;
@@ -26,6 +27,7 @@ const StyledContainer = styled(Container)<StyledContainerProps>`
   overflow: hidden;
   padding-bottom: 96px;
   padding-top: 64px;
+  height: max-content;
 
   :last-child {
     padding-bottom: 64px;
@@ -43,14 +45,19 @@ const StyledContent = styled(Content)`
 
 interface ContainerWithRadius extends StyledContainerProps {
   children: React.ReactNode;
+  className?: string;
 }
 
 const ContainerWithRadius = ({
   children,
   alternateColors = false,
+  className,
 }: ContainerWithRadius) => {
   return (
-    <StyledContainer alternateColors={alternateColors}>
+    <StyledContainer
+      alternateColors={alternateColors}
+      className={classNames(className)}
+    >
       <StyledContent>{children}</StyledContent>
     </StyledContainer>
   );

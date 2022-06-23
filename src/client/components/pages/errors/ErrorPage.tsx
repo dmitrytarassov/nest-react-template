@@ -19,14 +19,12 @@ const Container = styled.div<{ image: string }>`
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
-  min-height: calc(100vh - 72px - 203px);
 `;
 
 const Text = styled.div`
-  margin-top: 120px;
   margin-bottom: 56px;
   font-family: 'Neue Machina';
   font-style: normal;
@@ -39,7 +37,7 @@ const Text = styled.div`
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
-      margin: 0 0 32px;
+      margin: 64px 0 32px;
     `)};
 `;
 
@@ -91,7 +89,9 @@ export default function ErrorPage({ statusCode }: Props) {
   return (
     <Container image={images[code] || images[500]}>
       <Text>{text}</Text>
-      <Button href="/">Вернуться обратно</Button>
+      <Button type="link" href="/">
+        Вернуться обратно
+      </Button>
       <Image src={images[code] || images[500]} />
     </Container>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import BreadCrumbs from '@frontend/components/BreadCrumbs';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PageHeader from '@frontend/components/PageHeader';
 import { WithTheme } from '@frontend/utils/theme';
 import searchIcon from '@frontend/assets/search.svg';
@@ -20,6 +20,11 @@ interface ListTopProps {
 const SearchInputContainer = styled.div`
   display: flex;
   position: relative;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.tablet(css`
+      width: 100%;
+    `)}
 `;
 
 const SearchInput = styled.input`
@@ -38,6 +43,7 @@ const SearchInput = styled.input`
   z-index: 1;
   box-sizing: border-box;
   margin-bottom: 12px;
+  width: 100%;
 `;
 
 const SearchIconContainer = styled.div`

@@ -33,6 +33,16 @@ export const theme = {
       hover: '#13EC50',
     },
     buttons: {
+      insurance: {
+        default: {
+          color: '#0F0E0E',
+          background: '#ffffff',
+        },
+        hover: {
+          color: '#ffffff',
+          background: '#FE6B01',
+        },
+      },
       default: {
         color: '#0F0E0E',
         background: '#13EC50',
@@ -79,11 +89,13 @@ export const theme = {
       active: '#13EC50',
     },
     background: {
+      insurance: '#7749D9',
       default: '#ffffff',
       primary: '#F8F9FA',
       secondary: '#E9EAEE',
-      alternate: '#0F0E0E',
+      alternate: '#222222',
       header: '#222222',
+      footer: '#0F0E0E',
     },
     tags: {
       new: '#7749D9',

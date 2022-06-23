@@ -6,6 +6,7 @@ import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 import RentalCard from '@frontend/components/pages/rentals/RentalCard';
+import NotFound from '@frontend/components/NotFound';
 
 const RentalsPage = () => {
   const { rentals } = useRentals();
@@ -18,6 +19,7 @@ const RentalsPage = () => {
 
   useEffect(() => {
     function callBack(e) {
+      setSearchString('');
       // @ts-ignore
       setActive(e.detail || '');
     }
@@ -58,13 +60,17 @@ const RentalsPage = () => {
         search={{ value: searchString, onChange: setSearchString }}
       />
 
-      {filteredRentals.map((rental) => (
-        <RentalCard
-          key={rental.id}
-          rental={rental}
-          active={active === rental.id}
-        />
-      ))}
+      {filteredRentals.length > 0 ? (
+        filteredRentals.map((rental) => (
+          <RentalCard
+            key={rental.id}
+            rental={rental}
+            active={active === rental.id}
+          />
+        ))
+      ) : (
+        <NotFound />
+      )}
     </PageMainColumnContainer>
   );
 };

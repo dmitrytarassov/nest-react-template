@@ -61,7 +61,13 @@ const Markers = ({ map }: { map: any }) => {
   useEffect(() => {
     if (center.join() !== '0,0') {
       if (markers.find(({ active }) => active)) {
-        map.setCenter(center, 14);
+        (window as any).map = map;
+        console.log(center);
+        if (window.innerWidth < window.innerHeight) {
+          map.setCenter([center[0] - 0.006, center[1]], 14);
+        } else {
+          map.setCenter(center, 14);
+        }
       } else {
         map.setCenter(center);
       }

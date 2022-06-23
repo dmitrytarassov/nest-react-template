@@ -12,7 +12,7 @@ const StyledBreadCrumbs = styled.div`
   font-family: 'Roboto Mono';
   display: flex;
   flex-wrap: wrap;
-  margin: 32px 0 16px;
+  margin: 0 0 16px;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`

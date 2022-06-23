@@ -14,9 +14,7 @@ import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import styled from 'styled-components';
 
-const StyledPageMainColumnContainer = styled(PageMainColumnContainer)`
-  padding-top: 64px;
-`;
+const StyledPageMainColumnContainer = styled(PageMainColumnContainer)``;
 
 type NewProductPageProps = {
   rental: ICrudRental;

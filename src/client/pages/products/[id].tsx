@@ -75,10 +75,7 @@ const Product = ({ city, productData }: RentalPageProps) => {
   return (
     <ProductsProvider>
       <PromotionsProvider>
-        <RentalsProvider>
-          <Header />
-          {data && <ProductPage {...data} />}
-        </RentalsProvider>
+        <RentalsProvider>{data && <ProductPage {...data} />}</RentalsProvider>
       </PromotionsProvider>
     </ProductsProvider>
   );

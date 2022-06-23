@@ -38,13 +38,15 @@ export interface IApp extends AppProps {
 function Client(props: IApp) {
   const { Component, pageProps } = props;
 
+  const isMainTemplate = ['/', '/insurance'].includes(props.router.route);
+
   // @ts-ignore
   return props.router.route.startsWith('/admin') ? (
     // @ts-ignore
     <Component {...pageProps} />
   ) : (
     <ThemeProvider theme={theme}>
-      {props.router.route === '/' ? (
+      {isMainTemplate ? (
         <>
           {/* @ts-ignore */}
           <Component {...pageProps} />
