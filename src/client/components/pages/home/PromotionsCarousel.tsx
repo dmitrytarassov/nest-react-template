@@ -52,6 +52,7 @@ const PromotionsCarousel = () => {
                       date={promotion.date}
                       price={promotion.price}
                       discountPrice={promotion.discountPrice}
+                      rentalLogo={promotion.rentalLogo}
                     />
                   </SwiperSlide>
                 ))}

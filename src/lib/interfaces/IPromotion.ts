@@ -14,4 +14,5 @@ export interface IPromotion {
   date?: string;
   price?: number;
   discountPrice?: number;
+  rentalLogo?: string;
 }

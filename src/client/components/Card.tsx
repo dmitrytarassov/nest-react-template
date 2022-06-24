@@ -7,6 +7,7 @@ import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
 import CardTag from '@frontend/components/CardTag';
 import CardDate from '@frontend/components/CardDate';
 import { getExpirationDateText } from '@frontend/utils/getExpirationDateText';
+import imageUrl from '@frontend/utils/imageUrl';
 
 const StyledCard = styled.a`
   display: flex;
@@ -178,7 +179,7 @@ const Card = ({
             <CardContent>
               <CardTitle>
                 {title}
-                {rentalLogo && <RentalLogo src={rentalLogo} />}
+                {rentalLogo && <RentalLogo src={imageUrl(rentalLogo)} />}
               </CardTitle>
               <CardDescription>{promotionText || description}</CardDescription>
             </CardContent>

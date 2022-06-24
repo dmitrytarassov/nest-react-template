@@ -23,7 +23,6 @@ const HomePage: React.FC<HomePageProps> = ({ uniques }) => {
       </Container>
       <Uniques _positions={uniques} />
       <Insurance />
-      {/*<FeedbackForm />*/}
       <Footer />
     </>
   );

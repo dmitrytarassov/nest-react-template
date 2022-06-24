@@ -200,6 +200,7 @@ export const loadAllPromotions = async (city: City): Promise<IPromotion[]> => {
                 date: rentalProduct?.date?.toString(),
                 price: rentalProduct.price,
                 discountPrice: rentalProduct.discountPrice,
+                rentalLogo: rental.icon,
               };
               return data;
             }
@@ -210,9 +211,13 @@ export const loadAllPromotions = async (city: City): Promise<IPromotion[]> => {
 
   return [
     ...productPromotions,
-    ...promotions.data.map((e) => ({
-      ...e,
-      url: `/promotion/${e.url}`,
-    })),
+    ...promotions.data.map((promotion) => {
+      const rental = _rentals.find(({ id }) => id === promotion.rentalId);
+      return {
+        ...promotion,
+        url: `/promotion/${promotion.url}`,
+        rentalLogo: rental ? rental.icon : undefined,
+      };
+    }),
   ];
 };
