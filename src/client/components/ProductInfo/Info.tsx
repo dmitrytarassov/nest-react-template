@@ -46,8 +46,8 @@ const PropName = styled.div`
   white-space: pre;
 
   ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      white-space: initial;
+    theme.mixins.mobile(css`
+      margin-right: 0;
     `)}
 `;
 
@@ -55,6 +55,11 @@ const PropValue = styled.div`
   ${base};
   margin-left: 8px;
   white-space: initial;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      margin-left: 0;
+    `)}
 `;
 
 const PropTitle = styled.div`
@@ -78,6 +83,10 @@ const PropSeparator = styled.div`
   width: 100%;
   border-bottom: 1px dashed #d8dde2;
   margin-top: 14px;
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      display: none;
+    `)}
 `;
 
 const PropText = styled.div`
@@ -102,6 +111,11 @@ const Props = styled.div`
   & + & {
     margin-top: 16px;
   }
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      flex-direction: column;
+    `)}
 `;
 
 interface InfoProps {

@@ -77,6 +77,10 @@ const Container = styled.div`
     line-height: 16px;
     letter-spacing: 0.05em;
 
+    span {
+      width: calc(100% - 32px);
+    }
+
     :before {
       content: '';
       width: 24px;
@@ -200,7 +204,7 @@ const Form = ({ onSend }: { onSend: () => void }) => {
         className={classNames('checkbox', { checked })}
         onClick={() => setChecked(!checked)}
       >
-        Я соглашаюсь на обработку персональных данных
+        <span>Я соглашаюсь на обработку персональных данных</span>
       </div>
       <StyledButton disabled={!isValid} onClick={send}>
         Отправить заявку

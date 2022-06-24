@@ -11,6 +11,7 @@ import Risks from '@frontend/components/pages/insurance/Risks';
 import Prices from '@frontend/components/pages/insurance/Prices';
 import Form from '@frontend/components/pages/insurance/Form';
 import classNames from 'classnames';
+import Banner from '@frontend/components/pages/insurance/Banner';
 
 const StyledContainer = styled(Container)`
   ${({ theme }: WithTheme) =>
@@ -65,6 +66,7 @@ const BixWithImage = styled(Block)`
       background-image: unset;
       &.formSended {
         background-position: bottom center;
+        background-size: auto 80%;
       }
     `)}
 `;
@@ -76,6 +78,7 @@ const InsurancePage: React.FC = () => {
     <StyledContainer>
       <Content>
         <StyledContent>
+          <Banner />
           <Block>
             <Title>Почему именно наша страховка?</Title>
             <WhyUs />

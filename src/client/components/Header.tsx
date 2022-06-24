@@ -108,6 +108,7 @@ const CitySelectContainer = styled.div`
 `;
 
 const Logo = styled.img`
+  cursor: pointer;
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(
       css`

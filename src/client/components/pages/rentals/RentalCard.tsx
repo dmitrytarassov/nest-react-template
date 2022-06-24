@@ -41,6 +41,10 @@ const StyledRentalCard = styled.div<StyledRentalCardProps>`
   & + & {
     margin-top: 16px;
   }
+
+  :hover {
+    box-shadow: 0px 8px 16px rgba(156, 164, 169, 0.32);
+  }
 `;
 
 const RentalCardImage = styled.img`

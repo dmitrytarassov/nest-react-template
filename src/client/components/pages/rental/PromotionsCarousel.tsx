@@ -131,9 +131,9 @@ const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
               )}
 
               <StyledCarouselFooterMobile>
-                {/*<Button type="link" href={`/rentals/${id}/promotions`}>*/}
-                {/*  Посмотреть все*/}
-                {/*</Button>*/}
+                <Button type="link" href={`/rentals/${id}/promotions`}>
+                  Посмотреть все
+                </Button>
                 <CarouselControlsWithMap count={promotionsFullInfo.length} />
               </StyledCarouselFooterMobile>
             </Swiper>

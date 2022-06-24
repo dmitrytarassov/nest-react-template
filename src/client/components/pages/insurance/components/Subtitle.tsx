@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Subtitle = styled.div`
-  white-space: pre;
+  white-space: break-spaces;
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 700;

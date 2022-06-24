@@ -70,14 +70,16 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
 
   const _product: ProductLike = {
     photos: product.photos,
-    date: rentalProduct.date?.toString(),
+    date: rentalProduct.date ? rentalProduct.date.toString() : undefined,
     promotionText: rentalProduct.promotionText,
     promotion: {
       tag: rentalProduct.promotionType,
       tagText: rentalProduct.promotionText,
     },
-    price: rentalProduct.price.toString(),
-    discountPrice: rentalProduct.discountPrice.toString(),
+    price: rentalProduct.price ? rentalProduct.price.toString() : undefined,
+    discountPrice: rentalProduct.discountPrice
+      ? rentalProduct.discountPrice.toString()
+      : undefined,
     description: product.description,
     properties: product.properties,
     propertiesText: product.propertiesText,

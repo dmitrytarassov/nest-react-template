@@ -38,7 +38,7 @@ const Product = ({ city, productData }: RentalPageProps) => {
   const router = useRouter();
 
   const rentalProductData: SWRResponse<IControllerResponse<IRentalProduct>> =
-    useSWR(getLoadRentalProductUrl(router.query.id.toString()), get);
+    useSWR(getLoadRentalProductUrl(router.query.id?.toString()), get);
   const rentalProduct = rentalProductData?.data?.data;
 
   const rentalData: SWRResponse<IControllerResponse<IRental>> = useSWR(
