@@ -58,15 +58,29 @@ function Client(props: IApp) {
     <>
       <Head>
         <title>{seoData.title}</title>
+        <meta name="og:title" content={seoData.title} />
+        <meta name="twitter:title" content={seoData.title} />
         <meta name="description" content={seoData.description} />
         <meta name="og:description" content={seoData.description} />
+        <meta name="twitter:description" content={seoData.description} />
         <meta name="keywords" content={seoData.keywords} />
+        <link
+          rel="canonnical"
+          href={
+            props.pageProps.site_url +
+            props.router.asPath.split('#')[0].split('?')[0]
+          }
+        />
         <meta
           name="og:url"
           content={
             props.pageProps.site_url +
             props.router.asPath.split('#')[0].split('?')[0]
           }
+        />
+        <link
+          rel="image_src"
+          href={props.pageProps.site_url + imageUrl('cover.png')}
         />
         <meta
           name="og:image"
