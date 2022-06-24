@@ -48,6 +48,7 @@ const PropName = styled.div`
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`
       margin-right: 0;
+      white-space: break-spaces;
     `)}
 `;
 
@@ -59,6 +60,7 @@ const PropValue = styled.div`
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`
       margin-left: 0;
+      white-space: break-spaces;
     `)}
 `;
 

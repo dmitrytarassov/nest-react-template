@@ -107,7 +107,7 @@ const Price = ({ price, discountPrice, link }: PriceProps) => {
           {moneyFormat(discountPrice || price, false)}
           <span>₽</span>
         </CurrentPrice>
-        {discountPrice && (
+        {discountPrice > 0 && (
           <OldPrice>
             {moneyFormat(price, false)} <span>₽</span>
           </OldPrice>
