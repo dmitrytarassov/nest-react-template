@@ -9,7 +9,7 @@ import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { useRouter } from 'next/router';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import Block from '@frontend/components/ProductInfo/Block';
 import Image from '@frontend/components/ProductInfo/Image';
 import { getExpirationDateText } from '@frontend/utils/getExpirationDateText';
@@ -24,7 +24,7 @@ interface ProductPageProps {
   product: IProduct;
   rental: IRental;
   rentalProduct: IRentalProduct;
-  promotions: IPromotion[];
+  promotions: ICrudPromotion[];
 }
 
 const ProductPage = ({

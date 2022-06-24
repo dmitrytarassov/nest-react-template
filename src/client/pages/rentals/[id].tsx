@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { loadRental } from '@frontend/utils/loaders';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import { PageProps } from '@frontend/pages/_app';
+import clearify from '@frontend/utils/clearify';
 
 interface RentalPageProps {
   rental?: ICrudRental;
@@ -59,6 +60,12 @@ export async function getServerSideProps(
         props: {
           rental: rental || null,
           city: getCity(context.req.session.city),
+          ...clearify({
+            seo_title: rental.seo_title,
+            seo_description: rental.seo_description,
+            seo_keywords: rental.seo_keywords,
+            site_url: process.env.SITE_URL,
+          }),
         },
       };
     }

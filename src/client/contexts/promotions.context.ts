@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { FullPromotionInfo } from '@frontend/dtos/FullPromotionInfo';
 
 export interface IPromotionsContext {
-  promotions: IPromotion[];
+  promotions: ICrudPromotion[];
 }
 
 export const PromotionsContext = createContext<IPromotionsContext>({

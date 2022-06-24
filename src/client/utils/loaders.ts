@@ -3,13 +3,16 @@ import { get } from '@frontend/utils/fetcher';
 import { ICrudRentalProduct } from '@lib/interfaces/ICrudRentalProduct';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import { ICrudProduct } from '@lib/interfaces/ICrudProduct';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { City } from '@lib/types/City';
 import { ICardProps } from '@frontend/components/Card';
 import imageUrl from '@frontend/utils/imageUrl';
 import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
 
-const makeUrl = (part: string): string => `${process.env.API_URL || ''}${part}`;
+const makeUrl = (part: string): string => {
+  // console.log(`${process.env.API_URL || ''}${part}`);
+  return `${process.env.API_URL || ''}${part}`;
+};
 
 export const loadRentalProduct = async (url): Promise<ICrudRentalProduct> => {
   const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
@@ -19,8 +22,8 @@ export const loadRentalProduct = async (url): Promise<ICrudRentalProduct> => {
   return rentalProduct;
 };
 
-// export const loadRentalPromotions = async (rentalId): Promise<IPromotion[]> => {
-//   const _promotions: IControllerResponse<IPromotion[]> = await get(
+// export const loadRentalPromotions = async (rentalId): Promise<ICrudPromotion[]> => {
+//   const _promotions: IControllerResponse<ICrudPromotion[]> = await get(
 //     makeUrl(`/api/promotions?rentalId[]=url,${rentalId}`),
 //   );
 //   return _promotions.data;
@@ -34,8 +37,8 @@ export const loadRental = async (url): Promise<ICrudRental> => {
   return rental;
 };
 
-export const loadPromotion = async (url): Promise<IPromotion> => {
-  const _promotion: IControllerResponse<IPromotion[]> = await get(
+export const loadPromotion = async (url): Promise<ICrudPromotion> => {
+  const _promotion: IControllerResponse<ICrudPromotion[]> = await get(
     makeUrl(`/api/promotions?filter[]=url,${url}`),
   );
   const [promotion] = _promotion.data || [];
@@ -69,13 +72,17 @@ export const getAllRentalsForCity = async (
 
 export const loadUniques = async (
   city: City,
+  onlyMainPage?: boolean,
 ): Promise<(ICardProps & { id: string })[]> => {
   const _rentals: ICrudRental[] = await getAllRentalsForCity(city);
   const rentalIds = _rentals.map(({ id }) => id);
-  console.log(rentalIds);
 
   const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
-    makeUrl(`/api/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}`),
+    makeUrl(
+      `/api/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}${
+        onlyMainPage && '&filter[]=showOnMainPage,true'
+      }`,
+    ),
   );
 
   if (_rentalProducts.data.length) {
@@ -150,19 +157,28 @@ export const loadUniques = async (
   return [];
 };
 
-export const loadAllPromotions = async (city: City): Promise<IPromotion[]> => {
+export const loadAllPromotions = async (
+  city: City,
+  onlyMainPage?: boolean,
+): Promise<ICrudPromotion[]> => {
   const _rentals: ICrudRental[] = await getAllRentalsForCity(city);
   const rentalIds = _rentals.map(({ id }) => id);
 
-  const promotions: IControllerResponse<IPromotion[]> = await get(
-    makeUrl(`/api/promotions?filter[]=rentalId,in,${rentalIds.join(',')}`),
+  const promotions: IControllerResponse<ICrudPromotion[]> = await get(
+    makeUrl(
+      `/api/promotions?filter[]=rentalId,in,${rentalIds.join('|')}${
+        onlyMainPage && '&filter[]=showOnMainPage,true'
+      }`,
+    ),
   );
 
   const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
     makeUrl(
       `/api/rental_products?filter[]=rentalId,in,${rentalIds.join(
         '|',
-      )}&filter[]=promotionType,in,new|sale`,
+      )}&filter[]=promotionType,in,new|sale${
+        onlyMainPage && '&filter[]=showOnMainPage,true'
+      }`,
     ),
   );
 
@@ -172,7 +188,7 @@ export const loadAllPromotions = async (city: City): Promise<IPromotion[]> => {
     makeUrl(`/api/product?filter[]=_id,in,${productIds.join('|')}`),
   );
 
-  const productPromotions: IPromotion[] = products?.data?.length
+  const productPromotions: ICrudPromotion[] = products?.data?.length
     ? products?.data
         .map((product) => {
           const rentalProduct: ICrudRentalProduct = _rentalProducts.data.find(
@@ -184,7 +200,7 @@ export const loadAllPromotions = async (city: City): Promise<IPromotion[]> => {
               (p) => p.id === rentalProduct.rentalId,
             );
             if (rental) {
-              const data: IPromotion = {
+              const data: ICrudPromotion = {
                 id: product.id,
                 photos: product.photos,
                 name: product.name,
@@ -195,7 +211,7 @@ export const loadAllPromotions = async (city: City): Promise<IPromotion[]> => {
                   product.shortDescription,
                 rentalId: rentalProduct.rentalId,
                 promotionType:
-                  rentalProduct.promotionType as IPromotion['promotionType'],
+                  rentalProduct.promotionType as ICrudPromotion['promotionType'],
                 promotionText: rentalProduct.promotionText,
                 date: rentalProduct?.date?.toString(),
                 price: rentalProduct.price,

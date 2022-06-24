@@ -1,15 +1,15 @@
 import { Controller } from '@nestjs/common';
-import { CrudRentalProcuctService } from './crud_rental_product.service';
+import { CrudRentalProductService } from './crud_rental_product.service';
 import { BaseCrudMongoController } from '@backend/utils/BaseCrudMongoController';
-import { RentalProcuct } from './crud_rental_product.schema';
+import { RentalProduct } from './crud_rental_product.schema';
 
 @Controller('crud/rental_products')
 // @ts-ignore
-export class CrudRentalProcuctController extends BaseCrudMongoController<
-  CrudRentalProcuctService,
-  RentalProcuct
+export class CrudRentalProductController extends BaseCrudMongoController<
+  CrudRentalProductService,
+  RentalProduct
 > {
-  constructor(private readonly service: CrudRentalProcuctService) {
+  constructor(private readonly service: CrudRentalProductService) {
     super(service);
   }
 }

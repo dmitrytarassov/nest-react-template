@@ -12,12 +12,12 @@ import RentalPage from '@frontend/components/pages/rental/RentalPage';
 import { useRouter } from 'next/router';
 import useSWR, { SWRResponse } from 'swr';
 import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import RentalPromotionsPage from '@frontend/components/pages/rentalPromotions/RentalPromotionsPage';
 
 interface RentalPromotionsPageProps extends PageWithCity {
   rental?: IRental;
-  promotions?: IPromotion[];
+  promotions?: ICrudPromotion[];
 }
 
 type Props = PageProps<RentalPromotionsPageProps>;
@@ -33,10 +33,8 @@ const RentalPromotions = ({
     get,
   );
 
-  const _promotions: SWRResponse<IControllerResponse<IPromotion[]>> = useSWR(
-    `/api/promotions/${router.query.id}`,
-    get,
-  );
+  const _promotions: SWRResponse<IControllerResponse<ICrudPromotion[]>> =
+    useSWR(`/api/promotions/${router.query.id}`, get);
 
   const rentalData = rental || _rental?.data?.data;
   const promotionsData = promotions || _promotions?.data?.data;
@@ -69,7 +67,7 @@ export async function getServerSideProps(context): Promise<Props> {
       );
       const promotionsResponse = await promotionsResponsePromise;
       // @ts-ignore
-      const promotions: IPromotion[] = promotionsResponse.data || [];
+      const promotions: ICrudPromotion[] = promotionsResponse.data || [];
 
       return {
         props: {

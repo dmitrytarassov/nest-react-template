@@ -1,9 +1,10 @@
 import { City } from '@lib/types/City';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Seo } from '@backend/utils/seo.schema';
 
 @Schema()
-export class Rental {
+export class Rental extends Seo {
   @Prop()
   name: string;
 

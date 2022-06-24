@@ -1,4 +1,4 @@
-import { DateInput, TextInput, useInput } from 'react-admin';
+import { DateInput, TextInput, useInput, BooleanInput } from 'react-admin';
 import React from 'react';
 
 export const DependedTextField = (props) => {
@@ -41,6 +41,9 @@ export const DependedTextField = (props) => {
               required={isRequired}
               {...rest}
             />
+          )}
+          {type === 'boolean' && (
+            <BooleanInput source={props.source} label={props.label} />
           )}
         </>
       )}

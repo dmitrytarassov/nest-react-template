@@ -115,7 +115,7 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
   const ref = useRef();
 
   const isSmallMap = [
-    '/products/[id]',
+    '/delete_products/[id]',
     '/rentals/[id]',
     '/rentals/[id]/[product]',
     '/promotion/[id]',
@@ -123,7 +123,7 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
   ].includes(router.route);
 
   const showMap = [
-    '/products/[id]',
+    '/delete_products/[id]',
     '/rentals/[id]',
     '/rentals/[id]/[product]',
     '/promotion/[id]',

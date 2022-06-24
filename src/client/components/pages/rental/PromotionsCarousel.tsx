@@ -9,7 +9,7 @@ import CarouselFooter from '@frontend/components/CarouselFooter';
 import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
 import CarouselContainer from '@frontend/components/CarouselContainer';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 import { get } from '@frontend/utils/fetcher';
 import { halfPageSwiperProps } from '@frontend/utils/halfPageSwiperProps';
@@ -77,15 +77,16 @@ interface PromotionsCarouselProps {
 }
 
 const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
-  const promotions: SWRResponse<IControllerResponse<IPromotion[]>> = useSWR(
+  const promotions: SWRResponse<IControllerResponse<ICrudPromotion[]>> = useSWR(
     `/api/promotions?filter[]=rentalId,${id}&filter[]=date,gte,now`,
     get,
   );
 
-  const promotionsWithoutDate: SWRResponse<IControllerResponse<IPromotion[]>> =
-    useSWR(`/api/promotions?filter[]=rentalId,${id}&filter[]=date,`, get);
+  const promotionsWithoutDate: SWRResponse<
+    IControllerResponse<ICrudPromotion[]>
+  > = useSWR(`/api/promotions?filter[]=rentalId,${id}&filter[]=date,`, get);
 
-  const promotionsFullInfo: IPromotion[] = [
+  const promotionsFullInfo: ICrudPromotion[] = [
     ...(promotions?.data?.data || []),
     ...(promotionsWithoutDate?.data?.data || []),
   ];

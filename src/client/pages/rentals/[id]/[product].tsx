@@ -12,6 +12,7 @@ import { PageProps } from '@frontend/pages/_app';
 import { useRouter } from 'next/router';
 import NewProductPage from '@frontend/components/pages/product/NewProductPage';
 import { RentalsProvider } from '@frontend/providers/rentals.provider';
+import clearify from '@frontend/utils/clearify';
 
 type RentalProductPageProps = {
   rental?: ICrudRental;
@@ -85,8 +86,14 @@ export async function getServerSideProps(
     if (data) {
       return {
         props: {
-          ...data,
+          ...clearify(data),
           city: getCity(context.req.session.city),
+          ...clearify({
+            seo_title: data.rentalProduct.seo_title,
+            seo_description: data.rentalProduct.seo_description,
+            seo_keywords: data.rentalProduct.seo_keywords,
+            site_url: process.env.SITE_URL,
+          }),
         },
       };
     }

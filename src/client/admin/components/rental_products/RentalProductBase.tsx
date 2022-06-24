@@ -7,6 +7,7 @@ import {
   SelectInput,
   NumberInput,
   useRecordContext,
+  BooleanInput,
 } from 'react-admin';
 import { validateRequired } from '@admin/components/utils/validate';
 import Box from '@admin/components/Box';
@@ -96,6 +97,31 @@ const RentalProductBase = () => {
             refValue={promotionType}
             multiline
             rows={8}
+          />
+          <DependedTextField
+            type="boolean"
+            refValue={promotionType}
+            source="showOnMainPage"
+            label="Показывать в списке новостей на главной"
+          />
+        </Box>
+      </FormTab>
+      <FormTab label="СЕО">
+        <Box>
+          <TextInput resettable source="seo_title" label="Title" />
+          <TextInput
+            resettable
+            source="seo_description"
+            label="Meta description"
+            multiline
+            rows={4}
+          />
+          <TextInput
+            resettable
+            source="seo_keywords"
+            label="Ключевые слова"
+            multiline
+            rows={4}
           />
         </Box>
       </FormTab>

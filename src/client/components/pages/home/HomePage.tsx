@@ -8,6 +8,7 @@ import FeedbackForm from '@frontend/components/pages/home/FeedbackForm';
 import Footer from '@frontend/components/Footer';
 import { ICardProps } from '@frontend/components/Card';
 import Insurance from '@frontend/components/pages/home/Insurance';
+import { Head } from 'next/document';
 
 interface HomePageProps {
   uniques: (ICardProps & { id: string })[];

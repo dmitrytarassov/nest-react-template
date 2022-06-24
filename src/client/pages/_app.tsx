@@ -9,6 +9,9 @@ import './index.css';
 import { Router } from 'next/router';
 import ContainerWithMap from '@frontend/components/ContainerWithMap';
 import { City } from '@lib/types/City';
+import seo from '@frontend/utils/seo';
+import Head from 'next/head';
+import imageUrl from '@frontend/utils/imageUrl';
 
 export interface IMetaTags {
   title?: string;
@@ -25,6 +28,11 @@ export interface IHeadProps {
 export type PageProps = {
   statusCode?: number;
   city: City;
+  seo_title?: string;
+  seo_keywords?: string;
+  seo_description?: string;
+  seo_name?: string;
+  site_url?: string;
 };
 
 export interface IApp extends AppProps {
@@ -40,24 +48,45 @@ function Client(props: IApp) {
 
   const isMainTemplate = ['/', '/insurance'].includes(props.router.route);
 
+  const seoData = seo(props.pageProps);
+
   // @ts-ignore
   return props.router.route.startsWith('/admin') ? (
     // @ts-ignore
     <Component {...pageProps} />
   ) : (
-    <ThemeProvider theme={theme}>
-      {isMainTemplate ? (
-        <>
-          {/* @ts-ignore */}
-          <Component {...pageProps} />
-        </>
-      ) : (
-        <ContainerWithMap {...pageProps}>
-          {/* @ts-ignore */}
-          <Component {...pageProps} />
-        </ContainerWithMap>
-      )}
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        <meta name="og:description" content={seoData.description} />
+        <meta name="keywords" content={seoData.keywords} />
+        <meta
+          name="og:url"
+          content={
+            props.pageProps.site_url +
+            props.router.asPath.split('#')[0].split('?')[0]
+          }
+        />
+        <meta
+          name="og:image"
+          content={props.pageProps.site_url + imageUrl('cover.png')}
+        />
+      </Head>
+      <ThemeProvider theme={theme}>
+        {isMainTemplate ? (
+          <>
+            {/* @ts-ignore */}
+            <Component {...pageProps} />
+          </>
+        ) : (
+          <ContainerWithMap {...pageProps}>
+            {/* @ts-ignore */}
+            <Component {...pageProps} />
+          </ContainerWithMap>
+        )}
+      </ThemeProvider>
+    </>
   );
 }
 

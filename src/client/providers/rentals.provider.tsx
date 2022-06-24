@@ -20,10 +20,7 @@ export const RentalsProvider = ({
     get,
   );
 
-  console.log('-----city', city);
-
   useEffect(() => {
-    console.log(city, init);
     if (init) {
       fetchData.mutate();
     }
@@ -32,8 +29,6 @@ export const RentalsProvider = ({
   useEffect(() => {
     setInit(true);
   }, []);
-
-  console.log(fetchData?.data?.data);
 
   const rentals = fetchData?.data?.data || _rentals || [];
 

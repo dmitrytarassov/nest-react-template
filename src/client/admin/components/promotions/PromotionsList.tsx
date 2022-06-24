@@ -1,5 +1,11 @@
 import React from 'react';
-import { Datagrid, List, ReferenceField, TextField } from 'react-admin';
+import {
+  BooleanField,
+  Datagrid,
+  List,
+  ReferenceField,
+  TextField,
+} from 'react-admin';
 
 interface PromotionsListProps {}
 
@@ -12,6 +18,7 @@ const PromotionsList = ({}: PromotionsListProps) => {
         <ReferenceField label="Rental" source="rentalId" reference="rental">
           <TextField source="name" />
         </ReferenceField>
+        <BooleanField source="showOnMainPage" label="Показывать на главной?" />
       </Datagrid>
     </List>
   );

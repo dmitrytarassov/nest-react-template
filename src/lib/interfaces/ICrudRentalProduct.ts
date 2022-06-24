@@ -1,4 +1,6 @@
-export interface ICrudRentalProduct {
+import { ISeo } from '@lib/interfaces/ISeo';
+
+export interface ICrudRentalProduct extends ISeo {
   id: string;
 
   rentalId: string;

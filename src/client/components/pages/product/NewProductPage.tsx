@@ -86,8 +86,6 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
     externalUrl: rentalProduct.externalUrl,
   };
 
-  console.log(_product);
-
   return (
     <StyledPageMainColumnContainer>
       <ListTop

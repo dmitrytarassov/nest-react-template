@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Seo } from '@backend/utils/seo.schema';
 
 @Schema()
-export class Promotion {
+export class Promotion extends Seo {
   @Prop()
   photos: string[];
 
@@ -29,6 +30,9 @@ export class Promotion {
 
   @Prop()
   date?: Date;
+
+  @Prop()
+  showOnMainPage?: boolean;
 }
 
 export type PromotionDocument = Promotion & Document;

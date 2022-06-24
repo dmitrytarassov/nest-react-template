@@ -5,12 +5,13 @@ import { loadPromotion, loadRentalById } from '@frontend/utils/loaders';
 import { PageProps } from '@frontend/pages/_app';
 import { useRouter } from 'next/router';
 import { RentalsProvider } from '@frontend/providers/rentals.provider';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import PromotionPage from '@frontend/components/pages/promotion/PromotionPage';
+import clearify from '@frontend/utils/clearify';
 
 type RentalProductPageProps = {
   rental?: ICrudRental;
-  promotion?: IPromotion;
+  promotion?: ICrudPromotion;
 };
 
 const loadData = async (promotionUrl): Promise<RentalProductPageProps> => {
@@ -65,8 +66,14 @@ export async function getServerSideProps(
     if (data) {
       return {
         props: {
-          ...data,
+          ...clearify(data),
           city: getCity(context.req.session.city),
+          ...clearify({
+            seo_title: data.promotion.seo_title,
+            seo_description: data.promotion.seo_description,
+            seo_keywords: data.promotion.seo_keywords,
+            site_url: process.env.SITE_URL,
+          }),
         },
       };
     }

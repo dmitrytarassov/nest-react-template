@@ -110,6 +110,25 @@ export default function RentalBase({
           <TextInput source="web" label="Сайт" />
         </Box>
       </FormTab>
+      <FormTab label="СЕО">
+        <Box>
+          <TextInput resettable source="seo_title" label="Title" />
+          <TextInput
+            resettable
+            source="seo_description"
+            label="Meta description"
+            multiline
+            rows={4}
+          />
+          <TextInput
+            resettable
+            source="seo_keywords"
+            label="Ключевые слова"
+            multiline
+            rows={4}
+          />
+        </Box>
+      </FormTab>
       <FormTab label="Preview: Card">
         <RentalPreviewCard />
       </FormTab>

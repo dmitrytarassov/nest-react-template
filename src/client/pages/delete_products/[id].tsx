@@ -26,7 +26,7 @@ import {
   getLoadProductPromotionsUrl,
   loadProductPromotions,
 } from '@frontend/utils/loadProductPromotions';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 
 interface RentalPageProps extends PageWithCity {
   productData?: RentalProductFullInfo;
@@ -51,10 +51,13 @@ const Product = ({ city, productData }: RentalPageProps) => {
     get,
   );
 
-  const promotionsData: SWRResponse<IControllerResponse<IPromotion[]>> = useSWR(
-    rentalProduct ? getLoadProductPromotionsUrl(rentalProduct.productId) : null,
-    get,
-  );
+  const promotionsData: SWRResponse<IControllerResponse<ICrudPromotion[]>> =
+    useSWR(
+      rentalProduct
+        ? getLoadProductPromotionsUrl(rentalProduct.productId)
+        : null,
+      get,
+    );
 
   const product = productsData?.data?.data[0];
   const rental = rentalData?.data?.data;
@@ -83,7 +86,7 @@ const Product = ({ city, productData }: RentalPageProps) => {
 
 export async function getServerSideProps(context): Promise<Props> {
   try {
-    const id = (context.req.originalUrl.split('products/')[1] || '')
+    const id = (context.req.originalUrl.split('delete_products/')[1] || '')
       .split('?')[0]
       .split('#')[0];
     if (id) {

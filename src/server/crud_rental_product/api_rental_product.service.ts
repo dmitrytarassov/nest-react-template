@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { RentalProcuct } from './crud_rental_product.schema';
+import { RentalProduct } from './crud_rental_product.schema';
 import { BaseApiMongoModel } from '@backend/utils/BaseApiMongoModel';
 
 @Injectable()
 // @ts-ignore
-export class ApiRentalProductService extends BaseApiMongoModel<RentalProcuct> {
+export class ApiRentalProductService extends BaseApiMongoModel<RentalProduct> {
   constructor(
-    @InjectModel(RentalProcuct.name)
-    private readonly model: Model<RentalProcuct>,
+    @InjectModel(RentalProduct.name)
+    private readonly model: Model<RentalProduct>,
   ) {
     super(model);
   }

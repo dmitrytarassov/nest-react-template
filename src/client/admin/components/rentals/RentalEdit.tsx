@@ -23,7 +23,6 @@ const RentalEdit = (props) => {
       if (el) {
         // @ts-ignore
         setCoordinates(el.value.split(',').map((e) => +e));
-        console.log(el);
       }
     }, 500);
   }, []);

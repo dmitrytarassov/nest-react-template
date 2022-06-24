@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Card from '@frontend/components/Card';
 import logoWithCover from '@frontend/assets/logoWithCover.svg';
 import CarouselContainer from '@frontend/components/CarouselContainer';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { halfPageSwiperProps } from '@frontend/utils/halfPageSwiperProps';
 import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
@@ -15,7 +15,7 @@ const StyledPromotionsCarousel = styled(CarouselContainer)`
 `;
 
 interface PromotionsCarouselProps {
-  promotions: IPromotion[];
+  promotions: ICrudPromotion[];
 }
 
 const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {

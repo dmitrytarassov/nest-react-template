@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { IRental } from '@lib/interfaces/IRental';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { useRouter } from 'next/router';
 import { useCity } from '@frontend/hooks/useCity';
 import { useRentals } from '@frontend/hooks/useRentals';
@@ -11,10 +11,11 @@ import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
 import PromotionsCarousel from '@frontend/components/pages/rentalPromotions/PromotionsCarousel';
 import Title from '@frontend/components/pages/Title';
+import { Head } from 'next/document';
 
 interface RentalPromotionsProps {
   rental: IRental;
-  promotions: IPromotion[];
+  promotions: ICrudPromotion[];
 }
 
 const RentalPromotionsPage = ({

@@ -55,7 +55,7 @@ const Uniques: React.FC<UniquesProps> = ({ _positions }) => {
     useState<(ICardProps & { id: string })[]>(_positions);
 
   useEffect(() => {
-    loadUniques(city).then((data) => {
+    loadUniques(city, true).then((data) => {
       setProducts(data);
     });
   }, []);

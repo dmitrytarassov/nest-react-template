@@ -5,23 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ViewModule } from '../view/view.module';
 import { ConsoleModule } from 'nestjs-console';
-import { RentalsModule } from '@backend/rentals/rentals.module';
-import { RentalsController } from '@backend/rentals/rentals.controller';
-import { RentalsService } from '@backend/rentals/rentals.service';
-import { ProductsController } from '@backend/products/products.controller';
-import { ProductsModule } from '@backend/products/products.module';
-import { ProductsService } from '@backend/products/products.service';
-import { PromotionsModule } from '@backend/promotions/promotions.module';
-import { PromotionsController } from '@backend/promotions/promotions.controller';
-import { PromotionsService } from '@backend/promotions/promotions.service';
 import { CityModule } from '@backend/city/city.module';
 import { CityController } from '@backend/city/city.controller';
 import { CityService } from '@backend/city/city.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
-import { RentalProductsModule } from '@backend/rental-products/rental-products.module';
-import { RentalProductsController } from '@backend/rental-products/rental-products.controller';
-import { RentalProductsService } from '@backend/rental-products/rental-products.service';
 import { CrudRentalModule } from '@backend/crud_rental/crud_rental.module';
 import { CrudRentalController } from '@backend/crud_rental/crud_rental.controller';
 import { CrudRentalService } from '@backend/crud_rental/crud_rental.service';
@@ -31,8 +19,8 @@ import { CrudProductService } from '@backend/crud_product/crud_product.service';
 import { CrudProductController } from '@backend/crud_product/crud_product.controller';
 import { CrudProductModule } from '@backend/crud_product/crud_product.module';
 import { CrudRentalProductModule } from '@backend/crud_rental_product/crud_rental_product.module';
-import { CrudRentalProcuctController } from '@backend/crud_rental_product/crud_rental_product.controller';
-import { CrudRentalProcuctService } from '@backend/crud_rental_product/crud_rental_product.service';
+import { CrudRentalProductController } from '@backend/crud_rental_product/crud_rental_product.controller';
+import { CrudRentalProductService } from '@backend/crud_rental_product/crud_rental_product.service';
 import { CrudPromotionModule } from '@backend/crud_promotion/crud_product.module';
 import { CrudPromotionController } from '@backend/crud_promotion/crud_promotion.controller';
 import { CrudPromotionService } from '@backend/crud_promotion/crud_promotion.service';
@@ -64,24 +52,16 @@ console.log(mongoConfig);
     CrudProductModule,
     CrudRentalProductModule,
     CrudPromotionModule,
-    ProductsModule,
-    RentalsModule,
-    // PromotionsModule,
     CityModule,
-    RentalProductsModule,
     CrudAuthModule,
   ],
   controllers: [
     AppController,
     CrudRentalController,
     CrudProductController,
-    CrudRentalProcuctController,
+    CrudRentalProductController,
     CrudPromotionController,
-    RentalsController,
-    ProductsController,
-    // PromotionsController,
     CityController,
-    RentalProductsController,
     CrudAuthController,
     ApiRentalProductController,
     ApiProductController,
@@ -92,13 +72,9 @@ console.log(mongoConfig);
     AppService,
     CrudRentalService,
     CrudProductService,
-    CrudRentalProcuctService,
+    CrudRentalProductService,
     CrudPromotionService,
-    RentalsService,
-    ProductsService,
-    // PromotionsService,
     CityService,
-    RentalProductsService,
     CrudAuthService,
     ApiRentalProductService,
     ApiProductService,

@@ -1,7 +1,6 @@
-// import { Promotion } from '@lib/types/Promotion';
-// import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
+import { ISeo } from '@lib/interfaces/ISeo';
 
-export interface IPromotion {
+export interface ICrudPromotion extends ISeo {
   id: string;
   photos: string[];
   name: string;

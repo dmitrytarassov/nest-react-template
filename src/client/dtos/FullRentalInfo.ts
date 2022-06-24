@@ -1,15 +1,15 @@
 import { IRental } from '@lib/interfaces/IRental';
 import { IProduct } from '@lib/interfaces/IProduct';
 import { IRentalProduct } from '@lib/interfaces/IRentalProduct';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 
 export interface FullRentalInfo {
   rental: IRental;
   positions: (IProduct & IRentalProduct)[];
-  news: (IPromotion & {
+  news: (ICrudPromotion & {
     product?: IProduct;
   })[];
-  promotions: (IPromotion & {
+  promotions: (ICrudPromotion & {
     product?: IProduct;
   })[];
 }

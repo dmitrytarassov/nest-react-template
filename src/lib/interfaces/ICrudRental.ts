@@ -1,6 +1,7 @@
 import { City } from '@lib/types/City';
+import { ISeo } from '@lib/interfaces/ISeo';
 
-export interface ICrudRental {
+export interface ICrudRental extends ISeo {
   id: string;
 
   name: string;

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CrudRentalProcuctService } from './crud_rental_product.service';
-import { CrudRentalProcuctController } from './crud_rental_product.controller';
+import { CrudRentalProductService } from './crud_rental_product.service';
+import { CrudRentalProductController } from './crud_rental_product.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import {
-  RentalProcuct,
-  RentalProcuctSchema,
+  RentalProduct,
+  RentalProductSchema,
 } from './crud_rental_product.schema';
 import mongoConfig from '@backend/utils/mongoConfig';
 import { ApiRentalProductController } from '@backend/crud_rental_product/api_rental_product.controller';
@@ -14,11 +14,11 @@ import { ApiRentalProductService } from '@backend/crud_rental_product/api_rental
   imports: [
     MongooseModule.forRoot(mongoConfig.uri),
     MongooseModule.forFeature([
-      { name: RentalProcuct.name, schema: RentalProcuctSchema },
+      { name: RentalProduct.name, schema: RentalProductSchema },
     ]),
   ],
-  controllers: [CrudRentalProcuctController, ApiRentalProductController],
-  providers: [CrudRentalProcuctService, ApiRentalProductService],
+  controllers: [CrudRentalProductController, ApiRentalProductController],
+  providers: [CrudRentalProductService, ApiRentalProductService],
   exports: [MongooseModule],
 })
 export class CrudRentalProductModule {}

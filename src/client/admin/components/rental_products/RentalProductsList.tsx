@@ -21,6 +21,11 @@ const RentalProductsList = ({}: RentalsListProps) => {
         </ReferenceField>
         <TextField source="price" />
         <TextField source="discountPrice" />
+        <TextField source="promotionType" label="Тип акции" />
+        <BooleanField
+          source="showOnMainPage"
+          label="Показывать в новостях на главной?"
+        />
       </Datagrid>
     </List>
   );

@@ -7,6 +7,7 @@ import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import { PageProps } from '@frontend/pages/_app';
 import { getAllRentalsForCity } from '@frontend/utils/loaders';
 import { CityProvider } from '@frontend/providers/city.provider';
+import clearify from '@frontend/utils/clearify';
 
 type HomePageProps = {
   rentals: ICrudRental[];
@@ -28,6 +29,12 @@ export async function getServerSideProps(
     props: {
       rentals,
       city: getCity(context.req.session.city),
+      ...clearify({
+        seo_title: 'Найти ренталов на карте',
+        seo_description: 'Ренталы на карте онлайн',
+        seo_keywords: null,
+        site_url: process.env.SITE_URL,
+      }),
     },
   };
 }

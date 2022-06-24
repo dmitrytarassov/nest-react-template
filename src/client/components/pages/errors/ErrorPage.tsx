@@ -62,8 +62,6 @@ export default function ErrorPage({ statusCode }: Props) {
   const router = useRouter();
   const { rentals } = useRentals();
 
-  console.log(rentals);
-
   useEffect(() => {
     updateMapRentals(rentals, '-1');
 

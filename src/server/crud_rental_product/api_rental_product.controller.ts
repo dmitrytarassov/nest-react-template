@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 
-import { RentalProcuct } from './crud_rental_product.schema';
+import { RentalProduct } from './crud_rental_product.schema';
 import { BaseApiMongoController } from '@backend/utils/BaseApiMongoController';
 import { ApiRentalProductService } from '@backend/crud_rental_product/api_rental_product.service';
 
@@ -8,7 +8,7 @@ import { ApiRentalProductService } from '@backend/crud_rental_product/api_rental
 // @ts-ignore
 export class ApiRentalProductController extends BaseApiMongoController<
   ApiRentalProductService,
-  RentalProcuct
+  RentalProduct
 > {
   constructor(private readonly service: ApiRentalProductService) {
     super(service);

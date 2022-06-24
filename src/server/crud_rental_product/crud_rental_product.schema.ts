@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Seo } from '@backend/utils/seo.schema';
 
 @Schema()
-export class RentalProcuct {
+export class RentalProduct extends Seo {
   @Prop()
   rentalId: string;
 
@@ -35,8 +36,11 @@ export class RentalProcuct {
 
   @Prop()
   externalUrl: string;
+
+  @Prop()
+  showOnMainPage?: boolean;
 }
 
-export type RentalProcuctDocument = RentalProcuct & Document;
+export type RentalProductDocument = RentalProduct & Document;
 
-export const RentalProcuctSchema = SchemaFactory.createForClass(RentalProcuct);
+export const RentalProductSchema = SchemaFactory.createForClass(RentalProduct);

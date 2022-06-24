@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { IRental } from '@lib/interfaces/IRental';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { useRouter } from 'next/router';
 import { useCity } from '@frontend/hooks/useCity';
 import { useRentals } from '@frontend/hooks/useRentals';
@@ -20,7 +20,7 @@ const StyledPageMainColumnContainer = styled(PageMainColumnContainer)``;
 
 interface PromotionPageProps {
   rental: ICrudRental;
-  promotion: IPromotion;
+  promotion: ICrudPromotion;
 }
 
 const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {

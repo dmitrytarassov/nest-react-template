@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { PromotionsContext } from '@frontend/contexts/promotions.context';
 import { loadAllPromotions } from '@frontend/utils/loaders';
 import { useCity } from '@frontend/hooks/useCity';
@@ -9,14 +9,14 @@ export const PromotionsProvider = ({
   _promotions = [],
 }: {
   children: React.ReactNode;
-  _promotions?: IPromotion[];
+  _promotions?: ICrudPromotion[];
 }) => {
   const { city } = useCity();
-  const [promotions, setPromotions] = useState<IPromotion[]>(_promotions);
+  const [promotions, setPromotions] = useState<ICrudPromotion[]>(_promotions);
   const [init, setInit] = useState<boolean>();
 
   const load = async () => {
-    const data = await loadAllPromotions(city);
+    const data = await loadAllPromotions(city, true);
     setPromotions(data);
     setInit(true);
   };
@@ -34,10 +34,6 @@ export const PromotionsProvider = ({
       setInit(true);
     }
   }, []);
-
-  promotions.forEach((d) => {
-    console.log(d.url);
-  });
 
   return (
     <PromotionsContext.Provider value={{ promotions }}>

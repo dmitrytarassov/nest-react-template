@@ -31,7 +31,6 @@ export class BaseApiMongoModel<T> {
           filter[name][type] = value;
         } else {
           const [name, typeOrValue, value] = el.split(',');
-          // console.log(el);
           // @ts-ignore
           filter[name] = {};
           let _type;
@@ -48,18 +47,14 @@ export class BaseApiMongoModel<T> {
             _type = `$${typeOrValue}`;
             _value = typeOrValue === 'in' ? value.split('|') : value;
           }
-          // const _type = !value ? '$eq' : `$${typeOrValue}`;
-          // let _value = _type === '$in' ? value.split('|') : value || typeOrValue;
           if (_value === 'now') {
             _value = new Date().toString();
           }
-          // console.log(_value);
           filter[name][_type] = _value;
         }
       }
     }
 
-    // console.log(filter);
     return filter;
   }
 

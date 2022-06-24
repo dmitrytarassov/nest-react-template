@@ -1,8 +1,8 @@
 import { createContext } from 'react';
-import { IPromotion } from '@lib/interfaces/IPromotion';
+import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 
 export interface INewsContext {
-  news: IPromotion[];
+  news: ICrudPromotion[];
 }
 
 export const NewsContext = createContext<INewsContext>({

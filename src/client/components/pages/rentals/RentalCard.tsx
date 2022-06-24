@@ -21,6 +21,7 @@ const StyledRentalCard = styled.div<StyledRentalCardProps>`
   padding: 24px;
   background: ${({ theme }: WithTheme) => theme.colors.background.default};
   border-radius: 16px;
+  cursor: pointer;
 
   ${({ theme, active }: WithThemeAndProps<StyledRentalCardProps>) =>
     active
