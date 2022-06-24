@@ -49,7 +49,7 @@ const Column = styled.div`
 
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`
-      width: 100%;
+      width: 100% !important;
       margin-bottom: 0 !important;
       & + & {
         margin-top: 64px;
