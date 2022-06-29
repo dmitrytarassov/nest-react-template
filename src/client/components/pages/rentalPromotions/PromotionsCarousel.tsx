@@ -9,9 +9,27 @@ import { halfPageSwiperProps } from '@frontend/utils/halfPageSwiperProps';
 import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
 import CarouselFooter from '@frontend/components/CarouselFooter';
+import imageUrl from '@frontend/utils/imageUrl';
+import { WithTheme } from '@frontend/utils/theme';
+
+const PositionsContainer = styled.div`
+  margin: 0 -24px 0 -24px;
+  background-color: ${({ theme }: WithTheme) =>
+    theme.colors.background.primary};
+  padding: 32px 24px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+`;
 
 const StyledPromotionsCarousel = styled(CarouselContainer)`
-  margin-bottom: 24px;
+  width: 100%;
+  .swiper {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 interface PromotionsCarouselProps {
@@ -20,27 +38,34 @@ interface PromotionsCarouselProps {
 
 const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {
   return (
-    <StyledPromotionsCarousel>
-      <Swiper {...halfPageSwiperProps}>
-        {/* {promotions.map((promotion) => (
-          <SwiperSlide key={promotion.title}>
-            <Card
-              title={promotion.title}
-              description={promotion.shortText}
-              price={promotion.price}
-              discountPrice={promotion.discountPrice}
-              image={promotion.images[0] || logoWithCover.src}
-              link={`/${promotion.type}/${promotion.id}`}
-              tag={promotion.tag}
-            />
-          </SwiperSlide>
-        ))} */}
-        <CarouselFooter>
-          <div />
-          <CarouselControls />
-        </CarouselFooter>
-      </Swiper>
-    </StyledPromotionsCarousel>
+    <PositionsContainer>
+      <StyledPromotionsCarousel>
+        <Swiper {...halfPageSwiperProps}>
+          {promotions.map((promotion) => (
+            <SwiperSlide key={promotion.url}>
+              <Card
+                title={promotion.name}
+                description={promotion.shortText}
+                image={
+                  promotion.photos[0]
+                    ? imageUrl(promotion.photos[0])
+                    : logoWithCover.src
+                }
+                link={promotion.url}
+                tag={{
+                  type: promotion.promotionType,
+                  text: promotion.promotionText,
+                }}
+                date={promotion.date}
+              />
+            </SwiperSlide>
+          ))}
+          <CarouselFooter>
+            <CarouselControls count={2} />
+          </CarouselFooter>
+        </Swiper>
+      </StyledPromotionsCarousel>
+    </PositionsContainer>
   );
 };
 

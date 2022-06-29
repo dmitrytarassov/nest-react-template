@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { IRental } from '@lib/interfaces/IRental';
 import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { useRouter } from 'next/router';
 import { useCity } from '@frontend/hooks/useCity';
@@ -11,10 +10,11 @@ import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
 import PromotionsCarousel from '@frontend/components/pages/rentalPromotions/PromotionsCarousel';
 import Title from '@frontend/components/pages/Title';
-import { Head } from 'next/document';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
+import imageUrl from '@frontend/utils/imageUrl';
 
 interface RentalPromotionsProps {
-  rental: IRental;
+  rental: ICrudRental;
   promotions: ICrudPromotion[];
 }
 
@@ -22,7 +22,6 @@ const RentalPromotionsPage = ({
   rental,
   promotions,
 }: RentalPromotionsProps) => {
-  return null;
   const router = useRouter();
   const { city } = useCity();
 
@@ -38,11 +37,11 @@ const RentalPromotionsPage = ({
     },
     {
       name: rental.name,
-      link: `/rentals/${rental.id}`,
+      link: `/rentals/${rental.url}`,
     },
     {
       name: 'Новинки и акции',
-      link: `/rentals/${rental.id}/promotions`,
+      link: `/rentals/${rental.url}/promotions`,
     },
   ];
 
@@ -75,16 +74,20 @@ const RentalPromotionsPage = ({
         breadcrumbs={breadcrumbs}
         backLink={`/rentals/${rental.url}`}
         title={`${rental.name}: Новинки и акции`}
-        // image={rental.icon}
+        image={imageUrl(rental.icon)}
       />
       <Title>Акции</Title>
-      {/* <PromotionsCarousel
-        promotions={promotions.filter(({ type }) => type === 'promotion')}
-      /> */}
+      <PromotionsCarousel
+        promotions={promotions.filter(
+          ({ promotionType }) => promotionType === 'sale',
+        )}
+      />
       <Title>Новинки</Title>
-      {/* <PromotionsCarousel
-        promotions={promotions.filter(({ type }) => type === 'news')}
-      /> */}
+      <PromotionsCarousel
+        promotions={promotions.filter(
+          ({ promotionType }) => promotionType === 'new',
+        )}
+      />
     </PageMainColumnContainer>
   );
 };

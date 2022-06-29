@@ -8,6 +8,10 @@ import { City } from '@lib/types/City';
 import { ICardProps } from '@frontend/components/Card';
 import imageUrl from '@frontend/utils/imageUrl';
 import { IPromotionTag } from '@lib/interfaces/IPromotionTag';
+import {
+  combineProductsAndPromotions,
+  productsToPromotionType,
+} from '@frontend/utils/parsers';
 
 const makeUrl = (part: string): string => {
   // console.log(`${process.env.API_URL || ''}${part}`);
@@ -43,6 +47,35 @@ export const loadPromotion = async (url): Promise<ICrudPromotion> => {
   );
   const [promotion] = _promotion.data || [];
   return promotion;
+};
+
+export const loadPromotionsByRentalId = async (
+  rentalId: string,
+): Promise<ICrudPromotion[]> => {
+  const rental = await loadRentalById(rentalId);
+  const _promotions: IControllerResponse<ICrudPromotion[]> = await get(
+    makeUrl(`/api/promotions?filter[]=rentalId,${rentalId}`),
+  );
+
+  const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
+    makeUrl(
+      `/api/rental_products?filter[]=rentalId,${rentalId}&filter[]=promotionType,in,new|sale`,
+    ),
+  );
+
+  const productIds = _rentalProducts.data.map(({ productId }) => productId);
+
+  const products: IControllerResponse<ICrudProduct[]> = await get(
+    makeUrl(`/api/product?filter[]=_id,in,${productIds.join('|')}`),
+  );
+
+  const result: ICrudPromotion[] = productsToPromotionType(
+    products?.data || [],
+    _rentalProducts.data || [],
+    [rental],
+  );
+
+  return combineProductsAndPromotions(result, _promotions.data, [rental]);
 };
 
 export const loadProductById = async (id): Promise<ICrudProduct> => {
@@ -188,52 +221,11 @@ export const loadAllPromotions = async (
     makeUrl(`/api/product?filter[]=_id,in,${productIds.join('|')}`),
   );
 
-  const productPromotions: ICrudPromotion[] = products?.data?.length
-    ? products?.data
-        .map((product) => {
-          const rentalProduct: ICrudRentalProduct = _rentalProducts.data.find(
-            (p) => p.productId === product.id,
-          );
+  const result: ICrudPromotion[] = productsToPromotionType(
+    products?.data || [],
+    _rentalProducts.data || [],
+    _rentals || [],
+  );
 
-          if (rentalProduct) {
-            const rental: ICrudRental = _rentals.find(
-              (p) => p.id === rentalProduct.rentalId,
-            );
-            if (rental) {
-              const data: ICrudPromotion = {
-                id: product.id,
-                photos: product.photos,
-                name: product.name,
-                url: `/rentals/${rental.url}/${rentalProduct.url}`,
-                text: '',
-                shortText:
-                  rentalProduct.promotionShortDescription ||
-                  product.shortDescription,
-                rentalId: rentalProduct.rentalId,
-                promotionType:
-                  rentalProduct.promotionType as ICrudPromotion['promotionType'],
-                promotionText: rentalProduct.promotionText,
-                date: rentalProduct?.date?.toString(),
-                price: rentalProduct.price,
-                discountPrice: rentalProduct.discountPrice,
-                rentalLogo: rental.icon,
-              };
-              return data;
-            }
-          }
-        })
-        .filter(Boolean)
-    : [];
-
-  return [
-    ...productPromotions,
-    ...promotions.data.map((promotion) => {
-      const rental = _rentals.find(({ id }) => id === promotion.rentalId);
-      return {
-        ...promotion,
-        url: `/promotion/${promotion.url}`,
-        rentalLogo: rental ? rental.icon : undefined,
-      };
-    }),
-  ];
+  return combineProductsAndPromotions(result, promotions.data, _rentals);
 };

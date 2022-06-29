@@ -74,9 +74,10 @@ const StyledCarouselPromotionsButton = styled(Button)`
 
 interface PromotionsCarouselProps {
   id: string;
+  url: string;
 }
 
-const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
+const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
   const promotions: SWRResponse<IControllerResponse<ICrudPromotion[]>> = useSWR(
     `/api/promotions?filter[]=rentalId,${id}&filter[]=date,gte,now`,
     get,
@@ -99,7 +100,7 @@ const PromotionsCarousel = ({ id }: PromotionsCarouselProps) => {
             Акции и новости рентала
             <StyledCarouselPromotionsButton
               type="link"
-              href={`/rentals/${id}/promotions`}
+              href={`/rentals/${url}/promotions`}
             >
               Посмотреть все
             </StyledCarouselPromotionsButton>

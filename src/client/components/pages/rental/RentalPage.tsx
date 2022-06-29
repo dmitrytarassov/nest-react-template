@@ -208,7 +208,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
       {/*  <Title>Уникальные позиции</Title>*/}
       {/*  <Uniques id={rental.id} />*/}
       {/*</UniquesContainer>*/}
-      <PromotionsCarousel id={rental.id} />
+      <PromotionsCarousel id={rental.id} url={rental.url} />
     </PageMainColumnContainer>
   );
 };

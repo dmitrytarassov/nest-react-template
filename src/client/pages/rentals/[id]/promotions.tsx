@@ -1,43 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PromotionsProvider } from '@frontend/providers/promotions.provider';
 import { RentalsProvider } from '@frontend/providers/rentals.provider';
-import Header from '@frontend/components/Header';
-import { CityProvider } from '@frontend/providers/city.provider';
 import { getCity } from '@frontend/utils/getCity';
-import { PageWithCity } from '@frontend/dtos/PageWithCity';
-import { PageProps } from '@frontend/dtos/PageProps';
-import { get } from '@frontend/utils/fetcher';
-import { IRental } from '@lib/interfaces/IRental';
-import RentalPage from '@frontend/components/pages/rental/RentalPage';
 import { useRouter } from 'next/router';
-import useSWR, { SWRResponse } from 'swr';
-import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import RentalPromotionsPage from '@frontend/components/pages/rentalPromotions/RentalPromotionsPage';
+import { ICrudRental } from '@lib/interfaces/ICrudRental';
+import { PageProps } from '@frontend/pages/_app';
+import { loadPromotionsByRentalId, loadRental } from '@frontend/utils/loaders';
 
-interface RentalPromotionsPageProps extends PageWithCity {
-  rental?: IRental;
+interface RentalPromotionsPageProps {
+  rental?: ICrudRental;
   promotions?: ICrudPromotion[];
 }
 
-type Props = PageProps<RentalPromotionsPageProps>;
+const loadData = async (rentalUrl): Promise<RentalPromotionsPageProps> => {
+  const rental = await loadRental(rentalUrl);
+  const promotions = await loadPromotionsByRentalId(rental.id);
+
+  return {
+    rental,
+    promotions,
+  };
+};
 
 const RentalPromotions = ({
-  city,
   rental,
   promotions,
-}: RentalPromotionsPageProps) => {
+}: RentalPromotionsPageProps & PageProps) => {
   const router = useRouter();
-  const _rental: SWRResponse<IControllerResponse<IRental>> = useSWR(
-    `/api/rentals/${router.query.id}`,
-    get,
-  );
+  const [_rental, set_rental] = useState<ICrudRental>(rental);
+  const [_promotions, set_promotions] = useState<ICrudPromotion[]>(promotions);
 
-  const _promotions: SWRResponse<IControllerResponse<ICrudPromotion[]>> =
-    useSWR(`/api/promotions/${router.query.id}`, get);
+  useEffect(() => {
+    if (!rental || !promotions) {
+      loadData(router.query.id).then((data) => {
+        set_rental(data.rental);
+        set_promotions(data.promotions);
+      });
+    }
+  }, []);
 
-  const rentalData = rental || _rental?.data?.data;
-  const promotionsData = promotions || _promotions?.data?.data;
+  const rentalData = rental || _rental;
+  const promotionsData = promotions || _promotions;
 
   return (
     <PromotionsProvider>
@@ -48,32 +53,23 @@ const RentalPromotions = ({
   );
 };
 
-export async function getServerSideProps(context): Promise<Props> {
+export async function getServerSideProps(
+  context,
+): Promise<{ props: RentalPromotionsPageProps & PageProps }> {
   try {
     const id =
       (context.req.originalUrl.split('rentals/')[1] || '').split(
         '/promotions',
       )[0] || '';
     if (id) {
-      const responsePromise: Response = await get(
-        `${process.env.API_URL}/api/rentals/${id}`,
-      );
-      const response = await responsePromise;
-      // @ts-ignore
-      const data: IRental = response.data;
-
-      const promotionsResponsePromise: Response = await get(
-        `${process.env.API_URL}/api/promotions/${id}`,
-      );
-      const promotionsResponse = await promotionsResponsePromise;
-      // @ts-ignore
-      const promotions: ICrudPromotion[] = promotionsResponse.data || [];
+      const data = await loadData(id);
 
       return {
         props: {
-          rental: data,
-          promotions,
+          ...data,
           city: getCity(context.req.session.city),
+          seo_title: `${data.rental.name} | Новинки и акции`,
+          seo_description: `${data.rental.name} | Новинки и акции`,
         },
       };
     }
