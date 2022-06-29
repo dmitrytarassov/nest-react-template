@@ -37,11 +37,13 @@ interface CarouselControlsProps {
   revertColors?: boolean;
   hide?: number;
   count?: number;
+  maxCount?: number;
 }
 
 const CarouselControls: React.FC<CarouselControlsProps> = ({
   revertColors,
   count,
+  maxCount = 2,
 }) => {
   const swiper = useSwiper();
 
@@ -52,6 +54,8 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
   const prev = () => {
     swiper.slidePrev();
   };
+
+  // const classNames = {};
 
   return (
     <StyledCarouselControls

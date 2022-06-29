@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { useRouter } from 'next/router';
-import { useCity } from '@frontend/hooks/useCity';
 import { useRentals } from '@frontend/hooks/useRentals';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import ListTop from '@frontend/components/ListTop';
@@ -23,7 +22,6 @@ const RentalPromotionsPage = ({
   promotions,
 }: RentalPromotionsProps) => {
   const router = useRouter();
-  const { city } = useCity();
 
   const { rentals } = useRentals();
   const breadcrumbs: IBreadCrumb[] = [

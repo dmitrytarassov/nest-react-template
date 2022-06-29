@@ -61,7 +61,7 @@ const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {
             </SwiperSlide>
           ))}
           <CarouselFooter>
-            <CarouselControls count={2} />
+            <CarouselControls count={promotions.length + 1} />
           </CarouselFooter>
         </Swiper>
       </StyledPromotionsCarousel>
