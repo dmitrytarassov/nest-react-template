@@ -13,7 +13,7 @@ import imageUrl from '@frontend/utils/imageUrl';
 import { WithTheme } from '@frontend/utils/theme';
 
 const PositionsContainer = styled.div`
-  margin: 0 -24px 0 -24px;
+  margin: -32px -24px;
   background-color: ${({ theme }: WithTheme) =>
     theme.colors.background.primary};
   padding: 32px 24px;
@@ -57,6 +57,8 @@ const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {
                   text: promotion.promotionText,
                 }}
                 date={promotion.date}
+                price={promotion.price}
+                discountPrice={promotion.discountPrice}
               />
             </SwiperSlide>
           ))}

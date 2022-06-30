@@ -11,6 +11,11 @@ import PromotionsCarousel from '@frontend/components/pages/rentalPromotions/Prom
 import Title from '@frontend/components/pages/Title';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
+import styled from 'styled-components';
+
+const StyledTitle = styled(Title)`
+  //margin-bottom: 0;
+`;
 
 interface RentalPromotionsProps {
   rental: ICrudRental;
@@ -49,14 +54,13 @@ const RentalPromotionsPage = ({
       : [...rentals, rental];
     // @ts-ignore
     updateMapRentals(_rentals, rental.id, 500);
-  }, [rentals, rental.id]);
 
-  useEffect(() => {
-    // @ts-ignore
-    updateMapRentals([rental], rental.id);
     function callBack(e) {
       // @ts-ignore
-      router.push(`/rentals/${e.detail}`);
+      const rental = rentals.find(({ id }) => id === e.detail);
+      if (rental) {
+        router.push(`/rentals/${rental.url}`);
+      }
     }
 
     window.addEventListener(ESelectRental, callBack);
@@ -64,6 +68,11 @@ const RentalPromotionsPage = ({
     return () => {
       window.removeEventListener(ESelectRental, callBack);
     };
+  }, [rentals, rental.id]);
+
+  useEffect(() => {
+    // @ts-ignore
+    updateMapRentals([rental], rental.id);
   }, []);
 
   return (
@@ -74,13 +83,13 @@ const RentalPromotionsPage = ({
         title={`${rental.name}: Новинки и акции`}
         image={imageUrl(rental.icon)}
       />
-      <Title>Акции</Title>
+      <StyledTitle>Акции</StyledTitle>
       <PromotionsCarousel
         promotions={promotions.filter(
           ({ promotionType }) => promotionType === 'sale',
         )}
       />
-      <Title>Новинки</Title>
+      <StyledTitle>Новинки</StyledTitle>
       <PromotionsCarousel
         promotions={promotions.filter(
           ({ promotionType }) => promotionType === 'new',
