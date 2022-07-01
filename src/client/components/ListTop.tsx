@@ -44,6 +44,11 @@ const SearchInput = styled.input`
   box-sizing: border-box;
   margin-bottom: 12px;
   width: 100%;
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.tablet(css`
+      margin-bottom: 0;
+    `)}
 `;
 
 const SearchIconContainer = styled.div`

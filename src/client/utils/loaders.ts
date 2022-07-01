@@ -41,6 +41,16 @@ export const loadRental = async (url): Promise<ICrudRental> => {
   return rental;
 };
 
+export const loadRentalsByCity = async (
+  city: string,
+): Promise<ICrudRental[]> => {
+  const _rentals: IControllerResponse<ICrudRental[]> = await get(
+    makeUrl(`/api/rental?filter[]=city,${city}`),
+  );
+  console.log(makeUrl(`/api/rental?filter[]=city,${city}`));
+  return _rentals.data || [];
+};
+
 export const loadPromotion = async (url): Promise<ICrudPromotion> => {
   const _promotion: IControllerResponse<ICrudPromotion[]> = await get(
     makeUrl(`/api/promotions?filter[]=url,${url}`),
@@ -76,6 +86,40 @@ export const loadPromotionsByRentalId = async (
   );
 
   return combineProductsAndPromotions(result, _promotions.data, [rental]);
+};
+
+export const loadPromotionsByRentals = async (
+  rentals: ICrudRental[],
+): Promise<ICrudPromotion[]> => {
+  const _promotions: IControllerResponse<ICrudPromotion[]> = await get(
+    makeUrl(
+      `/api/promotions?filter[]=rentalId,in,${rentals
+        .map(({ id }) => id)
+        .join('|')}`,
+    ),
+  );
+
+  const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
+    makeUrl(
+      `/api/rental_products?filter[]=rentalId,in,${rentals
+        .map(({ id }) => id)
+        .join('|')}&filter[]=promotionType,in,new|sale`,
+    ),
+  );
+
+  const productIds = _rentalProducts.data.map(({ productId }) => productId);
+
+  const products: IControllerResponse<ICrudProduct[]> = await get(
+    makeUrl(`/api/product?filter[]=_id,in,${productIds.join('|')}`),
+  );
+
+  const result: ICrudPromotion[] = productsToPromotionType(
+    products?.data || [],
+    _rentalProducts.data || [],
+    rentals,
+  );
+
+  return combineProductsAndPromotions(result, _promotions.data, rentals);
 };
 
 export const loadProductById = async (id): Promise<ICrudProduct> => {

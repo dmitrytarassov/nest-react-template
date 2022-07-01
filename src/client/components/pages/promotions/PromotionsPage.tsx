@@ -7,19 +7,30 @@ import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
+import PromotionsCarousel from '@frontend/components/pages/rentalPromotions/PromotionsCarousel';
+import Title from '@frontend/components/pages/Title';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
+import styled from 'styled-components';
+import NotFound from '@frontend/components/NotFound';
+import classNames from 'classnames';
 import NewsAndPromotions from '@frontend/components/pages/rentalPromotions/NewsAndPromotions';
 
-interface RentalPromotionsProps {
-  rental: ICrudRental;
+const StyledTitle = styled(Title)`
+  &.not_alone {
+    margin-top: 32px;
+  }
+`;
+
+const NFContainer = styled.div`
+  min-height: 420px;
+`;
+
+interface PromotionsProps {
   promotions: ICrudPromotion[];
 }
 
-const RentalPromotionsPage = ({
-  rental,
-  promotions,
-}: RentalPromotionsProps) => {
+const RentalPromotionsPage = ({ promotions }: PromotionsProps) => {
   const router = useRouter();
   const [searchString, setSearchString] = useState<string>('');
 
@@ -30,31 +41,20 @@ const RentalPromotionsPage = ({
       link: '/',
     },
     {
-      name: 'Ренталы',
-      link: '/rentals',
-    },
-    {
-      name: rental.name,
-      link: `/rentals/${rental.url}`,
-    },
-    {
       name: 'Новинки и акции',
-      link: `/rentals/${rental.url}/promotions`,
+      link: `/rentals/promotions`,
     },
   ];
 
   useEffect(() => {
-    const _rentals = rentals.find(({ id }) => id === rental.id)
-      ? rentals
-      : [...rentals, rental];
     // @ts-ignore
-    updateMapRentals(_rentals, rental.id, 500);
+    updateMapRentals(rentals, '', 500);
 
     function callBack(e) {
       // @ts-ignore
       const rental = rentals.find(({ id }) => id === e.detail);
       if (rental) {
-        router.push(`/rentals/${rental.url}`);
+        router.push(`/rentals/${rental.url}/promotions`);
       }
     }
 
@@ -63,11 +63,11 @@ const RentalPromotionsPage = ({
     return () => {
       window.removeEventListener(ESelectRental, callBack);
     };
-  }, [rentals, rental.id]);
+  }, [rentals]);
 
   useEffect(() => {
     // @ts-ignore
-    updateMapRentals([rental], rental.id);
+    updateMapRentals([], '');
   }, []);
 
   const actions = promotions
@@ -90,9 +90,8 @@ const RentalPromotionsPage = ({
     <PageMainColumnContainer>
       <ListTop
         breadcrumbs={breadcrumbs}
-        backLink={`/rentals/${rental.url}`}
-        title={`${rental.name}: Новинки и акции`}
-        image={imageUrl(rental.icon)}
+        backLink={`/`}
+        title={`Новинки и акции`}
         search={{ value: searchString, onChange: setSearchString }}
       />
       <NewsAndPromotions news={news} promotions={actions} />

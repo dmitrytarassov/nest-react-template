@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import useSWR, { SWRResponse } from 'swr';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { fullPageSwiperProps } from '@frontend/utils/fullPageSwiperProps';
 import Card from '@frontend/components/Card';
 import logoWithCover from '@frontend/assets/logoWithCover.svg';
 import CarouselFooter from '@frontend/components/CarouselFooter';
 import Button from '@frontend/components/Button';
-import CarouselControls from '@frontend/components/CarouselControls';
 import CarouselContainer from '@frontend/components/CarouselContainer';
 import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
-import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
-import { get } from '@frontend/utils/fetcher';
 import { halfPageSwiperProps } from '@frontend/utils/halfPageSwiperProps';
 import imageUrl from '@frontend/utils/imageUrl';
 import { WithTheme } from '@frontend/utils/theme';
 import CarouselControlsWithMap from '@frontend/components/CarouselControlsWithMap';
 import Title from '@frontend/components/pages/Title';
+import { loadPromotionsByRentalId } from '@frontend/utils/loaders';
 
 const StyledPromotionsCarousel = styled(CarouselContainer)`
   //margin-bottom: 24px;
@@ -78,23 +74,16 @@ interface PromotionsCarouselProps {
 }
 
 const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
-  const promotions: SWRResponse<IControllerResponse<ICrudPromotion[]>> = useSWR(
-    `/api/promotions?filter[]=rentalId,${id}&filter[]=date,gte,now`,
-    get,
-  );
-
-  const promotionsWithoutDate: SWRResponse<
-    IControllerResponse<ICrudPromotion[]>
-  > = useSWR(`/api/promotions?filter[]=rentalId,${id}&filter[]=date,`, get);
-
-  const promotionsFullInfo: ICrudPromotion[] = [
-    ...(promotions?.data?.data || []),
-    ...(promotionsWithoutDate?.data?.data || []),
-  ];
+  const [allPromotions, setAllPromotions] = useState<ICrudPromotion[]>([]);
+  useEffect(() => {
+    loadPromotionsByRentalId(id).then((data) => {
+      setAllPromotions(data);
+    });
+  }, []);
 
   return (
     <>
-      {promotionsFullInfo.length > 0 && (
+      {allPromotions.length > 0 && (
         <PositionsContainer>
           <StyledTitle>
             Акции и новости рентала
@@ -107,7 +96,7 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
           </StyledTitle>
           <StyledPromotionsCarousel>
             <Swiper {...halfPageSwiperProps}>
-              {promotionsFullInfo.map((promotion) => (
+              {allPromotions.map((promotion) => (
                 <SwiperSlide key={promotion.id}>
                   <Card
                     title={promotion.name}
@@ -126,9 +115,10 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
                   />
                 </SwiperSlide>
               ))}
-              {promotionsFullInfo.length > 2 && (
+
+              {allPromotions.length > 2 && (
                 <StyledCarouselFooterDesktop>
-                  <CarouselControlsWithMap count={promotionsFullInfo.length} />
+                  <CarouselControlsWithMap count={allPromotions.length} />
                 </StyledCarouselFooterDesktop>
               )}
 
@@ -136,7 +126,7 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
                 <Button type="link" href={`/rentals/${id}/promotions`}>
                   Посмотреть все
                 </Button>
-                <CarouselControlsWithMap count={promotionsFullInfo.length} />
+                <CarouselControlsWithMap count={allPromotions.length} />
               </StyledCarouselFooterMobile>
             </Swiper>
           </StyledPromotionsCarousel>

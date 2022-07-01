@@ -204,10 +204,6 @@ const RentalPage = ({ rental }: RentalPageProps) => {
           </SocialsBlock>
         </Block>
       </BLocks>
-      {/*<UniquesContainer>*/}
-      {/*  <Title>Уникальные позиции</Title>*/}
-      {/*  <Uniques id={rental.id} />*/}
-      {/*</UniquesContainer>*/}
       <PromotionsCarousel id={rental.id} url={rental.url} />
     </PageMainColumnContainer>
   );

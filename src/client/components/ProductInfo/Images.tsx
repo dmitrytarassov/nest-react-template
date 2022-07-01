@@ -81,7 +81,9 @@ interface ImageProps {
 }
 
 const Image = styled.img<ImageProps>`
-  height: 56px;
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
   border: 1px solid;
   border-radius: 8px;
   border-color: ${({ active, theme }: WithThemeAndProps<ImageProps>) =>
