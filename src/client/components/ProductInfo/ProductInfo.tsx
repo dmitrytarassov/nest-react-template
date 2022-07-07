@@ -62,7 +62,7 @@ export default function ProductInfo({ product, rental }: Props) {
           onChange={setCurrentImage}
         />
       </Block>
-      {(product.price || product.discountPrice) && (
+      {(product.price || product.discountPrice || product.externalUrl) && (
         <Block>
           <Price
             price={+product.price}

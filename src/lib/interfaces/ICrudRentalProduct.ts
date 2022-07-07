@@ -24,4 +24,8 @@ export interface ICrudRentalProduct extends ISeo {
   date: Date;
 
   externalUrl: string;
+
+  showUniqueOnMainPage?: boolean;
+
+  showOnMainPage?: boolean;
 }

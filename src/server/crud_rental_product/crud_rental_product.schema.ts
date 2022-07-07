@@ -39,6 +39,9 @@ export class RentalProduct extends Seo {
 
   @Prop()
   showOnMainPage?: boolean;
+
+  @Prop()
+  showUniqueOnMainPage?: boolean;
 }
 
 export type RentalProductDocument = RentalProduct & Document;

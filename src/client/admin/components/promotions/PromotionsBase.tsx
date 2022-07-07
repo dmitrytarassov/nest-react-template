@@ -39,6 +39,12 @@ const PromotionsBase = () => {
             validate={validateRequired}
             onChange={(e) => setName(e.target.value)}
           />
+          <TextInput
+            resettable
+            source="externalUrl"
+            label="Ссылка на акцию на сайте рентала"
+            validate={validateRequired}
+          />
           <BoundedTextField
             label="ЧПУ"
             source="url"

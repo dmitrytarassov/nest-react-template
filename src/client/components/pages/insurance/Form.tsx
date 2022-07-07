@@ -45,6 +45,10 @@ const Container = styled.div`
       border-color: #13ec50;
     }
 
+    &.invalid {
+      border-color: #e22446;
+    }
+
     ${({ theme }: WithTheme) =>
       theme.mixins.tablet(css`
         width: 100%;
@@ -194,7 +198,10 @@ const Form = ({ onSend }: { onSend: () => void }) => {
         type="text"
         placeholder="Ваш E-mail"
         onChange={(e) => setemail(e.target.value)}
-        className={classNames({ valid: validateEmail(email || '') })}
+        className={classNames({
+          valid: validateEmail(email || ''),
+          invalid: !validateEmail(email || ''),
+        })}
       />
       <textarea
         placeholder="Напишите сопроводительный текст"

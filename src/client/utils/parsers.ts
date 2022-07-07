@@ -8,14 +8,13 @@ export const productsToPromotionType = (
   rentalProducts: ICrudRentalProduct[],
   rentals: ICrudRental[],
 ): ICrudPromotion[] => {
-  const result: ICrudPromotion[] = products.length
-    ? products
-        .map((product) => {
-          const rentalProduct: ICrudRentalProduct = rentalProducts.find(
-            (p) => p.productId === product.id,
+  const _result: ICrudPromotion[] = rentalProducts.length
+    ? rentalProducts
+        .map((rentalProduct) => {
+          const product: ICrudProduct = products.find(
+            ({ id }) => id === rentalProduct.productId,
           );
-
-          if (rentalProduct) {
+          if (product) {
             const rental: ICrudRental = rentals.find(
               (p) => p.id === rentalProduct.rentalId,
             );
@@ -45,7 +44,7 @@ export const productsToPromotionType = (
         .filter(Boolean)
     : [];
 
-  return result;
+  return _result;
 };
 
 export const combineProductsAndPromotions = (

@@ -76,6 +76,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
       tag: promotion.promotionType,
       tagText: promotion.promotionText,
     },
+    externalUrl: promotion.externalUrl,
   };
 
   return (

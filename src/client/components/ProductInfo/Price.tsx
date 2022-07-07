@@ -99,25 +99,32 @@ const OldPrice = styled.div`
 `;
 
 const Price = ({ price, discountPrice, link }: PriceProps) => {
+  const isPromotion = !(price || discountPrice);
   return (
     <StyledPrice>
       <Prices>
-        <Text>Стоимость за сутки:</Text>
-        <CurrentPrice>
-          {moneyFormat(discountPrice || price, false)}
-          <span>₽</span>
-        </CurrentPrice>
-        {discountPrice > 0 && (
-          <OldPrice>
-            {moneyFormat(price, false)} <span>₽</span>
-          </OldPrice>
+        {isPromotion ? (
+          <Text>Посмотреть на сайте рентала</Text>
+        ) : (
+          <>
+            <Text>Стоимость за сутки:</Text>
+            <CurrentPrice>
+              {moneyFormat(discountPrice || price, false)}
+              <span>₽</span>
+            </CurrentPrice>
+            {discountPrice > 0 && (
+              <OldPrice>
+                {moneyFormat(price, false)} <span>₽</span>
+              </OldPrice>
+            )}
+          </>
         )}
       </Prices>
       <Buttons>
         <ShareButton />
         {link && (
           <Button href={link} blank type="link">
-            Арендовать
+            {isPromotion ? 'Открыть' : 'Арендовать'}
           </Button>
         )}
       </Buttons>

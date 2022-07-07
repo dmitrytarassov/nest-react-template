@@ -48,6 +48,7 @@ export async function getServerSideProps(
     true,
   );
   const uniques = await loadUniques(getCity(context.req.session.city), true);
+
   return {
     props: {
       city: getCity(context.req.session.city),

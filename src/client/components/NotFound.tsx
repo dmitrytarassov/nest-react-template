@@ -10,6 +10,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: 500px;
 `;
 
 const Text = styled.span`

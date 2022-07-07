@@ -90,6 +90,7 @@ const Image = styled.img<ImageProps>`
     active ? theme.colors.borders.active : theme.colors.borders.default};
   cursor: pointer;
   box-sizing: border-box;
+  background: #fff;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`

@@ -106,12 +106,13 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
                         ? imageUrl(promotion.photos[0])
                         : logoWithCover.src
                     }
-                    link={`/promotion/${promotion.url}`}
+                    link={promotion.url}
                     tag={{
                       type: promotion.promotionType,
                       text: promotion.promotionText,
                     }}
                     date={promotion.date}
+                    rentalLogo={promotion.rentalLogo}
                   />
                 </SwiperSlide>
               ))}

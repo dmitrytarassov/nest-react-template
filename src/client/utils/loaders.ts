@@ -157,14 +157,13 @@ export const loadUniques = async (
   const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
     makeUrl(
       `/api/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}${
-        onlyMainPage && '&filter[]=showOnMainPage,true'
+        onlyMainPage && '&filter[]=showUniqueOnMainPage,true'
       }`,
     ),
   );
 
   if (_rentalProducts.data.length) {
     const productIds = _rentalProducts.data.map(({ productId }) => productId);
-
     const products: IControllerResponse<ICrudProduct[]> = await get(
       makeUrl(
         `/api/product?filter[]=_id,in,${productIds.join(

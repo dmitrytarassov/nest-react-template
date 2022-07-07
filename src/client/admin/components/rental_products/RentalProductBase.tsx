@@ -104,6 +104,10 @@ const RentalProductBase = () => {
             source="showOnMainPage"
             label="Показывать в списке новостей на главной"
           />
+          <BooleanInput
+            source="showUniqueOnMainPage"
+            label="Показывать в списке уникальных позиций на главной"
+          />
         </Box>
       </FormTab>
       <FormTab label="СЕО">

@@ -14,4 +14,5 @@ export interface ICrudPromotion extends ISeo {
   price?: number;
   discountPrice?: number;
   rentalLogo?: string;
+  externalUrl?: string;
 }

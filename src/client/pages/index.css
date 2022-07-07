@@ -166,3 +166,16 @@ p {
 .ymaps-2-1-79-events-pane.ymaps-2-1-79-user-selection-none {
     z-index: 2000!important;
 }
+
+input {
+    background: #fff;
+}
+
+input:hover, textarea:hover {
+    border-color: #6C768A!important;
+}
+
+input:focus-visible, textarea:focus-visible {
+    border-color: #3760F2!important;
+    outline: none!important;
+}

@@ -26,6 +26,10 @@ const RentalProductsList = ({}: RentalsListProps) => {
           source="showOnMainPage"
           label="Показывать в новостях на главной?"
         />
+        <BooleanField
+          source="showUniqueOnMainPage"
+          label="Показывать в списке уникальных позиций на главной"
+        />
       </Datagrid>
     </List>
   );

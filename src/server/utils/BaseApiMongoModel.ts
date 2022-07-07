@@ -50,6 +50,9 @@ export class BaseApiMongoModel<T> {
           if (_value === 'now') {
             _value = new Date().toString();
           }
+          if (_value === 'true') {
+            _value = true;
+          }
           filter[name][_type] = _value;
         }
       }

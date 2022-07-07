@@ -11,6 +11,9 @@ export class Promotion extends Seo {
   name: string;
 
   @Prop()
+  externalUrl: string;
+
+  @Prop()
   url: string;
 
   @Prop()
