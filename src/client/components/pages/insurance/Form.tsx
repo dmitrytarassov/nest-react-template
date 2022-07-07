@@ -200,7 +200,7 @@ const Form = ({ onSend }: { onSend: () => void }) => {
         onChange={(e) => setemail(e.target.value)}
         className={classNames({
           valid: validateEmail(email || ''),
-          invalid: !validateEmail(email || ''),
+          invalid: (email || '').length > 0 && !validateEmail(email || ''),
         })}
       />
       <textarea

@@ -28,6 +28,7 @@ const RentalProductBase = () => {
     }
   }, [promotionType]);
 
+  // @ts-ignore
   return (
     <TabbedForm id="rental_product_form">
       <FormTab label="Привязать продукт к ренталу">
