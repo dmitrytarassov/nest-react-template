@@ -46,7 +46,9 @@ export interface IApp extends AppProps {
 function Client(props: IApp) {
   const { Component, pageProps } = props;
 
-  const isMainTemplate = ['/', '/insurance'].includes(props.router.route);
+  const isMainTemplate = ['/', '/insurance', '/terms'].includes(
+    props.router.route,
+  );
 
   const seoData = seo(props.pageProps);
 

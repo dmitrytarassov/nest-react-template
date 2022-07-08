@@ -55,7 +55,7 @@ const BixWithImage = styled(Block)`
   background-repeat: no-repeat;
   background-position: bottom right;
 
-  &.formSended {
+  &.formIsSent {
     background-image: url(/public/sended.png);
     background-position: bottom center;
     background-size: cover;
@@ -64,15 +64,19 @@ const BixWithImage = styled(Block)`
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
       background-image: unset;
-      &.formSended {
+      &.formIsSent {
         background-position: bottom center;
         background-size: auto 80%;
       }
     `)}
 `;
 
-const InsurancePage: React.FC = () => {
-  const [formSended, setFormSended] = useState<boolean>(false);
+interface InsurancePageProps {
+  canSend: boolean;
+}
+
+const InsurancePage: React.FC<InsurancePageProps> = ({ canSend }) => {
+  const [formIsSent, setFormIsSent] = useState<boolean>(!canSend);
 
   return (
     <StyledContainer>
@@ -95,13 +99,13 @@ const InsurancePage: React.FC = () => {
             <Title>Таблица цен</Title>
             <Prices />
           </Block>
-          <BixWithImage className={classNames({ formSended })}>
+          <BixWithImage className={classNames({ formIsSent })}>
             <Title>
-              {formSended
+              {formIsSent
                 ? 'Спасибо за вашу заявку!'
                 : 'Хотите застраховать свою технику?'}
             </Title>
-            <Form onSend={() => setFormSended(true)} />
+            <Form onSend={() => setFormIsSent(true)} canSend={canSend} />
           </BixWithImage>
         </StyledContent>
       </Content>

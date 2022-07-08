@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
 import classNames from 'classnames';
 import Button from '@frontend/components/Button';
+import { get, post } from '@frontend/utils/fetcher';
+import Link from 'next/link';
 
 const Container = styled.div`
   display: flex;
@@ -81,6 +83,10 @@ const Container = styled.div`
     line-height: 16px;
     letter-spacing: 0.05em;
 
+    a {
+      color: #7749d9;
+    }
+
     span {
       width: calc(100% - 32px);
     }
@@ -147,7 +153,13 @@ const validateEmail = (email: string) => {
     );
 };
 
-const Form = ({ onSend }: { onSend: () => void }) => {
+const Form = ({
+  onSend,
+  canSend,
+}: {
+  onSend: () => void;
+  canSend: boolean;
+}) => {
   const [checked, setChecked] = useState<boolean>();
   const [text, settext] = useState<string>();
   const [email, setemail] = useState<string>();
@@ -160,25 +172,25 @@ const Form = ({ onSend }: { onSend: () => void }) => {
     );
   }, [email, text, checked, sended]);
 
-  const send = () => {
+  const send = async () => {
     if (isValid) {
-      setTimeout(() => {
-        setemail('');
-        settext('');
-        setChecked(false);
-        localStorage.setItem('sended', '1');
-        setsended(true);
-        onSend();
-      }, 300);
+      await post('/api/feedback/insurance', {
+        email,
+        message: text,
+      });
+      setemail('');
+      settext('');
+      setChecked(false);
+      localStorage.setItem('sended', '1');
+      setsended(true);
+      onSend();
     }
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (!!localStorage.getItem('sended')) {
-        setsended(true);
-        onSend();
-      }
+    if (!canSend) {
+      setsended(true);
+      onSend();
     }
   }, []);
 
@@ -207,11 +219,13 @@ const Form = ({ onSend }: { onSend: () => void }) => {
         placeholder="Напишите сопроводительный текст"
         onChange={(e) => settext(e.target.value)}
       ></textarea>
-      <div
-        className={classNames('checkbox', { checked })}
-        onClick={() => setChecked(!checked)}
-      >
-        <span>Я соглашаюсь на обработку персональных данных</span>
+      <div className={classNames('checkbox', { checked })}>
+        <span>
+          <span onClick={() => setChecked(!checked)}>
+            Я соглашаюсь на обработку{' '}
+          </span>
+          <Link href="/terms">персональных данных</Link>
+        </span>
       </div>
       <StyledButton disabled={!isValid} onClick={send}>
         Отправить заявку

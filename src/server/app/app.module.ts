@@ -36,6 +36,9 @@ import { ApiRentalController } from '@backend/crud_rental/api_rental.controller'
 import { ApiPromotionController } from '@backend/crud_promotion/api_promotion.controller';
 import { ApiRentalService } from '@backend/crud_rental/api_rental.service';
 import mongoConfig from '@backend/utils/mongoConfig';
+import { FeedbackModule } from '@backend/feedback/feedback.module';
+import { FeedbackController } from '@backend/feedback/feedback.controller';
+import { FeedbackService } from '@backend/feedback/feedback.service';
 
 console.log(mongoConfig);
 
@@ -54,6 +57,7 @@ console.log(mongoConfig);
     CrudPromotionModule,
     CityModule,
     CrudAuthModule,
+    FeedbackModule,
   ],
   controllers: [
     AppController,
@@ -67,6 +71,7 @@ console.log(mongoConfig);
     ApiProductController,
     ApiPromotionController,
     ApiRentalController,
+    FeedbackController,
   ],
   providers: [
     AppService,
@@ -80,6 +85,7 @@ console.log(mongoConfig);
     ApiProductService,
     ApiPromotionService,
     ApiRentalService,
+    FeedbackService,
   ],
   exports: [MongooseModule],
 })

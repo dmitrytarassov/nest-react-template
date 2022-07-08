@@ -5,36 +5,26 @@ import { getCity } from '@frontend/utils/getCity';
 import { CityProvider } from '@frontend/providers/city.provider';
 import Header from '@frontend/components/Header';
 import Footer from '@frontend/components/Footer';
+import TermsPage from '@frontend/components/pages/Terms/Terms';
 
-interface InsuranceProps {
-  canSend: boolean;
-}
-
-const Insurance: React.FC<PageProps & InsuranceProps> = ({ city, canSend }) => {
+const Terms: React.FC<PageProps> = ({ city }) => {
   return (
     <CityProvider currentCity={city}>
       <Header />
-      <InsurancePage canSend={canSend} />
+      <TermsPage />
       <Footer />
     </CityProvider>
   );
 };
 
-export default Insurance;
+export default Terms;
 
 export async function getServerSideProps(
   context,
-): Promise<{ props: PageProps & InsuranceProps }> {
-  const lastSend = context.req.session.insuranceRequestSend
-    ? new Date(context.req.session.insuranceRequestSend)
-    : new Date(+new Date() - 10000001);
-
-  const goodTimeToSend = +new Date() - +lastSend >= 10000000;
-
+): Promise<{ props: PageProps }> {
   return {
     props: {
       city: getCity(context.req.session.city),
-      canSend: goodTimeToSend,
     },
   };
 }

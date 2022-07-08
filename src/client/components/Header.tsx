@@ -177,7 +177,9 @@ const Header = () => {
   }, []);
 
   const isPageWithMap =
-    router.pathname !== '/' && router.pathname !== '/insurance';
+    router.pathname !== '/' &&
+    router.pathname !== '/insurance' &&
+    router.pathname !== '/terms';
 
   return (
     <StyledContainer>

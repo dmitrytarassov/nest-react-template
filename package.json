@@ -71,6 +71,7 @@
     "mysql": "^2.18.1",
     "nestjs-console": "^7.0.1",
     "next": "^12.1.5",
+    "node-telegram-bot-api": "^0.58.0",
     "pm2": "^5.2.0",
     "ra-data-json-server": "^4.1.0",
     "ra-data-simple-rest": "^4.1.0",

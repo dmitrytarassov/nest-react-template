@@ -100,8 +100,8 @@ const Banner = () => {
               <path
                 d="M6.49953 1.5L1.99953 7M1.99953 7L6.49953 12.5M1.99953 7H11"
                 stroke="black"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
             Вернуться
