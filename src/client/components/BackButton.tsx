@@ -8,15 +8,16 @@ const StyledBackButton = styled.a`
   align-items: center;
   justify-content: center;
   margin-right: 16px;
-`;
+  background: #fff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
 
-const BackgroundPath = styled.path`
-  fill: ${({ theme }: WithTheme) =>
-    theme.colors.buttons.additional.default.background};
-
-  :hover {
-    fill: ${({ theme }: WithTheme) =>
-      theme.colors.buttons.additional.hover.background};
+  &:hover {
+    background: #d8dde2;
+    border: 1px solid #e9eaee;
+    border-radius: 12px;
   }
 `;
 
@@ -29,16 +30,15 @@ const BackButton = ({ to }: BackButtonProps) => {
     <Link href={to} passHref>
       <StyledBackButton>
         <svg
-          width="40"
-          height="40"
+          width="38"
+          height="38"
           viewBox="0 0 40 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <BackgroundPath d="M0 12C0 5.37258 5.37258 0 12 0H28C34.6274 0 40 5.37258 40 12V28C40 34.6274 34.6274 40 28 40H12C5.37258 40 0 34.6274 0 28V12Z" />
           <path
             d="M20.4995 14.5L15.9995 20M15.9995 20L20.4995 25.5M15.9995 20H25"
-            stroke="black"
+            stroke="#0F0E0E"
             strokeWidth="2"
             strokeLinecap="round"
           />

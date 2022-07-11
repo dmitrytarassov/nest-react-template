@@ -75,7 +75,7 @@ const Uniques: React.FC<UniquesProps> = ({ _positions }) => {
                 </SwiperSlide>
               ))}
               <CarouselFooter>
-                <Button type="link" href="/uniques">
+                <Button type="link" href="/unique_positions">
                   Посмотреть все
                 </Button>
                 <CarouselControls count={products.length} revertColors />

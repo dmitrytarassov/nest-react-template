@@ -25,7 +25,7 @@ const Rental = ({ rental }: RentalPageProps & PageProps) => {
 
   useEffect(() => {
     loadData(router.query.id).then(set_rental);
-  }, []);
+  }, [router.query.id]);
 
   const rentalData = rental || _rental;
 

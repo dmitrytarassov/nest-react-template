@@ -82,6 +82,7 @@ const ContentContainer = styled.div`
       margin-top: -16px;
       position: relative;
       overflow: visible;
+      padding-top: 16px;
 
       :after {
         content: '';
@@ -97,11 +98,12 @@ const ContentContainer = styled.div`
 `;
 
 const ChildrenContainer = styled.div`
-  display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   padding-top: 72px;
   min-height: calc(100vh - 72px);
+  width: 100%;
+  justify-content: space-between;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
@@ -115,11 +117,11 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
   const ref = useRef();
 
   const isSmallMap = [
-    '/delete_products/[id]',
     '/rentals/[id]',
     '/rentals/[id]/[product]',
     '/promotion/[id]',
     '/rentals',
+    '/unique_positions',
   ].includes(router.route);
 
   const showMap = [
@@ -127,6 +129,7 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
     '/rentals/[id]',
     '/rentals/[id]/[product]',
     '/promotion/[id]',
+    '/unique_positions',
   ].includes(router.route);
 
   const isError = typeof statusCode !== 'undefined' && statusCode >= 400;

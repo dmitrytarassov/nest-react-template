@@ -45,7 +45,7 @@ const PositionsContainer = styled.div`
   margin: 0 -24px 0 -24px;
   background-color: ${({ theme }: WithTheme) =>
     theme.colors.background.primary};
-  padding: 32px 24px;
+  padding: 32px 24px 0;
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
   overflow-x: hidden;
@@ -79,7 +79,7 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
     loadPromotionsByRentalId(id).then((data) => {
       setAllPromotions(data);
     });
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -119,7 +119,10 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
 
               {allPromotions.length > 2 && (
                 <StyledCarouselFooterDesktop>
-                  <CarouselControlsWithMap count={allPromotions.length} />
+                  <CarouselControlsWithMap
+                    count={allPromotions.length}
+                    size="small"
+                  />
                 </StyledCarouselFooterDesktop>
               )}
 
@@ -127,7 +130,10 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
                 <Button type="link" href={`/rentals/${id}/promotions`}>
                   Посмотреть все
                 </Button>
-                <CarouselControlsWithMap count={allPromotions.length} />
+                <CarouselControlsWithMap
+                  count={allPromotions.length}
+                  size="large"
+                />
               </StyledCarouselFooterMobile>
             </Swiper>
           </StyledPromotionsCarousel>

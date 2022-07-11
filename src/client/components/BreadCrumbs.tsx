@@ -35,6 +35,7 @@ const Slash = styled.span`
 
 const BreadCrumb = styled.a`
   ${breadCrumbBase};
+  text-decoration: none;
 
   :hover {
     color: ${({ theme }: WithTheme) => theme.colors.breadcrumbs.hover};

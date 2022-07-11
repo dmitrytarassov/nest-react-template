@@ -8,7 +8,7 @@ import classNames from 'classnames';
 const StyledCarouselControls = styled.div`
   display: flex;
 
-  &.hide-on-laptop {
+  &.hide-from-tablet {
     display: none;
     ${({ theme }: WithTheme) =>
       theme.mixins.tablet(
@@ -18,7 +18,7 @@ const StyledCarouselControls = styled.div`
       )}
   }
 
-  &.hide-on-tablet {
+  &.hide-from-mobile {
     display: none;
     ${({ theme }: WithTheme) =>
       theme.mixins.mobile(
@@ -28,7 +28,7 @@ const StyledCarouselControls = styled.div`
       )}
   }
 
-  &.hide-on-mobile {
+  &.hide {
     display: none;
   }
 `;
@@ -37,15 +37,15 @@ interface CarouselControlsProps {
   revertColors?: boolean;
   hide?: number;
   count?: number;
-  maxCount?: number;
   size?: 'large' | 'small';
+  className?: string;
 }
 
-const CarouselControls: React.FC<CarouselControlsProps> = ({
+const CarouselControlsHalfScreen: React.FC<CarouselControlsProps> = ({
   revertColors,
   count,
-  maxCount = 2,
   size = 'large',
+  className,
 }) => {
   const swiper = useSwiper();
 
@@ -57,14 +57,12 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
     swiper.slidePrev();
   };
 
-  // const classNames = {};
-
   return (
     <StyledCarouselControls
       className={classNames(
-        count > 0 && count <= 3 && 'hide-on-laptop',
-        count > 0 && count <= 2 && 'hide-on-tablet',
-        count === 1 && 'hide-on-mobile',
+        className,
+        count < 2 && 'hide',
+        count === 2 && 'hide-from-mobile',
       )}
     >
       <CarouselControl
@@ -83,4 +81,4 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
   );
 };
 
-export default CarouselControls;
+export default CarouselControlsHalfScreen;

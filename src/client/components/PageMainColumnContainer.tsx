@@ -3,14 +3,17 @@ import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
 
 const PageMainColumnContainer = styled.div`
-  display: grid;
+  display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 32px 24px;
+
+  width: 100%;
+  box-sizing: border-box;
   //min-height: calc(100vh - 72px - 299px);
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
-      padding-top: 32px !important;
+      padding: 32px 16px 40px;
       //min-height: unset;
     `)};
 `;

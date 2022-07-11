@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { clone, cloneDeep } from 'lodash';
 
 export const breakpoints = {
   mobile: 576,
@@ -94,7 +95,7 @@ export const theme = {
       primary: '#F8F9FA',
       secondary: '#E9EAEE',
       alternate: '#222222',
-      header: '#222222',
+      header: '#0F0E0E',
       footer: '#0F0E0E',
     },
     tags: {
@@ -129,6 +130,12 @@ export const theme = {
 };
 
 export type Theme = typeof theme;
+
+export const _dark: Theme = cloneDeep(theme);
+_dark.colors.background.primary = '#222222';
+_dark.colors.text.primary = '#fff';
+_dark.colors.breadcrumbs.current = '#fff';
+export const dark = _dark;
 
 export type WithTheme = {
   theme: Theme;

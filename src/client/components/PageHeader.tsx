@@ -38,13 +38,14 @@ const H1 = styled.h1`
   line-height: 40px;
   margin: 0;
   padding: 0;
+  color: ${({ theme }: WithTheme) => theme.colors.text.primary};
 
   ${({ theme }: WithTheme) =>
     theme.mixins.tablet(css`
       font-weight: 500;
       font-size: 20px;
       line-height: 140%;
-    `)}
+    `)};
 `;
 
 const Image = styled.img`

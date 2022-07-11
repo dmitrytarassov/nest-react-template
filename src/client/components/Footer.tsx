@@ -3,8 +3,6 @@ import ContainerWithRadius from '@frontend/components/ContainerWithRadius';
 import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
 import logo from '@frontend/assets/logo.svg';
-import telegram from '@frontend/assets/telegram.svg';
-import vk from '@frontend/assets/vk.svg';
 import Link from 'next/link';
 import Vk from '@frontend/components/logos/Vk';
 import Telegram from '@frontend/components/logos/Telegram';
@@ -129,6 +127,7 @@ const Footer = ({ halfScreen }: FooterProps) => {
         <Column>
           <Link href={'/rentals'}>Ренталы на карте</Link>
           <Link href={'/insurance'}>Страхование оборудования</Link>
+          <Link href="/unique_positions">Уникальные позиции</Link>
         </Column>
         <Column>
           <a href="mailto:kinoscope@inbox.ru">kinoscope@inbox.ru</a>

@@ -99,6 +99,7 @@ const OldPrice = styled.div`
 `;
 
 const Price = ({ price, discountPrice, link }: PriceProps) => {
+  console.log({ link });
   const isPromotion = !(price || discountPrice);
   return (
     <StyledPrice>

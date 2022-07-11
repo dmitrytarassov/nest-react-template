@@ -2,7 +2,18 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { theme, WithThemeAndProps } from '@frontend/utils/theme';
 
+const getSizeNumber = (size: 'large' | 'small'): number => {
+  return {
+    large: 56,
+    small: 40,
+  }[size];
+};
+
+const getSizePx = (size: 'large' | 'small'): string =>
+  `${getSizeNumber(size)}px`;
+
 interface CarouselControlProps {
+  size: 'large' | 'small';
   direction: 'left' | 'right';
   onClick: () => void;
   revertColors: boolean;
@@ -11,14 +22,15 @@ interface CarouselControlProps {
 interface StyledCarouselControl {
   direction: CarouselControlProps['direction'];
   revertColors: CarouselControlProps['revertColors'];
+  size: 'large' | 'small';
 }
 
 const StyledCarouselControl = styled.div<StyledCarouselControl>`
   & + & {
     margin-left: 12px;
   }
-  width: 56px;
-  height: 56px;
+  width: ${({ size }) => getSizePx(size)};
+  height: ${({ size }) => getSizePx(size)};
   cursor: pointer;
   ${({ direction }) =>
     direction === 'right' &&
@@ -43,34 +55,26 @@ const StyledCarouselControl = styled.div<StyledCarouselControl>`
   }
 
   :hover {
-    circle {
-      ${({ theme }: WithThemeAndProps<CarouselControlProps>) => css`
-        fill: ${theme.colors.links.alternate.hover};
-      `}
-    }
-
-    path {
-      ${({ theme }: WithThemeAndProps<CarouselControlProps>) => css`
-        fill: ${theme.colors.links.active};
-      `}
-    }
+    filter: drop-shadow(0px 8px 16px rgba(156, 164, 169, 0.32));
   }
 `;
 
 const CarouselControl = ({
+  size,
   direction,
   onClick,
   revertColors,
 }: CarouselControlProps) => {
   return (
     <StyledCarouselControl
+      size={size}
       direction={direction}
       onClick={onClick}
       revertColors={revertColors}
     >
       <svg
-        width="56"
-        height="56"
+        width={getSizeNumber(size)}
+        height={getSizeNumber(size)}
         viewBox="0 0 56 56"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

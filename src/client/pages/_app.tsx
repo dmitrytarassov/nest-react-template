@@ -2,7 +2,7 @@ import React from 'react';
 import { AppProps } from 'next/app';
 
 import { ThemeProvider } from 'styled-components';
-import { theme } from '@frontend/utils/theme';
+import { dark, theme } from '@frontend/utils/theme';
 
 import 'swiper/css';
 import './index.css';
@@ -52,6 +52,8 @@ function Client(props: IApp) {
 
   const seoData = seo(props.pageProps);
 
+  const _theme = props.router.route === '/unique_positions' ? dark : theme;
+
   // @ts-ignore
   return props.router.route.startsWith('/admin') ? (
     // @ts-ignore
@@ -89,7 +91,7 @@ function Client(props: IApp) {
           content={props.pageProps.site_url + imageUrl('cover.png')}
         />
       </Head>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={_theme}>
         {isMainTemplate ? (
           <>
             {/* @ts-ignore */}

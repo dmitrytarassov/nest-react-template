@@ -150,15 +150,17 @@ export const getAllRentalsForCity = async (
 export const loadUniques = async (
   city: City,
   onlyMainPage?: boolean,
+  rentalId?: string,
 ): Promise<(ICardProps & { id: string })[]> => {
   const _rentals: ICrudRental[] = await getAllRentalsForCity(city);
   const rentalIds = _rentals.map(({ id }) => id);
+  console.log(city);
 
   const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
     makeUrl(
       `/api/rental_products?filter[]=rentalId,in,${rentalIds.join('|')}${
-        onlyMainPage && '&filter[]=showUniqueOnMainPage,true'
-      }`,
+        onlyMainPage ? '&filter[]=showUniqueOnMainPage,true' : ''
+      }${rentalId ? `rentalId=${rentalId}` : ''}`,
     ),
   );
 
