@@ -48,7 +48,6 @@ const PositionsContainer = styled.div`
   padding: 32px 24px 0;
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 `;
@@ -57,6 +56,7 @@ const StyledTitle = styled(Title)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 `;
 
 const StyledCarouselPromotionsButton = styled(Button)`

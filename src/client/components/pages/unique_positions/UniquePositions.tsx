@@ -12,7 +12,15 @@ import imageUrl from '@frontend/utils/imageUrl';
 import NewsAndPromotions from '@frontend/components/pages/rentalPromotions/NewsAndPromotions';
 import Positions from '@frontend/components/pages/unique_positions/Positions';
 import { ICardProps } from '@frontend/components/Card';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import NotFound from '@frontend/components/NotFound';
+import Button from '@frontend/components/Button';
+import BannerBase from '@frontend/components/pages/home/BannerBase';
+import banner from '@frontend/components/pages/home/assets/banner-map.png';
+import { WithTheme } from '@frontend/utils/theme';
+import bannerMobile from '@frontend/components/pages/home/assets/banner-map-mobile.png';
+import Heading from '@frontend/components/Heading';
+import InfoText from '@frontend/components/InfoText';
 
 const CarouselContainer = styled.div`
   display: flex;
@@ -24,6 +32,40 @@ const CarouselContainer = styled.div`
     flex-direction: column;
     width: 100%;
   }
+`;
+
+const StyledBanner = styled(BannerBase)`
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: url('/public/uniques.png');
+  padding: 24px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  border-radius: 24px;
+
+  ${({ theme }: WithTheme) => theme.mixins.tablet(css``)}
+
+  ${({ theme }: WithTheme) =>
+    theme.mixins.mobile(css`
+      background-image: url(${bannerMobile.src});
+      background-position: bottom right;
+      background-size: contain;
+
+      padding: 32px;
+      height: 560px;
+    `)}
+`;
+
+const StyledInfoText = styled(InfoText)`
+  color: #fff;
+  max-width: 448px;
+  margin-bottom: 0;
+  min-height: 145px;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  align-items: center;
 `;
 
 interface UniquePositionsPageProps {
@@ -76,9 +118,15 @@ const UniquePositionsPage = ({
         title={`Уникальные позиции`}
         // search={{ value: searchString, onChange: setSearchString }}
       />
+      <StyledBanner>
+        <StyledInfoText>
+          В этом блоке, вы можете найти редкие, эксклюзивные и даже такие
+          позиции, которых вы раньше не видели!
+        </StyledInfoText>
+      </StyledBanner>
       <CarouselContainer>
         <div className="container">
-          <Positions positions={uniques} />
+          {uniques.length ? <Positions positions={uniques} /> : <NotFound />}
         </div>
       </CarouselContainer>
     </PageMainColumnContainer>

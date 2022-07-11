@@ -125,6 +125,7 @@ const OldPrice = styled.div`
   text-decoration: line-through;
   margin-right: 12px;
   color: ${({ theme }: WithTheme) => theme.colors.text.secondary};
+  margin-bottom: 2px;
 `;
 
 const PriceTitle = styled.div`
