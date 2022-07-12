@@ -1,0 +1,52 @@
+:root {
+    --color-theme-green: #13EC50;
+
+    --colors-text-primary: #222222;
+    --colors-text-secondary: #6C768A;
+    --colors-text-accent: #000000;
+    --colors-text-additional: #0F0E0E;
+    --colors-text-alternate: #FFFFFF;
+    --colors-text-oldPrice: #9EA6B6;
+
+    --color-background-insurance: #7749D9;
+    --color-background-default: #ffffff;
+    --color-background-primary: #F8F9FA;
+    --color-background-secondary: #E9EAEE;
+    --color-background-alternate: #222222;
+    --color-background-header: #0F0E0E;
+    --color-background-footer: #0F0E0E;
+
+    --color-links-dedault: #000000;
+    --color-links-hover: #13EC50;
+    --color-links-active: #0F0E0E;
+    --color-links-alternate-default: #fff;
+    --color-links-alternate-hover: #13EC50;
+    --color-links-alternate-active: #13EC50;
+
+    --color-options-active: #E9EAEE20;
+
+    --color-buttons-insurance-default-color: #0F0E0E;
+    --color-buttons-insurance-default-background: #ffffff;
+    --color-buttons-insurance-hover-color: #ffffff;
+    --color-buttons-insurance-hover-background: #FE6B01;
+
+    --color-buttons-default-color: #0F0E0E;
+    --color-buttons-default-background: #13EC50;
+    --color-buttons-hover-color: #0F0E0E;
+    --color-buttons-hover-background: #15D14A;
+    --color-buttons-disabled-color: #6C768A;
+    --color-buttons-disabled-background: #E9EAEE;
+
+    --color-buttons-additional-default-color: #222222;
+    --color-buttons-additional-default-background: #F8F9FA;
+    --color-buttons-additional-hover-color: #000000;
+    --color-buttons-additional-hover-background: #ffffff;
+
+    --color-buttons-alternate-default-color: #000000;
+    --color-buttons-alternate-default-background: #F1F5F6;
+    --color-buttons-alternate-hover-color: #222222;
+    --color-buttons-alternate-hover-background: #D8DDE2;
+
+    --font-RM: 'Roboto Mono';
+    --font-NM: 'Neue Machina';
+}

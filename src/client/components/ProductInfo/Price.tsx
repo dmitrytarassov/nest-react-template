@@ -40,7 +40,6 @@ const Text = styled.div`
       font-weight: 500;
       font-size: 14px;
       line-height: 20px;
-      margin-bottom: 16px;
     `)}
 `;
 
@@ -104,7 +103,7 @@ const Price = ({ price, discountPrice, link }: PriceProps) => {
     <StyledPrice>
       <Prices>
         {isPromotion ? (
-          <Text>Посмотреть на сайте рентала</Text>
+          <Text>{link ? 'Посмотреть на сайте рентала' : 'Поделиться'}</Text>
         ) : (
           <>
             <Text>Стоимость за сутки:</Text>
@@ -121,7 +120,7 @@ const Price = ({ price, discountPrice, link }: PriceProps) => {
         )}
       </Prices>
       <Buttons>
-        <ShareButton />
+        <ShareButton alone={!link} />
         {link && (
           <Button href={link} blank type="link">
             {isPromotion ? 'Открыть' : 'Арендовать'}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IRental } from '@lib/interfaces/IRental';
 import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { useRouter } from 'next/router';
@@ -15,6 +15,7 @@ import ProductInfo, {
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
 import styled from 'styled-components';
+import { useMap } from '@frontend/hooks/useMap';
 
 const StyledPageMainColumnContainer = styled(PageMainColumnContainer)``;
 
@@ -25,8 +26,10 @@ interface PromotionPageProps {
 
 const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
   const router = useRouter();
-
   const { rentals } = useRentals();
+  const { activeRental } = useMap();
+  const [init, setInit] = useState<boolean>(false);
+
   const breadcrumbs: IBreadCrumb[] = [
     {
       name: 'Главная',
@@ -47,26 +50,20 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
   ];
 
   useEffect(() => {
-    updateMapRentals(rentals, rental.id, 500);
+    setInit(true);
+    return () => {
+      setInit(false);
+    };
+  }, []);
 
-    function callBack(e) {
-      // @ts-ignore
-      const rental = rentals.find(({ id }) => id === e.detail);
+  useEffect(() => {
+    if (activeRental && init) {
+      const rental = rentals.find(({ id }) => id === activeRental);
       if (rental) {
         router.push(`/rentals/${rental.url}`);
       }
     }
-
-    window.addEventListener(ESelectRental, callBack);
-
-    return () => {
-      window.removeEventListener(ESelectRental, callBack);
-    };
-  }, [rental.id, rentals]);
-
-  useEffect(() => {
-    updateMapRentals([rental], rental.id);
-  }, []);
+  }, [activeRental]);
 
   const _product: ProductLike = {
     photos: promotion.photos,

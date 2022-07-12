@@ -63,13 +63,11 @@ const RentalProductPage: React.FC<RentalProductPageProps & PageProps> = ({
   const _product = product || data.product;
 
   return (
-    <RentalsProvider>
-      <NewProductPage
-        rental={_rental}
-        product={_product}
-        rentalProduct={_rentalProduct}
-      />
-    </RentalsProvider>
+    <NewProductPage
+      rental={_rental}
+      product={_product}
+      rentalProduct={_rentalProduct}
+    />
   );
 };
 

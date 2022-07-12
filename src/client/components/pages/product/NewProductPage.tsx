@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useRentals } from '@frontend/hooks/useRentals';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
@@ -13,6 +13,7 @@ import { ICrudRentalProduct } from '@lib/interfaces/ICrudRentalProduct';
 import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import styled from 'styled-components';
+import { useMap } from '@frontend/hooks/useMap';
 
 const StyledPageMainColumnContainer = styled(PageMainColumnContainer)``;
 
@@ -28,8 +29,10 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
   rentalProduct,
 }) => {
   const router = useRouter();
-
   const { rentals } = useRentals();
+  const { activeRental } = useMap();
+  const [init, setInit] = useState<boolean>(false);
+
   const breadcrumbs: IBreadCrumb[] = [
     {
       name: 'Главная',
@@ -50,23 +53,20 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
   ];
 
   useEffect(() => {
-    updateMapRentals(rentals, rental.id, 500);
-
-    function callBack(e) {
-      const rental = rentals.find(({ id }) => id === e.detail);
-      router.push(`/rentals/${rental.url}`);
-    }
-
-    window.addEventListener(ESelectRental, callBack);
-
+    setInit(true);
     return () => {
-      window.removeEventListener(ESelectRental, callBack);
+      setInit(false);
     };
-  }, [rental.id, rentals]);
+  }, []);
 
   useEffect(() => {
-    updateMapRentals([rental], rental.id);
-  }, []);
+    if (activeRental && init) {
+      const rental = rentals.find(({ id }) => id === activeRental);
+      if (rental) {
+        router.push(`/rentals/${rental.url}`);
+      }
+    }
+  }, [activeRental]);
 
   const _product: ProductLike = {
     photos: product.photos,

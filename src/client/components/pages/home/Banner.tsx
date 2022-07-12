@@ -1,31 +1,11 @@
 import React from 'react';
 import Content from '@frontend/layout/Content';
-import styled, { css } from 'styled-components';
-import banner from './assets/banner.png';
-import bannerMobile from './assets/banner-mobile.png';
-import { WithTheme } from '@frontend/utils/theme';
+import styled from 'styled-components';
 import Heading from '@frontend/components/Heading';
 import InfoText from '@frontend/components/InfoText';
-import BannerBase from '@frontend/components/pages/home/BannerBase';
-
-const StyledBanner = styled(BannerBase)`
-  background-image: url(${banner.src});
-  height: 538px;
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      height: 420px;
-    `)}
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.mobile(css`
-      background-image: url(${bannerMobile.src});
-      background-position: bottom right;
-      background-size: contain;
-
-      height: 570px;
-    `)}
-`;
+import headingStyles from '../../Heading.module.scss';
+import styles from './Banner.module.scss';
+import classNames from 'classnames';
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 32px;
@@ -35,15 +15,15 @@ const StyledHeading = styled(Heading)`
 const Banner = () => {
   return (
     <Content>
-      <StyledBanner>
-        <StyledHeading level="h1" useLines>
-          Kinoscope
-        </StyledHeading>
+      <div className={styles.banner}>
+        <h1 className={classNames(styles.heading, headingStyles.useLines)}>
+          <span>Kinoscope</span>
+        </h1>
         <InfoText>
           Информационный сервис о новинках {'\n'}и акциях во всех ренталах{' '}
           {'\n'}в твоем городе
         </InfoText>
-      </StyledBanner>
+      </div>
     </Content>
   );
 };

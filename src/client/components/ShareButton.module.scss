@@ -1,0 +1,72 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  cursor: pointer;
+  background-color: var(--color-buttons-alternate-default-background);
+  border-radius: 12px;
+  margin-left: 16px;
+
+  &.alone {
+    margin-left: 0;
+  }
+
+  &:hover {
+    background-color: var(--color-buttons-alternate-hover-background);
+  }
+}
+
+.popup {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  box-shadow: 0 8px 16px rgba(156, 164, 169, 0.32);
+  border-radius: 16px;
+  background-color: var(--color-background-default);
+  padding: 16px;
+  z-index: 2;
+  display: flex;
+  cursor: default;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  .text {
+    font-family: var(--font-RM);
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 16px;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+
+    a {
+      display: flex;
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    a + a {
+      margin-left: 16px;
+    }
+  }
+}
+
+.toast {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: var(--font-RM);
+
+  [role="progressbar"] {
+    background: var(--color-theme-green)!important;
+  }
+}

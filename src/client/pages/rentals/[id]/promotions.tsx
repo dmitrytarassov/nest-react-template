@@ -45,11 +45,7 @@ const RentalPromotions = ({
   const promotionsData = promotions || _promotions;
 
   return (
-    <PromotionsProvider>
-      <RentalsProvider>
-        <RentalPromotionsPage rental={rentalData} promotions={promotionsData} />
-      </RentalsProvider>
-    </PromotionsProvider>
+    <RentalPromotionsPage rental={rentalData} promotions={promotionsData} />
   );
 };
 

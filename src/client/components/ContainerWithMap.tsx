@@ -10,6 +10,7 @@ import { CurrentLocationProvider } from '@frontend/providers/current_location.pr
 import { IApp } from '@frontend/pages/_app';
 import ErrorPage from '@frontend/components/pages/errors/ErrorPage';
 import { RentalsProvider } from '@frontend/providers/rentals.provider';
+import { MapProvider } from '@frontend/providers/map.provider';
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import('@frontend/components/Map'),
@@ -111,7 +112,11 @@ const ChildrenContainer = styled.div`
     `)};
 `;
 
-const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
+const ContainerWithMap = ({
+  children,
+  statusCode,
+  ...rest
+}: IApp['pageProps']) => {
   const isClient = typeof window !== 'undefined';
   const router = useRouter();
   const ref = useRef();
@@ -152,28 +157,35 @@ const ContainerWithMap = ({ children, statusCode }: IApp['pageProps']) => {
     }
   }, [router.route]);
 
+  console.log(rest);
+
   return (
     <CityProvider currentCity={city || 'spb'}>
-      <CurrentLocationProvider>
-        <Container>
-          <Header />
-          <MapContainer size={isSmallMap ? 'small' : 'big'}>
-            {isClient && <DynamicComponentWithNoSSR />}
-          </MapContainer>
-          <ContentContainer ref={ref}>
-            <ChildrenContainer>
-              {isError ? (
-                <RentalsProvider>
-                  <ErrorPage statusCode={statusCode} />
-                </RentalsProvider>
-              ) : (
-                children
-              )}
-              <Footer halfScreen />
-            </ChildrenContainer>
-          </ContentContainer>
-        </Container>
-      </CurrentLocationProvider>
+      {/* @ts-ignore */}
+      <RentalsProvider _rentals={rest?.rentals || []}>
+        <MapProvider>
+          <CurrentLocationProvider>
+            <Container>
+              <Header />
+              <MapContainer size={isSmallMap ? 'small' : 'big'}>
+                {isClient && <DynamicComponentWithNoSSR />}
+              </MapContainer>
+              <ContentContainer ref={ref}>
+                <ChildrenContainer>
+                  {isError ? (
+                    <RentalsProvider>
+                      <ErrorPage statusCode={statusCode} />
+                    </RentalsProvider>
+                  ) : (
+                    children
+                  )}
+                  <Footer halfScreen />
+                </ChildrenContainer>
+              </ContentContainer>
+            </Container>
+          </CurrentLocationProvider>
+        </MapProvider>
+      </RentalsProvider>
     </CityProvider>
   );
 };

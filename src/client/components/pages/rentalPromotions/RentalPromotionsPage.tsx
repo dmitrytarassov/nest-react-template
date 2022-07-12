@@ -5,11 +5,10 @@ import { useRentals } from '@frontend/hooks/useRentals';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
-import { updateMapRentals } from '@frontend/utils/updateMapRentals';
-import { ESelectRental } from '@frontend/dtos/ESelectRental';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
 import NewsAndPromotions from '@frontend/components/pages/rentalPromotions/NewsAndPromotions';
+import { useMap } from '@frontend/hooks/useMap';
 
 interface RentalPromotionsProps {
   rental: ICrudRental;
@@ -22,8 +21,10 @@ const RentalPromotionsPage = ({
 }: RentalPromotionsProps) => {
   const router = useRouter();
   const [searchString, setSearchString] = useState<string>('');
-
   const { rentals } = useRentals();
+  const { activeRental } = useMap();
+  const [init, setInit] = useState<boolean>(false);
+
   const breadcrumbs: IBreadCrumb[] = [
     {
       name: 'Главная',
@@ -44,31 +45,20 @@ const RentalPromotionsPage = ({
   ];
 
   useEffect(() => {
-    const _rentals = rentals.find(({ id }) => id === rental.id)
-      ? rentals
-      : [...rentals, rental];
-    // @ts-ignore
-    updateMapRentals(_rentals, rental.id, 500);
+    setInit(true);
+    return () => {
+      setInit(false);
+    };
+  }, []);
 
-    function callBack(e) {
-      // @ts-ignore
-      const rental = rentals.find(({ id }) => id === e.detail);
+  useEffect(() => {
+    if (activeRental && init) {
+      const rental = rentals.find(({ id }) => id === activeRental);
       if (rental) {
         router.push(`/rentals/${rental.url}`);
       }
     }
-
-    window.addEventListener(ESelectRental, callBack);
-
-    return () => {
-      window.removeEventListener(ESelectRental, callBack);
-    };
-  }, [rentals, rental.id]);
-
-  useEffect(() => {
-    // @ts-ignore
-    updateMapRentals([rental], rental.id);
-  }, []);
+  }, [activeRental]);
 
   const actions = promotions
     .filter(({ promotionType }) => promotionType === 'sale')

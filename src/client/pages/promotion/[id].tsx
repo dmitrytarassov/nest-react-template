@@ -46,11 +46,7 @@ const RentalProductPage: React.FC<RentalProductPageProps & PageProps> = ({
   const _rental = rental || data.rental;
   const _promotion = promotion || data.promotion;
 
-  return (
-    <RentalsProvider>
-      <PromotionPage rental={_rental} promotion={_promotion} />
-    </RentalsProvider>
-  );
+  return <PromotionPage rental={_rental} promotion={_promotion} />;
 };
 
 export async function getServerSideProps(

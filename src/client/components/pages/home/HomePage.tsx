@@ -1,14 +1,12 @@
 import React from 'react';
 import Banner from '@frontend/components/pages/home/Banner';
-import { Container } from '@frontend/layout/Container';
 import SecondBanner from '@frontend/components/pages/home/SecondBanner';
 import PromotionsCarousel from '@frontend/components/pages/home/PromotionsCarousel';
 import Uniques from '@frontend/components/pages/home/Uniques';
-import FeedbackForm from '@frontend/components/pages/home/FeedbackForm';
 import Footer from '@frontend/components/Footer';
 import { ICardProps } from '@frontend/components/Card';
 import Insurance from '@frontend/components/pages/home/Insurance';
-import { Head } from 'next/document';
+import containerStyles from '../../../layout/Container.module.scss';
 
 interface HomePageProps {
   uniques: (ICardProps & { id: string })[];
@@ -17,11 +15,11 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ uniques }) => {
   return (
     <>
-      <Container>
+      <div className={containerStyles.container}>
         <Banner />
         <SecondBanner />
         <PromotionsCarousel />
-      </Container>
+      </div>
       <Uniques _positions={uniques} />
       <Insurance />
       <Footer />

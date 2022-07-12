@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ProductsProvider } from '@frontend/providers/products.provider';
 import { PromotionsProvider } from '@frontend/providers/promotions.provider';
-import { RentalsProvider } from '@frontend/providers/rentals.provider';
-import Header from '@frontend/components/Header';
 import { getCity } from '@frontend/utils/getCity';
 import RentalPage from '@frontend/components/pages/rental/RentalPage';
 import { useRouter } from 'next/router';
@@ -32,9 +30,7 @@ const Rental = ({ rental }: RentalPageProps & PageProps) => {
   return (
     <ProductsProvider>
       <PromotionsProvider>
-        <RentalsProvider>
-          {rentalData && <RentalPage rental={rentalData} />}
-        </RentalsProvider>
+        {rentalData && <RentalPage rental={rentalData} />}
       </PromotionsProvider>
     </ProductsProvider>
   );

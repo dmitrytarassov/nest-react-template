@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Container } from '@frontend/layout/Container';
 import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
 import Content from '@frontend/layout/Content';
 import Link from 'next/link';
@@ -9,103 +8,7 @@ import { getCityName } from '@frontend/utils/getCityName';
 import { useCity } from '@frontend/hooks/useCity';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
-
-const StyledContainer = styled(Container)`
-  background-color: ${({ theme }: WithTheme) => theme.colors.background.header};
-  min-height: unset;
-  height: 72px;
-  color: ${({ theme }: WithTheme) => theme.colors.text.alternate};
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  box-sizing: border-box;
-  z-index: 10;
-  overflow: visible;
-
-  & + div {
-    padding-top: 72px;
-  }
-`;
-
-const StyledContent = styled(Content)`
-  padding: 0;
-  height: 72px;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1212px;
-
-  &.withMap {
-    max-width: unset;
-  }
-`;
-
-const CityDisplay = styled.div`
-  background: rgba(241, 245, 246, 0.1);
-  border-radius: 16px;
-  height: 32px;
-  position: relative;
-`;
-
-const CityName = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 0 12px;
-  line-height: 30px;
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 18px;
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.mobile(
-      css`
-        font-size: 14px;
-      `,
-    )}
-
-  svg {
-    margin-right: 12px;
-  }
-`;
-
-const CitySelectContainer = styled.div`
-  position: absolute;
-  right: 0;
-  top: 64px;
-  padding: 8px;
-  background-color: ${({ theme }: WithTheme) => theme.colors.background.header};
-  border-radius: 8px;
-  z-index: 2;
-  width: 212px;
-  display: flex;
-  flex-direction: column;
-
-  .corner {
-    top: -10px;
-    right: 20px;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    z-index: 2;
-    transform: scaleX(-0.6) scaleY(0.9);
-
-    :after {
-      top: 0;
-      left: 0;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background-color: ${({ theme }: WithTheme) =>
-        theme.colors.background.header};
-      content: '';
-      border-top-left-radius: 8px;
-      transform: rotate(45deg);
-    }
-  }
-`;
+import styles from './Header.module.scss';
 
 const Logo = styled.img`
   cursor: pointer;
@@ -120,32 +23,6 @@ const Logo = styled.img`
 interface CityButtonProps {
   active: boolean;
 }
-
-const CityButton = styled.div<CityButtonProps>`
-  ${({ theme, active }: WithThemeAndProps<CityButtonProps>) => css`
-    color: ${theme.colors.links.alternate.default};
-    background-color: ${active && theme.colors.options.active};
-
-    :hover {
-      background-color: ${theme.colors.options.active};
-    }
-  `}
-
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 140%;
-  padding: 8px;
-  border-radius: 4px;
-  position: relative;
-  z-index: 2;
-  cursor: pointer;
-
-  & + & {
-    margin-top: 4px;
-  }
-`;
 
 const Header = () => {
   const router = useRouter();
@@ -182,30 +59,38 @@ const Header = () => {
     router.pathname !== '/terms';
 
   return (
-    <StyledContainer>
-      <StyledContent className={classNames({ withMap: isPageWithMap })}>
+    <div className={classNames(styles.container)}>
+      <div
+        className={classNames(styles.content, {
+          [styles.withMap]: isPageWithMap,
+        })}
+      >
         <Link href="/" passHref>
           <Logo src={logo.src} />
         </Link>
-        <CityDisplay ref={selectRef}>
+        <div className={styles.cityDisplay} ref={selectRef}>
           {selectIsOpen && (
-            <CitySelectContainer>
-              <div className="corner" />
-              <CityButton
-                active={city === 'spb'}
+            <div className={styles.citySelectContainer}>
+              <div className={styles.corner} />
+              <div
+                className={classNames(styles.cityButton, {
+                  [styles.cityButtonActive]: city === 'spb',
+                })}
                 onClick={() => setCity('spb')}
               >
                 {getCityName('spb')}
-              </CityButton>
-              <CityButton
-                active={city === 'moscow'}
+              </div>
+              <div
+                className={classNames(styles.cityButton, {
+                  [styles.cityButtonActive]: city === 'moscow',
+                })}
                 onClick={() => setCity('moscow')}
               >
                 {getCityName('moscow')}
-              </CityButton>
-            </CitySelectContainer>
+              </div>
+            </div>
           )}
-          <CityName onClick={toggle}>
+          <div className={styles.cityName} onClick={toggle}>
             <svg
               width="16"
               height="16"
@@ -227,10 +112,10 @@ const Header = () => {
               />
             </svg>
             {getCityName(city)}
-          </CityName>
-        </CityDisplay>
-      </StyledContent>
-    </StyledContainer>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

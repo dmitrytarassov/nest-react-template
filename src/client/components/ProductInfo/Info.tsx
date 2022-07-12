@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { IProduct } from '@lib/interfaces/IProduct';
 import { WithTheme } from '@frontend/utils/theme';
 import Tabs from './Tabs';
 
 const StyledInfo = styled.div`
-  padding: 16px 24px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -55,7 +54,7 @@ const PropName = styled.div`
 const PropValue = styled.div`
   ${base};
   margin-left: 8px;
-  white-space: initial;
+  white-space: nowrap;
 
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`

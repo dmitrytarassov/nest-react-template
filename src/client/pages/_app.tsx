@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { dark, theme } from '@frontend/utils/theme';
 
 import 'swiper/css';
+import './theme.css';
 import './index.css';
 import { Router } from 'next/router';
 import ContainerWithMap from '@frontend/components/ContainerWithMap';

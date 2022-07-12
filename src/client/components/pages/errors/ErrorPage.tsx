@@ -1,26 +1,23 @@
 import Button from '@frontend/components/Button';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import _500 from './500.svg';
 import _400 from './400.svg';
 import { WithTheme } from '@frontend/utils/theme';
 import { useRentals } from '@frontend/hooks/useRentals';
-import { updateMapRentals } from '@frontend/utils/updateMapRentals';
-import { ESelectRental } from '@frontend/dtos/ESelectRental';
 import { useRouter } from 'next/router';
+import { useMap } from '@frontend/hooks/useMap';
 
 type Props = {
   statusCode: number;
 };
 
 const Container = styled.div<{ image: string }>`
-  background-position: bottom center;
-  background-size: contain;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  min-height: calc(100vh - 72px - 275px);
   width: 100%;
 `;
 
@@ -61,23 +58,24 @@ const images = {
 export default function ErrorPage({ statusCode }: Props) {
   const router = useRouter();
   const { rentals } = useRentals();
+  const { activeRental } = useMap();
+  const [init, setInit] = useState<boolean>(false);
 
   useEffect(() => {
-    updateMapRentals(rentals, '-1');
+    setInit(true);
+    return () => {
+      setInit(false);
+    };
+  }, []);
 
-    function callBack(e) {
-      // @ts-ignore
-      const rental = rentals.find(({ id }) => id === e.detail);
+  useEffect(() => {
+    if (activeRental && init) {
+      const rental = rentals.find(({ id }) => id === activeRental);
       if (rental) {
         router.push(`/rentals/${rental.url}`);
       }
     }
-    window.addEventListener(ESelectRental, callBack);
-
-    return () => {
-      window.removeEventListener(ESelectRental, callBack);
-    };
-  }, [rentals]);
+  }, [activeRental]);
 
   const code = statusCode < 500 ? 400 : 500;
   const text =

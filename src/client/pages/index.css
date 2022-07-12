@@ -148,6 +148,11 @@ p {
 .ymaps-2-1-79-image-with-content.rental_icon:not(.active):hover {
     border-color: #15D14A!important;
     transform: scale(1.1);
+
+}
+
+.ymaps-2-1-79-placemark-overlay:not(.active):hover {
+    z-index: 99999999!important;
 }
 
 .ymaps-2-1-79-image-with-content.rental_icon.active {

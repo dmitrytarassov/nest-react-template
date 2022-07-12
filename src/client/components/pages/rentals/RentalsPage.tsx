@@ -7,11 +7,13 @@ import PageMainColumnContainer from '@frontend/components/PageMainColumnContaine
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 import RentalCard from '@frontend/components/pages/rentals/RentalCard';
 import NotFound from '@frontend/components/NotFound';
+import { useMap } from '@frontend/hooks/useMap';
 
 const RentalsPage = () => {
   const { rentals } = useRentals();
   const [active, setActive] = useState<string>('');
   const [searchString, setSearchString] = useState<string>('');
+  const { activeRental } = useMap();
 
   useEffect(() => {
     updateMapRentals(rentals, active);
@@ -29,6 +31,13 @@ const RentalsPage = () => {
       window.removeEventListener(ESelectRental, callBack);
     };
   }, []);
+
+  useEffect(() => {
+    if (activeRental) {
+      setSearchString('');
+      setActive(activeRental);
+    }
+  }, [activeRental]);
 
   const breadcrumbs: IBreadCrumb[] = [
     {
