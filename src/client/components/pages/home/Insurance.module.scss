@@ -7,23 +7,24 @@
   min-height: unset;
   overflow: hidden;
   padding-bottom: 120px; // 88px + 32px
-  padding-top: 99px;
+  padding-top: 99px; // 99 из дизайна минус 20 отступа для теней
   height: max-content;
   background-color: var(--color-background-alternate);
   margin-bottom: -32px;
 
-  &.haveUniques {
-    border-radius: 0;
-    padding-top: 88px;
-
-    @include tablet {
-      padding-top: 40px;
-    }
-  }
-
   @include tablet {
     padding-top: 40px;
     padding-bottom: 72px; // 40px + 32px
+  }
+
+  &.haveUniques {
+    margin-top: -1px;
+    border-radius: 0;
+    padding-top: 53px; // 88 из дизайна минус 35 отступа для теней
+
+    @include tablet {
+      padding-top: 5px; // 40 из дизайна минус 35 отступа для теней
+    }
   }
 }
 

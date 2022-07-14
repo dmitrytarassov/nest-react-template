@@ -6,10 +6,10 @@
   border-top-right-radius: 32px;
   min-height: unset;
   overflow: hidden;
-  padding-bottom: 0;
   padding-top: 99px;
   height: max-content;
   background-color: var(--color-background-alternate);
+  padding-bottom: 36px; // для теней
 
   @include tablet {
     padding-top: 45px;
@@ -54,8 +54,12 @@
 }
 
 .footer {
-  margin-top: 24px;
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include tablet {
+    margin-top: 32px;
+  }
 }

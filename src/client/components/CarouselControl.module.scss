@@ -24,7 +24,9 @@
   }
 
   &.left {
-    transform: rotate(180deg);
+    svg {
+      transform: rotate(180deg);
+    }
   }
 
   &:hover {
