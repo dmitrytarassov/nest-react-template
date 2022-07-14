@@ -1,0 +1,36 @@
+@import "../../../pages/mixins";
+
+.content {
+  padding: 0;
+  margin-bottom: 88px;
+
+  @include tablet {
+    margin-bottom: 40px;
+  }
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.heading {
+  composes: h3 from "../../Heading.module.scss";
+  margin-bottom: 74px;
+
+  @include tablet {
+    margin-bottom: 49px;
+  }
+}
+
+.carousel {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include tablet {
+    margin-top: 32px;
+  }
+}

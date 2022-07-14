@@ -1,0 +1,26 @@
+.popup {
+  position: absolute;
+  background: var(--color-popup-background);
+  color: var(--color-popup-text);
+  border-radius: 8px;
+  font-family: var(--font-RM);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  padding: 6px 12px;
+  display: none;
+
+  &:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background: inherit;
+    left: 23px;
+    top: -4px;
+    transform-origin: 50%;
+    transform: rotate(45deg);
+    border-radius: 2px;
+  }
+}

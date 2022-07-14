@@ -44,8 +44,6 @@ const Promotions = ({ promotions, city }: PromotionsPageProps & PageProps) => {
 
   const promotionsData = _promotions.length ? _promotions : promotions || [];
 
-  console.log(promotionsData, promotions);
-
   return (
     <PromotionsProvider>
       <RentalsProvider>

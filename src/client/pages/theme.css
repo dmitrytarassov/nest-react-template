@@ -1,6 +1,9 @@
 :root {
     --color-theme-green: #13EC50;
 
+    --color-text-black: #0F0E0E;
+    --colors-text-gray: #6C768A;
+
     --colors-text-primary: #222222;
     --colors-text-secondary: #6C768A;
     --colors-text-accent: #000000;
@@ -15,6 +18,27 @@
     --color-background-alternate: #222222;
     --color-background-header: #0F0E0E;
     --color-background-footer: #0F0E0E;
+
+    --color-carousel-black-background: #0F0E0E;
+    --color-carousel-black-color: #fff;
+    --color-carousel-black-background-hover: #222222;
+    --color-carousel-black-color-hover: #fff;
+
+    --color-carousel-lite-background: #fff;
+    --color-carousel-lite-color: #0F0E0E;
+    --color-carousel-lite-background-hover: #E9EAEE;
+    --color-carousel-lite-color-hover: #0F0E0E;
+
+    --color-card-background: #ffffff;
+    --color-card-border: #D8DDE2;
+    --color-card-title: #0F0E0E;
+    --color-card-text: #6C768A;
+    --color-card-price-text: #000000;
+    --color-card-price-value: #0F0E0E;
+    --color-card-price-old: #9EA6B6;
+
+    --color-popup-background: #0F0E0E;
+    --color-popup-text: #fff;
 
     --color-links-dedault: #000000;
     --color-links-hover: #13EC50;
@@ -47,6 +71,14 @@
     --color-buttons-alternate-hover-color: #222222;
     --color-buttons-alternate-hover-background: #D8DDE2;
 
+    --color-badge-date-color: #fff;
+    --color-badge-date-background: #0F0E0E;
+    --color-badge-new-color: #fff;
+    --color-badge-new-background: #7749D9;
+    --color-badge-sale-color: #fff;
+    --color-badge-sale-background: #FE6B01;
+
+    --font-RO: 'Roboto';
     --font-RM: 'Roboto Mono';
     --font-NM: 'Neue Machina';
 }

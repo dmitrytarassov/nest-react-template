@@ -21,7 +21,7 @@ const HomePage: React.FC<HomePageProps> = ({ uniques }) => {
         <PromotionsCarousel />
       </div>
       <Uniques _positions={uniques} />
-      <Insurance />
+      <Insurance haveUniques={uniques.length > 0} />
       <Footer />
     </>
   );

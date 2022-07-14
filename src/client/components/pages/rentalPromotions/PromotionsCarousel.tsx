@@ -2,11 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Card from '@frontend/components/Card';
-import logoWithCover from '@frontend/assets/logoWithCover.svg';
 import CarouselContainer from '@frontend/components/CarouselContainer';
 import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { halfPageSwiperProps } from '@frontend/utils/halfPageSwiperProps';
-import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
 import CarouselFooter from '@frontend/components/CarouselFooter';
 import imageUrl from '@frontend/utils/imageUrl';
@@ -49,7 +47,7 @@ const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {
                 image={
                   promotion.photos[0]
                     ? imageUrl(promotion.photos[0])
-                    : logoWithCover.src
+                    : '/public/logoWithCover.svg'
                 }
                 link={promotion.url}
                 tag={{

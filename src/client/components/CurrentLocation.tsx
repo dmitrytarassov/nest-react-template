@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import getLocationIcon from '@frontend/assets/get_location.svg';
 import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
 import getLocation from '@frontend/utils/getLocation';
 import { useCurrentLocation } from '@frontend/hooks/useCurrentLocation';
@@ -12,7 +11,7 @@ interface GetLocationIconProps {
 const GetLocationIcon = styled.div<{ disabled?: boolean }>`
   z-index: 10;
   position: absolute;
-  background-image: url(${getLocationIcon.src});
+  background-image: url('/public/get_location.svg');
   width: 64px;
   height: 64px;
   background-color: ${({

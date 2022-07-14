@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import clocks from '@frontend/assets/clocks.svg';
 import TagBase from '@frontend/components/TagBase';
 
 const StyledTag = styled(TagBase)`
@@ -19,7 +18,7 @@ interface TagProps {
 const DateTag = ({ children }: TagProps) => {
   return (
     <StyledTag type="date">
-      <img src={clocks.src} /> {children}
+      <img src="/public/clocks.svg" /> {children}
     </StyledTag>
   );
 };

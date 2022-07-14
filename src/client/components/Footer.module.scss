@@ -1,0 +1,126 @@
+@import "../pages/mixins";
+.container {
+  composes: container from '../layout/Container.module.scss';
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  min-height: unset;
+  padding-bottom: 74px;
+  padding-top: 65px;
+  background-color: var(--color-background-footer);
+
+  @include tablet {
+    padding-top: 40px;
+    padding-bottom: 72px; // 40px + 32px
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 0!important;
+}
+
+.block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  position: relative;
+
+  .halfScreen & {
+    width: 48%;
+
+    &:first-child {
+      width: 100%;
+      margin-bottom: 32px;
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  @include laptop {
+    &:first-child {
+      width: 100%;
+      margin-bottom: 32px;
+    }
+  }
+
+  @include mobile {
+    margin-bottom: 0 !important;
+    width: 100%;
+    & + & {
+      margin-top: 72px;
+    }
+  }
+
+  a {
+    font-family: var(--font-RM);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: capitalize;
+    text-decoration: none;
+
+    & + * {
+      margin-top: 12px;
+    }
+
+    color: var(--color-links-alternate-default);
+
+    &:hover {
+      color: var(--color-links-alternate-hover);
+    }
+
+    :active,
+    :focus,
+    :visited,
+    :focus-visible :focus-within {
+      color: var(--color-links-alternate-default);
+    }
+  }
+}
+
+.logoLink {
+  width: 172px;
+  height: 40px;
+  position: relative;
+
+  @include mobile {
+    width: 148px!important;
+    min-width: unset!important;
+  }
+}
+
+.socials {
+  display: flex;
+
+  @include mobile {
+    margin-top: 33px!important;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
+
+  a {
+    margin: 0;
+  }
+
+  a + a {
+    margin-left: 8px;
+    margin-top: 0 !important;
+  }
+}

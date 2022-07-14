@@ -1,24 +1,28 @@
 @import "../../../pages/mixins";
 
 .banner {
-  background-image: url('/public/banner.png');
   composes: base from "./BannerBase.module.scss";
+  background-image: url('/public/banner.png');
   height: 538px;
 
   @include tablet {
     height: 420px;
+    background-position: bottom right;
+    background-size: contain;
+    background-image: url('/public/banner-mobile.png');
   }
 
   @include mobile {
-    background-position: bottom right;
-    background-size: contain;
     height: 570px;
-    background-image: url('/public/banner-mobile.png');
   }
 }
 
 .heading {
   composes: h1 from "../../Heading.module.scss";
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   font-family: var(--font-NM);
+
+  @include tablet {
+    margin-bottom: 32px;
+  }
 }

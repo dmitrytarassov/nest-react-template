@@ -12,12 +12,6 @@ import PromotionsCarousel from '@frontend/components/pages/rental/PromotionsCaro
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
 
-import telegram from './assets/telegram.svg';
-import vk from './assets/vk.svg';
-import web from './assets/web.svg';
-import phone from './assets/phone.svg';
-import email from './assets/email.svg';
-
 import SocialsRow from '@frontend/components/pages/rental/SocialsRow';
 import SocialsBlock from '@frontend/components/pages/rental/SocialsBlock';
 import { phoneFormat } from '@frontend/utils/phoneFormat';
@@ -88,13 +82,13 @@ const RentalPage = ({ rental }: RentalPageProps) => {
           <SocialsBlock>
             <SocialsRow fullWidth>
               <a href={`tel:+${rental.phone}`}>
-                <SocialIcon src={phone.src} />
+                <SocialIcon src="/public/icons/phone.svg" />
                 {phoneFormat(`+${rental.phone}`)}
               </a>
             </SocialsRow>
             <SocialsRow fullWidth>
               <a href={`mailto:${rental.email}`}>
-                <SocialIcon src={email.src} />
+                <SocialIcon src="/>public/icons/email.svg" />
                 {rental.email}
               </a>
             </SocialsRow>
@@ -105,7 +99,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
             {rental.telegram && (
               <SocialsRow>
                 <a href={rental.telegram} target="_blank">
-                  <SocialIcon src={telegram.src} />
+                  <SocialIcon src="/public/icons/telegram.svg" />
                   {parseTelegram(rental.telegram)}
                 </a>
               </SocialsRow>
@@ -113,7 +107,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
             {rental.vk && (
               <SocialsRow>
                 <a href={rental.vk} target="_blank">
-                  <SocialIcon src={vk.src} />
+                  <SocialIcon src="/>public/icons/vk.svg" />
                   {parseVk(rental.vk)}
                 </a>
               </SocialsRow>
@@ -121,7 +115,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
             {rental.web && (
               <SocialsRow>
                 <a href={rental.web} target="_blank">
-                  <SocialIcon src={web.src} />
+                  <SocialIcon src="/public/icons/web.svg" />
                   {parseUrl(rental.web)}
                 </a>
               </SocialsRow>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Card from '@frontend/components/Card';
-import logoWithCover from '@frontend/assets/logoWithCover.svg';
 import CarouselFooter from '@frontend/components/CarouselFooter';
 import Button from '@frontend/components/Button';
 import CarouselContainer from '@frontend/components/CarouselContainer';
@@ -104,7 +103,7 @@ const PromotionsCarousel = ({ id, url }: PromotionsCarouselProps) => {
                     image={
                       promotion.photos[0]
                         ? imageUrl(promotion.photos[0])
-                        : logoWithCover.src
+                        : '/public/logoWithCover.svg'
                     }
                     link={promotion.url}
                     tag={{

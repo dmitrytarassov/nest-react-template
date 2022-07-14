@@ -4,7 +4,7 @@ import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import styled, { css } from 'styled-components';
 import PageHeader from '@frontend/components/PageHeader';
 import { WithTheme } from '@frontend/utils/theme';
-import searchIcon from '@frontend/assets/search.svg';
+import Image from 'next/image';
 
 interface ListTopProps {
   breadcrumbs: IBreadCrumb[];
@@ -81,7 +81,7 @@ const ListTop = ({
               onChange={(e) => search.onChange(e.target.value)}
             />
             <SearchIconContainer>
-              <img src={searchIcon.src} />
+              <Image src="/public/search.svg" width="24px" height="24px" />
             </SearchIconContainer>
           </SearchInputContainer>
         )}

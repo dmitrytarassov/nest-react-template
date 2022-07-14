@@ -17,7 +17,6 @@ const Markers = ({ map }: { map: any }) => {
   }, [center]);
 
   useEffect(() => {
-    console.log(zoom);
     map.setZoom(zoom);
   }, [zoom]);
 

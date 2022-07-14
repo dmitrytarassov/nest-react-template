@@ -1,0 +1,78 @@
+@import "../../../pages/mixins";
+
+.container {
+  composes: container from '../../../layout/Container.module.scss';
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  min-height: unset;
+  overflow: hidden;
+  padding-bottom: 120px; // 88px + 32px
+  padding-top: 99px;
+  height: max-content;
+  background-color: var(--color-background-alternate);
+  margin-bottom: -32px;
+
+  &.haveUniques {
+    border-radius: 0;
+    padding-top: 88px;
+
+    @include tablet {
+      padding-top: 40px;
+    }
+  }
+
+  @include tablet {
+    padding-top: 40px;
+    padding-bottom: 72px; // 40px + 32px
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.banner {
+  composes: base from "./BannerBase.module.scss";
+  background-image: url(/public/insurance.png);
+  background-color: var(--color-background-insurance);
+  padding: 48px 40px;
+  align-items: flex-start;
+
+  @include tablet {
+    background-image: url(/public/insurance-mobile.png);
+    background-position: bottom right;
+    background-size: contain;
+    padding: 32px 24px;
+    height: 420px;
+  }
+
+  @include mobile {
+    height: 570px;
+  }
+}
+
+.heading {
+  composes: h3 from "../../Heading.module.scss";
+  margin-bottom: 24px;
+  font-size: 32px;
+  font-family: var(--font-NM);
+  color: var(--colors-text-alternate);
+
+  @include tablet {
+    margin-bottom: 16px;
+  }
+}
+
+.text {
+  composes: text from "../../InfoText.module.scss";
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: var(--colors-text-alternate);
+
+  @include tablet {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}

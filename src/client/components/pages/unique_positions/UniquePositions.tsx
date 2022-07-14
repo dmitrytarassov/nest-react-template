@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import { useRouter } from 'next/router';
-import { useRentals } from '@frontend/hooks/useRentals';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
 import { ESelectRental } from '@frontend/dtos/ESelectRental';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
-import imageUrl from '@frontend/utils/imageUrl';
-import NewsAndPromotions from '@frontend/components/pages/rentalPromotions/NewsAndPromotions';
 import Positions from '@frontend/components/pages/unique_positions/Positions';
 import { ICardProps } from '@frontend/components/Card';
 import styled, { css } from 'styled-components';
 import NotFound from '@frontend/components/NotFound';
-import Button from '@frontend/components/Button';
 import BannerBase from '@frontend/components/pages/home/BannerBase';
-import banner from '@frontend/components/pages/home/assets/banner-map.png';
 import { WithTheme } from '@frontend/utils/theme';
-import bannerMobile from '@frontend/components/pages/home/assets/banner-map-mobile.png';
-import Heading from '@frontend/components/Heading';
 import InfoText from '@frontend/components/InfoText';
 
 const CarouselContainer = styled.div`
@@ -46,12 +38,11 @@ const StyledBanner = styled(BannerBase)`
 
   ${({ theme }: WithTheme) =>
     theme.mixins.mobile(css`
-      background-image: url(${bannerMobile.src});
       background-position: bottom right;
-      background-size: contain;
-
+      background-size: cover;
+      background-image: url('/public/uniques-mobile.png');
       padding: 32px;
-      height: 560px;
+      height: 268px;
     `)}
 `;
 

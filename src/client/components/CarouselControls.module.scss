@@ -1,0 +1,25 @@
+@import "../pages/mixins";
+
+.container {
+  display: flex;
+
+  &.hide-on-laptop {
+    display: none;
+
+    @include tablet {
+      display: flex;
+    }
+  }
+
+  &.hide-on-tablet {
+    display: none;
+
+    @include mobile {
+      display: flex;
+    }
+  }
+
+  &.hide-on-mobile {
+    display: none;
+  }
+}

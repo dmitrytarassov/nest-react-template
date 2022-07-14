@@ -157,8 +157,6 @@ const ContainerWithMap = ({
     }
   }, [router.route]);
 
-  console.log(rest);
-
   return (
     <CityProvider currentCity={city || 'spb'}>
       {/* @ts-ignore */}

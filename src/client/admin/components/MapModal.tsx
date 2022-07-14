@@ -1,13 +1,9 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import { MapContainer, Popup, TileLayer, Marker } from 'react-leaflet';
-import Markers from '@frontend/components/Markers';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { City } from '@lib/types/City';
 import { DivIcon } from 'leaflet';
-import marker from '@frontend/assets/marker.svg';
-import shadow from '@frontend/assets/shadow.svg';
 import { renderToString } from 'react-dom/server';
 
 const customStyles = {
@@ -80,8 +76,8 @@ const Icon = () => (
 );
 
 const _icon = new DivIcon({
-  iconUrl: marker.src,
-  shadowUrl: shadow.src,
+  iconUrl: '/public/marker.svg',
+  shadowUrl: '/public/shadow.svg',
   iconSize: [48, 56],
   iconAnchor: [48, 56],
   shadowSize: [19, 4],

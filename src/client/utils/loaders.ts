@@ -47,7 +47,6 @@ export const loadRentalsByCity = async (
   const _rentals: IControllerResponse<ICrudRental[]> = await get(
     makeUrl(`/api/rental?filter[]=city,${city}`),
   );
-  console.log(makeUrl(`/api/rental?filter[]=city,${city}`));
   return _rentals.data || [];
 };
 
@@ -154,7 +153,6 @@ export const loadUniques = async (
 ): Promise<(ICardProps & { id: string })[]> => {
   const _rentals: ICrudRental[] = await getAllRentalsForCity(city);
   const rentalIds = _rentals.map(({ id }) => id);
-  console.log(city);
 
   const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
     makeUrl(
@@ -182,18 +180,10 @@ export const loadUniques = async (
         const rental = _rentals.find(({ id }) => id === rentalProduct.rentalId);
 
         if (!rental) {
-          console.log(
-            'can not find rental with id ',
-            rentalProduct.rentalId,
-            _rentals,
-          );
+          console.log('can not find rental with id ', rentalProduct.rentalId);
         }
         if (!product) {
-          console.log(
-            'can not find product with id ',
-            rentalProduct.productId,
-            products,
-          );
+          console.log('can not find product with id ', rentalProduct.productId);
         }
         if (product && rental) {
           return {

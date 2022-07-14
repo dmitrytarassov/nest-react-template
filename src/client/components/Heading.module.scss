@@ -3,17 +3,21 @@
 @mixin base {
   margin: 0;
   padding: 0;
-  color: var(--colors-text-primary);
+  color: var(--color-text-black);
   font-weight: 700;
   line-height: 100%;
 
   &.useLines {
-    span {
+    span, div {
       padding-right: 32px;
       background-size: contain;
       background-position: left center;
       background-repeat: no-repeat;
       background-image: url("/public/lines.svg");
+
+      @include mobile {
+        background-size: 272px auto;
+      }
     }
   }
 }

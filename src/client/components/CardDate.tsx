@@ -1,34 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
-import clocks from '@frontend/assets/clocks.svg';
-import TagBase from '@frontend/components/TagBase';
-
-const StyledCardDate = styled(TagBase)`
-  position: absolute;
-  height: 32px;
-  top: 24px;
-  right: 24px;
-  display: flex;
-  align-items: center;
-  font-size: 10px;
-  font-family: 'Neue Machina';
-
-  img {
-    margin-right: 4px;
-    width: 14px;
-  }
-`;
+import Image from 'next/image';
+import styles from './CardDate.module.scss';
+import classNames from 'classnames';
 
 interface CardDateProps {
   children: React.ReactNode;
+  size: 'small' | 'large';
 }
 
-const CardDate = ({ children }: CardDateProps) => {
+const CardDate = ({ children, size }: CardDateProps) => {
   return (
-    <StyledCardDate type="date">
-      <img src={clocks.src} />
-      {children}
-    </StyledCardDate>
+    <div className={classNames(styles.badge, styles[size])}>
+      <Image src="/public/clocks.svg" width={20} height={14} />
+      <span className={styles.text}>{children}</span>
+    </div>
   );
 };
 

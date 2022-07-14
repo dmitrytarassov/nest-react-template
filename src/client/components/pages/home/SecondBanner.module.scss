@@ -1,0 +1,54 @@
+@import "../../../pages/mixins";
+
+.content {
+  padding-bottom: 0;
+  margin-bottom: 88px;
+
+  @include tablet {
+    margin-bottom: 44px;
+  }
+}
+
+.banner {
+  composes: base from "./BannerBase.module.scss";
+  padding-top: 68px;
+  padding-bottom: 68px;
+  align-items: flex-start;
+  background-image: url("/public/banner-map.png");
+
+  @include tablet {
+    background-image: url("/public/banner-map-mobile.png");
+    background-position: bottom right;
+    background-size: contain;
+
+    padding-top: 32px;
+    padding-bottom: 32px;
+    height: 420px;
+  }
+
+  @include mobile {
+    height: 570px;
+  }
+}
+
+.heading {
+  composes: h2 from "../../Heading.module.scss";
+  margin-bottom: 24px;
+  font-size: 32px;
+  font-family: var(--font-NM);
+
+  @include tablet {
+    margin-bottom: 16px;
+  }
+}
+
+.text {
+  composes: text from "../../InfoText.module.scss";
+  margin-bottom: 40px;
+
+  @include tablet {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}
+

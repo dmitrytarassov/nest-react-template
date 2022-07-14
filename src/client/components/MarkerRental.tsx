@@ -30,6 +30,7 @@ export const MarkerRental: React.FC<
       ];
       elements.forEach((element) => {
         const image = getElementStyle(element, 'backgroundImage');
+        console.log(image, icon);
         if (image.includes(icon)) {
           setElement(element);
         }
@@ -43,27 +44,30 @@ export const MarkerRental: React.FC<
 
   useEffect(() => {
     if (element) {
-      element.classList.add('rental_icon');
-      if (active) {
-        const parent = element.parentNode.parentNode;
-        if (parent.classList.contains('ymaps-2-1-79-placemark-overlay')) {
-          [
+      setTimeout(() => {
+        element.classList.add('rental_icon');
+        console.log('Change');
+        if (active) {
+          const parent = element.parentNode.parentNode;
+          if (parent.classList.contains('ymaps-2-1-79-placemark-overlay')) {
+            [
+              // @ts-ignore
+              ...document.querySelectorAll('.ymaps-2-1-79-placemark-overlay'),
+            ].forEach((e) => {
+              e.classList.remove('active');
+            });
+            parent.classList.add('active');
+          }
+          const elements = [
             // @ts-ignore
-            ...document.querySelectorAll('.ymaps-2-1-79-placemark-overlay'),
-          ].forEach((e) => {
-            e.classList.remove('active');
+            ...document.querySelectorAll('.ymaps-2-1-79-image-with-content'),
+          ];
+          elements.forEach((el) => {
+            el.classList.remove('active');
           });
-          parent.classList.add('active');
+          element.classList.add('active');
         }
-        const elements = [
-          // @ts-ignore
-          ...document.querySelectorAll('.ymaps-2-1-79-image-with-content'),
-        ];
-        elements.forEach((el) => {
-          el.classList.remove('active');
-        });
-        element.classList.add('active');
-      }
+      }, 300);
     }
   }, [element, active]);
   return null;

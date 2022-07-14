@@ -61,7 +61,7 @@ const PageHeader = ({ backLink, title, children, image }: PageHeaderProps) => {
     <PageHeaderContainer>
       <TitleContainer>
         <BackButton to={backLink} />
-        {image && <Image src={image} />}
+        {image && <Image src={image} width={48} height={48} />}
         <H1>{title}</H1>
       </TitleContainer>
       {children}

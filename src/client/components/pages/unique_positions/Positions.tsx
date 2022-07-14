@@ -1,12 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import lightningLine from '@frontend/assets/lightning-line.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Card, { ICardProps } from '@frontend/components/Card';
-import CarouselControls from '@frontend/components/CarouselControls';
-import CarouselFooter from '@frontend/components/CarouselFooter';
 import { halfPageSwiperProps } from '@frontend/utils/halfPageSwiperProps';
-import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import CarouselControlsHalfScreen from '@frontend/components/CarouselControlsHalfScreen';
 
 const CarouselContainer = styled.div<{ useLines: boolean }>`
@@ -26,7 +22,7 @@ const CarouselContainer = styled.div<{ useLines: boolean }>`
         left: 0;
         width: 100vw;
         height: 100%;
-        background-image: url(${lightningLine.src});
+        background-image: url('/public/lightning-line.svg');
         background-repeat-x: repeat;
         background-repeat-y: no-repeat;
         background-size: auto calc(100% - 80px);

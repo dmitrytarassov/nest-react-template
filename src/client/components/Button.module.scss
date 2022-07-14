@@ -1,0 +1,48 @@
+.button {
+  font-family: var(--font-RM);
+  border: 0;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.3s ease-in-out;
+  color: var(--color-buttons-default-color);
+  background-color: var(--color-buttons-default-background);
+
+  &.large {
+    padding: 20px 32px;
+  }
+
+  &.primary {
+    &:hover {
+      color: var(--color-buttons-hover-color)!important;
+      background-color: var(--color-buttons-hover-background)!important;
+    }
+  }
+
+  &.whiteOrange {
+    color: var(--color-buttons-insurance-default-color);
+    background-color: var(--color-buttons-insurance-default-background);
+
+    &:hover {
+      color: var(--color-buttons-insurance-hover-color);
+      background-color: var(--color-buttons-insurance-hover-background);
+    }
+  }
+
+  &:disabled {
+    color: var(--color-buttons-disabled-color)!important;
+    background-color: var(--color-buttons-disabled-background)!important;
+  }
+}
+
+.aButton {
+  text-decoration: none;
+  display: flex;
+}

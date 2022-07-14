@@ -1,0 +1,168 @@
+.card {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  text-decoration: none;
+  transition: filter 0.3s ease-in-out;
+
+  &:hover {
+    filter: drop-shadow(0px 8px 16px rgba(156, 164, 169, 0.32));
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: var(--color-card-background);
+  cursor: pointer;
+  height: 100%;
+  justify-content: space-between;
+  border: 1px solid var(--color-card-border);
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  margin-top: -2px!important;
+  margin-left: -1px!important;
+  width: calc(100% + 2px)!important;
+  height: calc(100% + 2px)!important;
+  object-fit: fill;
+  border: 1px solid var(--color-card-border)!important;
+  box-sizing: content-box!important;
+  border-radius: 24px;
+}
+
+.content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .small & {
+    padding: 16px;
+  }
+}
+
+.titleContainer {
+  font-family: var(--font-RM);
+  position: relative;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 16px;
+  color: var(--color-card-title);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .small & {
+    margin-bottom: 8px;
+  }
+
+  .popupContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &:hover .popup {
+      display: flex;
+    }
+  }
+
+  .title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.logoContainer {
+  position: relative;
+  margin-left: 8px;
+  height: 40px;
+  display: flex;
+}
+
+.logo {
+  height: 40px!important;
+  object-fit: contain;
+}
+
+.popup {
+  composes: popup from "./Popup.module.scss";
+  top: 120%;
+}
+
+.text {
+  font-family: var(--font-RM);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-card-text);
+}
+
+.footer {
+  padding: 0 24px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .small & {
+    padding: 0 16px 16px;
+  }
+}
+
+.priceTitle {
+  font-family: var(--font-NM);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-card-price-text);
+}
+
+.oldPrice {
+  font-family: var(--font-RO);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  text-decoration: line-through;
+  margin-right: 12px;
+  color: var(--color-card-price-old);
+  margin-bottom: 2px;
+
+  .small & {
+    margin-bottom: 0;
+  }
+}
+
+.price {
+  font-family: var(--font-RO);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--color-card-price-value);
+
+  .small & {
+    font-size: 18px;
+  }
+}
+
+.prices {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-left: 8px;
+  white-space: nowrap;
+}

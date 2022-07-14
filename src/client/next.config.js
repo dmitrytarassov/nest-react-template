@@ -1,5 +1,8 @@
 // next.config.js
-module.exports = {
+const withPlugins = require('next-compose-plugins');
+const withImages = require('next-images');
+
+const nextConfig = {
   compiler: {
     // Enables the styled-components SWC transform
     styledComponents: true,
@@ -14,4 +17,12 @@ module.exports = {
         distDir: '../../.next',
       }
     : {}),
+  images: {
+    // default, imgix, cloudinary, akamai
+    loader: 'akamai',
+    path: '/',
+    disableStaticImages: true,
+  },
 };
+
+module.exports = withPlugins([withImages], nextConfig);

@@ -1,0 +1,26 @@
+.badge {
+  composes: badge from "./Badge.module.scss";
+  composes: date from "./Badge.module.scss";
+  height: 32px;
+  line-height: 32px;
+  top: 24px;
+  right: 24px;
+  font-size: 10px;
+  font-family: var(--font-NM);
+  padding: 0 10px;
+  border-radius: 8px;
+  z-index: 2;
+
+  &.small {
+    padding: 0 5px;
+  }
+
+  .text {
+    margin-left: 6px!important;
+  }
+
+  img {
+    width: 14px!important;
+    height: 14px!important;
+  }
+}

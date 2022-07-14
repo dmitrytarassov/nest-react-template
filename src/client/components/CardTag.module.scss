@@ -1,0 +1,20 @@
+@import "../pages/mixins";
+
+.badge {
+  composes: badge from "./Badge.module.scss";
+  top: -16px;
+  transform: rotate(-10deg) translateY(12px) translateX(-2px);
+  height: 40px;
+  line-height: 40;
+  font-size: 20px;
+  border-radius: 12px;
+  padding: 0 10px;
+  z-index: 2;
+  font-weight: 700;
+  font-family: var(--font-NM);
+  display: flex;
+
+  &.small {
+    font-size: 16px;
+  }
+}

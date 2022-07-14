@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-
-import vk from '@frontend/assets/share/vk.svg';
-import whatsapp from '@frontend/assets/share/whatsapp.svg';
-import telegram from '@frontend/assets/share/telegram.svg';
-import copy from '@frontend/assets/share/copy.svg';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './ShareButton.module.scss';
 import classNames from 'classnames';
+import Image from 'next/image';
 
 interface ShareButtonProps {
   alone: boolean;
@@ -85,14 +81,14 @@ const ShareButton = ({ alone }: ShareButtonProps) => {
             <div className={styles.text}>Поделиться</div>
             <div className={styles.content}>
               <a href="#" onClick={copyClick}>
-                <img src={copy.src} />
+                <Image width="32" height="32" src="/public/copy.svg" />
               </a>
               <a
                 href={`https://vk.com/share.php?url=${url}`}
                 target="_blank"
                 onClick={close}
               >
-                <img src={vk.src} />
+                <Image width="32" height="32" src="/public/vk.svg" />
               </a>
               <a
                 href={`https://api.whatsapp.com/send?text=${url}`}
@@ -100,14 +96,14 @@ const ShareButton = ({ alone }: ShareButtonProps) => {
                 target="_blank"
                 onClick={close}
               >
-                <img src={whatsapp.src} />
+                <Image width="32" height="32" src="/public/whatsapp.svg" />
               </a>
               <a
                 href={`https://t.me/share/url?url=${url}`}
                 target="_blank"
                 onClick={close}
               >
-                <img src={telegram.src} />
+                <Image width="32" height="32" src="/public/telegram.svg" />
               </a>
             </div>
           </div>

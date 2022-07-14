@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import Content from '@frontend/layout/Content';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,22 +7,11 @@ import Card from '@frontend/components/Card';
 import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
 import { fullPageSwiperProps } from '@frontend/utils/fullPageSwiperProps';
-import CarouselFooter from '@frontend/components/CarouselFooter';
 import CarouselContainer from '@frontend/components/CarouselContainer';
-import Heading from '@frontend/components/Heading';
 import imageUrl from '@frontend/utils/imageUrl';
-import { Navigation } from 'swiper';
-import { breakpoints } from '@frontend/utils/theme';
-
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-`;
-
-const StyledHeading = styled(Heading)`
-  margin-bottom: 64px;
-`;
+import styles from './PromotionsCarousel.module.scss';
+import classNames from 'classnames';
+import headingStyles from '../../Heading.module.scss';
 
 const PromotionsCarousel = () => {
   const { promotions } = usePromotions();
@@ -31,16 +19,17 @@ const PromotionsCarousel = () => {
   return (
     <>
       {promotions.length > 0 && (
-        <Content>
-          <Container>
-            <StyledHeading level="h3" useLines>
-              Акции и новинки ренталов
-            </StyledHeading>
+        <Content className={styles.content}>
+          <div className={styles.container}>
+            <h3 className={classNames(styles.heading, headingStyles.useLines)}>
+              <span>Акции и новинки ренталов</span>
+            </h3>
             <CarouselContainer>
               <Swiper {...fullPageSwiperProps}>
                 {promotions.map((promotion) => (
                   <SwiperSlide key={promotion.id}>
                     <Card
+                      size="large"
                       title={promotion.name}
                       description={promotion.shortText}
                       image={imageUrl(promotion.photos[0])}
@@ -56,15 +45,15 @@ const PromotionsCarousel = () => {
                     />
                   </SwiperSlide>
                 ))}
-                <CarouselFooter>
-                  <Button type="link" href="/promotions">
+                <div className={styles.carousel}>
+                  <Button type="link" href="/promotions" size="large">
                     Посмотреть все
                   </Button>
-                  <CarouselControls count={promotions.length} />
-                </CarouselFooter>
+                  <CarouselControls count={promotions.length} color="black" />
+                </div>
               </Swiper>
             </CarouselContainer>
-          </Container>
+          </div>
         </Content>
       )}
     </>

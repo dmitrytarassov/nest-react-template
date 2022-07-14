@@ -1,37 +1,8 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 import CarouselControl from '@frontend/components/CarouselControl';
 import { useSwiper } from 'swiper/react';
-import { WithTheme } from '@frontend/utils/theme';
 import classNames from 'classnames';
-
-const StyledCarouselControls = styled.div`
-  display: flex;
-
-  &.hide-on-laptop {
-    display: none;
-    ${({ theme }: WithTheme) =>
-      theme.mixins.tablet(
-        css`
-          display: flex;
-        `,
-      )}
-  }
-
-  &.hide-on-tablet {
-    display: none;
-    ${({ theme }: WithTheme) =>
-      theme.mixins.mobile(
-        css`
-          display: flex;
-        `,
-      )}
-  }
-
-  &.hide-on-mobile {
-    display: none;
-  }
-`;
+import styles from './CarouselControls.module.scss';
 
 interface CarouselControlsProps {
   revertColors?: boolean;
@@ -39,13 +10,14 @@ interface CarouselControlsProps {
   count?: number;
   maxCount?: number;
   size?: 'large' | 'small';
+  color?: 'black' | 'lite';
 }
 
 const CarouselControls: React.FC<CarouselControlsProps> = ({
   revertColors,
   count,
-  maxCount = 2,
   size = 'large',
+  color,
 }) => {
   const swiper = useSwiper();
 
@@ -57,14 +29,13 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
     swiper.slidePrev();
   };
 
-  // const classNames = {};
-
   return (
-    <StyledCarouselControls
+    <div
       className={classNames(
-        count > 0 && count <= 3 && 'hide-on-laptop',
-        count > 0 && count <= 2 && 'hide-on-tablet',
-        count === 1 && 'hide-on-mobile',
+        styles.container,
+        count > 0 && count <= 3 && styles['hide-on-laptop'],
+        count > 0 && count <= 2 && styles['hide-on-tablet'],
+        count === 1 && styles['hide-on-mobile'],
       )}
     >
       <CarouselControl
@@ -72,14 +43,16 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
         onClick={prev}
         revertColors={revertColors}
         direction="left"
+        color={color}
       />
       <CarouselControl
         size={size}
         onClick={next}
         revertColors={revertColors}
         direction="right"
+        color={color}
       />
-    </StyledCarouselControls>
+    </div>
   );
 };
 

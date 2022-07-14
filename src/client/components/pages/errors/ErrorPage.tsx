@@ -1,8 +1,6 @@
 import Button from '@frontend/components/Button';
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import _500 from './500.svg';
-import _400 from './400.svg';
 import { WithTheme } from '@frontend/utils/theme';
 import { useRentals } from '@frontend/hooks/useRentals';
 import { useRouter } from 'next/router';
@@ -51,8 +49,8 @@ const Image = styled.img`
 `;
 
 const images = {
-  500: _500.src,
-  400: _400.src,
+  500: '/publc/500.svg',
+  400: '/publc/400.svg',
 };
 
 export default function ErrorPage({ statusCode }: Props) {

@@ -118,3 +118,14 @@
     margin-top: 4px;
   }
 }
+
+.logoLink {
+  width: 172px;
+  height: 100%;
+  position: relative;
+
+  @include mobile {
+    width: 148px!important;
+    min-width: unset!important;
+  }
+}

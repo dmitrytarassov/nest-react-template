@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { WithTheme } from '@frontend/utils/theme';
-import lightningLine from '@frontend/assets/lightning-line.svg';
 import useSWR, { SWRResponse } from 'swr';
 import { IControllerResponse } from '@lib/interfaces/IControllerResponse';
 import { IProduct } from '@lib/interfaces/IProduct';
 import Heading from '@frontend/components/Heading';
 import { get } from '@frontend/utils/fetcher';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { fullPageSwiperProps } from '@frontend/utils/fullPageSwiperProps';
 import Card from '@frontend/components/Card';
 import Button from '@frontend/components/Button';
 import CarouselControls from '@frontend/components/CarouselControls';
@@ -34,7 +32,7 @@ const CarouselContainer = styled.div<{ useLines: boolean }>`
         left: 0;
         width: 100vw;
         height: 100%;
-        background-image: url(${lightningLine.src});
+        background-image: url('/public/lightning-line.svg');
         background-repeat-x: repeat;
         background-repeat-y: no-repeat;
         background-size: auto calc(100% - 80px);

@@ -1,109 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { IRental } from '@lib/interfaces/IRental';
-import styled, { css } from 'styled-components';
-import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
 import Link from 'next/link';
 import { phoneFormat } from '@frontend/utils/phoneFormat';
-import phone from '@frontend/assets/phone.svg';
-import location from '@frontend/assets/location.svg';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
-
-interface StyledRentalCardProps {
-  active: boolean;
-}
-
-const StyledRentalCard = styled.div<StyledRentalCardProps>`
-  font-family: 'Roboto Mono';
-  text-decoration: none;
-  color: ${({ theme }: WithTheme) => theme.colors.text.additional};
-  display: flex;
-  padding: 24px;
-  background: ${({ theme }: WithTheme) => theme.colors.background.default};
-  border-radius: 16px;
-  cursor: pointer;
-
-  ${({ theme, active }: WithThemeAndProps<StyledRentalCardProps>) =>
-    active
-      ? css`
-          border: 2px solid ${theme.colors.borders.active};
-          box-shadow: 0px 8px 16px rgba(156, 164, 169, 0.32);
-        `
-      : css`
-          border: 1px solid ${theme.colors.borders.default};
-        `}
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      flex-direction: column;
-      align-items: flex-start;
-    `)}
-
-  & + & {
-    margin-top: 16px;
-  }
-
-  :hover {
-    box-shadow: 0px 8px 16px rgba(156, 164, 169, 0.32);
-  }
-`;
-
-const RentalCardImage = styled.img`
-  width: 128px;
-  height: 128px;
-  margin-right: 24px;
-  object-fit: contain;
-  border-radius: 16px;
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      height: unset;
-      object-fit: unset;
-      margin-bottom: 16px;
-    `)}
-`;
-const RentalCardContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-
-const RentalCardName = styled.span`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 40px;
-  margin-bottom: 16px;
-`;
-
-const RentalCardAddress = styled.span`
-  display: flex;
-  align-items: center;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 16px;
-  color: ${({ theme }: WithTheme) => theme.colors.text.secondary};
-
-  img {
-    margin-right: 12px;
-  }
-`;
-
-const RentalCardPhone = styled.a`
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: ${({ theme }: WithTheme) => theme.colors.links.default};
-
-  img {
-    margin-right: 12px;
-  }
-`;
+import Image from 'next/image';
+import styles from './RentalCard.module.scss';
+import classNames from 'classnames';
 
 interface RentalCardProps {
   rental: ICrudRental;
@@ -122,20 +24,49 @@ const RentalCard = ({ rental, active }: RentalCardProps) => {
 
   return (
     <Link href={`/rentals/${rental.url}`} passHref>
-      <StyledRentalCard active={active} ref={ref}>
-        <RentalCardImage src={imageUrl(rental.icon)} />
-        <RentalCardContent>
-          <RentalCardName>{rental.name}</RentalCardName>
-          <RentalCardAddress>
-            <img src={location.src} alt="" />
-            {rental.address}
-          </RentalCardAddress>
-          <RentalCardPhone href={`tel:${rental.phone}`}>
-            <img src={phone.src} />
-            {phoneFormat(`+${rental.phone}`)}
-          </RentalCardPhone>
-        </RentalCardContent>
-      </StyledRentalCard>
+      <div
+        className={classNames(styles.card, active && styles.active)}
+        ref={ref}
+      >
+        <div className={styles.imageContainer}>
+          <Image src={imageUrl(rental.icon)} width="128px" height="128px" />
+        </div>
+        <div className={styles.container}>
+          <div className={styles.rentalName}>
+            <div className={styles.imageMobileContainer}>
+              <Image src={imageUrl(rental.icon)} width="48px" height="48px" />
+            </div>
+            <div className={styles.nameAndStar}>
+              <div className={styles.name}>
+                <span>{rental.name}</span>
+              </div>
+              <div className={styles.rating}>
+                <div className={styles.text}>{rental.rating}</div>
+                <div className={styles.star}>
+                  <Image src="/public/star.svg" width="20" height="20" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={classNames(styles.contact, styles.address)}>
+            <div className={styles.icon}>
+              <Image src="/public/location.svg" width="24" height="24" alt="" />
+            </div>
+            <div className={styles.value}>{rental.address}</div>
+          </div>
+          <a
+            href={`tel:${rental.phone}`}
+            className={classNames(styles.contact, styles.phone)}
+          >
+            <div className={styles.icon}>
+              <Image src="/public/phone.svg" width="24" height="24" />
+            </div>
+            <div className={styles.value}>
+              {phoneFormat(`+${rental.phone}`)}
+            </div>
+          </a>
+        </div>
+      </div>
     </Link>
   );
 };

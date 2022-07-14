@@ -1,34 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
-import { WithTheme, WithThemeAndProps } from '@frontend/utils/theme';
-import Content from '@frontend/layout/Content';
 import Link from 'next/link';
-import logo from '@frontend/assets/logo.svg';
 import { getCityName } from '@frontend/utils/getCityName';
 import { useCity } from '@frontend/hooks/useCity';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import styles from './Header.module.scss';
-
-const Logo = styled.img`
-  cursor: pointer;
-  ${({ theme }: WithTheme) =>
-    theme.mixins.mobile(
-      css`
-        width: 148px;
-      `,
-    )}
-`;
-
-interface CityButtonProps {
-  active: boolean;
-}
+import Image from 'next/image';
 
 const Header = () => {
   const router = useRouter();
   const selectRef = useRef();
   const { city, setCity } = useCity();
-  const [selectIsOpen, setSelectIsOpen] = useState<boolean>(true);
+  const [selectIsOpen, setSelectIsOpen] = useState<boolean>(false);
+  const lazyRoot = React.useRef(null);
 
   const close = () => setSelectIsOpen(false);
 
@@ -65,8 +49,14 @@ const Header = () => {
           [styles.withMap]: isPageWithMap,
         })}
       >
-        <Link href="/" passHref>
-          <Logo src={logo.src} />
+        <Link href="/" passHref ref={lazyRoot}>
+          <a className={styles.logoLink}>
+            <Image
+              src="/public/logo.svg"
+              className={styles.logo}
+              layout="fill"
+            />
+          </a>
         </Link>
         <div className={styles.cityDisplay} ref={selectRef}>
           {selectIsOpen && (

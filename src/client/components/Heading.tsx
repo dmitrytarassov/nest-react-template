@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css, StyledComponent } from 'styled-components';
-import linesSVG from '@frontend/assets/lines.svg';
 import { WithThemeAndProps } from '@frontend/utils/theme';
 import classNames from 'classnames';
 
@@ -24,7 +23,7 @@ const styledHeading = css`
         background-size: contain;
         background-position: left center;
         background-repeat: no-repeat;
-        background-image: url(${linesSVG.src});
+        background-image: url('/public/lines.svg');
       `}
   }
 `;

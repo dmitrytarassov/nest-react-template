@@ -130,7 +130,7 @@ p {
     border-radius: 50%!important;
 }
 
-.ymaps-2-1-79-image-with-content.rental_icon {
+.ymaps-2-1-79-image-with-content {
     background-size: contain!important;
     background-position: center!important;
     background-color: #fff!important;
@@ -145,7 +145,7 @@ p {
     transition: transform .3s ease;
 }
 
-.ymaps-2-1-79-image-with-content.rental_icon:not(.active):hover {
+.ymaps-2-1-79-image-with-content:not(.active):hover {
     border-color: #15D14A!important;
     transform: scale(1.1);
 
@@ -155,7 +155,7 @@ p {
     z-index: 99999999!important;
 }
 
-.ymaps-2-1-79-image-with-content.rental_icon.active {
+.ymaps-2-1-79-image-with-content.active {
     border: 4px solid #13EC50!important;
     width: 80px!important;
     height: 80px!important;
