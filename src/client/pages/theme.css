@@ -37,6 +37,10 @@
     --color-card-price-value: #0F0E0E;
     --color-card-price-old: #9EA6B6;
 
+    --color-breadcrumbs-default: #6C768A;
+    --color-breadcrumbs-current: #0F0E0E;
+    --color-breadcrumbs-hover: #13EC50;
+
     --color-popup-background: #0F0E0E;
     --color-popup-text: #fff;
 
@@ -70,6 +74,10 @@
     --color-buttons-alternate-default-background: #F1F5F6;
     --color-buttons-alternate-hover-color: #222222;
     --color-buttons-alternate-hover-background: #D8DDE2;
+
+    --color-buttons-back-default-background: #fff;
+    --color-buttons-back-hover-background: #D8DDE2;
+    --color-buttons-back-hover-border: #E9EAEE;
 
     --color-badge-date-color: #fff;
     --color-badge-date-background: #0F0E0E;

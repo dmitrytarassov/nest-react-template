@@ -23,12 +23,20 @@ export class BaseApiMongoModel<T> {
     if (query?.filter?.length) {
       for (const el of query.filter) {
         if (el.includes('||')) {
-          const [_name, type, _value] = el.split('||');
-          const value = _value.includes(',') ? _value.split(',') : _value;
-          const name = _name === 'id' ? '_id' : _name;
-          // @ts-ignore
-          filter[name] = {};
-          filter[name][type] = value;
+          // eslint-disable-next-line prefer-const
+          let [_name, type, _value] = el.split('||');
+          if (_name === 'q' && type === 'cont') {
+            _name = 'name';
+            type = '$regex';
+            // @ts-ignore
+            filter[_name] = new RegExp(_value, 'i');
+          } else {
+            const value = _value.includes(',') ? _value.split(',') : _value;
+            const name = _name === 'id' ? '_id' : _name;
+            // @ts-ignore
+            filter[name] = {};
+            filter[name][type] = value;
+          }
         } else {
           const [name, typeOrValue, value] = el.split(',');
           // @ts-ignore

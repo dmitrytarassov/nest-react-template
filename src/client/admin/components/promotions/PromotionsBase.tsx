@@ -8,6 +8,7 @@ import {
   ImageInput,
   DateInput,
   BooleanInput,
+  AutocompleteInput,
 } from 'react-admin';
 import { validateRequired } from '@admin/components/utils/validate';
 import Box from '@admin/components/Box';
@@ -30,7 +31,7 @@ const PromotionsBase = () => {
             source="rentalId"
             validate={validateRequired}
           >
-            <SelectInput optionText="name" label="Рентал" />
+            <AutocompleteInput optionText="name" label="Рентал" />
           </ReferenceInput>
           <TextInput
             resettable
@@ -109,12 +110,8 @@ const PromotionsBase = () => {
           />
         </Box>
       </FormTab>
-      <FormTab label="Preview: Card">
-        <PromotionPreviewCard />
-      </FormTab>
-      <FormTab label="Preview: Page">
-        <PromotionPreviewPage />
-      </FormTab>
+      <FormTab label="Preview: Card">{/*<PromotionPreviewCard />*/}</FormTab>
+      <FormTab label="Preview: Page">{/*<PromotionPreviewPage />*/}</FormTab>
     </TabbedForm>
   );
 };

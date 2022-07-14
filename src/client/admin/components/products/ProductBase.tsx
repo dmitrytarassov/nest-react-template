@@ -56,12 +56,8 @@ const ProductBase = () => {
           </ImageInput>
         </Box>
       </FormTab>
-      <FormTab label="Preview: Card">
-        <ProductPreviewCard />
-      </FormTab>
-      <FormTab label="Preview: Page">
-        <ProductPreviewPage />
-      </FormTab>
+      <FormTab label="Preview: Card">{/*<ProductPreviewCard />*/}</FormTab>
+      <FormTab label="Preview: Page">{/*<ProductPreviewPage />*/}</FormTab>
     </TabbedForm>
   );
 };

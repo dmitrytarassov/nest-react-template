@@ -1,25 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import Link from 'next/link';
-import { WithTheme } from '@frontend/utils/theme';
-
-const StyledBackButton = styled.a`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 16px;
-  background: #fff;
-  border-radius: 12px;
-  box-sizing: border-box;
-  width: 40px;
-  height: 40px;
-
-  &:hover {
-    background: #d8dde2;
-    border: 1px solid #e9eaee;
-    border-radius: 12px;
-  }
-`;
+import styles from './BackButton.module.scss';
 
 interface BackButtonProps {
   to: string;
@@ -28,7 +9,7 @@ interface BackButtonProps {
 const BackButton = ({ to }: BackButtonProps) => {
   return (
     <Link href={to} passHref>
-      <StyledBackButton>
+      <a className={styles.button}>
         <svg
           width="38"
           height="38"
@@ -43,7 +24,7 @@ const BackButton = ({ to }: BackButtonProps) => {
             strokeLinecap="round"
           />
         </svg>
-      </StyledBackButton>
+      </a>
     </Link>
   );
 };

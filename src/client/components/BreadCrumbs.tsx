@@ -1,70 +1,30 @@
 import React, { Fragment } from 'react';
-import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
-import { WithTheme } from '@frontend/utils/theme';
+import styles from './BreadCrumbs.module.scss';
 
 interface BreadCrumbsProps {
   breadcrumbs: IBreadCrumb[];
 }
 
-const StyledBreadCrumbs = styled.div`
-  font-family: 'Roboto Mono';
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 0 16px;
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      display: none;
-    `)}
-`;
-
-const breadCrumbBase = css`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 40px;
-  color: ${({ theme }: WithTheme) => theme.colors.breadcrumbs.default};
-`;
-
-const Slash = styled.span`
-  ${breadCrumbBase};
-  padding: 0 12px;
-`;
-
-const BreadCrumb = styled.a`
-  ${breadCrumbBase};
-  text-decoration: none;
-
-  :hover {
-    color: ${({ theme }: WithTheme) => theme.colors.breadcrumbs.hover};
-  }
-`;
-
-const LastBreadCrumb = styled.span`
-  ${breadCrumbBase};
-  color: ${({ theme }: WithTheme) => theme.colors.breadcrumbs.current};
-`;
-
 const BreadCrumbs = ({ breadcrumbs }: BreadCrumbsProps) => {
   return (
-    <StyledBreadCrumbs>
+    <div className={styles.container}>
       {breadcrumbs.map((breadcrumb, index) =>
         index !== breadcrumbs.length - 1 ? (
           <Fragment key={breadcrumb.name}>
             <Link href={breadcrumb.link} passHref>
-              <BreadCrumb>{breadcrumb.name}</BreadCrumb>
+              <a className={styles.element}>{breadcrumb.name}</a>
             </Link>
-            <Slash>{' / '}</Slash>
+            <span className={styles.slash}>{' / '}</span>
           </Fragment>
         ) : (
-          <LastBreadCrumb key={breadcrumb.name}>
+          <span key={breadcrumb.name} className={styles.current}>
             {breadcrumb.name}
-          </LastBreadCrumb>
+          </span>
         ),
       )}
-    </StyledBreadCrumbs>
+    </div>
   );
 };
 

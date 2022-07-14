@@ -1,7 +1,7 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 import BackButton from '@frontend/components/BackButton';
-import { WithTheme } from '@frontend/utils/theme';
+import styles from './PageHeader.module.scss';
+import Image from 'next/image';
 
 interface PageHeaderProps {
   backLink: string;
@@ -10,62 +10,20 @@ interface PageHeaderProps {
   image?: string;
 }
 
-const PageHeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      flex-direction: column;
-      align-items: flex-start;
-    `)}
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-const H1 = styled.h1`
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 28px;
-  line-height: 40px;
-  margin: 0;
-  padding: 0;
-  color: ${({ theme }: WithTheme) => theme.colors.text.primary};
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 140%;
-    `)};
-`;
-
-const Image = styled.img`
-  height: 48px;
-  width: 48px;
-  object-fit: contain;
-  margin-right: 16px;
-  border-radius: 8px;
-`;
-
 const PageHeader = ({ backLink, title, children, image }: PageHeaderProps) => {
   return (
-    <PageHeaderContainer>
-      <TitleContainer>
+    <div className={styles.container}>
+      <div className={styles.title}>
         <BackButton to={backLink} />
-        {image && <Image src={image} width={48} height={48} />}
-        <H1>{title}</H1>
-      </TitleContainer>
+        {image && (
+          <div className={styles.imageContainer}>
+            <Image src={image} width={48} height={48} />
+          </div>
+        )}
+        <h1 className={styles.heading}>{title}</h1>
+      </div>
       {children}
-    </PageHeaderContainer>
+    </div>
   );
 };
 

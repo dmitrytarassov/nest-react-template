@@ -66,7 +66,11 @@ const RentalsPage = () => {
         breadcrumbs={breadcrumbs}
         backLink="/"
         title="Список ренталов"
-        search={{ value: searchString, onChange: setSearchString }}
+        search={{
+          value: searchString,
+          onChange: setSearchString,
+          placeholder: 'Поиск по ренталам',
+        }}
       />
 
       {filteredRentals.length > 0 ? (

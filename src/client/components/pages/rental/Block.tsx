@@ -26,7 +26,7 @@ const StyledBlock = styled.div<{ columns: number }>`
   ${({ columns }) =>
     columns === 1
       ? css`
-          :not(:last-child) {
+          :not(:first-child) {
             margin-top: 16px;
           }
         `

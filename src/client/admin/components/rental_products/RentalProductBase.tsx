@@ -7,6 +7,7 @@ import {
   SelectInput,
   NumberInput,
   useRecordContext,
+  AutocompleteInput,
   BooleanInput,
 } from 'react-admin';
 import { validateRequired } from '@admin/components/utils/validate';
@@ -38,8 +39,9 @@ const RentalProductBase = () => {
             reference="product"
             source="productId"
             validate={validateRequired}
+            sort={{ field: 'name', order: 'ASC' }}
           >
-            <SelectInput optionText="name" label="Продукт" />
+            <AutocompleteInput optionText="name" label="Продукт" />
           </ReferenceInput>
           <ReferenceInput
             label="Рентал"
@@ -47,7 +49,7 @@ const RentalProductBase = () => {
             source="rentalId"
             validate={validateRequired}
           >
-            <SelectInput optionText="name" label="Рентал" />
+            <AutocompleteInput optionText="name" label="Рентал" />
           </ReferenceInput>
           <TextInput
             resettable
@@ -131,10 +133,10 @@ const RentalProductBase = () => {
         </Box>
       </FormTab>
       <FormTab label="Preview: Card">
-        <RentalProductPreviewCard />
+        {/*<RentalProductPreviewCard />*/}
       </FormTab>
       <FormTab label="Preview: Page">
-        <RentalProductPreviewPage />
+        {/*<RentalProductPreviewPage />*/}
       </FormTab>
     </TabbedForm>
   );

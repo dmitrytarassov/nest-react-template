@@ -1,0 +1,13 @@
+@import "../pages/mixins";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px 40px;
+  width: 100%;
+  box-sizing: border-box;
+
+  @include tablet {
+    padding: 32px 16px 40px;
+  }
+}

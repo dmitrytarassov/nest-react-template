@@ -1,0 +1,9 @@
+.resizer {
+  position: absolute;
+  height: 8px;
+  width: 56px;
+  background: red;
+  left: calc(50% - 28px);
+  bottom: 32px;
+  border-radius: 4px;
+}

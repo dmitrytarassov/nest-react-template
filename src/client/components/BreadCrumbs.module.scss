@@ -1,0 +1,39 @@
+@import "../pages/mixins";
+
+.container {
+  font-family: var(--font-RM);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+@mixin base {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 40px;
+  color: var(--color-breadcrumbs-default);
+}
+
+.slash {
+  @include base;
+  padding: 0 12px;
+}
+
+.element {
+  @include base;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-breadcrumbs-hover);
+  }
+}
+
+.current {
+  @include base;
+  color: var(--color-breadcrumbs-current);
+}

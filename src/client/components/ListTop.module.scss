@@ -1,0 +1,40 @@
+@import "../pages/mixins";
+
+.inputContainer {
+  display: flex;
+  position: relative;
+  margin-bottom: 12px;
+
+  @include tablet {
+    order: 1;
+    width: 100%;
+  }
+}
+
+.input {
+  font-family: var(--font-RM);
+  background-color: var(--color-background-default);
+  border-radius: 8px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 48px 0 16px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.search {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 16px;
+  width: 24px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

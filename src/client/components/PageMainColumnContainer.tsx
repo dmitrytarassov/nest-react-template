@@ -1,21 +1,14 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { WithTheme } from '@frontend/utils/theme';
+import styles from './PageMainColumnContainer.module.scss';
 
-const PageMainColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 32px 24px;
+interface PageMainColumnContainerProps {
+  children: React.ReactNode;
+}
 
-  width: 100%;
-  box-sizing: border-box;
-  //min-height: calc(100vh - 72px - 299px);
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.tablet(css`
-      padding: 32px 16px 40px;
-      //min-height: unset;
-    `)};
-`;
+const PageMainColumnContainer: React.FC<PageMainColumnContainerProps> = ({
+  children,
+}) => {
+  return <div className={styles.container}>{children}</div>;
+};
 
 export default PageMainColumnContainer;
