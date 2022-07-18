@@ -95,7 +95,7 @@ const InsurancePage: React.FC<InsurancePageProps> = ({ canSend }) => {
             <Title>Какие риски покрывает наша страховка?</Title>
             <Risks />
           </Block>
-          <Block>
+          <Block id="prices">
             <Title>Таблица цен</Title>
             <Prices />
           </Block>

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Button from '@frontend/components/Button';
 import { get, post } from '@frontend/utils/fetcher';
 import Link from 'next/link';
+import styles from './Form.module.scss';
 
 const Container = styled.div`
   display: flex;
@@ -89,6 +90,18 @@ const Container = styled.div`
 
     span {
       width: calc(100% - 32px);
+      position: relative;
+
+      &.withBox {
+        :before {
+          content: '';
+          position: absolute;
+          left: -39px;
+          width: 39px;
+          height: 22px;
+          top: -2px;
+        }
+      }
     }
 
     :before {
@@ -221,15 +234,21 @@ const Form = ({
       ></textarea>
       <div className={classNames('checkbox', { checked })}>
         <span>
-          <span onClick={() => setChecked(!checked)}>
+          <span className="withBox" onClick={() => setChecked(!checked)}>
             Я соглашаюсь на обработку{' '}
           </span>
           <Link href="/terms">персональных данных</Link>
         </span>
       </div>
-      <StyledButton disabled={!isValid} onClick={send}>
+      <Button
+        className={styles.button}
+        variant="grayViolet"
+        disabled={!isValid}
+        onClick={send}
+        size="large"
+      >
         Отправить заявку
-      </StyledButton>
+      </Button>
     </Container>
   );
 };

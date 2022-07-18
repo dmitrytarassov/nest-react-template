@@ -36,6 +36,24 @@
     }
   }
 
+  &.grayViolet {
+    padding: 15px 32px;
+
+    &.large {
+      padding: 19px 32px;
+    }
+
+    color: var(--color-buttons-violet-default-color);
+    background-color: var(--color-buttons-violet-default-background);
+    border: 1px solid var(--color-buttons-violet-default-border);
+
+    &:hover {
+      color: var(--color-buttons-violet-hover-color);
+      background-color: var(--color-buttons-violet-hover-background);
+      border-color: var(--color-buttons-violet-hover-border);
+    }
+  }
+
   &:disabled {
     color: var(--color-buttons-disabled-color)!important;
     background-color: var(--color-buttons-disabled-background)!important;

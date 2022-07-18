@@ -62,8 +62,8 @@
     --color-buttons-default-background: #13EC50;
     --color-buttons-hover-color: #0F0E0E;
     --color-buttons-hover-background: #15D14A;
-    --color-buttons-disabled-color: #6C768A;
-    --color-buttons-disabled-background: #E9EAEE;
+    --color-buttons-disabled-color: #9EA6B6;
+    --color-buttons-disabled-background: #D8DDE2;
 
     --color-buttons-additional-default-color: #222222;
     --color-buttons-additional-default-background: #F8F9FA;
@@ -74,6 +74,13 @@
     --color-buttons-alternate-default-background: #F1F5F6;
     --color-buttons-alternate-hover-color: #222222;
     --color-buttons-alternate-hover-background: #D8DDE2;
+
+    --color-buttons-violet-default-color: #000000;
+    --color-buttons-violet-default-background: #F1F5F6;
+    --color-buttons-violet-default-border: #F8F9FA;
+    --color-buttons-violet-hover-color: #fff;
+    --color-buttons-violet-hover-background: #7749D9;
+    --color-buttons-violet-hover-border: #7749D9;
 
     --color-buttons-back-default-background: #fff;
     --color-buttons-back-hover-background: #D8DDE2;

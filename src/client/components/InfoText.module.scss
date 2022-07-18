@@ -8,6 +8,20 @@
   line-height: 130%;
   color: var(--colors-text-gray);
 
+  &.onlyMobile {
+    display: none;
+    @include tablet {
+      display: block;
+    }
+  }
+
+  &.onlyDesktop {
+    display: block;
+    @include tablet {
+      display: none;
+    }
+  }
+
   @include tablet {
     font-size: 20px;
   }

@@ -12,7 +12,7 @@ interface ButtonProps {
   blank?: boolean;
   className?: string;
   size?: 'small' | 'medium' | 'large';
-  variant?: 'primary' | 'whiteOrange';
+  variant?: 'primary' | 'whiteOrange' | 'grayViolet';
 }
 
 const Button = ({

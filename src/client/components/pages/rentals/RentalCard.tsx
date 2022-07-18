@@ -24,10 +24,7 @@ const RentalCard = ({ rental, active }: RentalCardProps) => {
 
   return (
     <Link href={`/rentals/${rental.url}`} passHref>
-      <div
-        className={classNames(styles.card, active && styles.active)}
-        ref={ref}
-      >
+      <a className={classNames(styles.card, active && styles.active)} ref={ref}>
         <div className={styles.imageContainer}>
           <Image src={imageUrl(rental.icon)} width="128px" height="128px" />
         </div>
@@ -66,7 +63,7 @@ const RentalCard = ({ rental, active }: RentalCardProps) => {
             </div>
           </a>
         </div>
-      </div>
+      </a>
     </Link>
   );
 };

@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  will-change: filter;
+  position: relative;
 
   & + & {
     margin-left: 12px;

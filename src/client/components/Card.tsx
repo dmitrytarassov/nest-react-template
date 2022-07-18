@@ -53,7 +53,11 @@ const Card = ({
               width="400px"
               height="200px"
             />
-            <div className={classNames(styles.content)}>
+            <div
+              className={classNames(styles.content, {
+                [styles.withPrice]: !!price,
+              })}
+            >
               <div className={styles.titleContainer}>
                 <div className={styles.popupContainer}>
                   <span className={styles.title}>{title}</span>

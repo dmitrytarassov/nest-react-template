@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import ListTop from '@frontend/components/ListTop';
@@ -40,7 +40,8 @@ const SocialIcon = styled.img`
 const RentalPage = ({ rental }: RentalPageProps) => {
   const router = useRouter();
   const { rentals } = useRentals();
-  const { activeRental } = useMap();
+  const { activeRental, selectRental } = useMap();
+  const [init, setInit] = useState<boolean>(false);
 
   const breadcrumbs: IBreadCrumb[] = [
     {
@@ -58,11 +59,18 @@ const RentalPage = ({ rental }: RentalPageProps) => {
   ];
 
   useEffect(() => {
-    const rental = rentals.find(({ id }) => id === activeRental);
-    if (rental) {
-      router.push(`/rentals/${rental.url}`);
+    if (init) {
+      const rental = rentals.find(({ id }) => id === activeRental);
+      if (rental) {
+        router.push(`/rentals/${rental.url}`);
+      }
     }
   }, [activeRental]);
+
+  useEffect(() => {
+    setInit(true);
+    selectRental(rental.id);
+  }, []);
 
   return (
     <PageMainColumnContainer>

@@ -12,9 +12,13 @@ const Banner = () => {
         <h1 className={classNames(styles.heading, headingStyles.useLines)}>
           <span>Kinoscope</span>
         </h1>
-        <InfoText>
+        <InfoText onlyDesktop>
           Информационный сервис о новинках {'\n'}и акциях во всех ренталах{' '}
           {'\n'}в твоем городе
+        </InfoText>
+        <InfoText onlyMobile>
+          Информационный сервис {'\n'}о новинках и акциях во всех {'\n'}ренталах{' '}
+          в твоем городе
         </InfoText>
       </div>
     </Content>

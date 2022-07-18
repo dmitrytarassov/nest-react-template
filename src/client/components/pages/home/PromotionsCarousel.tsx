@@ -22,7 +22,9 @@ const PromotionsCarousel = () => {
         <Content className={styles.content}>
           <div className={styles.container}>
             <h3 className={classNames(styles.heading, headingStyles.useLines)}>
-              <span>Акции и новинки ренталов</span>
+              <div>
+                Акции и{'\u00A0'}новинки{'\u00A0'}ренталов
+              </div>
             </h3>
             <CarouselContainer>
               <Swiper {...fullPageSwiperProps}>

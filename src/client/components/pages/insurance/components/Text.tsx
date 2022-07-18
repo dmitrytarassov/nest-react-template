@@ -6,6 +6,15 @@ const Text = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+
+  &.withPadding {
+    padding: 0 24px;
+  }
+
+  a {
+    color: #fe6b01 !important;
+    text-decoration: none;
+  }
 `;
 
 export default Text;

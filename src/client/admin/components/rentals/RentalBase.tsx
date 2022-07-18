@@ -101,7 +101,6 @@ export default function RentalBase({
             source="coordinates"
             validate={validateRequired}
             label="Координаты"
-            disabled
             refValue={coordinates.join(',')}
             onClick={() => setMapIsOpen(true)}
           />

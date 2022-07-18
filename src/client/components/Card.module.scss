@@ -25,11 +25,6 @@
   box-sizing: border-box;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-}
-
 .image {
   margin-top: -2px!important;
   margin-left: -1px!important;
@@ -48,6 +43,10 @@
 
   .small & {
     padding: 16px;
+  }
+
+  &.withPrice {
+    padding-bottom: 0;
   }
 }
 
@@ -114,13 +113,13 @@
 }
 
 .footer {
-  padding: 0 24px 24px;
+  padding: 8px 24px 24px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 
   .small & {
-    padding: 0 16px 16px;
+    padding: 8px 16px 16px;
   }
 }
 

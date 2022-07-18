@@ -14,12 +14,12 @@
   padding-top: 68px;
   padding-bottom: 68px;
   align-items: flex-start;
-  background-image: url("/public/banner-map.png");
+  background-image: url("/public/banner-map.jpg");
 
   @include tablet {
-    background-image: url("/public/banner-map-mobile.png");
+    background-image: url("/public/banner-map-mobile.jpg");
     background-position: bottom right;
-    background-size: contain;
+    background-size: cover;
 
     padding-top: 32px;
     padding-bottom: 32px;

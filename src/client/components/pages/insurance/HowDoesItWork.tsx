@@ -18,7 +18,7 @@ const Container = styled.div`
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 16px;
-    row-gap: 16px;
+    row-gap: 58px;
     width: 100%;
     overflow-x: hidden;
 
@@ -114,7 +114,7 @@ const Container = styled.div`
         position: absolute;
         height: 1px;
         width: 2000px;
-        background: #f1f5f6;
+        background: #d8dde2;
         left: calc(100% + 24px);
         top: 50%;
         z-index: 1;
@@ -190,7 +190,7 @@ const HowDoesItWork: React.FC = () => {
         <div className="block">
           <div className="number withLine">1</div>
           <Subtitle>Оформление</Subtitle>
-          <Text>
+          <Text className="withPadding">
             Оформи страховку через менеджера рентала. Дополнительные документы
             не потребуются
           </Text>
@@ -198,15 +198,15 @@ const HowDoesItWork: React.FC = () => {
         <div className="block">
           <div className="number breakCenter">2</div>
           <Subtitle>Оплата</Subtitle>
-          <Text>
-            Ссылку на оплату мы пришлем на почту. С ценами можно ознакомиться
-            тут
+          <Text className="withPadding">
+            Ссылку на оплату мы пришлем на почту. С ценами можно ознакомиться{' '}
+            <a href="#prices">тут</a>
           </Text>
         </div>
         <div className="block">
           <div className="number breakLast">3</div>
           <Subtitle>Спокойствие</Subtitle>
-          <Text>
+          <Text className="withPadding">
             Проверь почту — страховой полис уже там. Теперь оборудование
             застраховано
           </Text>
@@ -214,14 +214,14 @@ const HowDoesItWork: React.FC = () => {
         <div className="block">
           <div className="number withLine">4</div>
           <Subtitle>Съемка</Subtitle>
-          <Text>
+          <Text className="withPadding">
             Реализуй самые смелые идеи, а риски на съемке мы берем на себя
           </Text>
         </div>
         <div className="block">
           <div className="number breakLast">5</div>
           <Subtitle>Не забудь</Subtitle>
-          <Text>
+          <Text className="withPadding">
             Наступил страховой случай? Напиши нам, пришли фото/видео повреждений
             и расскажи что случилось
           </Text>
@@ -245,7 +245,7 @@ const HowDoesItWork: React.FC = () => {
               <Subtitle>Оплата</Subtitle>
               <Text>
                 Ссылку на оплату мы пришлем на почту. С ценами можно
-                ознакомиться тут
+                ознакомиться <a href="#prices">тут</a>
               </Text>
             </div>
           </SwiperSlide>
