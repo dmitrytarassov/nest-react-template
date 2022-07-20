@@ -3,10 +3,11 @@ import NextImage from 'next/image';
 
 interface ImageProps {
   src: string;
-  className: string;
+  className?: string;
   width?: string | number;
   height?: string | number;
   layout?: string;
+  alt?: string;
 }
 
 const Image: React.FC<ImageProps> = ({
@@ -15,6 +16,7 @@ const Image: React.FC<ImageProps> = ({
   className,
   width,
   height,
+  alt,
 }) => {
   return (
     <NextImage
@@ -24,6 +26,7 @@ const Image: React.FC<ImageProps> = ({
       height={height}
       // @ts-ignore
       layout={layout}
+      alt={alt}
     />
   );
 };
