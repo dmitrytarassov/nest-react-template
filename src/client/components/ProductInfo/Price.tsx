@@ -24,11 +24,11 @@ const Price = ({ price, discountPrice, link }: PriceProps) => {
             <div className={styles.text}>Стоимость за сутки:</div>
             <div className={styles.current}>
               {moneyFormat(discountPrice || price, false)}
-              <span>₽</span>
+              <span>{'\u00A0'}₽</span>
             </div>
             {discountPrice > 0 && (
               <div className={styles.old}>
-                {moneyFormat(price, false)} <span>₽</span>
+                {moneyFormat(price, false)} <span>{'\u00A0'}₽</span>
               </div>
             )}
           </>

@@ -62,7 +62,9 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
   }, []);
 
   useEffect(() => {
-    router.push(`/rentals/`);
+    if (init) {
+      router.push(`/rentals/`);
+    }
   }, [city]);
 
   useEffect(() => {
