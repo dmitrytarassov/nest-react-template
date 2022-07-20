@@ -3,18 +3,7 @@ import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
 import NotFound from '@frontend/components/NotFound';
 import PromotionsCarousel from '@frontend/components/pages/rentalPromotions/PromotionsCarousel';
 import classNames from 'classnames';
-import styled from 'styled-components';
-import Title from '@frontend/components/pages/Title';
-
-const StyledTitle = styled(Title)`
-  &.not_alone {
-    margin-top: 32px;
-  }
-`;
-
-const NFContainer = styled.div`
-  min-height: 420px;
-`;
+import styles from './NewsAndPromotions.module.scss';
 
 interface NewsAndPromotionsProps {
   news: ICrudPromotion[];
@@ -28,24 +17,26 @@ const NewsAndPromotions: React.FC<NewsAndPromotionsProps> = ({
   return (
     <>
       {promotions.length === 0 && news.length === 0 && (
-        <NFContainer>
+        <div className={styles.nfContainer}>
           <NotFound />
-        </NFContainer>
+        </div>
       )}
       {promotions.length > 0 && (
         <>
-          <StyledTitle>Акции</StyledTitle>
+          <h2 className={styles.title}>Акции</h2>
           <PromotionsCarousel promotions={promotions} />
         </>
       )}
 
       {news.length > 0 && (
         <>
-          <StyledTitle
-            className={classNames({ not_alone: promotions.length > 0 })}
+          <h2
+            className={classNames(styles.title, {
+              [styles.not_alone]: promotions.length > 0,
+            })}
           >
             Новинки
-          </StyledTitle>
+          </h2>
           <PromotionsCarousel promotions={news} />
         </>
       )}

@@ -82,7 +82,7 @@ const RentalsPage = () => {
           />
         ))
       ) : (
-        <NotFound />
+        <>{rentals.length > 0 ? <NotFound /> : null}</>
       )}
     </PageMainColumnContainer>
   );

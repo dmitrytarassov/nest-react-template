@@ -30,7 +30,6 @@ export const MarkerRental: React.FC<
       ];
       elements.forEach((element) => {
         const image = getElementStyle(element, 'backgroundImage');
-        console.log(image, icon);
         if (image.includes(icon)) {
           setElement(element);
         }
@@ -46,7 +45,6 @@ export const MarkerRental: React.FC<
     if (element) {
       setTimeout(() => {
         element.classList.add('rental_icon');
-        console.log('Change');
         if (active) {
           const parent = element.parentNode.parentNode;
           if (parent.classList.contains('ymaps-2-1-79-placemark-overlay')) {

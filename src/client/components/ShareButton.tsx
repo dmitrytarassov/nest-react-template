@@ -81,14 +81,14 @@ const ShareButton = ({ alone }: ShareButtonProps) => {
             <div className={styles.text}>Поделиться</div>
             <div className={styles.content}>
               <a href="#" onClick={copyClick}>
-                <Image width="32" height="32" src="/public/copy.svg" />
+                <Image width="32" height="32" src="/public/share/copy.svg" />
               </a>
               <a
                 href={`https://vk.com/share.php?url=${url}`}
                 target="_blank"
                 onClick={close}
               >
-                <Image width="32" height="32" src="/public/vk.svg" />
+                <Image width="32" height="32" src="/public/share/vk.svg" />
               </a>
               <a
                 href={`https://api.whatsapp.com/send?text=${url}`}
@@ -96,14 +96,22 @@ const ShareButton = ({ alone }: ShareButtonProps) => {
                 target="_blank"
                 onClick={close}
               >
-                <Image width="32" height="32" src="/public/whatsapp.svg" />
+                <Image
+                  width="32"
+                  height="32"
+                  src="/public/share/whatsapp.svg"
+                />
               </a>
               <a
                 href={`https://t.me/share/url?url=${url}`}
                 target="_blank"
                 onClick={close}
               >
-                <Image width="32" height="32" src="/public/telegram.svg" />
+                <Image
+                  width="32"
+                  height="32"
+                  src="/public/share/telegram.svg"
+                />
               </a>
             </div>
           </div>

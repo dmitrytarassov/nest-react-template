@@ -17,6 +17,10 @@
   font-size: 12px;
   line-height: 40px;
   color: var(--color-breadcrumbs-default);
+
+  :global(.reverted) & {
+    color: var(--color-breadcrumbs-reverted-default);
+  }
 }
 
 .slash {
@@ -31,9 +35,17 @@
   &:hover {
     color: var(--color-breadcrumbs-hover);
   }
+
+  :global(.reverted) &:hover {
+    color: var(--color-breadcrumbs-reverted-hover);
+  }
 }
 
 .current {
   @include base;
   color: var(--color-breadcrumbs-current);
+
+  :global(.reverted) & {
+    color: var(--color-breadcrumbs-reverted-current);
+  }
 }

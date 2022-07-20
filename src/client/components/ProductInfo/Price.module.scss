@@ -1,0 +1,98 @@
+@import "../../pages/mixins";
+
+.price {
+  font-family: var(--font-RO);
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  align-items: center;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 40px;
+  color: var(--colors-text-additional);
+  box-sizing: border-box;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @include tablet {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.text {
+  font-family: var(--font-RM);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  margin-right: 24px;
+
+  @include tablet {
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+}
+
+.current {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 130%;
+  font-family: var(--font-RM);
+
+  span {
+    font-family: var(--font-RO);
+    font-weight: 500;
+  }
+}
+
+.old {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
+  text-decoration-line: line-through;
+  color: var(--colors-text-oldPrice);
+  margin-left: 12px;
+  font-family: var(--font-RM);
+
+  span {
+    font-family: var(--font-RO);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.prices {
+  display: flex;
+  align-items: center;
+
+  @include tablet {
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+}
+
+.button {
+  @include mobile {
+    width: calc(100% - 64px);
+    box-sizing: border-box;
+    justify-content: center;
+  }
+}

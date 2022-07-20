@@ -126,14 +126,20 @@
   align-items: center;
   display: flex;
   position: relative;
+  width: 100% !important;
 
   &:hover {
     color: var(--colot-rental-card-link-hover);
   }
 }
 
+.contactsLinkIconContainer {
+  margin-right: 16px;
+  position: relative;
+}
+
 .contactsIcon {
   width: 24px;
   height: 24px;
-  margin-right: 16px;
+
 }

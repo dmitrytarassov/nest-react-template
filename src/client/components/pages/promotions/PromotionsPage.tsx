@@ -6,25 +6,8 @@ import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import { updateMapRentals } from '@frontend/utils/updateMapRentals';
-import { ESelectRental } from '@frontend/dtos/ESelectRental';
-import PromotionsCarousel from '@frontend/components/pages/rentalPromotions/PromotionsCarousel';
-import Title from '@frontend/components/pages/Title';
-import { ICrudRental } from '@lib/interfaces/ICrudRental';
-import imageUrl from '@frontend/utils/imageUrl';
-import styled from 'styled-components';
-import NotFound from '@frontend/components/NotFound';
-import classNames from 'classnames';
 import NewsAndPromotions from '@frontend/components/pages/rentalPromotions/NewsAndPromotions';
-
-const StyledTitle = styled(Title)`
-  &.not_alone {
-    margin-top: 32px;
-  }
-`;
-
-const NFContainer = styled.div`
-  min-height: 420px;
-`;
+import { useMap } from '@frontend/hooks/useMap';
 
 interface PromotionsProps {
   promotions: ICrudPromotion[];
@@ -33,6 +16,8 @@ interface PromotionsProps {
 const RentalPromotionsPage = ({ promotions }: PromotionsProps) => {
   const router = useRouter();
   const [searchString, setSearchString] = useState<string>('');
+  const { activeRental } = useMap();
+  const [init, setInit] = useState<boolean>(false);
 
   const { rentals } = useRentals();
   const breadcrumbs: IBreadCrumb[] = [
@@ -41,29 +26,27 @@ const RentalPromotionsPage = ({ promotions }: PromotionsProps) => {
       link: '/',
     },
     {
-      name: 'Новинки и акции',
+      name: 'Акции и новинки',
       link: `/rentals/promotions`,
     },
   ];
 
   useEffect(() => {
-    // @ts-ignore
-    updateMapRentals(rentals, '', 500);
+    setInit(true);
+    return () => {
+      setInit(false);
+    };
+  }, []);
 
-    function callBack(e) {
-      // @ts-ignore
-      const rental = rentals.find(({ id }) => id === e.detail);
+  useEffect(() => {
+    const rental = rentals.find(({ id }) => id === activeRental);
+    if (init && rental) {
+      console.log(`go to /rentals/${rental.url}`);
       if (rental) {
-        router.push(`/rentals/${rental.url}/promotions`);
+        router.push(`/rentals/${rental.url}`);
       }
     }
-
-    window.addEventListener(ESelectRental, callBack);
-
-    return () => {
-      window.removeEventListener(ESelectRental, callBack);
-    };
-  }, [rentals]);
+  }, [activeRental]);
 
   useEffect(() => {
     // @ts-ignore
@@ -91,7 +74,7 @@ const RentalPromotionsPage = ({ promotions }: PromotionsProps) => {
       <ListTop
         breadcrumbs={breadcrumbs}
         backLink={`/`}
-        title={`Новинки и акции`}
+        title={`Акции и новинки`}
         search={{ value: searchString, onChange: setSearchString }}
       />
       <NewsAndPromotions news={news} promotions={actions} />

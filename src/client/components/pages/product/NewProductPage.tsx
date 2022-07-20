@@ -14,6 +14,7 @@ import ListTop from '@frontend/components/ListTop';
 import PageMainColumnContainer from '@frontend/components/PageMainColumnContainer';
 import styled from 'styled-components';
 import { useMap } from '@frontend/hooks/useMap';
+import { useCity } from '@frontend/hooks/useCity';
 
 const StyledPageMainColumnContainer = styled(PageMainColumnContainer)``;
 
@@ -28,6 +29,7 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
   product,
   rentalProduct,
 }) => {
+  const { city } = useCity();
   const router = useRouter();
   const { rentals } = useRentals();
   const { activeRental } = useMap();
@@ -58,6 +60,10 @@ const NewProductPage: React.FC<NewProductPageProps> = ({
       setInit(false);
     };
   }, []);
+
+  useEffect(() => {
+    router.push(`/rentals/`);
+  }, [city]);
 
   useEffect(() => {
     if (activeRental && init) {

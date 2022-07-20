@@ -51,14 +51,18 @@ export const combineProductsAndPromotions = (
   products: ICrudPromotion[],
   promotions: ICrudPromotion[],
   rentals: ICrudRental[],
-) => [
-  ...products,
-  ...promotions.map((promotion) => {
-    const rental = rentals.find(({ id }) => id === promotion.rentalId);
-    return {
-      ...promotion,
-      url: `/promotion/${promotion.url}`,
-      rentalLogo: rental ? rental.icon : undefined,
-    };
-  }),
-];
+) =>
+  [
+    ...products,
+    ...promotions.map((promotion) => {
+      const rental = rentals.find(({ id }) => id === promotion.rentalId);
+      return {
+        ...promotion,
+        url: `/promotion/${promotion.url}`,
+        rentalLogo: rental ? rental.icon : undefined,
+      };
+    }),
+  ].map((promotion) => ({
+    ...promotion,
+    date: promotion.date || null,
+  }));

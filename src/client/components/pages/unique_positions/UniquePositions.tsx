@@ -13,6 +13,8 @@ import NotFound from '@frontend/components/NotFound';
 import BannerBase from '@frontend/components/pages/home/BannerBase';
 import { WithTheme } from '@frontend/utils/theme';
 import InfoText from '@frontend/components/InfoText';
+import { useMap } from '@frontend/hooks/useMap';
+import styles from './UniquePositions.module.scss';
 
 const CarouselContainer = styled.div`
   display: flex;
@@ -24,26 +26,6 @@ const CarouselContainer = styled.div`
     flex-direction: column;
     width: 100%;
   }
-`;
-
-const StyledBanner = styled(BannerBase)`
-  background-color: rgba(255, 255, 255, 0.15);
-  background-image: url('/public/uniques.png');
-  padding: 24px;
-  align-items: flex-start;
-  margin-bottom: 32px;
-  border-radius: 24px;
-
-  ${({ theme }: WithTheme) => theme.mixins.tablet(css``)}
-
-  ${({ theme }: WithTheme) =>
-    theme.mixins.mobile(css`
-      background-position: bottom right;
-      background-size: cover;
-      background-image: url('/public/uniques-mobile.png');
-      padding: 32px;
-      height: 268px;
-    `)}
 `;
 
 const StyledInfoText = styled(InfoText)`
@@ -70,6 +52,8 @@ const UniquePositionsPage = ({
 }: UniquePositionsPageProps) => {
   const router = useRouter();
   const [searchString, setSearchString] = useState<string>('');
+  const { activeRental } = useMap();
+  const [init, setInit] = useState<boolean>(false);
 
   const breadcrumbs: IBreadCrumb[] = [
     {
@@ -83,23 +67,21 @@ const UniquePositionsPage = ({
   ];
 
   useEffect(() => {
-    // @ts-ignore
-    updateMapRentals(rentals, '', 500);
+    setInit(true);
+    return () => {
+      setInit(false);
+    };
+  }, []);
 
-    function callBack(e) {
-      // @ts-ignore
-      const rental = rentals.find(({ id }) => id === e.detail);
+  useEffect(() => {
+    const rental = rentals.find(({ id }) => id === activeRental);
+    if (init && rental) {
+      console.log(`go to /rentals/${rental.url}`);
       if (rental) {
         router.push(`/rentals/${rental.url}`);
       }
     }
-
-    window.addEventListener(ESelectRental, callBack);
-
-    return () => {
-      window.removeEventListener(ESelectRental, callBack);
-    };
-  }, [rentals]);
+  }, [activeRental]);
 
   return (
     <PageMainColumnContainer>
@@ -107,14 +89,19 @@ const UniquePositionsPage = ({
         breadcrumbs={breadcrumbs}
         backLink={`/`}
         title={`Уникальные позиции`}
+        revertColors
         // search={{ value: searchString, onChange: setSearchString }}
       />
-      <StyledBanner>
-        <StyledInfoText>
-          В этом блоке, вы можете найти редкие, эксклюзивные и даже такие
-          позиции, которых вы раньше не видели!
-        </StyledInfoText>
-      </StyledBanner>
+      <div className={styles.banner}>
+        <InfoText onlyDesktop className={styles.text}>
+          В этом блоке, вы можете найти редкие, {'\n'}эксклюзивные и даже такие
+          позиции, {'\n'}которых вы раньше не видели!
+        </InfoText>
+        <InfoText onlyMobile className={styles.text}>
+          В этом блоке, вы можете найти {'\n'}редкие, эксклюзивные и даже {'\n'}
+          такие позиции, которых вы {'\n'}раньше не видели!
+        </InfoText>
+      </div>
       <CarouselContainer>
         <div className="container">
           {uniques.length ? <Positions positions={uniques} /> : <NotFound />}

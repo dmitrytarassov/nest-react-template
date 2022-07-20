@@ -44,7 +44,7 @@ const PromotionPage = ({ rental, promotion }: PromotionPageProps) => {
       link: `/rentals/${rental.url}`,
     },
     {
-      name: 'Новинки и акции',
+      name: 'Акции и новинки',
       link: `/promotions/${promotion.id}`,
     },
   ];

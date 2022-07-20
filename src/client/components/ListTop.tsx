@@ -15,6 +15,8 @@ interface ListTopProps {
     onChange: (value: string) => void;
     placeholder?: string;
   };
+  rating?: number;
+  revertColors?: boolean;
 }
 
 const ListTop = ({
@@ -23,11 +25,19 @@ const ListTop = ({
   title,
   search,
   image,
+  rating,
+  revertColors,
 }: ListTopProps) => {
   return (
     <>
-      <BreadCrumbs breadcrumbs={breadcrumbs} />
-      <PageHeader backLink={backLink} title={title} image={image}>
+      <BreadCrumbs breadcrumbs={breadcrumbs} revertColors={revertColors} />
+      <PageHeader
+        backLink={backLink}
+        title={title}
+        image={image}
+        rating={rating}
+        revertColors={revertColors}
+      >
         {search && (
           <div className={styles.inputContainer}>
             <input

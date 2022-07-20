@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { PromotionsProvider } from '@frontend/providers/promotions.provider';
-import { RentalsProvider } from '@frontend/providers/rentals.provider';
 import { getCity } from '@frontend/utils/getCity';
 import { useRouter } from 'next/router';
 import { ICrudPromotion } from '@lib/interfaces/ICrudPromotion';
@@ -64,8 +62,8 @@ export async function getServerSideProps(
         props: {
           ...data,
           city: getCity(context.req.session.city),
-          seo_title: `${data.rental.name} | Новинки и акции`,
-          seo_description: `${data.rental.name} | Новинки и акции`,
+          seo_title: `${data.rental.name} | Акции и новинки`,
+          seo_description: `${data.rental.name} | Акции и новинки`,
         },
       };
     }

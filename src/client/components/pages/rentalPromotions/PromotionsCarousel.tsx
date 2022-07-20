@@ -57,11 +57,16 @@ const PromotionsCarousel = ({ promotions }: PromotionsCarouselProps) => {
                 date={promotion.date}
                 price={promotion.price}
                 discountPrice={promotion.discountPrice}
+                rentalLogo={promotion.rentalLogo}
               />
             </SwiperSlide>
           ))}
           <CarouselFooter>
-            <CarouselControls count={promotions.length + 1} />
+            <CarouselControls
+              count={promotions.length + 1}
+              color="black"
+              size="small"
+            />
           </CarouselFooter>
         </Swiper>
       </StyledPromotionsCarousel>

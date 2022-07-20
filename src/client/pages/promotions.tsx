@@ -47,7 +47,9 @@ const Promotions = ({ promotions, city }: PromotionsPageProps & PageProps) => {
   return (
     <PromotionsProvider>
       <RentalsProvider>
-        <PromotionsPage promotions={promotionsData} />
+        {promotionsData.length && (
+          <PromotionsPage promotions={promotionsData} />
+        )}
       </RentalsProvider>
     </PromotionsProvider>
   );
@@ -63,8 +65,8 @@ export async function getServerSideProps(
       props: {
         ...data,
         city: getCity(context.req.session.city),
-        seo_title: `Новинки и акции ренталов`,
-        seo_description: `Новинки и акции ренталов`,
+        seo_title: `Акции и новинки ренталов`,
+        seo_description: `Акции и новинки ренталов`,
       },
     };
   } catch (e) {

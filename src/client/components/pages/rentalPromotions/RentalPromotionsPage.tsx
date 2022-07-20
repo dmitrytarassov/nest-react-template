@@ -39,7 +39,7 @@ const RentalPromotionsPage = ({
       link: `/rentals/${rental.url}`,
     },
     {
-      name: 'Новинки и акции',
+      name: 'Акции и новинки',
       link: `/rentals/${rental.url}/promotions`,
     },
   ];
@@ -54,6 +54,7 @@ const RentalPromotionsPage = ({
   useEffect(() => {
     if (activeRental && init) {
       const rental = rentals.find(({ id }) => id === activeRental);
+      console.log(`go to: /rentals/${rental.url}`);
       if (rental) {
         router.push(`/rentals/${rental.url}`);
       }
@@ -81,7 +82,7 @@ const RentalPromotionsPage = ({
       <ListTop
         breadcrumbs={breadcrumbs}
         backLink={`/rentals/${rental.url}`}
-        title={`${rental.name}: Новинки и акции`}
+        title={`${rental.name}: Акции и новинки`}
         image={imageUrl(rental.icon)}
         search={{ value: searchString, onChange: setSearchString }}
       />

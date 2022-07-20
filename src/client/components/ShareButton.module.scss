@@ -1,3 +1,5 @@
+@import "../pages/mixins";
+
 .button {
   display: flex;
   align-items: center;
@@ -49,6 +51,9 @@
 
     a {
       display: flex;
+      position: relative;
+      width: 32px;
+
       img {
         width: 32px;
         height: 32px;

@@ -2,14 +2,20 @@ import React, { Fragment } from 'react';
 import Link from 'next/link';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import styles from './BreadCrumbs.module.scss';
+import classNames from 'classnames';
 
 interface BreadCrumbsProps {
   breadcrumbs: IBreadCrumb[];
+  revertColors?: boolean;
 }
 
-const BreadCrumbs = ({ breadcrumbs }: BreadCrumbsProps) => {
+const BreadCrumbs = ({ breadcrumbs, revertColors }: BreadCrumbsProps) => {
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        reverted: revertColors,
+      })}
+    >
       {breadcrumbs.map((breadcrumb, index) =>
         index !== breadcrumbs.length - 1 ? (
           <Fragment key={breadcrumb.name}>

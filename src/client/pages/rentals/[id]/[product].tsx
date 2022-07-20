@@ -11,7 +11,6 @@ import { ICrudRentalProduct } from '@lib/interfaces/ICrudRentalProduct';
 import { PageProps } from '@frontend/pages/_app';
 import { useRouter } from 'next/router';
 import NewProductPage from '@frontend/components/pages/product/NewProductPage';
-import { RentalsProvider } from '@frontend/providers/rentals.provider';
 import clearify from '@frontend/utils/clearify';
 
 type RentalProductPageProps = {

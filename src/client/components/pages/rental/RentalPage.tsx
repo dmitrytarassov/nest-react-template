@@ -62,6 +62,7 @@ const RentalPage = ({ rental }: RentalPageProps) => {
         backLink="/rentals"
         title={rental.name}
         image={imageUrl(rental.icon)}
+        rating={rental.rating}
       />
       <div className={styles.blocks}>
         <Block title="Адрес:" blockName="address">
@@ -72,23 +73,27 @@ const RentalPage = ({ rental }: RentalPageProps) => {
         <Block title="Контакты:" blockName="contacts">
           <div className={styles.fullRow}>
             <a className={styles.contactsLink} href={`tel:+${rental.phone}`}>
-              <Image
-                className={styles.contactsIcon}
-                width={24}
-                height={24}
-                src="/public/icons/phone.svg"
-              />
+              <div className={styles.contactsLinkIconContainer}>
+                <Image
+                  className={styles.contactsIcon}
+                  width={24}
+                  height={24}
+                  src="/public/icons/phone.svg"
+                />
+              </div>
               {phoneFormat(`+${rental.phone}`)}
             </a>
           </div>
           <div className={styles.fullRow}>
             <a className={styles.contactsLink} href={`mailto:${rental.email}`}>
-              <Image
-                className={styles.contactsIcon}
-                width={24}
-                height={24}
-                src="/public/icons/email.svg"
-              />
+              <div className={styles.contactsLinkIconContainer}>
+                <Image
+                  className={styles.contactsIcon}
+                  width={24}
+                  height={24}
+                  src="/public/icons/email.svg"
+                />
+              </div>
               {rental.email}
             </a>
           </div>
@@ -102,12 +107,14 @@ const RentalPage = ({ rental }: RentalPageProps) => {
                   target="_blank"
                   className={classNames(styles.contactsLink)}
                 >
-                  <Image
-                    className={styles.contactsIcon}
-                    width={24}
-                    height={24}
-                    src="/public/icons/telegram.svg"
-                  />
+                  <div className={styles.contactsLinkIconContainer}>
+                    <Image
+                      className={styles.contactsIcon}
+                      width={24}
+                      height={24}
+                      src="/public/icons/telegram.svg"
+                    />
+                  </div>
                   {parseTelegram(rental.telegram)}
                 </a>
               </div>
@@ -119,12 +126,14 @@ const RentalPage = ({ rental }: RentalPageProps) => {
                   target="_blank"
                   className={classNames(styles.contactsLink, styles.socialLink)}
                 >
-                  <Image
-                    className={styles.contactsIcon}
-                    width={24}
-                    height={24}
-                    src="/public/icons/vk.svg"
-                  />
+                  <div className={styles.contactsLinkIconContainer}>
+                    <Image
+                      className={styles.contactsIcon}
+                      width={24}
+                      height={24}
+                      src="/public/icons/vk.svg"
+                    />
+                  </div>
                   {parseVk(rental.vk)}
                 </a>
               </div>
@@ -136,12 +145,14 @@ const RentalPage = ({ rental }: RentalPageProps) => {
                   target="_blank"
                   className={classNames(styles.contactsLink, styles.socialLink)}
                 >
-                  <Image
-                    className={styles.contactsIcon}
-                    width={24}
-                    height={24}
-                    src="/public/icons/web.svg"
-                  />
+                  <div className={styles.contactsLinkIconContainer}>
+                    <Image
+                      className={styles.contactsIcon}
+                      width={24}
+                      height={24}
+                      src="/public/icons/web.svg"
+                    />
+                  </div>
                   {parseUrl(rental.web)}
                 </a>
               </div>

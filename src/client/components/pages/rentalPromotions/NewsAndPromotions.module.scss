@@ -1,0 +1,26 @@
+@import "../../../pages/mixins";
+
+.title {
+  font-family: var(--font-RM);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.05em;
+  margin: 0 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include tablet {
+    margin-bottom: 40px;
+  }
+
+  &.not_alone {
+    margin-top: 32px;
+  }
+}
+
+.nfContainer {
+  min-height: 420px;
+}
