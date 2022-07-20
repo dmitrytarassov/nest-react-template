@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 import styles from './CardDate.module.scss';
 import classNames from 'classnames';
 

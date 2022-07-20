@@ -3,7 +3,7 @@ import styles from './CarouselControl.module.scss';
 import classNames from 'classnames';
 
 interface CarouselControlProps {
-  size: 'large' | 'small';
+  size: 'large' | 'small' | 'medium';
   direction: 'left' | 'right';
   onClick: () => void;
   revertColors?: boolean;

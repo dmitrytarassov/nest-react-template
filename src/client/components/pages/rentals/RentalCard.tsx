@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { phoneFormat } from '@frontend/utils/phoneFormat';
 import { ICrudRental } from '@lib/interfaces/ICrudRental';
 import imageUrl from '@frontend/utils/imageUrl';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 import styles from './RentalCard.module.scss';
 import classNames from 'classnames';
 

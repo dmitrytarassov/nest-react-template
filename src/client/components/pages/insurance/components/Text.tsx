@@ -14,6 +14,11 @@ const Text = styled.div`
   a {
     color: #fe6b01 !important;
     text-decoration: none;
+
+    &:hover {
+      color: #fe6b01 !important;
+      text-decoration: underline;
+    }
   }
 `;
 

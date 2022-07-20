@@ -5,7 +5,7 @@ import Telegram from '@frontend/components/logos/Telegram';
 import classNames from 'classnames';
 import styles from './Footer.module.scss';
 import Content from '@frontend/layout/Content';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 
 interface FooterProps {
   halfScreen?: boolean;

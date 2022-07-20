@@ -1,0 +1,139 @@
+@import "../../../pages/mixins";
+
+.blocks {
+  display: grid;
+  grid-template-areas:
+    "address address"
+    "contacts socials"
+    "workingtime services"
+  ;
+  row-gap: 16px;
+  column-gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 32px;
+
+  @include mapBreakpoint {
+    grid-template-areas:
+      "address"
+      "contacts"
+      "socials"
+      "workingtime"
+      "services"
+    ;
+    grid-template-columns: 1fr;
+  }
+
+  @include tablet {
+    margin-bottom: 40px;
+  }
+}
+
+.fullRow {
+  width: 100%;
+  display: flex;
+
+  & + & {
+    margin-top: 16px;
+  }
+}
+
+.wtRow {
+  width: 100%;
+  display: flex;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  text-transform: uppercase;
+
+  & + & {
+    margin-top: 8px;
+  }
+}
+
+.flexibleContainer {
+  margin-top: -16px;
+  flex-wrap: wrap;
+
+  @include mapBreakpoint {
+    margin-top: 0;
+  }
+
+  .socialLink {
+    margin-right: 16px;
+
+    @include tablet {
+      margin-right: 0;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  margin-top: 16px;
+
+  @include tablet {
+    width: 100%;
+  }
+}
+
+.servicesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -12px;
+}
+
+.servicesRow {
+  display: flex;
+  width: 50%;
+  margin-bottom: 12px;
+
+  @include mapBreakpoint {
+    width: 25%;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.serviceLink {
+  display: flex;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  align-items: center;
+  color: var(--colot-rental-card-link-default);
+
+  &:hover {
+    color: var(--colot-rental-card-link-hover);
+  }
+}
+
+.text {
+  display: flex;
+  width: 100%;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 140%;
+  align-items: center;
+  color: var(--colot-rental-card-text);
+}
+
+.contactsLink {
+  color: var(--colot-rental-card-link-default);
+  font-weight: 400;
+  font-size: 12px;
+  align-items: center;
+  display: flex;
+  position: relative;
+
+  &:hover {
+    color: var(--colot-rental-card-link-hover);
+  }
+}
+
+.contactsIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+}

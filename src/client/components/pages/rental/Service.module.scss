@@ -1,0 +1,17 @@
+.service {
+  display: flex;
+  align-items: center;
+  float: left;
+  min-width: 50%;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+
+  svg {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+  }
+}

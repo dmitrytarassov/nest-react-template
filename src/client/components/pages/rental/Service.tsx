@@ -1,32 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+import styles from './Service.module.scss';
 
 interface ServiceProps {
   children: React.ReactNode;
 }
 
-const StyledService = styled.div`
-  display: flex;
-  align-items: center;
-  float: left;
-  min-width: 50%;
-  margin-top: 12px;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 130%;
-  letter-spacing: 0.02em;
-
-  svg {
-    margin-right: 8px;
-    width: 16px;
-    height: 16px;
-  }
-`;
-
 const Service = ({ children }: ServiceProps) => {
   return (
-    <StyledService>
+    <div className={styles.service}>
       <svg
         width="16"
         height="17"
@@ -37,7 +18,7 @@ const Service = ({ children }: ServiceProps) => {
         <circle cx="8" cy="8.5" r="8" fill="#22C56D" />
       </svg>
       {children}
-    </StyledService>
+    </div>
   );
 };
 

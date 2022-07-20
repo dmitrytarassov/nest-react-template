@@ -5,7 +5,7 @@ import { useCity } from '@frontend/hooks/useCity';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import styles from './Header.module.scss';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 
 const Header = () => {
   const router = useRouter();

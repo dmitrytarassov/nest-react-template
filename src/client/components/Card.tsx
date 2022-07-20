@@ -7,7 +7,7 @@ import CardDate from '@frontend/components/CardDate';
 import { getExpirationDateText } from '@frontend/utils/getExpirationDateText';
 import imageUrl from '@frontend/utils/imageUrl';
 import styles from './Card.module.scss';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 import classNames from 'classnames';
 
 export interface ICardProps {

@@ -3,7 +3,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './ShareButton.module.scss';
 import classNames from 'classnames';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 
 interface ShareButtonProps {
   alone: boolean;

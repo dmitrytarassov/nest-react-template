@@ -2,7 +2,7 @@ import React from 'react';
 import BreadCrumbs from '@frontend/components/BreadCrumbs';
 import { IBreadCrumb } from '@frontend/dtos/IBreadCrumb';
 import PageHeader from '@frontend/components/PageHeader';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 import styles from './ListTop.module.scss';
 
 interface ListTopProps {

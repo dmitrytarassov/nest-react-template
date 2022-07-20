@@ -37,13 +37,15 @@ interface CarouselControlsProps {
   revertColors?: boolean;
   hide?: number;
   count?: number;
-  size: 'large' | 'small';
+  size: 'large' | 'small' | 'medium';
+  color?: 'lite' | 'black';
 }
 
 const CarouselControlsWithMap: React.FC<CarouselControlsProps> = ({
   revertColors,
   count,
   size = 'large',
+  color,
 }) => {
   const swiper = useSwiper();
 
@@ -67,12 +69,14 @@ const CarouselControlsWithMap: React.FC<CarouselControlsProps> = ({
         onClick={prev}
         revertColors={revertColors}
         direction="left"
+        color={color}
       />
       <CarouselControl
         size={size}
         onClick={next}
         revertColors={revertColors}
         direction="right"
+        color={color}
       />
     </StyledCarouselControls>
   );

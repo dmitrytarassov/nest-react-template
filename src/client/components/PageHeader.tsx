@@ -1,7 +1,7 @@
 import React from 'react';
 import BackButton from '@frontend/components/BackButton';
 import styles from './PageHeader.module.scss';
-import Image from 'next/image';
+import Image from '@frontend/components/Image';
 
 interface PageHeaderProps {
   backLink: string;

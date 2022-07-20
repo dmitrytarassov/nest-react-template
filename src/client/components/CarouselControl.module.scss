@@ -25,6 +25,15 @@
     }
   }
 
+  &.medium {
+    width: 48px;
+    height: 48px;
+
+    svg {
+      width: 18px;
+    }
+  }
+
   &.left {
     svg {
       transform: rotate(180deg);
