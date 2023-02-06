@@ -1,6 +1,6 @@
 import { Admin, Resource, CustomRoutes, fetchUtils } from 'react-admin';
 import { Route } from 'react-router-dom';
-import crudProvider from '@fusionworks/ra-data-nest-crud';
+import crudProvider from './crudProvider';
 import RentalsList from '@admin/components/rentals/RentalsList';
 import RentalAdd from '@admin/components/rentals/RentalAdd';
 import * as reactAdmin from 'react-admin';
