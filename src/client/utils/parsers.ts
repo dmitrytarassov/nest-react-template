@@ -20,6 +20,7 @@ export const productsToPromotionType = (
             );
             if (rental) {
               const data: ICrudPromotion = {
+                weight: rentalProduct.weight,
                 id: product.id,
                 photos: product.photos,
                 name: product.name,
@@ -62,7 +63,9 @@ export const combineProductsAndPromotions = (
         rentalLogo: rental ? rental.icon : undefined,
       };
     }),
-  ].map((promotion) => ({
-    ...promotion,
-    date: promotion.date || null,
-  }));
+  ]
+    .map((promotion) => ({
+      ...promotion,
+      date: promotion.date || null,
+    }))
+    .sort((a, b) => ((a.weight || 0) < (b.weight || 0) ? 1 : -1));

@@ -9,6 +9,9 @@ export class Rental extends Seo {
   name: string;
 
   @Prop()
+  weight: number;
+
+  @Prop()
   email?: string;
 
   @Prop()

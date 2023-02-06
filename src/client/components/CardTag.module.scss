@@ -2,19 +2,18 @@
 
 .badge {
   composes: badge from "./Badge.module.scss";
-  top: -16px;
-  transform: rotate(-10deg) translateY(12px) translateX(-2px);
-  height: 40px;
+  top: 24px;
+  left: 24px;
+  height: 32px;
   line-height: 40;
-  font-size: 20px;
-  border-radius: 12px;
-  padding: 0 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 0 16px;
   z-index: 2;
-  font-weight: 700;
-  font-family: var(--font-NM);
+  font-family: var(--font-RO);
   display: flex;
 
   &.small {
-    font-size: 16px;
+    font-size: 12px;
   }
 }

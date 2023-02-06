@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@fusionworks/ra-data-nest-crud": "^1.0.8",
+    "@mui/x-data-grid": "^5.17.21",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.0.0",
     "@nestjs/core": "^8.0.0",
@@ -74,7 +75,7 @@
     "node-telegram-bot-api": "^0.58.0",
     "pm2": "^5.2.0",
     "react": "^18.1.0",
-    "react-admin": "^4.1.0",
+    "react-admin": "^4.7.3",
     "react-dom": "^18.1.0",
     "react-leaflet": "^4.0.0",
     "react-modal": "^3.15.1",

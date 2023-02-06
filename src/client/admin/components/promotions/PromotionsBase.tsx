@@ -9,6 +9,7 @@ import {
   DateInput,
   BooleanInput,
   AutocompleteInput,
+  NumberInput,
 } from 'react-admin';
 import { validateRequired } from '@admin/components/utils/validate';
 import Box from '@admin/components/Box';
@@ -39,6 +40,13 @@ const PromotionsBase = () => {
             label="Название"
             validate={validateRequired}
             onChange={(e) => setName(e.target.value)}
+          />
+          <NumberInput
+            source="weight"
+            validate={validateRequired}
+            label="Вес"
+            min={0}
+            max={1000}
           />
           <TextInput
             resettable

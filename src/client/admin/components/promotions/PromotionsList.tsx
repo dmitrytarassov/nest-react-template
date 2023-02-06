@@ -13,11 +13,12 @@ const PromotionsList = ({}: PromotionsListProps) => {
   return (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source="name" />
-        <TextField source="shortText" />
-        <ReferenceField label="Rental" source="rentalId" reference="rental">
+        <TextField source="name" label="Название" />
+        <TextField source="shortText" label="Описание" />
+        <ReferenceField label="Рентал" source="rentalId" reference="rental">
           <TextField source="name" />
         </ReferenceField>
+        <TextField source="weight" label="Вес" emptyText="0" />
         <BooleanField source="showOnMainPage" label="Показывать на главной?" />
       </Datagrid>
     </List>

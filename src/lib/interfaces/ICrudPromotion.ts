@@ -2,6 +2,7 @@ import { ISeo } from '@lib/interfaces/ISeo';
 
 export interface ICrudPromotion extends ISeo {
   id: string;
+  weight: number;
   photos: string[];
   name: string;
   url: string;

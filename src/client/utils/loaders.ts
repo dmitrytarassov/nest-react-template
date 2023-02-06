@@ -35,7 +35,7 @@ export const loadRentalProduct = async (url): Promise<ICrudRentalProduct> => {
 
 export const loadRental = async (url): Promise<ICrudRental> => {
   const _rental: IControllerResponse<ICrudRental[]> = await get(
-    makeUrl(`/api/rental?filter[]=url,${url}`),
+    makeUrl(`/api/rental?filter[]=url,${url}&sort[]=weight,desc`),
   );
   const [rental] = _rental.data || [];
   return rental;
@@ -45,7 +45,7 @@ export const loadRentalsByCity = async (
   city: string,
 ): Promise<ICrudRental[]> => {
   const _rentals: IControllerResponse<ICrudRental[]> = await get(
-    makeUrl(`/api/rental?filter[]=city,${city}`),
+    makeUrl(`/api/rental?filter[]=city,${city}&sort[]=weight,desc`),
   );
   return _rentals.data || [];
 };
@@ -63,7 +63,9 @@ export const loadPromotionsByRentalId = async (
 ): Promise<ICrudPromotion[]> => {
   const rental = await loadRentalById(rentalId);
   const _promotions: IControllerResponse<ICrudPromotion[]> = await get(
-    makeUrl(`/api/promotions?filter[]=rentalId,${rentalId}`),
+    makeUrl(
+      `/api/promotions?filter[]=rentalId,${rentalId}&sort[0]=weight,desc`,
+    ),
   );
 
   const _rentalProducts: IControllerResponse<ICrudRentalProduct[]> = await get(
@@ -94,7 +96,7 @@ export const loadPromotionsByRentals = async (
     makeUrl(
       `/api/promotions?filter[]=rentalId,in,${rentals
         .map(({ id }) => id)
-        .join('|')}`,
+        .join('|')}&sort[0]=weight,desc`,
     ),
   );
 
@@ -139,7 +141,7 @@ export const getAllRentalsForCity = async (
 ): Promise<ICrudRental[]> => {
   if (!rentalsStack[city]) {
     const _rentals: IControllerResponse<ICrudRental[]> = await get(
-      makeUrl(`/api/rental?filter[]=city,${city}`),
+      makeUrl(`/api/rental?filter[]=city,${city}&sort[]=weight,desc`),
     );
     rentalsStack[city] = _rentals.data;
   }
@@ -235,7 +237,7 @@ export const loadAllPromotions = async (
   const promotions: IControllerResponse<ICrudPromotion[]> = await get(
     makeUrl(
       `/api/promotions?filter[]=rentalId,in,${rentalIds.join('|')}${
-        onlyMainPage && '&filter[]=showOnMainPage,true'
+        onlyMainPage && '&filter[]=showOnMainPage,true&sort[0]=weight,desc'
       }`,
     ),
   );
@@ -245,7 +247,7 @@ export const loadAllPromotions = async (
       `/api/rental_products?filter[]=rentalId,in,${rentalIds.join(
         '|',
       )}&filter[]=promotionType,in,new|sale${
-        onlyMainPage && '&filter[]=showOnMainPage,true'
+        onlyMainPage && '&filter[]=showOnMainPage,true&sort[0]=weight,desc'
       }`,
     ),
   );

@@ -4,6 +4,8 @@ import { ISeo } from '@lib/interfaces/ISeo';
 export interface ICrudRental extends ISeo {
   id: string;
 
+  weight: number;
+
   name: string;
 
   email?: string;

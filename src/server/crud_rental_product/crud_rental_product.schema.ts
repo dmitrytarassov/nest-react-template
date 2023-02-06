@@ -8,6 +8,9 @@ export class RentalProduct extends Seo {
   rentalId: string;
 
   @Prop()
+  weight?: number;
+
+  @Prop()
   productId: string;
 
   @Prop()

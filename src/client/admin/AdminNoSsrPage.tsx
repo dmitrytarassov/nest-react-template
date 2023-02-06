@@ -1,4 +1,5 @@
-import { Admin, Resource, ListGuesser, fetchUtils } from 'react-admin';
+import { Admin, Resource, CustomRoutes, fetchUtils } from 'react-admin';
+import { Route } from 'react-router-dom';
 import crudProvider from '@fusionworks/ra-data-nest-crud';
 import RentalsList from '@admin/components/rentals/RentalsList';
 import RentalAdd from '@admin/components/rentals/RentalAdd';
@@ -14,6 +15,10 @@ import dynamic from 'next/dynamic';
 import PromotionsList from './components/promotions/PromotionsList';
 import PromotionsAdd from './components/promotions/PromotionsAdd';
 import PromotionsEdit from './components/promotions/PromotionsEdit';
+import ProductsWithWeightList from '@admin/components/weight/ProductsWithWeightList';
+import { Layout } from 'react-admin';
+import { Menu } from 'react-admin';
+import LabelIcon from '@mui/icons-material/Label';
 
 const httpClient = (url, options: { headers?: any } = {}) => {
   if (!options.headers) {
@@ -35,7 +40,7 @@ const convertFileToBase64 = (file) =>
     reader.readAsDataURL(file.rawFile);
   });
 
-const __dataProvider = async (type, resource, params) => {
+export const __dataProvider = async (type, resource, params) => {
   if (type === reactAdmin.CREATE || type === reactAdmin.UPDATE) {
     for (const paramName of Object.keys(params.data)) {
       if (Array.isArray(params.data[paramName])) {
@@ -86,9 +91,26 @@ const __dataProvider = async (type, resource, params) => {
   return response;
 };
 
+const MyMenu = () => (
+  <Menu>
+    {/*<Menu.DashboardItem />*/}
+    <Menu.ResourceItem name="rental" />
+    <Menu.ResourceItem name="product" />
+    <Menu.ResourceItem name="rental_products" />
+    <Menu.ResourceItem name="promotions" />
+    <Menu.Item
+      to="/products_with_weight"
+      primaryText="Позиции с весом"
+      leftIcon={<LabelIcon />}
+    />
+  </Menu>
+);
+
+const MyLayout = (props) => <Layout {...props} menu={MyMenu} />;
+
 const App = () => {
   return (
-    <Admin dataProvider={__dataProvider}>
+    <Admin layout={MyLayout} dataProvider={__dataProvider}>
       <Resource
         name="rental"
         list={RentalsList}
@@ -113,6 +135,12 @@ const App = () => {
         create={PromotionsAdd}
         edit={PromotionsEdit}
       />
+      <CustomRoutes>
+        <Route
+          path="products_with_weight"
+          element={<ProductsWithWeightList />}
+        />
+      </CustomRoutes>
     </Admin>
   );
 };

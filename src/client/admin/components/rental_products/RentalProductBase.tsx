@@ -51,6 +51,13 @@ const RentalProductBase = () => {
           >
             <AutocompleteInput optionText="name" label="Рентал" />
           </ReferenceInput>
+          <NumberInput
+            source="weight"
+            validate={validateRequired}
+            label="Вес"
+            min={0}
+            max={1000}
+          />
           <TextInput
             resettable
             source="externalUrl"

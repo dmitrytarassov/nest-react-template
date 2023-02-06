@@ -8,6 +8,9 @@ export class Promotion extends Seo {
   photos: string[];
 
   @Prop()
+  weight: number;
+
+  @Prop()
   name: string;
 
   @Prop()

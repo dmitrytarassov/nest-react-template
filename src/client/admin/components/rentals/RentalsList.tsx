@@ -8,11 +8,13 @@ const RentalsList = ({}: RentalsListProps) => {
   return (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source="name" />
+        <TextField source="name" label="Название" />
         <FunctionField
+          label="Город"
           source="city"
           render={(record) => getCityName(record.city)}
         />
+        <TextField source="weight" label="Вес" emptyText="0" />
       </Datagrid>
     </List>
   );

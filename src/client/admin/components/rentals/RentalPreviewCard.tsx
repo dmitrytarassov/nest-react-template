@@ -11,6 +11,7 @@ import { ICrudRental } from '@lib/interfaces/ICrudRental';
 export default function RentalPreviewCard() {
   const [record, setRecord] = useState<ICrudRental>({
     id: '',
+    weight: 0,
     name: '',
     url: '',
     icon: '',

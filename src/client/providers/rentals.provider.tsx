@@ -16,7 +16,7 @@ export const RentalsProvider = ({
   const [init, setInit] = useState<boolean>(false);
   const { city } = useCity();
   const fetchData: SWRResponse<IControllerResponse<ICrudRental[]>> = useSWR(
-    `/api/rental?filter[]=city,${city}`,
+    `/api/rental?filter[]=city,${city}&sort[0]=weight,desc`,
     get,
   );
 

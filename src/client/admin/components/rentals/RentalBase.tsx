@@ -49,7 +49,13 @@ export default function RentalBase({
             disabled
             refValue={makeUrl(name)}
           />
-
+          <NumberInput
+            source="weight"
+            validate={validateRequired}
+            label="Вес"
+            min={0}
+            max={1000}
+          />
           <RadioButtonGroupInput
             label="Адрес"
             source="city"
