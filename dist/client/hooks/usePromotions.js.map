@@ -1,0 +1,1 @@
+{"version":3,"file":"usePromotions.js","sourceRoot":"","sources":["../../../src/client/hooks/usePromotions.ts"],"names":[],"mappings":";;;AAAA,iCAAmC;AACnC,uEAA0E;AAE1E,SAAgB,aAAa;IAC3B,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,sCAAiB,CAAC,CAAC;IAE9C,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,4BAA4B,CAAC,CAAC;KAC/C;IAED,OAAO,OAAO,CAAC;AACjB,CAAC;AARD,sCAQC"}

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = require("styled-components");
+const theme_1 = require("../../../../utils/theme");
+const Title = styled_components_1.default.h3 `
+  font-family: 'Neue Machina';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  width: 100%;
+  margin-bottom: 24px;
+  margin-top: 0;
+
+  ${({ theme }) => theme.mixins.tablet((0, styled_components_1.css) `
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 32px;
+    `)}
+`;
+exports.default = Title;
+//# sourceMappingURL=Title.js.map

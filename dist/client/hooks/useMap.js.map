@@ -1,0 +1,1 @@
+{"version":3,"file":"useMap.js","sourceRoot":"","sources":["../../../src/client/hooks/useMap.ts"],"names":[],"mappings":";;;AAAA,iCAAmC;AACnC,yDAA4D;AAE5D,SAAgB,MAAM;IACpB,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,wBAAU,CAAC,CAAC;IAEvC,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,qBAAqB,CAAC,CAAC;KACxC;IAED,OAAO,OAAO,CAAC;AACjB,CAAC;AARD,wBAQC"}

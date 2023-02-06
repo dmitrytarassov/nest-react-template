@@ -1,0 +1,1 @@
+{"version":3,"file":"useCurrentLocation.js","sourceRoot":"","sources":["../../../src/client/hooks/useCurrentLocation.ts"],"names":[],"mappings":";;;AAAA,iCAAmC;AAEnC,mFAAqF;AAErF,SAAgB,kBAAkB;IAChC,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,iDAAsB,CAAC,CAAC;IAEnD,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,kCAAkC,CAAC,CAAC;KACrD;IAED,OAAO,OAAO,CAAC;AACjB,CAAC;AARD,gDAQC"}

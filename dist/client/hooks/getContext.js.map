@@ -1,0 +1,1 @@
+{"version":3,"file":"getContext.js","sourceRoot":"","sources":["../../../src/client/hooks/getContext.ts"],"names":[],"mappings":";;;AAAA,iCAA4C;AAE5C,SAAgB,UAAU,CAAI,QAAoB;IAChD,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,QAAQ,CAAC,CAAC;IAErC,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,WAAW,OAAO,CAAC,WAAW,CAAC,IAAI,UAAU,CAAC,CAAC;KAChE;IAED,OAAO,OAAO,CAAC;AACjB,CAAC;AARD,gCAQC"}

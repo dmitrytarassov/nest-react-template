@@ -41,6 +41,7 @@
     "drl": "yarn docker:restart:local"
   },
   "dependencies": {
+    "@fusionworks/ra-data-nest-crud": "^1.0.8",
     "@mui/x-data-grid": "^5.17.21",
     "@nestjs/common": "8.1.0",
     "@nestjs/config": "^2.0.0",

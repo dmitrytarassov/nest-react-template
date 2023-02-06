@@ -1,0 +1,1 @@
+{"version":3,"file":"useCity.js","sourceRoot":"","sources":["../../../src/client/hooks/useCity.ts"],"names":[],"mappings":";;;AAAA,iCAAmC;AACnC,2DAA8D;AAE9D,SAAgB,OAAO;IACrB,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,0BAAW,CAAC,CAAC;IAExC,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,sBAAsB,CAAC,CAAC;KACzC;IAED,OAAO,OAAO,CAAC;AACjB,CAAC;AARD,0BAQC"}

@@ -1,0 +1,20 @@
+{
+  "../components/ContainerWithMap.tsx -> @frontend/components/Map": {
+    "id": 35346,
+    "files": [
+      "static/css/c89eed449d4591a7.css",
+      "static/chunks/346.4a8f6d5bac8f9745.js"
+    ]
+  },
+  "admin/index.tsx -> ../../admin/AdminNoSsrPage": {
+    "id": 25965,
+    "files": [
+      "static/chunks/framework-29612375b7805865.js",
+      "static/chunks/f6ef2be3.b873460aa230a99f.js",
+      "static/chunks/177-62811887e1a0adee.js",
+      "static/chunks/761.491760a9a48ac49d.js",
+      "static/css/c89eed449d4591a7.css",
+      "static/chunks/757.35c9fb5108d5daec.js"
+    ]
+  }
+}

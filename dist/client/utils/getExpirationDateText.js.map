@@ -1,0 +1,1 @@
+{"version":3,"file":"getExpirationDateText.js","sourceRoot":"","sources":["../../../src/client/utils/getExpirationDateText.ts"],"names":[],"mappings":";;;AAAA,4CAAqC;AACrC,2CAA0C;AAEnC,MAAM,qBAAqB,GAAG,CAAC,IAAa,EAAU,EAAE,CAC7D,IAAI,IAAI,MAAM,IAAA,gBAAM,EAAC,IAAI,IAAI,CAAC,IAAI,CAAC,EAAE,QAAQ,EAAE,EAAE,MAAM,EAAE,YAAQ,EAAE,CAAC,EAAE,CAAC;AAD5D,QAAA,qBAAqB,yBACuC"}
