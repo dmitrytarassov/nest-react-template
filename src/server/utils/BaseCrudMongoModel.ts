@@ -14,6 +14,7 @@ export class BaseCrudMongoModel<T> extends BaseApiMongoModel<T> {
   }
 
   async update(id, element: T): Promise<T> {
+    // @ts-ignore
     return await this.model.findByIdAndUpdate(id, element, { new: true });
   }
 

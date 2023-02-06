@@ -12,7 +12,6 @@ const Header = () => {
   const selectRef = useRef();
   const { city, setCity } = useCity();
   const [selectIsOpen, setSelectIsOpen] = useState<boolean>(false);
-  const lazyRoot = React.useRef(null);
 
   const close = () => setSelectIsOpen(false);
 
@@ -49,7 +48,7 @@ const Header = () => {
           [styles.withMap]: isPageWithMap,
         })}
       >
-        <Link href="/" passHref ref={lazyRoot}>
+        <Link href="/" passHref>
           <a className={styles.logoLink}>
             <Image
               src="/public/logo.svg"
