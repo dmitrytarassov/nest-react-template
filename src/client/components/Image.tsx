@@ -22,7 +22,9 @@ const Image: React.FC<ImageProps> = ({
     <NextImage
       src={src}
       className={className}
+      // @ts-ignore
       width={width}
+      // @ts-ignore
       height={height}
       // @ts-ignore
       layout={layout}
