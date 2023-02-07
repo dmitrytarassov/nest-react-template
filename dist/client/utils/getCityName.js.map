@@ -1,1 +1,0 @@
-{"version":3,"file":"getCityName.js","sourceRoot":"","sources":["../../../src/client/utils/getCityName.ts"],"names":[],"mappings":";;;AAAA,+CAAuC;AAEvC,SAAgB,WAAW,CAAC,IAAU;IACpC,OAAO;QACL,GAAG,EAAE,iBAAiB;QACtB,MAAM,EAAE,QAAQ;KACjB,CAAC,IAAI,CAAC,CAAC;AACV,CAAC;AALD,kCAKC"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"useProducts.js","sourceRoot":"","sources":["../../../src/client/hooks/useProducts.ts"],"names":[],"mappings":";;;AAAA,iCAAmC;AACnC,mEAAsE;AAEtE,SAAgB,WAAW;IACzB,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,kCAAe,CAAC,CAAC;IAE5C,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,4BAA4B,CAAC,CAAC;KAC/C;IAED,OAAO,OAAO,CAAC;AACjB,CAAC;AARD,kCAQC"}

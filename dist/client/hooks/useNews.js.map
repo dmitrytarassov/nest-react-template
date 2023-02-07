@@ -1,1 +1,0 @@
-{"version":3,"file":"useNews.js","sourceRoot":"","sources":["../../../src/client/hooks/useNews.ts"],"names":[],"mappings":";;;AAAA,2DAA4E;AAC5E,6CAAwD;AACxD,iCAAkD;AAElD,SAAgB,OAAO;IACrB,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,0BAAW,CAAC,CAAC;IAExC,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,sBAAsB,CAAC,CAAC;KACzC;IAED,OAAO,OAAO,CAAC;AAGjB,CAAC;AAVD,0BAUC"}

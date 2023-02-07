@@ -1,1 +1,0 @@
-{"version":3,"file":"useRentals.js","sourceRoot":"","sources":["../../../src/client/hooks/useRentals.ts"],"names":[],"mappings":";;;AAAA,iCAAmC;AACnC,iEAAoE;AAEpE,SAAgB,UAAU;IACxB,MAAM,OAAO,GAAG,IAAA,kBAAU,EAAC,gCAAc,CAAC,CAAC;IAE3C,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,4BAA4B,CAAC,CAAC;KAC/C;IAED,OAAO,OAAO,CAAC;AACjB,CAAC;AARD,gCAQC"}
